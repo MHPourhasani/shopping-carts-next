@@ -16,8 +16,8 @@ const getSingleProduct = async (product_id: string) => {
             },
             cache: "no-store",
         });
-        const { product: data } = await res.json();
-        return data;
+        const { result } = await res.json();
+        return result;
     } catch (error: any) {
         console.error(error.message);
     }
@@ -32,8 +32,8 @@ const getProducts = async () => {
             },
             cache: "no-store",
         });
-        const data = await response.json();
-        return data;
+        const { results } = await response.json();
+        return results;
     } catch (error: any) {
         console.error(error);
     }
@@ -47,7 +47,7 @@ const ComparePage = async ({ searchParams }: Props) => {
 
     return (
         <section className="flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
-            <PageHeader title="مقایسه محصولات" />
+            <PageHeader title="مقایسه محصولات" desktopBackButton={false} />
 
             <Compare {...props} />
         </section>

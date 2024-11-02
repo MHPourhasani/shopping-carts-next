@@ -6,7 +6,6 @@ import ProductCardItem from "@/components/Products/ProductCardItem";
 import EmptyState from "@/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/utils/path";
-import PageHeader from "@/components/PageHeader/PageHeader";
 import Input from "@/components/common/Input";
 import { BlogInterface, ProductInterface } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
@@ -59,10 +58,8 @@ const Search = () => {
     };
 
     return (
-        <section className="flex h-full w-full flex-1 flex-col gap-4 lg:gap-8">
+        <>
             <div className="flex w-full flex-col gap-4">
-                <PageHeader title="جست و جو" desktopBackButton={false} />
-
                 <span className="relative flex h-12 w-full flex-col items-center">
                     <SearchIcon
                         onClick={searchHandler}
@@ -151,7 +148,7 @@ const Search = () => {
             </section>
 
             {!isLoading && !data.count && <EmptyState imgSrc={notProductSearchFound} description="متأسفانه، هیچ نتیجه ای یافت نشد." />}
-        </section>
+        </>
     );
 };
 

@@ -56,7 +56,22 @@ export const covertUserRoleToPersian = (role: UserRoleEnum) => {
         case role === UserRoleEnum.ADMIN:
             return "مدیر کل";
         default:
-            return "----";
+            return "کاربر";
+    }
+};
+
+export const covertUserRoleToUserRoleEnum = (role: string) => {
+    switch (true) {
+        case role === "کاربر":
+            return UserRoleEnum.USER;
+        case role === "نویسنده":
+            return UserRoleEnum.AUTHOR;
+        case role === "فروشنده":
+            return UserRoleEnum.SHOPPER;
+        case role === "مدیر کل":
+            return UserRoleEnum.ADMIN;
+        default:
+            return UserRoleEnum.USER;
     }
 };
 

@@ -2,8 +2,8 @@ import { RequestTypeEnum } from "@/interfaces/general";
 
 const API = {
     auth: {
-        login: () => "/auth/login",
-        signup: () => "/auth/signup",
+        login: () => "/api/auth/login",
+        signup: () => "/api/auth/signup",
     },
     banners: {
         banners_list: (mode: RequestTypeEnum = RequestTypeEnum.SSR) =>

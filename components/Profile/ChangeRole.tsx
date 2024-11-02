@@ -4,7 +4,7 @@ import SingleSelect from "../common/SingleSelect";
 import { TOption, UserInterface, UserRoleEnum } from "@/interfaces/general";
 import { toast } from "react-toastify";
 import toastMessage from "@/utils/toastMessage";
-import { covertUserRoleToPersian } from "@/utils/helper";
+import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/utils/helper";
 
 interface Props {
     user: UserInterface;
@@ -19,7 +19,7 @@ const ChangeRole = ({ user }: Props) => {
             const res = await fetch(`/api/auth/users/${user._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ role: selectedItem.title }),
+                body: JSON.stringify({ role: covertUserRoleToUserRoleEnum(selectedItem.title) }),
             });
 
             if (res.ok) {

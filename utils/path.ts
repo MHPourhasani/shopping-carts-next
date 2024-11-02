@@ -19,7 +19,7 @@ const PATH = {
         main: () => `/profile`,
         edit_personal: () => `/profile/edit-personal`,
         dashboard: () => `/profile/dashboard`,
-        shop:  () => `/profile/shop`,
+        shop: () => `/profile/shop`,
         products: {
             main: () => `/profile/products`,
             add_product: () => `/profile/products/add-product`,
@@ -41,6 +41,7 @@ const PATH = {
         },
         users: {
             main: () => `/profile/users`,
+            create_user: () => `/profile/users/create-user`,
             edit_user: (id: string) => `/profile/users/${id}`,
         },
         change_password: () => `/profile/change-password`,

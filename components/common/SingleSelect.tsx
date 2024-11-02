@@ -96,7 +96,7 @@ const SingleSelect = (props: SingleSelectProps) => {
                 onClick={() => {
                     if (!props.disabled) setShowOptions(!showOptions);
                 }}
-                className={`flex min-h-12 w-full items-center gap-2 rounded-[10px] border-1.5 px-3 ${showOptions ? "!border-primary-500 rounded-b-none border-b-0" : "dark:bg-secondary-400"}`}
+                className={`flex h-auto max-h-full min-h-12 w-full items-center gap-2 rounded-[10px] border-1.5 px-3 ${showOptions ? "!border-primary-500 rounded-b-none border-b-0" : "dark:bg-secondary-400"}`}
             >
                 <div className="flex flex-1 items-center gap-4">
                     {selectedOption.title && (

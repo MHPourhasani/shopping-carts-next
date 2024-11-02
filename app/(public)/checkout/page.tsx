@@ -1,3 +1,4 @@
+import PageHeader from "@/components/PageHeader/PageHeader";
 import API from "@/utils/api";
 import { getServerAuthSession } from "@/utils/auth";
 import Checkout from "@/utils/pages/checkout";
@@ -33,7 +34,12 @@ const CheckoutPage = async () => {
     }
     const carts = await getCarts(session?.user.userId!);
 
-    return <Checkout carts={carts ? carts : []} />;
+    return (
+        <section className="flex w-full flex-1 flex-col gap-4 lg:gap-8">
+            <PageHeader title="تسویه حساب" />
+            <Checkout carts={carts ? carts : []} />;
+        </section>
+    );
 };
 
 export default CheckoutPage;

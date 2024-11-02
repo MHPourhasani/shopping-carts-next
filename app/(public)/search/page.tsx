@@ -1,3 +1,4 @@
+import PageHeader from "@/components/PageHeader/PageHeader";
 import Search from "@/utils/pages/search";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
@@ -21,9 +22,13 @@ export const metadata: Metadata = {
 
 const SearchPage = () => {
     return (
-        <Suspense fallback={<p className="dark:text-gray-400">در حال بارگزاری ...</p>}>
-            <Search />
-        </Suspense>
+        <section className="flex h-full w-full flex-1 flex-col gap-4 lg:gap-8">
+            <PageHeader title="جست و جو" desktopBackButton={false} />
+
+            <Suspense fallback={<p className="dark:text-gray-400">در حال بارگزاری ...</p>}>
+                <Search />
+            </Suspense>
+        </section>
     );
 };
 
