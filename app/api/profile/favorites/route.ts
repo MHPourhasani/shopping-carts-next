@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
             return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", data: newFavorite }, { status: 201 });
         }
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

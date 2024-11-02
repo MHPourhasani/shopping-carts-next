@@ -11,10 +11,10 @@ const ProductEditIcon = ({ product }: { product: ProductInterface }) => {
 
     return (
         userState &&
-        userState.role !== UserRoleEnum.USER &&
+        userState.role === UserRoleEnum.ADMIN &&
+        userState.role === UserRoleEnum.SHOPPER &&
         product &&
-        shopState &&
-        product.shopper === shopState._id && (
+        shopState && (
             <Link href={PATH.profile.products.edit_product(product._id.toString())}>
                 <EditIcon className="fill-customBlack-200 dark:fill-white" />
             </Link>

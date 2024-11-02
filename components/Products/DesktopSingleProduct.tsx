@@ -30,7 +30,7 @@ import CompareIcon from "@/assets/icons/components/Compare";
 const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
-    const { _id, images, name, price, shopper, tags, description, relatedProducts } = productData.product;
+    const { _id, images, name, price, tags, description, relatedProducts } = productData.product;
     const { data: session } = useSession();
     const [imageActive, setImageActive] = useState(0);
     const router = useRouter();
@@ -53,7 +53,7 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                 ]}
             />
 
-            <section className="flex min-h-[100vh-20px] w-full items-start justify-between gap-16 pb-10">
+            <section className="flex min-h-[100vh-20px] w-full items-start justify-between gap-10 pb-10 xl:gap-16">
                 <div className="flex aspect-square w-5/12 flex-col items-start justify-center gap-2">
                     {images.length ? (
                         <Swiper
@@ -115,13 +115,6 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                                 </span>
                             </div>
                         </span>
-
-                        <div className="flex gap-2 text-base font-medium">
-                            فروشنده:{" "}
-                            <Link href={PATH.singleShop(shopper.name)} className="hover-transition hover:text-primary-100">
-                                {shopper.name}
-                            </Link>
-                        </div>
 
                         <div className="flex flex-col gap-4">
                             <h3 className="font-semibold">توضیحات</h3>

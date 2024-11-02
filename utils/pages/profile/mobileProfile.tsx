@@ -31,7 +31,7 @@ const pageItems = [
 ];
 
 const adminPages = [
-    { title: "فروشگاه", href: PATH.profile.shop.main() },
+    { title: "فروشگاه", href: PATH.profile.shop() },
     { title: "نوشته ها", href: PATH.profile.blog.blogs() },
     { title: "کاربران", href: PATH.profile.users.main() },
 ];

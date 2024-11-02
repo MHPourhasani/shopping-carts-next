@@ -1,25 +1,21 @@
 import BestSellers from "@/components/BestSellers/BestSellers";
 import Categories from "@/components/Categories/Categories";
-import EmptyState from "@/components/EmptyState";
 import Header from "@/components/ui/Header/Header";
 import MainBanners from "@/components/MainBanners/MainBanners";
 import ProductsList from "@/components/Products/ProductsList";
 import PATH from "@/utils/path";
 import { get } from "@/utils/scripts/api";
 import Link from "next/link";
-import shopImage from "@/assets/icons/svgs/receipt-page.svg";
-import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface, RequestTypeEnum, ShopInterface } from "@/interfaces/general";
-import ShopCardItem from "@/components/Shops/ShopCardItem";
+import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface, RequestTypeEnum } from "@/interfaces/general";
 import { Metadata } from "next";
 import BlogCard from "@/components/Blog/BlogCard";
 import API from "@/utils/api";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const shops: ShopInterface[] = await getShops({});
     const products: ProductInterface[] = await getProducts({});
 
     return {
-        keywords: [...products.map((item) => (item.tags ? item.tags : "")), ...shops.map((item) => item.name)],
+        keywords: [...products.map((item) => (item.tags ? item.tags : ""))],
     };
 }
 
@@ -28,8 +24,8 @@ const getBanners = async () => {
         .then((res) => {
             return res.json();
         })
-        .then((data) => {
-            return data.results;
+        .then(({ results }) => {
+            return results;
         });
 };
 
@@ -38,8 +34,8 @@ const getCategories = () => {
         .then((res) => {
             return res.json();
         })
-        .then((data) => {
-            return data.results;
+        .then(({ results }) => {
+            return results;
         });
 };
 
@@ -48,25 +44,9 @@ const getProducts = async ({ type, limit }: { type?: string; limit?: number }) =
         .then((res) => {
             return res.json();
         })
-        .then((data) => {
-            return data;
+        .then(({ results }) => {
+            return results;
         });
-};
-
-const getShops = async ({ limit }: { limit?: number }) => {
-    try {
-        const response = await fetch(API.shop.shops_list() + `?limit=${limit}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        const { results } = await response.json();
-        return results;
-    } catch (error: any) {
-        console.error(error);
-    }
 };
 
 const getBlogs = async ({ limit }: { limit?: number }) => {
@@ -89,7 +69,6 @@ export default async function Home() {
     const banners: BannerInterface[] = await getBanners();
     const categories: CategoryInterface[] = await getCategories();
     const bestSellers: ProductInterface[] = await getProducts({ type: "best seller" });
-    const shops: ShopInterface[] = await getShops({ limit: 5 });
     const products: ProductInterface[] = await getProducts({ limit: 6 });
     const blogs: BlogInterface[] = await getBlogs({ limit: 5 });
 
@@ -102,26 +81,6 @@ export default async function Home() {
             <MainBanners banners={banners ? banners : []} />
             <Categories categories={categories ? categories : []} />
             <BestSellers products={bestSellers ? bestSellers : []} />
-
-            <section className="mt-4 flex w-full flex-col gap-4">
-                <div className="flex w-full items-center justify-between px-4">
-                    <h2 className="text-xl font-semibold">فروشگاه ها</h2>
-                    <Link
-                        href={PATH.shops()}
-                        className="hover-transition text-sm text-gray-500 hover:text-primary-100 dark:text-secondary-100"
-                    >
-                        مشاهده همه
-                    </Link>
-                </div>
-
-                <div className="no-scrollbar flex w-full items-center gap-2 overflow-x-auto px-4">
-                    {shops.length ? (
-                        shops.map((shop) => <ShopCardItem key={String(shop._id)} shop={shop} />)
-                    ) : (
-                        <EmptyState imgSrc={shopImage} title="هیچ فروشگاهی یافت نشد." />
-                    )}
-                </div>
-            </section>
 
             <div className="mt-4 flex w-full flex-col gap-4 px-4">
                 <div className="flex w-full items-center justify-between">

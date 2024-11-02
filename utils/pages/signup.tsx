@@ -70,8 +70,8 @@ const SignUp = () => {
                 } else {
                     toast.error(message);
                 }
-            } catch (err: any) {
-                console.error(err);
+            } catch (error: any) {
+                console.error(error);
             }
         }
     };

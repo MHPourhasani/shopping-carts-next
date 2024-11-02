@@ -30,8 +30,8 @@ const getOrder = async (order_id: string, user_id: string) => {
         });
 
         if (response.ok) {
-            const order = await response.json();
-            return order;
+            const { result } = await response.json();
+            return result;
         }
     } catch (error: any) {
         console.error(error);

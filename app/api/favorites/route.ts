@@ -22,7 +22,10 @@ export async function POST(request: NextRequest) {
                     { new: true },
                 );
 
-                return NextResponse.json({ message: "محصول با موفقیت از علاقه مندی ها حذف شد.", data: updateFavorites }, { status: 200 });
+                return NextResponse.json(
+                    { message: "محصول با موفقیت از علاقه مندی ها حذف شد.", results: updateFavorites },
+                    { status: 200 },
+                );
             } else {
                 const updateFavorites = await favoriteModel.findOneAndUpdate(
                     { user: userId },
@@ -32,7 +35,10 @@ export async function POST(request: NextRequest) {
                     { new: true },
                 );
 
-                return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", data: updateFavorites }, { status: 200 });
+                return NextResponse.json(
+                    { message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", results: updateFavorites },
+                    { status: 200 },
+                );
             }
         } else {
             if (!userId) {
@@ -42,9 +48,9 @@ export async function POST(request: NextRequest) {
             const newFavorite = { user: userId, products: [productId] };
             await favoriteModel.create(newFavorite);
 
-            return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", data: newFavorite }, { status: 201 });
+            return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", results: newFavorite }, { status: 201 });
         }
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

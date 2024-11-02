@@ -17,8 +17,8 @@ export const POST = async (request: NextRequest) => {
         try {
             await userModel.create(newUser);
             return NextResponse.json({ message: "کاربر با موفقیت ثبت نام شد." }, { status: 201 });
-        } catch (err: any) {
-            return NextResponse.json({ message: err }, { status: 500 });
+        } catch (error: any) {
+            return NextResponse.json({ message: error }, { status: 500 });
         }
     }
 };

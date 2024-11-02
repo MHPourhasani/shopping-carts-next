@@ -9,25 +9,21 @@ export async function GET(req: NextRequest) {
 
     try {
         const products = await ProductModel.find().limit(+limit);
-        return NextResponse.json(products, { status: 200 });
+        return NextResponse.json({ results: products }, { status: 200 });
     } catch (error: any) {
-        return NextResponse.json({ message: error }, { status: 500 });
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 
 export async function POST(request: NextRequest) {
     connectToDB();
-    const { shopper, product } = await request.json();
+    const { product } = await request.json();
     const { name, brand, price, discountedPrice, sizes, colors, categories } = product;
 
     try {
-        if (!shopper) {
-            return NextResponse.json({ message: "آیدی فروشنده نباید خالی باشد." }, { status: 422 });
-        }
-
-        const findProduct = await ProductModel.findOne({ shopper: shopper });
-        if (findProduct && findProduct.name.toLowerCase() === product.name.toLowerCase()) {
-            return NextResponse.json({ message: "محصول وجود دارد." }, { status: 422 });
+        const findProduct = await ProductModel.findOne({ name });
+        if (findProduct) {
+            return NextResponse.json({ message: "محصول با این نام وجود دارد." }, { status: 422 });
         }
 
         if (!name.trim()) {
@@ -42,15 +38,12 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ message: "لطفا سایز(های) محصول را وارد کنید." }, { status: 422 });
         } else if (!colors.length) {
             return NextResponse.json({ message: "لطفا رنگ (های) محصول را وارد کنید." }, { status: 422 });
-        } else if (!categories.trim()) {
-            return NextResponse.json({ message: "لطفا دسته بندی(های) محصول را وارد کنید." }, { status: 422 });
         } else {
-            const newProduct = { shopper, ...product };
-            await ProductModel.create(newProduct);
+            await ProductModel.create(product);
 
-            return NextResponse.json({ message: "محصول با موفقیت اضافه شد.", data: newProduct }, { status: 201 });
+            return NextResponse.json({ message: "محصول با موفقیت اضافه شد.", result: product }, { status: 201 });
         }
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }

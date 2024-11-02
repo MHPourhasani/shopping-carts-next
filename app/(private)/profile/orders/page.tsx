@@ -23,8 +23,8 @@ const getOrders = async (user_id: string) => {
         });
 
         if (res.ok) {
-            const data = await res.json();
-            return data;
+            const { results } = await res.json();
+            return results;
         }
     } catch (error: any) {
         console.error(error);

@@ -291,7 +291,7 @@ const Products = ({ products }: Props) => {
 
                     <div className="flex w-full flex-1 flex-col items-center justify-center gap-10">
                         {!!currentProductsData.length && (
-                            <div className="grid h-full w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                            <div className="grid h-full w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                                 {currentProductsData.map((product: ProductInterface) => {
                                     return (
                                         <ProductCardItem

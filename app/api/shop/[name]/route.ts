@@ -46,8 +46,8 @@ export async function PUT(request: NextRequest, { params }: any) {
         } else {
             return NextResponse.json({ message: `فروشگاه ${name} یافت نشد.` }, { status: 404 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }
 
@@ -64,7 +64,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
 
             return NextResponse.json({ message: "فروشگاه با موفقیت حذف شد." }, { status: 200 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

@@ -8,7 +8,7 @@ export async function GET(_req: NextRequest, { params }: any) {
     const userId = params.id;
     const findFavorite = await favoriteModel.findOne({ user: userId }).populate("products").lean();
 
-    return NextResponse.json({ data: findFavorite }, { status: 200 });
+    return NextResponse.json({ result: findFavorite }, { status: 200 });
 }
 
 export async function PUT(request: NextRequest, { params }: any) {
@@ -23,7 +23,7 @@ export async function PUT(request: NextRequest, { params }: any) {
             if (findFavorite) {
                 await favoriteModel.findOneAndUpdate({ user: userId }, { $pull: { products: productId } }, { new: true });
 
-                return NextResponse.json({ message: "محصول با موفقیت از علاقه مندی ها حذف شد.", data: findFavorite }, { status: 200 });
+                return NextResponse.json({ message: "محصول با موفقیت از علاقه مندی ها حذف شد.", result: findFavorite }, { status: 200 });
             } else {
                 const updateFavorites = await favoriteModel.findOneAndUpdate(
                     { user: userId },
@@ -33,16 +33,19 @@ export async function PUT(request: NextRequest, { params }: any) {
                     { new: true },
                 );
 
-                return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", data: updateFavorites }, { status: 200 });
+                return NextResponse.json(
+                    { message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", result: updateFavorites },
+                    { status: 200 },
+                );
             }
         } else {
             const newFavorite = { user: userId, products: [productId] };
             await favoriteModel.create(newFavorite);
 
-            return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", data: newFavorite }, { status: 201 });
+            return NextResponse.json({ message: "محصول با موفقیت به علاقه مندی ها اضافه شد.", result: newFavorite }, { status: 201 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }
 
@@ -57,6 +60,6 @@ export async function DELETE(_req: NextRequest, { params }: any) {
 
         return NextResponse.json({ message: "همه محصولات با موفقیت حذف شدند." }, { status: 200 });
     } catch (error: any) {
-        return NextResponse.json({ message: error }, { status: 500 });
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }

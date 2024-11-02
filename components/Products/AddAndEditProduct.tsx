@@ -39,7 +39,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                   relatedProducts: [],
               },
     );
-    const [shop, setShop] = useState<Partial<ShopInterface>>({ createdAt: new Date() });
+    const [, setShop] = useState<Partial<ShopInterface>>({ createdAt: new Date() });
     const [allProducts, setAllProducts] = useState<Partial<ProductInterface[]>>([]);
     const router = useRouter();
 
@@ -69,8 +69,8 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                 .then((res) => {
                     return res.json();
                 })
-                .then((data) => {
-                    setAllProducts(data.filter((p: ProductInterface) => p._id !== formData._id));
+                .then(({ results }) => {
+                    setAllProducts(results.filter((p: ProductInterface) => p._id !== formData._id));
                 });
         };
 
@@ -102,8 +102,6 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
             toast.error("سایز(های) محصول را وارد کنید.");
         } else if (!colors.length) {
             toast.error("رنگ(های) محصول را وارد کنید.");
-        } else if (!categories.trim()) {
-            toast.error("دسته بندی(های) محصول را وارد کنید.");
         } else {
             try {
                 let res: any;
@@ -124,7 +122,6 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                             Accept: "application/json",
                         },
                         body: JSON.stringify({
-                            shopper: shop._id,
                             product: formData,
                             relatedProducts: relatedProducts.map((p: ProductInterface) => p._id),
                         }),
@@ -140,8 +137,8 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                 } else {
                     toast.error(message);
                 }
-            } catch (err: any) {
-                console.error(err);
+            } catch (error: any) {
+                console.error(error);
             }
         }
     };

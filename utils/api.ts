@@ -38,8 +38,6 @@ const API = {
             (mode === RequestTypeEnum.SSR ? process.env.API_BASE_URL : "/api") + `/orders/${id}?user_id=${user_id}`,
     },
     shop: {
-        shops_list: (mode: RequestTypeEnum = RequestTypeEnum.SSR) =>
-            (mode === RequestTypeEnum.SSR ? process.env.API_BASE_URL : "/api") + "/shop",
         single_shop: (name: string, mode: RequestTypeEnum = RequestTypeEnum.SSR) =>
             (mode === RequestTypeEnum.SSR ? process.env.API_BASE_URL : "/api") + `/shop/${name}`,
         single_order: (id: string, mode: RequestTypeEnum = RequestTypeEnum.SSR) =>

@@ -16,7 +16,7 @@ const Navbar = () => {
 
     const navbarItems = [
         { title: "خانه", icon: <HomeIcon className="fill-inherit" />, href: PATH.home() },
-        { title: "فروشگاه ها", icon: <ShopIcon className="fill-inherit" />, href: PATH.shops() },
+        { title: "محصولات", icon: <ShopIcon className="fill-inherit" />, href: PATH.products() },
         { title: "بلاگ", icon: <PaperNote className="fill-inherit" />, href: PATH.blogs() },
         {
             title: "پروفایل",

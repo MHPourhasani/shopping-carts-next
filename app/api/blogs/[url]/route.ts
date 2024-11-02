@@ -10,7 +10,7 @@ export async function GET(_req: NextRequest, { params }: any) {
     if (findBlog) {
         return NextResponse.json({ result: findBlog }, { status: 200 });
     } else {
-        return NextResponse.json({ message: `${url} بلاگ یافت نشد.` }, { status: 404 });
+        return NextResponse.json({ message: `بلاگ ${url} یافت نشد.` }, { status: 404 });
     }
 }
 
@@ -25,18 +25,12 @@ export async function PUT(request: NextRequest, { params }: any) {
         if (findBlog) {
             const updatedBlog = await blogModel.findOneAndUpdate({ link: url }, { ...data }, { new: true });
 
-            return NextResponse.json(
-                {
-                    message: "بلاگ با موفقست آپدیت شد.",
-                    data: updatedBlog,
-                },
-                { status: 200 },
-            );
+            return NextResponse.json({ message: "بلاگ با موفقست آپدیت شد.", result: updatedBlog }, { status: 200 });
         } else {
             return NextResponse.json({ message: "بلاگ یافت نشد." }, { status: 404 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }
 
@@ -47,7 +41,7 @@ export async function DELETE(_req: NextRequest, { params }: any) {
     try {
         await blogModel.deleteOne({ _id: id });
         return NextResponse.json({ message: "بلاگ با موفقیت حذف شد." }, { status: 200 });
-    } catch (error) {
-        return NextResponse.json({ message: error }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }

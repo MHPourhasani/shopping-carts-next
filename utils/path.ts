@@ -13,18 +13,13 @@ const PATH = {
     singleBlog: (url: string) => `/blogs/${url}`,
     singleBrand: (brand: string) => `/brands/${brand}`,
     singleProduct: (id: string, name: string) => `/products/${id}/${stringToSlug(name)}`,
-    shops: () => `/shops`,
-    singleShop: (name: string) => `/shops/${name}`,
     compare: (pid1: string, pid2?: string) => `/compare?p1=${pid1}${pid2 ? `&p2=${pid2}` : ""}`,
 
     profile: {
         main: () => `/profile`,
         edit_personal: () => `/profile/edit-personal`,
         dashboard: () => `/profile/dashboard`,
-        shop: {
-            main: () => `/profile/shop`,
-            create_shop: () => `/profile/shop/create-shop`,
-        },
+        shop:  () => `/profile/shop`,
         products: {
             main: () => `/profile/products`,
             add_product: () => `/profile/products/add-product`,

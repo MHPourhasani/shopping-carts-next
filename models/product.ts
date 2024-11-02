@@ -3,9 +3,9 @@ const { ObjectId } = mongoose.Schema.Types;
 
 const schema = new mongoose.Schema(
     {
-        shopper: {
+        creator: {
             type: ObjectId,
-            ref: "Shop",
+            ref: "User",
             required: true,
         },
         name: {
@@ -18,7 +18,8 @@ const schema = new mongoose.Schema(
         },
         description: {
             type: String,
-            minlength: 15,
+            trim: true,
+            default: "",
         },
         brand: {
             type: String,
@@ -27,6 +28,7 @@ const schema = new mongoose.Schema(
         },
         brandLogo: {
             type: String,
+            default: "",
         },
         services: {
             type: String,

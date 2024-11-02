@@ -8,8 +8,7 @@ import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/utils/path";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import Input from "@/components/common/Input";
-import { BlogInterface, ProductInterface, ShopInterface } from "@/interfaces/general";
-import ShopCardItem from "@/components/Shops/ShopCardItem";
+import { BlogInterface, ProductInterface } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
 import API from "../api";
 import BlogCard from "@/components/Blog/BlogCard";
@@ -17,10 +16,10 @@ import BlogCard from "@/components/Blog/BlogCard";
 const Search = () => {
     const [data, setData] = useState<{
         count: number;
-        results: { shops: ShopInterface[]; products: ProductInterface[]; blogs: BlogInterface[] };
+        results: { products: ProductInterface[]; blogs: BlogInterface[] };
     }>({
         count: 0,
-        results: { shops: [], products: [], blogs: [] },
+        results: { products: [], blogs: [] },
     });
     const [isLoading, setIsLoading] = useState(false);
     const [searchValue, setSearchValue] = useState("");
@@ -94,35 +93,6 @@ const Search = () => {
             </div>
 
             <section className="flex flex-col gap-4">
-                <h2 className="text-lg font-semibold">فروشگاه ها</h2>
-
-                {!isLoading ? (
-                    <div className="no-scrollbar flex w-full gap-4 overflow-x-auto">
-                        {data.results.shops?.length ? (
-                            data.results.shops.map((shop) => {
-                                return <ShopCardItem shop={shop} />;
-                            })
-                        ) : (
-                            <p>هیچ فروشگاهی یافت نشد.</p>
-                        )}
-                    </div>
-                ) : (
-                    <div className="flex gap-4">
-                        {Array.from(Array(4).keys()).map((_item, index) => (
-                            <div key={index} className="flex w-full items-center gap-2 rounded-lg border p-1">
-                                <div className="skeleton aspect-square size-20 rounded-md" />
-                                <div className="flex h-full w-full flex-col gap-2">
-                                    <div style={{ height: "16px" }} className="skeleton w-20 rounded-md" />
-                                    <div style={{ height: "16px" }} className="skeleton w-full rounded-md" />
-                                    <div style={{ height: "16px" }} className="skeleton w-10/12 rounded-md" />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </section>
-
-            <section className="flex flex-col gap-4">
                 <h2 className="text-lg font-semibold">محصولات</h2>
 
                 {!isLoading ? (
@@ -161,7 +131,7 @@ const Search = () => {
                     <div className="grid w-full gap-4 sm:grid-cols-3 lg:grid-cols-2">
                         {data.results.blogs?.length ? (
                             data.results.blogs.map((blog) => {
-                                return <BlogCard key={blog._id.toString()} blog={blog} link={PATH.singleBlog(blog.subject)} />;
+                                return <BlogCard key={blog._id.toString()} blog={blog} link={PATH.singleBlog(blog.link)} />;
                             })
                         ) : (
                             <p>هیچ بلاگی یافت نشد.</p>

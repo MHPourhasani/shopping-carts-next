@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
         await addedComment.save();
 
         return NextResponse.json({ data: addedComment, message: "نظر با موفقیت ثبت شد." }, { status: 201 });
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

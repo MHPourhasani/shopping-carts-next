@@ -34,8 +34,8 @@ const getProducts = async () => {
             cache: "no-store",
         });
         if (response.ok) {
-            const data = await response.json();
-            return data;
+            const { results } = await response.json();
+            return results;
         }
     } catch (error: any) {
         console.error(error);

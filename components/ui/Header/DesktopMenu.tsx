@@ -11,7 +11,6 @@ const DesktopMenu = () => {
     const items = [
         { title: "خانه", path: PATH.home() },
         { title: "محصولات", path: PATH.products() },
-        { title: "فروشگاه ها", path: PATH.shops() },
         { title: "بلاگ", path: PATH.blogs() },
     ];
 

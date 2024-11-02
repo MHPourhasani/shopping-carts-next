@@ -25,7 +25,7 @@ export async function PUT(request: NextRequest, { params }: any) {
 
             return NextResponse.json({ message: "آدرس با موفقیت ویرایش شد.", data: findUser.addresses }, { status: 200 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

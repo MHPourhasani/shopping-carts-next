@@ -16,7 +16,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
 
             return NextResponse.json({ message: "آدرس با موفقیت حذف شد.", data: findUser }, { status: 200 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

@@ -20,8 +20,8 @@ const getFavoritesProducts = async (user_id: string) => {
             cache: "no-cache",
         });
         if (response.ok) {
-            const { data } = await response.json();
-            return data.products;
+            const { result } = await response.json();
+            return result.products;
         }
     } catch (error) {
         console.error(error);

@@ -32,7 +32,7 @@ const getShop = async (user_id: string) => {
 
 const ProfileProductsPage = async () => {
     const session = await getServerAuthSession();
-    const data: { products: ProductInterface[] } = await getShop(session?.user.userId!);
+    const products:  ProductInterface[] = await getShop(session?.user.userId!);
 
     return (
         <section className="flex w-full flex-1 flex-col gap-4">
@@ -54,9 +54,9 @@ const ProfileProductsPage = async () => {
                     <p className="col-span-2">عملیات</p>
                 </div>
 
-                {data.products.length ? (
+                {products.length ? (
                     <div className="flex w-full flex-col">
-                        {data.products.map((product) => (
+                        {products.map((product) => (
                             <ProductListItem
                                 key={product._id.toString()}
                                 product={product}

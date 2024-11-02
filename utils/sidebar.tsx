@@ -37,8 +37,8 @@ export const sidebarItems = (pathname: string) => {
         },
         {
             title: "فروشگاه",
-            icon: <ShopIcon className={pathname === PATH.profile.shop.main() ? activeFillColor : fillColor} />,
-            href: PATH.profile.shop.main(),
+            icon: <ShopIcon className={pathname === PATH.profile.shop() ? activeFillColor : fillColor} />,
+            href: PATH.profile.shop(),
             roles: [UserRoleEnum.SHOPPER, UserRoleEnum.ADMIN],
         },
         {

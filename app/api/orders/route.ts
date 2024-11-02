@@ -2,33 +2,26 @@ import connectToDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import orderModel from "@/models/order";
 import userModel from "@/models/user";
-import { ProductInterface, UserRoleEnum } from "@/interfaces/general";
+import { UserRoleEnum } from "@/interfaces/general";
 
 export async function GET(req: NextRequest) {
     connectToDB();
     const url = new URL(req.url);
     const user_id = url.searchParams.get("user_id");
-    const shop_id = url.searchParams.get("shop_id");
 
-    const userOrders = await orderModel.findOne({ user: user_id });
-    const user = await userModel.findById(user_id);
+    try {
+        if (user_id) {
+            const user = await userModel.findById(user_id);
 
-    if (shop_id && user.role !== UserRoleEnum.USER) {
-        const getAllOrders = await orderModel
-            .find({})
-            .populate({ path: "orders.products", populate: { path: "product" } })
-            .lean();
-
-        const shopOrders = getAllOrders
-            .flatMap((item) => item.orders)
-            .filter((item) => {
-                let order = item.products.some(({ product }: { product: ProductInterface }) => String(product.shopper) === shop_id);
-                return order;
-            });
-
-        return NextResponse.json({ userOrders: userOrders ? userOrders : [], shopOrders: shopOrders ? shopOrders : [] }, { status: 200 });
-    } else {
-        return NextResponse.json({ userOrders: userOrders ? userOrders : [] }, { status: 200 });
+            if (user && (user.role === UserRoleEnum.SHOPPER || user.role === UserRoleEnum.ADMIN)) {
+                const userOrders = await orderModel.findOne({ user: user_id });
+                return NextResponse.json({ results: userOrders ? userOrders : [] }, { status: 200 });
+            }
+        } else {
+            return NextResponse.json({ message: "آیدی کاربر نباید خالی باشد." }, { status: 429 });
+        }
+    } catch (error: any) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
 
@@ -58,7 +51,7 @@ export async function POST(request: NextRequest) {
                 },
                 { new: true },
             );
-            return NextResponse.json({ message: "سفارش با موفقیت ثبت شد.", data: updateOrders }, { status: 200 });
+            return NextResponse.json({ message: "سفارش با موفقیت ثبت شد.", results: updateOrders }, { status: 200 });
         } else {
             if (!userId) {
                 return NextResponse.json({ message: "آیدی کاربر نباید خالی باشد." }, { status: 422 });
@@ -81,9 +74,9 @@ export async function POST(request: NextRequest) {
 
             await orderModel.create(newOrder);
 
-            return NextResponse.json({ message: "سفارش با موفقیت ثبت شد.", data: newOrder }, { status: 201 });
+            return NextResponse.json({ message: "سفارش با موفقیت ثبت شد.", results: newOrder }, { status: 201 });
         }
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }

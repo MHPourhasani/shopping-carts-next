@@ -32,7 +32,7 @@ import CompareIcon from "@/assets/icons/components/Compare";
 const MobileSingleProduct = (props: SingleProductPropsInterface) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
-    const { _id, images, name, price, discountedPrice, shopper, tags, description, sizes, colors, relatedProducts } = productData.product;
+    const { _id, images, name, price, discountedPrice, tags, description, sizes, colors, relatedProducts } = productData.product;
     const { data: session } = useSession();
     const [imageActive, setImageActive] = useState(0);
     const [isChooseSize, setIsChooseSize] = useState(false);
@@ -108,18 +108,9 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
                 </div>
 
                 <div>
-                    <div className="my-4 flex flex-col gap-4">
-                        <h1 className="flex w-full items-center justify-between text-2xl font-bold text-secondary-600 dark:text-white">
-                            {capitalizeTheFirstLettersOfWords(name)}
-                        </h1>
-
-                        <span className="text-lg">
-                            فروشنده:{" "}
-                            <Link href={PATH.singleShop(shopper.name)} className="hover-transition hover:text-primary-100">
-                                {shopper.name}
-                            </Link>
-                        </span>
-                    </div>
+                    <h1 className="flex w-full items-center justify-between text-2xl font-bold text-secondary-600 dark:text-white">
+                        {capitalizeTheFirstLettersOfWords(name)}
+                    </h1>
 
                     <section className="flex flex-col gap-2">
                         <div

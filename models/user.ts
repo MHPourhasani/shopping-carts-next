@@ -5,10 +5,12 @@ const addressSchema = new mongoose.Schema({
     address_title: {
         type: String,
         required: true,
+        trim: true,
     },
     address_value: {
         type: String,
         required: true,
+        trim: true,
     },
     isSelected: {
         type: Boolean,
@@ -46,7 +48,7 @@ const userSchema = new mongoose.Schema(
             min: 11,
             max: 11,
         },
-        addresses: [addressSchema] || [],
+        addresses: [addressSchema],
         emailValid: {
             type: Boolean,
             default: false,
@@ -88,6 +90,12 @@ userSchema.virtual("reviews", {
 
 userSchema.virtual("shops", {
     ref: "Shop",
+    localField: "_id",
+    foreignField: "creator",
+});
+
+userSchema.virtual("products", {
+    ref: "Product",
     localField: "_id",
     foreignField: "creator",
 });

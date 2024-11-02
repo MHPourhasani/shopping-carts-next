@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
             return NextResponse.json({ message: "پیام با موفقیت اضافه شد.", data: newNotification }, { status: 201 });
         }
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }

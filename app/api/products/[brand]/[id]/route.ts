@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(_req: NextRequest, { params }: any) {
     connectToDB();
     const id = params.id;
-    const product = await productModel.findById(id).populate("shopper");
+    const product = await productModel.findById(id);
 
     if (product) {
         return NextResponse.json({ product }, { status: 200 });

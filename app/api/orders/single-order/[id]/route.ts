@@ -10,7 +10,7 @@ export async function GET(request: NextRequest, { params }: any) {
 
     if (order_id) {
         const findUser = await orderModel.findOne({ user: userId }).populate({ path: "orders", populate: "products" }).lean();
-        return NextResponse.json({ order: findUser }, { status: 200 });
+        return NextResponse.json({ results: findUser }, { status: 200 });
     } else {
         return NextResponse.json({ message: "آیدی سفارش نباید خالی باشد." }, { status: 429 });
     }
@@ -38,10 +38,10 @@ export async function PUT(request: NextRequest, { params }: any) {
             }
             findCart.save();
 
-            return NextResponse.json({ message: "محصول با موفقیت آپدیت شد.", data: findCart }, { status: 200 });
+            return NextResponse.json({ message: "محصول با موفقیت آپدیت شد.", results: findCart }, { status: 200 });
         }
-    } catch (err) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }
 

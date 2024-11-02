@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     connectToDB();
     const { name, phone_number, description, user_id } = await request.json();
-        const session = await getServerAuthSession();
+    const session = await getServerAuthSession();
 
     try {
         const findShop = await shopModel.findOne({ creator: user_id });
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
             });
             return NextResponse.json({ message: "فروشگاه با موفقیت ساخته شد.", data: newShop }, { status: 201 });
         }
-    } catch (err: any) {
-        return NextResponse.json({ message: err }, { status: 500 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error }, { status: 500 });
     }
 }
