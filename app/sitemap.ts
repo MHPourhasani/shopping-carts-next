@@ -54,17 +54,6 @@ const getProducts = async () => {
         });
 };
 
-const getShops = async () => {
-    return get(API.shop.shops_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            if (data.length) return data;
-            else return [];
-        });
-};
-
 const getBlogs = async () => {
     try {
         const response = await fetch(API.blogs.blogs_list(), {
@@ -84,7 +73,6 @@ const getBlogs = async () => {
 async function getRoutes() {
     const banners: BannerInterface[] = await getBanners();
     const categories: CategoryInterface[] = await getCategories();
-    const shops: ShopInterface[] = await getShops();
     const products: ProductInterface[] = await getProducts();
     const blogs: BlogInterface[] = await getBlogs();
 
@@ -97,11 +85,10 @@ async function getRoutes() {
 
     const routesOfBanners = banners.map((b) => PATH.singleBanner(b.name));
     const routesOfCategories = categories.map((c) => PATH.singleBrand(c.name.toLowerCase()));
-    const routesOfShops = shops.map((sh) => PATH.singleShop(sh.name));
     const routesOfProducts = products.map((p) => PATH.singleProduct(p._id.toString(), p.name));
     const routesOfBlogs = blogs.map((b) => PATH.singleBlog(b.link));
 
-    const routes = [...routesOfFolders, ...routesOfBanners, ...routesOfCategories, ...routesOfShops, ...routesOfProducts, ...routesOfBlogs];
+    const routes = [...routesOfFolders, ...routesOfBanners, ...routesOfCategories, ...routesOfProducts, ...routesOfBlogs];
 
     return [...new Set(routes)].map((route) => ({
         url: `${baseUrl}${route}`,

@@ -1,5 +1,4 @@
 "use client";
-
 import PATH from "@/utils/path";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +11,8 @@ const DesktopMenu = () => {
         { title: "خانه", path: PATH.home() },
         { title: "محصولات", path: PATH.products() },
         { title: "بلاگ", path: PATH.blogs() },
+        { title: "درباره ما", path: PATH.aboutUs() },
+        { title: "تماس با ما", path: PATH.contactUs() },
     ];
 
     return (
