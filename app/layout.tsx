@@ -128,7 +128,6 @@ export const metadata: Metadata = {
         "twitter:url": url,
         "revisit-after": "7 days",
         "mobile-web-app-capable": "yes",
-        "google-site-verification": "p0VT7c9GjiuiIuMRliK7HZ8hc1mZ8yX1WeqXfkJ9PpI",
     },
 };
 
