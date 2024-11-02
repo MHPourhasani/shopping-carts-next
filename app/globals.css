@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --toastify-font-family: inherit;
+}
+
+@layer base {
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f2f2f2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #dbdbdb;
+    border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #cecece;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.popover-fadeIn {
+    transition: all 4s ease-in-out;
+    /* animation-name: openPopover;
+    animation-duration: 2s; */
+}
+
+.popover-fadeIn:target {
+    height: auto;
+}
+
+.custom-container {
+    @apply w-full max-w-[1800px];
+}
+
+.hover-transition {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* text editor */
+.jodit-wysiwyg {
+    font-family: inherit;
+    height: 600px !important;
+    color: #000;
+}
+
+.jodit__preview-box {
+    font-family: inherit;
+    color: #000;
+    padding: 4px !important;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+.skeleton {
+    background: #000;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    background-size: 200% 100%;
+    transform: scaleX(-1);
+    animation: 1.5s shine linear infinite;
+}
+
+@media print {
+    @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-weight: bold;
+        src: url("../assets/fonts/IRANSansWeb(FaNum)_Bold.ttf") format("truetype");
+    }
+    @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-weight: 500;
+        src: url("../assets/fonts/IRANSansWeb(FaNum)_Medium.ttf") format("truetype");
+    }
+    @font-face {
+        font-family: IRANSans;
+        font-style: normal;
+        font-weight: normal;
+        src: url("../assets/fonts/IRANSansWeb(FaNum).ttf") format("truetype");
+    }
+
+    body {
+        font-family: "IRANSans" !important;
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+}
+
+@keyframes openPopover {
+    from {
+        display: none;
+    }
+    to {
+        display: block;
+        height: auto;
+    }
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}

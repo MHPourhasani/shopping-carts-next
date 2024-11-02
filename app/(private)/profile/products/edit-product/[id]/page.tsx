@@ -1,0 +1,40 @@
+import AddAndEditProduct from "@/components/Products/AddAndEditProduct";
+import { ProductInterface } from "@/interfaces/general";
+import API from "@/utils/api";
+import { Metadata } from "next";
+
+interface Params {
+    id: string;
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+    const product: ProductInterface = await getSingleProduct(params.id);
+
+    return { title: `ویرایش محصول ${product.name}` };
+}
+
+const getSingleProduct = async (product_id: string) => {
+    try {
+        const res = await fetch(API.product.single_product(product_id), {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            cache: "no-store",
+        });
+        if (res.ok) {
+            const { product: data } = await res.json();
+            return data;
+        }
+    } catch (error: any) {
+        console.error(error.message);
+    }
+};
+
+const EditProductPage = async ({ params }: { params: Params }) => {
+    const product: ProductInterface = await getSingleProduct(params.id);
+
+    return <AddAndEditProduct isEdit product={product} />;
+};
+
+export default EditProductPage;
