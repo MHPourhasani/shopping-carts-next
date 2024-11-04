@@ -100,6 +100,12 @@ userSchema.virtual("products", {
     foreignField: "creator",
 });
 
+userSchema.virtual("blogs", {
+    ref: "Blog",
+    localField: "_id",
+    foreignField: "author",
+});
+
 const userModel = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default userModel;
