@@ -59,7 +59,7 @@ const getBlogs = async ({ limit }: { limit?: number }) => {
             cache: "no-store",
         });
         const { results } = await response.json();
-        return results;
+        return results ? results : [];
     } catch (error: any) {
         console.error(error);
     }
