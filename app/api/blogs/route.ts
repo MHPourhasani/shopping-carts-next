@@ -7,8 +7,12 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const limit = url.searchParams.get("limit") || 100;
 
-    const blogs = await blogModel.find().limit(+limit).populate("author");
-    return NextResponse.json({ results: blogs }, { status: 200 });
+    try {
+        const blogs = await blogModel.find().limit(+limit).populate("author");
+        return NextResponse.json({ results: blogs ? blogs : [] }, { status: 200 });
+    } catch (error: any) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
+    }
 }
 
 export async function POST(request: NextRequest) {
@@ -23,13 +27,7 @@ export async function POST(request: NextRequest) {
         const newBlog = { author, ...data };
         await blogModel.create(newBlog);
 
-        return NextResponse.json(
-            {
-                message: "بلاگ با موفقست اضافه شد.",
-                data: newBlog,
-            },
-            { status: 201 },
-        );
+        return NextResponse.json({ message: "بلاگ با موفقیت اضافه شد.", result: newBlog }, { status: 201 });
     } catch (error: any) {
         return NextResponse.json({ message: error }, { status: 500 });
     }

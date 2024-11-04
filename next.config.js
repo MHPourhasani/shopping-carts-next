@@ -11,7 +11,7 @@ const nextConfig = {
     swcMinify: true,
     env: {
         API_BASE_URL: "https://mhp-shop.vercel.app/api",
-        MONGODB_URI: "mongodb+srv://srmhp1381:mhpmongo110..@shop.rubrrh7.mongodb.net/mhp-shopping",
+        MONGODB_URI: "mongodb+srv://srmhp1381:mhpmongo110..@shop.rubrrh7.mongodb.net/mhp-shop",
         NEXTAUTH_URL: "https://mhp-shop.vercel.app",
         NEXTAUTH_SECRET: "Yz7v+ZdjHWFXwnTm+cAIlQPNAKuwVACL/6lh6ug9Uqs=",
         GITHUB_ID: "16d86c5991c8a9f397ae",

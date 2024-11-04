@@ -106,14 +106,16 @@ export default async function Home() {
                     </Link>
                 </div>
                 <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
-                    {blogs.map((item) => (
-                        <BlogCard
-                            key={String(item._id)}
-                            link={PATH.singleBlog(item.link)}
-                            blog={item}
-                            className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
-                        />
-                    ))}
+                    {blogs.length
+                        ? blogs.map((item) => (
+                              <BlogCard
+                                  key={String(item._id)}
+                                  link={PATH.singleBlog(item.link)}
+                                  blog={item}
+                                  className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
+                              />
+                          ))
+                        : null}
                 </div>
             </div>
         </main>
