@@ -70,7 +70,7 @@ export default async function Home() {
     const categories: CategoryInterface[] = await getCategories();
     const bestSellers: ProductInterface[] = await getProducts({ type: "best seller" });
     const products: ProductInterface[] = await getProducts({ limit: 6 });
-    const blogs: BlogInterface[] = await getBlogs({ limit: 5 });
+    const blogs: BlogInterface[] = await getBlogs({ limit: 3 });
 
     return (
         <main className="flex w-full flex-1 flex-col items-start gap-6 pb-20 pt-4 2xl:items-center 2xl:justify-center">

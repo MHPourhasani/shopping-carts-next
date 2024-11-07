@@ -30,7 +30,7 @@ import CompareIcon from "@/assets/icons/components/Compare";
 const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
-    const { _id, images, name, price, tags, description, relatedProducts } = productData.product;
+    const { _id, images, name, price, tags, description, relatedProducts, colors, sizes } = productData.product;
     const { data: session } = useSession();
     const [imageActive, setImageActive] = useState(0);
     const router = useRouter();
@@ -42,7 +42,7 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
     }, [imageActive]);
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-4 p-4">
+        <section className="flex w-full flex-1 flex-col gap-4">
             <BreadCrumb
                 items={[
                     { title: "محصولات", path: PATH.products() },
@@ -97,10 +97,12 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                     </div>
                 </div>
 
-                <div className="w-7/12">
+                <div className="flex w-7/12 flex-col gap-8">
                     <div className="flex w-full flex-col gap-8">
                         <span className="flex w-full items-center justify-between text-xl font-bold text-secondary-600">
-                            <p className="text-2xl dark:text-white xl:text-3xl">{capitalizeTheFirstLettersOfWords(name)}</p>
+                            <h1 className="text-2xl text-customBlack-200 dark:text-white xl:text-3xl">
+                                {capitalizeTheFirstLettersOfWords(name)}
+                            </h1>
 
                             <div className="flex items-center gap-4">
                                 <Link
@@ -122,12 +124,12 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                         </div>
                     </div>
 
-                    <section className="flex flex-col gap-8 py-8">
+                    <section className="flex flex-col gap-8">
                         <div className="flex flex-col gap-4">
                             <span className="font-semibold">سایز ها</span>
 
                             <div className="flex flex-wrap gap-2">
-                                {productData.product?.sizes?.split(",").map((size: string) => {
+                                {sizes?.split(",").map((size: string) => {
                                     return (
                                         <span
                                             key={size}
@@ -147,18 +149,18 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                             <span className="font-semibold">رنگ ها</span>
 
                             <div className="flex flex-wrap gap-2">
-                                {productData.product?.colors?.map((color: ColorInterface, index) => {
+                                {colors?.map((color: ColorInterface, index) => {
                                     return (
                                         <span
                                             key={index}
                                             title={color.name}
                                             onClick={() => setProductData({ ...productData, color: color })}
                                             style={{ backgroundColor: color.hex }}
-                                            className={`group relative flex size-10 cursor-pointer flex-col items-center justify-center rounded-full dark:bg-customBlack-50`}
+                                            className={`group relative flex size-10 cursor-pointer flex-col items-center justify-center rounded-full dark:bg-customBlack-50 ${color === productData.color ? "border-2 border-gray-300 dark:border-white" : ""}`}
                                         >
                                             {color === productData.color && (
                                                 <TickIcon
-                                                    className={`absolute top-1/4 w-5 fill-white ${color !== productData.color && "opacity-30"}`}
+                                                    className={`top-1/5 absolute w-5 fill-white ${color !== productData.color && "opacity-30"}`}
                                                 />
                                             )}
                                             <p className="absolute -top-9 hidden items-center justify-center rounded-md bg-gray-500 p-1 text-white group-hover:flex">

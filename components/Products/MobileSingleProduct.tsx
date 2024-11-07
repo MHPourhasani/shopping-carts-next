@@ -46,7 +46,7 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
     }, [imageActive]);
 
     return (
-        <section className="flex w-full flex-col pb-14">
+        <section className="flex w-full flex-col gap-4 pb-14">
             <div className="flex w-full items-center justify-between">
                 <BackButton />
 
@@ -63,8 +63,8 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
                 </div>
             </div>
 
-            <section className="flex w-full flex-col">
-                <div className="mt-6 flex aspect-square w-full flex-col items-center justify-center gap-2">
+            <section className="flex w-full flex-col gap-6">
+                <div className="flex aspect-square w-full flex-col items-center justify-center gap-2">
                     {images.length ? (
                         <Swiper
                             ref={swiperRef}
@@ -107,8 +107,8 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
                     </div>
                 </div>
 
-                <div>
-                    <h1 className="flex w-full items-center justify-between text-2xl font-bold text-secondary-600 dark:text-white">
+                <div className="flex flex-col gap-4">
+                    <h1 className="mb-2 w-full text-2xl font-bold text-customBlack-200 dark:text-white">
                         {capitalizeTheFirstLettersOfWords(name)}
                     </h1>
 
@@ -214,7 +214,7 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
                         </div>
                     </section>
 
-                    <div className="my-10">
+                    <div className="">
                         <h3 className="mb-4 font-semibold">توضیحات</h3>
                         <h2 className="text-gray-500 dark:text-gray-400">{description}</h2>
                     </div>

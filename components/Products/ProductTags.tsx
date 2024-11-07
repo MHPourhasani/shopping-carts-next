@@ -4,7 +4,7 @@ interface Props {
 
 const ProductTags = ({ tags }: Props) => {
     return (
-        <div className="my-6 flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
             <h4 className="font-semibold">تگ ها</h4>
             <div className="flex flex-wrap gap-1.5">
                 {tags.map((category: string) => {
