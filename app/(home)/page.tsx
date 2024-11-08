@@ -10,7 +10,6 @@ import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface, Re
 import { Metadata } from "next";
 import BlogCard from "@/components/Blog/BlogCard";
 import API from "@/utils/api";
-import PageLoader from "@/components/PageLoader";
 
 export async function generateMetadata(): Promise<Metadata> {
     const products: ProductInterface[] = await getProducts({});
@@ -78,7 +77,6 @@ export default async function Home() {
             <div className="w-full px-4 lg:hidden">
                 <Header />
             </div>
-            <PageLoader />
             <MainBanners banners={banners ? banners : []} />
             <Categories categories={categories ? categories : []} />
             <BestSellers products={bestSellers ? bestSellers : []} />
