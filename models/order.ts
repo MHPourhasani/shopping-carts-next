@@ -33,7 +33,7 @@ const schema = new mongoose.Schema(
                 orderNo: { type: String, required: true },
                 products: [productSchema],
                 payment: { method: { type: String, required: true }, transportCost: { type: Number, required: true } },
-                createdAt: { type: Number, required: true },
+                createdAt: { type: Date, required: true, default: Date.now },
                 pricePaid: { type: Number, required: true },
                 address: {
                     address_title: { type: String, required: true },

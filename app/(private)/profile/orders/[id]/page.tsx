@@ -43,7 +43,7 @@ const SingleOrderPage = async ({ params }: Props) => {
     const order: OrderInterface = await getOrder(params.id, session?.user.userId!);
 
     return session ? (
-        <SingleOrder data={order} />
+        <SingleOrder order={order} />
     ) : (
         <div className="flex w-full flex-1 flex-col gap-2">
             <h1 className="mb-5 text-3xl font-bold">سفارشات</h1>

@@ -2,13 +2,14 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Providers } from "@/redux/provider";
 import NextAuthSessionProvider from "@/providers/SessionProvider";
-import React from "react";
+import React, { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProviders } from "@/providers/Theme";
 import Wrapper from "./_wrapper";
 import Toast from "@/components/Toast";
 import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
+import Loading from "./loading";
 
 const title = process.env.shop_name!;
 const description = "این یک پروژه فروشگاهی حرفه ای است.";
@@ -179,25 +180,27 @@ const iranSans = localFont({
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="fa" dir="rtl">
-            <body
-                className={`flex min-h-screen w-full max-w-full flex-col items-center justify-start overflow-x-hidden bg-white dark:bg-secondary-800 ${iranSans.className}`}
-            >
-                <Providers>
-                    <NextAuthSessionProvider>
-                        <ThemeProviders>
-                            <Toast />
+            <Suspense fallback={<Loading />}>
+                <body
+                    className={`flex min-h-screen w-full max-w-full flex-col items-center justify-start overflow-x-hidden bg-white dark:bg-secondary-800 ${iranSans.className}`}
+                >
+                    <Providers>
+                        <NextAuthSessionProvider>
+                            <ThemeProviders>
+                                <Toast />
 
-                            <Wrapper>
-                                {children}
-                                <Navbar />
-                                <SpeedInsights />
-                            </Wrapper>
+                                <Wrapper>
+                                    {children}
+                                    <Navbar />
+                                    <SpeedInsights />
+                                </Wrapper>
 
-                            <div id="shop-modal" />
-                        </ThemeProviders>
-                    </NextAuthSessionProvider>
-                </Providers>
-            </body>
+                                <div id="shop-modal" />
+                            </ThemeProviders>
+                        </NextAuthSessionProvider>
+                    </Providers>
+                </body>
+            </Suspense>
         </html>
     );
 }

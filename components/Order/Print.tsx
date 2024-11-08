@@ -16,7 +16,7 @@ const OrderPrint = forwardRef(function OrderPrint({ order }: { order: Partial<Or
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                    {order.products?.map((item: any) => <ProductOrderCard key={String(item._id)} product={item} />)}
+                    {order.products?.map((item) => <ProductOrderCard key={String(item._id)} product={item} />)}
                 </div>
             </div>
 
