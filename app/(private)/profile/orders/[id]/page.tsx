@@ -4,7 +4,7 @@ import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import PATH from "@/utils/path";
 import API from "@/utils/api";
 import SingleOrder from "@/utils/pages/singleOrder";
-import { OrderInterface, RequestTypeEnum } from "@/interfaces/general";
+import { OrderInterface } from "@/interfaces/general";
 import { Metadata } from "next";
 
 interface Props {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const getOrder = async (order_id: string, user_id: string) => {
     try {
-        const response = await fetch(API.orders.single_order(order_id, user_id, RequestTypeEnum.SSR), {
+        const response = await fetch(API.orders.single_order(order_id, user_id), {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
