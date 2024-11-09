@@ -1,7 +1,6 @@
 import Login from "@/utils/pages/login";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 const title = "ورود به حساب کاربری";
 const url = PATH.login();
@@ -16,11 +15,7 @@ export const metadata: Metadata = {
 };
 
 const LoginPage = () => {
-    return (
-        <Suspense>
-            <Login />
-        </Suspense>
-    );
+    return <Login />;
 };
 
 export default LoginPage;
