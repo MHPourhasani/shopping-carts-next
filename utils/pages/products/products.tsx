@@ -12,6 +12,7 @@ import BreadCrumb from "@/components/common/BreadCrumb";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import CloseIcon from "@/assets/icons/components/Close";
+import FilterIcon from "@/assets/icons/components/Filter";
 
 interface Props {
     products: ProductInterface[];
@@ -96,13 +97,19 @@ const Products = ({ products }: Props) => {
             {isShow.filter && window.innerWidth < 1024 && (
                 <div
                     ref={mobileFilterRef}
-                    style={{ minWidth: "70%" }}
+                    style={{ minWidth: "70%", maxWidth: "70%" }}
                     className="absolute left-0 right-0 top-0 z-10 flex h-full flex-col gap-8 rounded-l-xl rounded-r-xl bg-bg-2 p-4 dark:bg-secondary-600"
                 >
-                    <span className="flex items-center justify-between">
-                        <h3 className="text-xl font-semibold">فیلتر</h3>
-                        <CloseIcon onClick={() => setIsShow({ ...isShow, filter: false })} className="cursor-pointer" />
-                    </span>
+                    <div className="flex items-center justify-between">
+                        <span className="flex items-center gap-2">
+                            <FilterIcon className="h-5 stroke-secondary-700 dark:stroke-secondary-100" />
+                            <h3 className="text-xl font-semibold">فیلتر</h3>
+                        </span>
+                        <CloseIcon
+                            onClick={() => setIsShow({ ...isShow, filter: false })}
+                            className="cursor-pointer fill-secondary-700 dark:fill-secondary-100"
+                        />
+                    </div>
 
                     {!!getFilterItems()?.brands && (
                         <div className="flex w-full flex-col gap-4 border-b">
@@ -123,7 +130,7 @@ const Products = ({ products }: Props) => {
                             </div>
 
                             {isShow.brands && (
-                                <ul className="mr-2 flex flex-col gap-2">
+                                <ul className="mr-2 flex flex-col gap-2 dark:bg-secondary-500">
                                     {getFilterItems().brands.map((brand) => (
                                         <CheckBox
                                             key={brand}
@@ -195,7 +202,7 @@ const Products = ({ products }: Props) => {
                         onClick={() => setIsShow({ ...isShow, filter: !isShow.filter })}
                         className="w-auto rounded-md px-2 text-primary-100 dark:text-violet-400 lg:hidden"
                     >
-                        فیلتر
+                        <FilterIcon className="stroke-primary-100 dark:stroke-violet-400" />
                     </Button>
                 </PageHeader>
 
