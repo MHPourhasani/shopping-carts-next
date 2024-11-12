@@ -293,7 +293,7 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
                             <ProductCardItem
                                 product={p}
                                 href={PATH.singleProduct(p._id.toString(), p.name)}
-                                className="w-1/2 bg-secondary-50 shadow-none"
+                                className="w-1/2 bg-secondary-50 dark:bg-secondary-700 shadow-none"
                             />
                         ))}
                     </div>
