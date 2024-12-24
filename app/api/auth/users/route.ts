@@ -1,4 +1,4 @@
-import { UserRoleEnum } from "@/interfaces/general";
+import { UserRoleEnum } from "@/interfaces/enums";
 import userModel from "@/models/user";
 import connectToDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";

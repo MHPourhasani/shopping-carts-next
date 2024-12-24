@@ -2,7 +2,7 @@ import connectToDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import orderModel from "@/models/order";
 import userModel from "@/models/user";
-import { UserRoleEnum } from "@/interfaces/general";
+import { UserRoleEnum } from "@/interfaces/enums";
 
 export async function GET(req: NextRequest) {
     connectToDB();

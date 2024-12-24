@@ -2,10 +2,10 @@ import connectToDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import shopModel from "@/models/shop";
 import userModel from "@/models/user";
-import { UserRoleEnum } from "@/interfaces/general";
 import ProductModel from "@/models/product";
 import API from "@/utils/api";
 import { getServerAuthSession } from "@/utils/auth";
+import { UserRoleEnum } from "@/interfaces/enums";
 
 export async function GET(req: NextRequest, {}: any) {
     connectToDB();

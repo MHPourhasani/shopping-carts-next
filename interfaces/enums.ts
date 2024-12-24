@@ -1,8 +1,8 @@
 export enum UserRoleEnum {
-    ADMIN = "ADMIN",
     USER = "USER",
     SHOPPER = "SHOPPER",
     AUTHOR = "AUTHOR",
+    ADMIN = "ADMIN",
 }
 
 export enum PaymentMethodEnum {

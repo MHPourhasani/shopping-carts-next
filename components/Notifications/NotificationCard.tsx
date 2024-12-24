@@ -1,5 +1,5 @@
 "use client";
-import { NotificationInterface, RequestTypeEnum } from "@/interfaces/general";
+import { NotificationInterface } from "@/interfaces/general";
 import Button from "../common/Button";
 import TrashIcon from "@/assets/icons/components/Trash";
 import API from "@/utils/api";
@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import toastMessage from "@/utils/toastMessage";
 import { showFullDate } from "@/utils/helper";
+import { RequestTypeEnum } from "@/interfaces/enums";
 
 interface Props {
     notification: NotificationInterface;
