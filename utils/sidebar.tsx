@@ -6,9 +6,9 @@ import SettingIcon from "@/assets/icons/components/Setting";
 import PaperNote from "@/assets/icons/components/PaperNote";
 import ReceiptIcon from "@/assets/icons/components/Receipt";
 import LoveIcon from "@/assets/icons/components/Love";
-import { UserRoleEnum } from "@/interfaces/general";
 import ShopIcon from "@/assets/icons/components/Shop";
 import ProductsIcon from "@/assets/icons/components/Products";
+import { UserRoleEnum } from "@/interfaces/enums";
 
 const strokeColor = `stroke-customBlack-100 dark:stroke-secondary-100`;
 const activeStrokeColor = `stroke-primary-100 dark:stroke-white`;

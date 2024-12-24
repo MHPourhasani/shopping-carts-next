@@ -1,4 +1,5 @@
 import { ObjectId } from "mongoose";
+import { PaymentMethodEnum, UserRoleEnum } from "./enums";
 
 export interface CategoryInterface {
     _id: ObjectId;
@@ -23,19 +24,6 @@ export interface AddressInterface {
 export interface FavoriteInterface {
     _id: ObjectId;
     productId?: ObjectId;
-}
-
-export enum UserRoleEnum {
-    ADMIN = "ADMIN",
-    USER = "USER",
-    SHOPPER = "SHOPPER",
-    AUTHOR = "AUTHOR",
-}
-
-export enum PaymentMethodEnum {
-    cash = "cash",
-    online = "online",
-    credit = "credit",
 }
 
 export interface UserInterface {
@@ -172,8 +160,3 @@ export interface BlogInterface {
 }
 
 export type TOption = { id?: string | number; title: string };
-
-export enum RequestTypeEnum {
-    CSR,
-    SSR,
-}

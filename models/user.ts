@@ -1,4 +1,4 @@
-import { UserRoleEnum } from "@/interfaces/general";
+import { UserRoleEnum } from "@/interfaces/enums";
 import mongoose from "mongoose";
 
 const addressSchema = new mongoose.Schema({

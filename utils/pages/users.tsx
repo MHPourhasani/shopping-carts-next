@@ -4,7 +4,7 @@ import TrashIcon from "@/assets/icons/components/Trash";
 import EmptyState from "@/components/EmptyState";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import ChangeRole from "@/components/Profile/ChangeRole";
-import { UserInterface, UserRoleEnum } from "@/interfaces/general";
+import { UserInterface } from "@/interfaces/general";
 import toastMessage from "@/utils/toastMessage";
 import Link from "next/link";
 import { useState } from "react";
@@ -13,6 +13,7 @@ import PATH from "../path";
 import { useAppSelector } from "@/redux/hooks";
 import Button from "@/components/common/Button";
 import AddIcon from "@/assets/icons/components/Add";
+import { UserRoleEnum } from "@/interfaces/enums";
 
 interface Props {
     users: UserInterface[];
@@ -47,7 +48,7 @@ const AllUsers = (props: Props) => {
                 </Link>
             </PageHeader>
 
-            <div className="flex w-full max-w-full flex-col gap-4 2xl:grid 2xl:grid-cols-2">
+            <div className="flex w-full flex-1 max-w-full flex-col gap-4 2xl:grid 2xl:grid-cols-2">
                 {users.length ? (
                     users.map((user) => (
                         <div
