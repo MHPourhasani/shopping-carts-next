@@ -7,13 +7,13 @@ import { setUser } from "@/redux/slices/authSlice";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { useRef, useState } from "react";
-import { UserRoleEnum } from "@/interfaces/general";
 import EditIcon from "@/assets/icons/components/Edit";
 import Modal from "@/components/Modal";
 import Button from "@/components/common/Button";
 import PATH from "@/utils/path";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import { covertUserRoleToPersian, showFullDate } from "@/utils/helper";
+import { UserRoleEnum } from "@/interfaces/enums";
 
 interface PropsInterface {
     isLoading: boolean;

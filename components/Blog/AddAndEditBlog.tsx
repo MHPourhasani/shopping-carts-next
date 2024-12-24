@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { handleRefreshAfterBack } from "../../utils/helper";
 import { useAppSelector } from "@/redux/hooks";
-import { BlogInterface, RequestTypeEnum } from "@/interfaces/general";
+import { BlogInterface } from "@/interfaces/general";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import Link from "next/link";
@@ -15,6 +15,7 @@ import toastMessage from "@/utils/toastMessage";
 import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "../common/MultiSelect";
 import API from "@/utils/api";
+import { RequestTypeEnum } from "@/interfaces/enums";
 
 interface Props {
     blog?: BlogInterface;

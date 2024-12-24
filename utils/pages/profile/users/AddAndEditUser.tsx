@@ -2,7 +2,8 @@
 import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import SingleSelect from "@/components/common/SingleSelect";
-import { UserInterface, UserRoleEnum } from "@/interfaces/general";
+import { UserRoleEnum } from "@/interfaces/enums";
+import { UserInterface } from "@/interfaces/general";
 import API from "@/utils/api";
 import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/utils/helper";
 import { useRouter } from "next/navigation";
@@ -121,6 +122,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
 
                 <Input
                     dir="ltr"
+                    type="email"
                     label="ایمیل"
                     name="email"
                     value={user.email}

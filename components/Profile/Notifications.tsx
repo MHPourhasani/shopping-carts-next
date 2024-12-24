@@ -6,7 +6,8 @@ import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { useEffect, useState } from "react";
 import API from "@/utils/api";
 import { useSession } from "next-auth/react";
-import { NotificationInterface, RequestTypeEnum } from "@/interfaces/general";
+import { NotificationInterface } from "@/interfaces/general";
+import { RequestTypeEnum } from "@/interfaces/enums";
 
 const DashboardNotifications = () => {
     const { data: session } = useSession();
