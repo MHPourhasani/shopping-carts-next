@@ -82,17 +82,17 @@ const Login = () => {
     };
 
     return (
-        <section className="flex w-full flex-1 md:items-center md:gap-10 xl:gap-0">
-            <div className="hidden lg:flex lg:basis-1/2 lg:items-center lg:justify-center">
+        <section className="flex w-full flex-1 justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
+            <div className="hidden lg:flex lg:items-center lg:justify-center">
                 <Image src={loginImage} alt="login image" className="h-auto w-full 2xl:w-9/12" />
             </div>
 
-            <div className="flex w-full items-center justify-center p-4 lg:basis-1/2">
+            <div className="flex w-full items-center justify-center lg:flex-1">
                 <form
                     onSubmit={handleSubmit(loginHandler, errorHandler)}
                     className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
                 >
-                    <h1 className="mb-5 text-3xl font-bold">ورود</h1>
+                    <h1 className="mb-5 text-3xl font-bold">ورود به حساب کاربری</h1>
                     <Input
                         dir="ltr"
                         type="email"
@@ -116,7 +116,6 @@ const Login = () => {
                     <Button
                         variant="Primary"
                         disabled={!(formData.email || formData.password || formData.password.length >= 8) || isLoading}
-                        className="disabled:bg-gray-300"
                     >
                         {isLoading ? "لطفا صبر کنید..." : "ورود به حساب کاربری"}
                     </Button>
