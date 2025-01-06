@@ -6,10 +6,14 @@ import ProductsList from "@/components/Products/ProductsList";
 import PATH from "@/utils/path";
 import { get } from "@/utils/scripts/api";
 import Link from "next/link";
-import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface, RequestTypeEnum } from "@/interfaces/general";
+import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface } from "@/interfaces/general";
 import { Metadata } from "next";
 import BlogCard from "@/components/Blog/BlogCard";
 import API from "@/utils/api";
+import { RequestTypeEnum } from "@/interfaces/enums";
+
+export const revalidate = 30;
+export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
     const products: ProductInterface[] = await getProducts({});

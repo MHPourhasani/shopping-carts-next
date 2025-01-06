@@ -2,6 +2,9 @@ import SignUp from "@/utils/pages/signup";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 const title = "ثبت نام";
 const url = PATH.signup();
 

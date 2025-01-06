@@ -4,6 +4,9 @@ import PATH from "@/utils/path";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 const title = "جست و جو";
 const description = "در این صفحه کاربر می تواند بر اساس نیاز خود جست و جو کند.";
 const url = PATH.search();

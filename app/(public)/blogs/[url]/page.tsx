@@ -1,5 +1,5 @@
 import BreadCrumb from "@/components/common/BreadCrumb";
-import { BlogInterface, RequestTypeEnum } from "@/interfaces/general";
+import { BlogInterface } from "@/interfaces/general";
 import API from "@/utils/api";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
@@ -10,6 +10,10 @@ import ClockIcon from "@/assets/icons/components/Clock";
 import BlogCard from "@/components/Blog/BlogCard";
 import { showFullDate } from "@/utils/helper";
 import PageHeader from "@/components/PageHeader/PageHeader";
+import { RequestTypeEnum } from "@/interfaces/enums";
+
+export const revalidate = 30;
+export const dynamic = "force-static";
 
 interface Props {
     params: { url: string };

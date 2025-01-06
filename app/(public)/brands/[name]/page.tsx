@@ -5,6 +5,9 @@ import { capitalizeTheFirstLettersOfWords } from "@/utils/helper";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 interface Props {
     params: {
         name: string;

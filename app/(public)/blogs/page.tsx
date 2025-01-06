@@ -1,10 +1,14 @@
 import BlogCard from "@/components/Blog/BlogCard";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { BlogInterface, RequestTypeEnum } from "@/interfaces/general";
+import { RequestTypeEnum } from "@/interfaces/enums";
+import { BlogInterface } from "@/interfaces/general";
 import API from "@/utils/api";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
+
+export const revalidate = 30;
+export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
     const blogs: BlogInterface[] = await getBlogs();

@@ -4,6 +4,9 @@ import API from "@/utils/api";
 import SingleProduct from "@/utils/pages/products/singleProduct";
 import { Metadata } from "next";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 interface Props {
     params: {
         slug: string;

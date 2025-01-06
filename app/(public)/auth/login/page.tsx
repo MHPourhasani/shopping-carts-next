@@ -2,6 +2,9 @@ import Login from "@/utils/pages/login";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 const title = "ورود به حساب کاربری";
 const url = PATH.login();
 

@@ -4,6 +4,9 @@ import Products from "@/utils/pages/products/products";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 export async function generateMetadata(): Promise<Metadata> {
     const products: ProductInterface[] = await getProducts();
     const productsName = products !== undefined ? products.map((item) => item.name) : [];

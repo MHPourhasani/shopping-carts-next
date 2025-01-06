@@ -4,6 +4,9 @@ import { Metadata } from "next";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import PATH from "@/utils/path";
 
+export const revalidate = 30;
+export const dynamic = "force-static";
+
 export async function generateMetadata(): Promise<Metadata> {
     const data: ProductInterface[] = await getData();
     const products = data.filter((product: ProductInterface) => product.tags?.includes("best seller"));

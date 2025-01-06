@@ -1,11 +1,12 @@
 import BlogCard from "@/components/Blog/BlogCard";
 import BreadCrumb from "@/components/common/BreadCrumb";
-import { BlogInterface, RequestTypeEnum, UserInterface } from "@/interfaces/general";
+import { BlogInterface, UserInterface } from "@/interfaces/general";
 import API from "@/utils/api";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import userIcon from "@/assets/icons/svgs/user.svg";
+import { RequestTypeEnum } from "@/interfaces/enums";
 
 interface Props {
     params: { id: string };
