@@ -1,4 +1,5 @@
-import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface, RequestTypeEnum, ShopInterface } from "@/interfaces/general";
+import { RequestTypeEnum } from "@/interfaces/enums";
+import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface } from "@/interfaces/general";
 import API from "@/utils/api";
 import PATH from "@/utils/path";
 import { get } from "@/utils/scripts/api";

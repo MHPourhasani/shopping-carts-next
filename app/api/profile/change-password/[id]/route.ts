@@ -3,7 +3,6 @@ import connectToDB from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import API from "@/utils/api";
-import { RequestTypeEnum } from "@/interfaces/general";
 
 export async function PUT(request: NextRequest, { params }: any) {
     connectToDB();
