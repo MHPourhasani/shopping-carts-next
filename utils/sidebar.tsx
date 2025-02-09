@@ -11,9 +11,9 @@ import ProductsIcon from "@/assets/icons/components/Products";
 import { UserRoleEnum } from "@/interfaces/enums";
 
 const strokeColor = `stroke-customBlack-100 dark:stroke-secondary-100`;
-const activeStrokeColor = `stroke-primary-100 dark:stroke-white`;
+const activeStrokeColor = `stroke-primary-100 dark:stroke-violet-300`;
 const fillColor = `fill-customBlack-100 dark:fill-secondary-100`;
-const activeFillColor = `fill-primary-100 dark:fill-white`;
+const activeFillColor = `fill-primary-100 dark:fill-violet-300`;
 
 export const sidebarItems = (pathname: string) => {
     return [

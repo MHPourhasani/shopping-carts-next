@@ -30,10 +30,10 @@ const Sidebar = () => {
                                     <Link
                                         key={item.href}
                                         href={item.href}
-                                        className={`flex items-center gap-2 border-r-4 py-4 ${
+                                        className={`flex items-center gap-2 py-4 ${
                                             isActive
-                                                ? "border-primary-100 bg-gradient-to-l from-violet-100 to-violet-50 text-primary-100 dark:from-violet-500 dark:text-white"
-                                                : "border-transparent"
+                                                ? "bg-gradient-to-l text-primary-100 dark:text-violet-300"
+                                                : ""
                                         }`}
                                     >
                                         {item.icon}
