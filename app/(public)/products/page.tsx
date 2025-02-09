@@ -3,6 +3,7 @@ import API from "@/shared/api";
 import Products from "@/utils/pages/products/products";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
+import { get } from "@/utils/scripts/api";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -28,21 +29,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const getProducts = async () => {
-    try {
-        const response = await fetch(API.product.products_list(), {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const { results } = await response.json();
+    return get(API.product.products_list())
+        .then((res) => {
+            return res.json();
+        })
+        .then(({ results }) => {
             return results;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+        });
 };
 
 const ProductsPage = async () => {

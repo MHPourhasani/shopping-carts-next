@@ -72,7 +72,7 @@ export default async function Home() {
     const blogs: IBlog[] = await getBlogs({ limit: 3 });
 
     return (
-        <main className="flex w-full flex-1 flex-col items-start gap-6 pb-20 pt-4 2xl:items-center 2xl:justify-center">
+        <section className="flex w-full flex-1 flex-col items-start gap-6 pb-20 pt-4 2xl:items-center 2xl:justify-center">
             <div className="w-full px-4 lg:hidden">
                 <Header />
             </div>
@@ -116,6 +116,6 @@ export default async function Home() {
                         : null}
                 </div>
             </div>
-        </main>
+        </section>
     );
 }
