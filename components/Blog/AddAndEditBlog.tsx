@@ -125,6 +125,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                         {isEditLink ? "تأیید" : "ویرایش"}
                     </Button>
                 </div>
+
                 {data.link && (
                     <Link dir="ltr" href={PATH.singleBlog(data.link)} className="text-primary-100">
                         {process.env.API_BASE_URL}
@@ -133,6 +134,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 )}
             </div>
 
+            <Input name="readingTime" label="زمان مطالعه (دقیقه)" type="number" value={data.readingTime} onChange={changeHandler} />
             <Input name="subject" label="موضوع" value={data.subject} onChange={changeHandler} />
             <TextEditor value={data.content!} onChange={(content) => setData({ ...data, content })} />
             <Input name="tags" label="تگ ها" value={data.tags} onChange={changeHandler} />

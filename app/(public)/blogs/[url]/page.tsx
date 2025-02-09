@@ -12,9 +12,6 @@ import { showFullDate } from "@/utils/helper";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
-export const revalidate = 30;
-export const dynamic = "force-static";
-
 interface Props {
     params: { url: string };
 }
@@ -75,49 +72,62 @@ const SingleBlogPage = async ({ params }: Props) => {
     const blogs: BlogInterface[] = await getBlogs();
     const filteredBlogs = blogs.filter((blog) => blog.link !== params.url);
 
+    const { subject, link, author, updatedAt, createdAt, readingTime, tags, content, relatedBlogs } = data;
+
     return (
         <section className="flex w-full flex-1 flex-col gap-8">
             <BreadCrumb
                 items={[
                     { title: "بلاگ", path: PATH.blogs() },
-                    { title: data.subject, path: PATH.singleBlog(data.link) },
+                    { title: subject, path: PATH.singleBlog(link) },
                 ]}
             />
 
             <section className="flex w-full flex-col gap-4 lg:flex-row lg:gap-8">
                 <div className="flex flex-col gap-8 md:flex-1 lg:border-l lg:pl-8">
-                    <PageHeader title={data.subject} desktopBackButton={false} />
+                    <PageHeader title={subject} desktopBackButton={false} />
 
-                    <div className="flex items-center gap-4 pb-4">
-                        <Link href={PATH.singleBlogAuthor(String(data.author._id))} className="flex items-center gap-2 text-sm">
+                    <div className="flex items-center gap-4 pb-4 text-sm">
+                        <Link href={PATH.singleBlogAuthor(String(author._id))} className="flex items-center gap-1">
                             <span
                                 className={`flex aspect-square size-7 items-center justify-center rounded-full bg-bg-2 dark:bg-secondary-700`}
                             >
                                 <Image
-                                    src={data.author.profile_image ? data.author.profile_image : userIcon}
+                                    src={author.profile_image ? author.profile_image : userIcon}
                                     alt="user"
                                     width={500}
                                     height={500}
-                                    className={`${data.author.profile_image ? "h-full rounded-full object-cover" : "w-1/2"}`}
+                                    className={`${author.profile_image ? "h-full rounded-full object-cover" : "w-1/2"}`}
                                 />
                             </span>
+                            <p className="hidden text-gray-300 lg:flex">نویسنده: </p>
                             <p className="hover-transition truncate hover:text-primary-100 dark:hover:text-violet-400">
-                                {data.author.first_name} {data.author.last_name}
+                                {author.first_name} {author.last_name}
                             </p>
                         </Link>
-                        <p className="flex items-center gap-2 text-secondary-400 dark:text-gray-300">
+
+                        {readingTime && (
+                            <span className="flex items-center gap-1 text-secondary-400 dark:text-gray-300">
+                                <ClockIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
+                                <p className="hidden lg:flex">زمان مطالعه: </p>
+                                {readingTime}
+                            </span>
+                        )}
+
+                        <span className="flex items-center gap-1 text-secondary-400 dark:text-gray-300">
                             <ClockIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
-                            {showFullDate(data.createdAt)}
-                        </p>
+                            <p className="hidden lg:flex">{updatedAt ? "تاریخ به روزرسانی" : "تاریخ انتشار"}: </p>
+                            {updatedAt ? showFullDate(updatedAt) : showFullDate(createdAt)}
+                        </span>
                     </div>
 
-                    <div dangerouslySetInnerHTML={{ __html: data.content }} className="text-lg"></div>
+                    <div dangerouslySetInnerHTML={{ __html: content }} className="text-lg"></div>
 
-                    {data.tags && (
+                    {tags && (
                         <div className="flex flex-col gap-4">
                             <h6>تگ ها</h6>
                             <div className="flex gap-2">
-                                {data.tags.split(", ").map((tag) => (
+                                {tags.split(", ").map((tag) => (
                                     <span key={tag} className="rounded-lg bg-secondary-100 px-2 py-1 text-sm dark:bg-secondary-700">
                                         {tag}
                                     </span>
@@ -126,17 +136,17 @@ const SingleBlogPage = async ({ params }: Props) => {
                         </div>
                     )}
 
-                    {data.relatedBlogs && !!data.relatedBlogs.length && (
+                    {relatedBlogs && !!relatedBlogs.length && (
                         <div className="flex w-full flex-col gap-4 border-t pt-4">
-                            <h2 className="text-lg font-semibold">بلاگ های مرتبط</h2>
+                            <h3 className="text-lg font-semibold">بلاگ های مرتبط</h3>
 
                             <div className="np-scrollbar flex w-full gap-4 lg:overflow-x-auto">
-                                {data.relatedBlogs.map((blog) => (
+                                {relatedBlogs.slice(0, 3).map((blog) => (
                                     <BlogCard
                                         key={String(blog._id)}
                                         blog={blog}
                                         link={PATH.singleBlog(blog.link)}
-                                        className={`lg:w-1/2 xl:w-1/3 ${data.relatedBlogs!.length > 1 ? "w-11/12" : ""}`}
+                                        className={`lg:w-1/2 xl:w-1/3 ${relatedBlogs!.length > 1 ? "w-11/12" : ""}`}
                                     />
                                 ))}
                             </div>

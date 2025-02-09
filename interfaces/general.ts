@@ -154,6 +154,7 @@ export interface BlogInterface {
     tags?: string;
     keywords?: string;
     categories?: string;
+    readingTime?: number;
     relatedBlogs?: BlogInterface[];
     createdAt: Date;
     updatedAt?: Date;

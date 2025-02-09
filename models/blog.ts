@@ -32,6 +32,9 @@ var blog = new mongoose.Schema(
             type: String,
             default: "",
         },
+        readingTime: {
+            type: Number,
+        },
         relatedBlogs: {
             type: [{ type: ObjectId, ref: "Blog" }],
             default: [],

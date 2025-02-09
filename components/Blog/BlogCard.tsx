@@ -31,6 +31,7 @@ const BlogCard = ({ blog, link, className }: Props) => {
                     <UserIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
                     <p className="truncate">{author.first_name + " " + author.last_name || author.email}</p>
                 </span>
+                
                 <span className="flex items-center gap-1 truncate">
                     <ClockIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
                     {new Date(createdAt).toLocaleDateString("fa-IR")}

@@ -82,8 +82,8 @@ const Login = () => {
     };
 
     return (
-        <section className="flex w-full flex-1 justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
-            <div className="hidden lg:flex lg:items-center lg:justify-center">
+        <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
+            <div className="hidden lg:flex lg:items-center lg:justify-center lg:flex-1 bg-gray-300">
                 <Image src={loginImage} alt="login image" className="h-auto w-full 2xl:w-9/12" />
             </div>
 
@@ -128,9 +128,9 @@ const Login = () => {
                     </div>
 
                     <div className="flex w-full items-center gap-2">
-                        <hr className="flex-1 border border-gray-200" />
+                        <hr className="flex-1 border border-gray-200 dark:border-gray-300" />
                         <span className="-translate-y-0.5">یا</span>
-                        <hr className="flex-1 border border-gray-200" />
+                        <hr className="flex-1 border border-gray-200 dark:border-gray-300" />
                     </div>
 
                     <div className="flex flex-col gap-4">

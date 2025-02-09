@@ -25,7 +25,7 @@ export async function PUT(request: NextRequest, { params }: any) {
         if (findBlog) {
             const updatedBlog = await blogModel.findOneAndUpdate({ link: url }, { ...data }, { new: true });
 
-            return NextResponse.json({ message: "بلاگ با موفقست آپدیت شد.", result: updatedBlog }, { status: 200 });
+            return NextResponse.json({ message: "بلاگ با موفقیت آپدیت شد.", result: updatedBlog }, { status: 200 });
         } else {
             return NextResponse.json({ message: "بلاگ یافت نشد." }, { status: 404 });
         }

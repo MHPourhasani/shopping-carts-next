@@ -1,5 +1,5 @@
 import AddIcon from "@/assets/icons/components/Add";
-import BlogList from "@/components/Blog/BlogList";
+import BlogListItem from "@/components/Blog/BlogListItem";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { BlogInterface } from "@/interfaces/general";
@@ -47,7 +47,7 @@ const ProfileBlogs = async () => {
 
             <div className="flex flex-col gap-4">
                 {blogs.map((item) => (
-                    <BlogList key={String(item._id)} link={PATH.profile.blog.edit_blog(item.link)} blog={item} />
+                    <BlogListItem key={String(item._id)} link={PATH.profile.blog.edit_blog(item.link)} blog={item} />
                 ))}
             </div>
         </section>

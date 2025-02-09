@@ -1,4 +1,5 @@
 import BlogCard from "@/components/Blog/BlogCard";
+import BreadCrumb from "@/components/common/BreadCrumb";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { RequestTypeEnum } from "@/interfaces/enums";
@@ -54,6 +55,12 @@ const Blogs = async () => {
 
     return (
         <section className="flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
+            <BreadCrumb
+                items={[
+                    { title: "بلاگ", path: PATH.blogs() },
+                ]}
+            />
+
             <PageHeader title="بلاگ" mobileBackButton={false} desktopBackButton={false} />
 
             <div className="grid w-full gap-4 lg:grid-cols-3">

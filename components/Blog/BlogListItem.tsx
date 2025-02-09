@@ -9,7 +9,7 @@ import toastMessage from "@/utils/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-const BlogList = ({ blog, link }: { blog: BlogInterface; link: string }) => {
+const BlogListItem = ({ blog, link }: { blog: BlogInterface; link: string }) => {
     const { _id, subject, author, createdAt } = blog;
 
     const deleteHandler = async () => {
@@ -56,4 +56,4 @@ const BlogList = ({ blog, link }: { blog: BlogInterface; link: string }) => {
     );
 };
 
-export default BlogList;
+export default BlogListItem;
