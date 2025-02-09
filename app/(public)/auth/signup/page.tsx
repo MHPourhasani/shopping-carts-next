@@ -1,4 +1,4 @@
-import SignUp from "@/utils/pages/signup";
+import SignUp from "@/features/auth/signup/components/signup";
 import PATH from "@/utils/path";
 import { Metadata } from "next";
 
