@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { ProductInterface, ReviewInterface, productData } from "@/interfaces/general";
 import MobileSingleProduct from "@/components/Products/MobileSingleProduct";
-import DesktopSingleProduct from "@/components/Products/DesktopSingleProduct";
+import DesktopSingleProduct from "@/components/Products/Desctop/DesktopSingleProduct";
 import { usePathname, useRouter } from "next/navigation";
 import toastMessage from "@/utils/toastMessage";
 import PATH from "@/utils/path";

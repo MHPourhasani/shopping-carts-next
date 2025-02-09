@@ -12,7 +12,7 @@ import AddReview from "@/components/Reviews/AddReview";
 import { ColorInterface, SingleProductPropsInterface } from "@/interfaces/general";
 import EditIcon from "@/assets/icons/components/Edit";
 import { useSession } from "next-auth/react";
-import ProductTags from "./ProductTags";
+import ProductTags from "../ProductTags";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useParams, useRouter } from "next/navigation";
@@ -22,10 +22,11 @@ import Button from "@/components/common/Button";
 import TickIcon from "@/assets/icons/components/Tick";
 import notImage from "@/assets/images/not-images.svg";
 import LoveIcon from "@/assets/icons/components/Love";
-import BreadCrumb from "../common/BreadCrumb";
+import BreadCrumb from "../../common/BreadCrumb";
 import Toman from "@/assets/icons/components/Toman";
-import ProductCardItem from "./ProductCardItem";
+import ProductCardItem from "../ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
+import SingleProductTab from "./SingleProductTab";
 
 const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
@@ -126,7 +127,7 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
 
                     <section className="flex flex-col gap-8">
                         <div className="flex flex-col gap-4">
-                            <span className="font-semibold">سایز ها</span>
+                            <span className="font-semibold">سایز</span>
 
                             <div className="flex flex-wrap gap-2">
                                 {sizes?.split(",").map((size: string) => {
@@ -146,7 +147,7 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                         </div>
 
                         <div className="flex flex-col gap-4">
-                            <span className="font-semibold">رنگ ها</span>
+                            <span className="font-semibold">رنگ</span>
 
                             <div className="flex flex-wrap gap-2">
                                 {colors?.map((color: ColorInterface, index) => {
@@ -223,50 +224,17 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                 </div>
             </section>
 
-            <section className="flex w-full gap-10 border-t py-10">
-                <div className="w-7/12">
-                    <ReviewsList reviews={reviews ? reviews.slice(0, 5) : []} isLoading={false} />
+            <SingleProductTab />
+
+            {relatedProducts&&<section className="flex w-full flex-col gap-6 border-t py-10">
+                <h3 className="text-xl font-semibold">محصولات مشابه</h3>
+
+                <div className="no-scrollbar overflow-x-aut flex w-full flex-1 gap-4">
+                    {relatedProducts.map((p) => (
+                        <ProductCardItem product={p} href={PATH.singleProduct(p._id.toString(), p.name)} className="w-1/4 xl:w-1/6" />
+                    ))}
                 </div>
-
-                <div className="flex flex-1 flex-col gap-4">
-                    <span
-                        onClick={() => {
-                            if (session?.user.userId) {
-                                setIsAddReview(!isAddReview);
-                            } else {
-                                router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
-                                toast.success("لطفا وارد شوید");
-                            }
-                        }}
-                        className="flex cursor-pointer items-center gap-2"
-                    >
-                        <EditIcon className="size-5 fill-primary-100" />
-                        <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
-                    </span>
-
-                    {isAddReview ? (
-                        <AddReview
-                            productId={String(params.slug)}
-                            onSubmit={(review: any) => {
-                                setIsAddReview(false);
-                                setReviews((prev: any) => [...prev, review]);
-                            }}
-                        />
-                    ) : null}
-                </div>
-            </section>
-
-            {relatedProducts && (
-                <section className="flex w-full flex-col gap-6 border-t py-10">
-                    <h3 className="text-xl font-semibold">محصولات مرتبط</h3>
-
-                    <div className="no-scrollbar overflow-x-aut flex w-full flex-1 gap-4">
-                        {relatedProducts.map((p) => (
-                            <ProductCardItem product={p} href={PATH.singleProduct(p._id.toString(), p.name)} className="w-1/4 xl:w-1/6" />
-                        ))}
-                    </div>
-                </section>
-            )}
+            </section>}
         </section>
     );
 };
