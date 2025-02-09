@@ -10,12 +10,12 @@ import { signIn, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import Input from "@/components/common/Input";
-import PATH from "../path";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import AppleLogo from "@/assets/icons/components/AppleLogo";
-import toastMessage from "../toastMessage";
-import API from "../api";
+import PATH from "@/utils/path";
+import API from "@/utils/api";
+import toastMessage from "@/utils/toastMessage";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
