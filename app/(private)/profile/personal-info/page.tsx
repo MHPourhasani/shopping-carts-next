@@ -1,6 +1,6 @@
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import Profile from "@/utils/pages/profile/profile";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 

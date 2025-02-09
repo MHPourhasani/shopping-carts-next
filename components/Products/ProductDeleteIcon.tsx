@@ -1,14 +1,14 @@
 "use client";
 import TrashIcon from "@/assets/icons/components/Trash";
-import { ProductInterface } from "@/interfaces/general";
+import { IProduct } from "@/interfaces/general";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
-import toastMessage from "@/utils/toastMessage";
-import { handleRefreshAfterBack } from "@/utils/helper";
-import API from "@/utils/api";
+import toastMessage from "@/shared/toastMessage";
+import { handleRefreshAfterBack } from "@/shared/helper";
+import API from "@/shared/api";
 import { RequestTypeEnum, UserRoleEnum } from "@/interfaces/enums";
 
-const ProductDeleteIcon = ({ product }: { product: ProductInterface }) => {
+const ProductDeleteIcon = ({ product }: { product: IProduct }) => {
     const userState = useAppSelector((state: any) => state.auth.user);
     const shopState = useAppSelector((state: any) => state.shop.shop);
 

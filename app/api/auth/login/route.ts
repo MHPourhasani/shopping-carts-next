@@ -1,9 +1,9 @@
 import userModel from "@/models/user";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import API from "@/utils/api";
-import { getServerAuthSession } from "@/utils/auth";
+import API from "@/shared/api";
+import { getServerAuthSession } from "@/shared/auth";
 
 export async function POST(req: NextRequest) {
     await connectToDB();

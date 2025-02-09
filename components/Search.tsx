@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import SearchIcon from "@/assets/icons/components/Search";
 import Input from "./common/Input";
 

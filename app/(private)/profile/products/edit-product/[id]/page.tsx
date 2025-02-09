@@ -1,6 +1,6 @@
 import AddAndEditProduct from "@/components/Products/AddAndEditProduct";
-import { ProductInterface } from "@/interfaces/general";
-import API from "@/utils/api";
+import { IProduct } from "@/interfaces/general";
+import API from "@/shared/api";
 import { Metadata } from "next";
 
 interface Params {
@@ -8,7 +8,7 @@ interface Params {
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-    const product: ProductInterface = await getSingleProduct(params.id);
+    const product: IProduct = await getSingleProduct(params.id);
 
     return { title: `ویرایش محصول ${product.name}` };
 }
@@ -32,7 +32,7 @@ const getSingleProduct = async (product_id: string) => {
 };
 
 const EditProductPage = async ({ params }: { params: Params }) => {
-    const product: ProductInterface = await getSingleProduct(params.id);
+    const product: IProduct = await getSingleProduct(params.id);
 
     return <AddAndEditProduct isEdit product={product} />;
 };

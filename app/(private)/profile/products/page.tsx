@@ -2,9 +2,9 @@ import AddIcon from "@/assets/icons/components/Add";
 import Button from "@/components/common/Button";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import ProductListItem from "@/components/Products/ProductListItem";
-import { ProductInterface } from "@/interfaces/general";
-import { getServerAuthSession } from "@/utils/auth";
-import PATH from "@/utils/path";
+import { IProduct } from "@/interfaces/general";
+import { getServerAuthSession } from "@/shared/auth";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -32,7 +32,7 @@ const getShop = async (user_id: string) => {
 
 const ProfileProductsPage = async () => {
     const session = await getServerAuthSession();
-    const products:  ProductInterface[] = await getShop(session?.user.userId!);
+    const products: IProduct[] = await getShop(session?.user.userId!);
 
     return (
         <section className="flex w-full flex-1 flex-col gap-4">

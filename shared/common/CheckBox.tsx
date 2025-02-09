@@ -1,4 +1,4 @@
-import { cn } from "@/utils/helper";
+import { cn } from "@/shared/helper";
 import { InputHTMLAttributes } from "react";
 
 interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {

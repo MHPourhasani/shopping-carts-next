@@ -1,10 +1,10 @@
 import EmptyState from "@/components/EmptyState";
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
-import PATH from "@/utils/path";
-import API from "@/utils/api";
+import PATH from "@/shared/path";
+import API from "@/shared/api";
 import SingleOrder from "@/utils/pages/singleOrder";
-import { OrderInterface } from "@/interfaces/general";
+import { IOrder } from "@/interfaces/general";
 import { Metadata } from "next";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const session = await getServerAuthSession();
-    const order: OrderInterface = await getOrder(params.id, session?.user.userId!);
+    const order: IOrder = await getOrder(params.id, session?.user.userId!);
 
     return {
         title: `سفارش ${order.orderNo}`,
@@ -40,7 +40,7 @@ const getOrder = async (order_id: string, user_id: string) => {
 
 const SingleOrderPage = async ({ params }: Props) => {
     const session = await getServerAuthSession();
-    const order: OrderInterface = await getOrder(params.id, session?.user.userId!);
+    const order: IOrder = await getOrder(params.id, session?.user.userId!);
 
     return session ? (
         <SingleOrder order={order} />

@@ -1,8 +1,8 @@
 "use client";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/components/EmptyState";
-import { OrderInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { IOrder } from "@/interfaces/general";
+import PATH from "@/shared/path";
 import OrderCardItem from "@/components/Order/OrderCardItem";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { useAppSelector } from "@/redux/hooks";
@@ -10,10 +10,10 @@ import { useEffect, useState } from "react";
 import { UserRoleEnum } from "@/interfaces/enums";
 
 interface Props {
-    orders: OrderInterface[];
+    orders: IOrder[];
 }
 
-const orderStatus=[""]
+const orderStatus = [""];
 
 const Orders = (props: Props) => {
     const [search, setSearch] = useState("");
@@ -56,7 +56,7 @@ const Orders = (props: Props) => {
 
                 {orders && orders.length ? (
                     <div className="flex w-full flex-1 flex-col gap-4">
-                        {orders.map((item: OrderInterface) => {
+                        {orders.map((item: IOrder) => {
                             return <OrderCardItem key={item.orderNo} href={PATH.profile.order.single_order(item.orderNo)} order={item} />;
                         })}
                     </div>

@@ -1,9 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { cn } from "@/utils/helper";
+import { cn } from "@/shared/helper";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import Link from "next/link";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import HomeIcon from "@/assets/icons/components/Home";
 
 type TBreadCrumb = { title: string; path: string };

@@ -6,16 +6,16 @@ import { toast } from "react-toastify";
 import { useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { ProductInterface, ReviewInterface, productData } from "@/interfaces/general";
+import { IProduct, IReview, productData } from "@/interfaces/general";
 import MobileSingleProduct from "@/components/Products/MobileSingleProduct";
 import DesktopSingleProduct from "@/components/Products/Desctop/DesktopSingleProduct";
 import { usePathname, useRouter } from "next/navigation";
-import toastMessage from "@/utils/toastMessage";
-import PATH from "@/utils/path";
+import toastMessage from "@/shared/toastMessage";
+import PATH from "@/shared/path";
 
 interface Props {
-    product: ProductInterface;
-    reviews: ReviewInterface[];
+    product: IProduct;
+    reviews: IReview[];
 }
 
 export default function SingleProduct({ product, reviews }: Props) {
@@ -29,7 +29,7 @@ export default function SingleProduct({ product, reviews }: Props) {
         size: product.sizes!.split(",")[0],
         color: product.colors![0],
     });
-    const [reviewsList, setReviewsList] = useState<ReviewInterface[]>(reviews);
+    const [reviewsList, setReviewsList] = useState<IReview[]>(reviews);
 
     const addToFavoriteHandler = async () => {
         if (!session) {

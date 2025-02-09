@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/slices/authSlice";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import PageHeader from "@/components/PageHeader/PageHeader";
 
 const EditPersonalInformation = () => {
@@ -73,7 +73,7 @@ const EditPersonalInformation = () => {
     };
 
     return (
-        <section className="flex w-full flex-col flex-1 gap-4">
+        <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="ویرایش اطلاعات شخصی" />
 
             <div className="flex flex-col gap-4">

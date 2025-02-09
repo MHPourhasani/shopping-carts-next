@@ -1,6 +1,6 @@
 import CloseIcon from "@/assets/icons/components/Close";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
-import { cn } from "@/utils/helper";
+import { cn } from "@/shared/helper";
 import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import CheckBox from "./CheckBox";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";

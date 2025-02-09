@@ -1,9 +1,9 @@
 import EmptyState from "@/components/EmptyState";
 import Favorites from "@/utils/pages/favorites";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import { Metadata } from "next";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import PageHeader from "@/components/PageHeader/PageHeader";
 
 export const metadata: Metadata = {

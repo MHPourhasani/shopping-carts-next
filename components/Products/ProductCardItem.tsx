@@ -1,8 +1,8 @@
 "use client";
 import notImage from "@/assets/images/not-images.svg";
 import Image from "next/image";
-import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/utils/helper";
-import { ProductInterface } from "@/interfaces/general";
+import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/helper";
+import { IProduct } from "@/interfaces/general";
 import LoveIcon from "@/assets/icons/components/Love";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -10,11 +10,11 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import Toman from "@/assets/icons/components/Toman";
 
 interface PropsInterface {
-    product: ProductInterface;
+    product: IProduct;
     href: string | object;
     className?: string;
 }

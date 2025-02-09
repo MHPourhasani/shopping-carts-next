@@ -1,6 +1,6 @@
 import Error500 from "@/components/Error500";
-import { ProductInterface } from "@/interfaces/general";
-import API from "@/utils/api";
+import { IProduct } from "@/interfaces/general";
+import API from "@/shared/api";
 import SingleProduct from "@/utils/pages/products/singleProduct";
 import { Metadata } from "next";
 
@@ -64,7 +64,7 @@ const getReviews = async (product_id: string) => {
 };
 
 const SingleProductPage = async ({ params }: Props) => {
-    const product: ProductInterface = await getSingleProduct(params.slug);
+    const product: IProduct = await getSingleProduct(params.slug);
     const reviews = await getReviews(params.slug);
 
     return product !== undefined ? <SingleProduct product={product} reviews={reviews} /> : <Error500 />;

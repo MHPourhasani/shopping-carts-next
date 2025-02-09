@@ -1,9 +1,9 @@
 import Carts from "@/utils/pages/carts";
 import { Metadata } from "next";
-import API from "@/utils/api";
-import { getServerAuthSession } from "@/utils/auth";
+import API from "@/shared/api";
+import { getServerAuthSession } from "@/shared/auth";
 import { redirect } from "next/navigation";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 
 export const metadata: Metadata = {
     title: "سبد خرید",

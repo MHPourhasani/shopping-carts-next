@@ -1,5 +1,5 @@
 import notFoundImage from "@/assets/icons/svgs/404-page.svg";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";

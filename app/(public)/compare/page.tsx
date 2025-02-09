@@ -1,6 +1,6 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { ProductInterface } from "@/interfaces/general";
-import API from "@/utils/api";
+import { IProduct } from "@/interfaces/general";
+import API from "@/shared/api";
 import Compare from "@/utils/pages/compare";
 
 interface Props {
@@ -40,9 +40,9 @@ const getProducts = async () => {
 };
 
 const ComparePage = async ({ searchParams }: Props) => {
-    const product1: ProductInterface = await getSingleProduct(searchParams.p1);
-    const product2: ProductInterface = await getSingleProduct(searchParams.p2);
-    const products: ProductInterface[] = await getProducts();
+    const product1: IProduct = await getSingleProduct(searchParams.p1);
+    const product2: IProduct = await getSingleProduct(searchParams.p2);
+    const products: IProduct[] = await getProducts();
     const props = { product1, product2, products };
 
     return (

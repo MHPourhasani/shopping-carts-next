@@ -3,20 +3,20 @@ import Button from "@/components/common/Button";
 import Input from "@/components/common/Input";
 import SingleSelect from "@/components/common/SingleSelect";
 import { UserRoleEnum } from "@/interfaces/enums";
-import { UserInterface } from "@/interfaces/general";
-import API from "@/utils/api";
-import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/utils/helper";
+import { IUser } from "@/interfaces/general";
+import API from "@/shared/api";
+import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/shared/helper";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 interface Props {
-    data?: UserInterface;
+    data?: IUser;
     isEdit?: boolean;
 }
 
 const AddAndEditUser = ({ data, isEdit = false }: Props) => {
-    const [user, setUser] = useState<Partial<UserInterface>>(isEdit && data ? { ...data, password: "" } : {});
+    const [user, setUser] = useState<Partial<IUser>>(isEdit && data ? { ...data, password: "" } : {});
     const router = useRouter();
 
     const changeHandler = (e: any) => {

@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import SingleSelect from "../common/SingleSelect";
-import { TOption, UserInterface } from "@/interfaces/general";
+import { TOption, IUser } from "@/interfaces/general";
 import { toast } from "react-toastify";
-import toastMessage from "@/utils/toastMessage";
-import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/utils/helper";
+import toastMessage from "@/shared/toastMessage";
+import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/shared/helper";
 import { UserRoleEnum } from "@/interfaces/enums";
 
 interface Props {
-    user: UserInterface;
+    user: IUser;
 }
 
 const ChangeRole = ({ user }: Props) => {

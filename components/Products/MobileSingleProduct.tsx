@@ -9,15 +9,15 @@ import Image from "next/image";
 import Modal from "@/components/Modal";
 import { Navigation } from "swiper/modules";
 import ReviewsList from "@/components/Reviews/ReviewsList/ReviewsList";
-import { capitalizeTheFirstLettersOfWords, isNumber, tomanFormat } from "@/utils/helper";
+import { capitalizeTheFirstLettersOfWords, isNumber, tomanFormat } from "@/shared/helper";
 import AddReview from "@/components/Reviews/AddReview";
 import EditIcon from "@/assets/icons/components/Edit";
-import { SingleProductPropsInterface } from "@/interfaces/general";
+import { ISingleProductProps } from "@/interfaces/general";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ProductTags from "./ProductTags";
 import { useEffect, useRef, useState } from "react";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import TickIcon from "@/assets/icons/components/Tick";
 import Button from "@/components/common/Button";
 import BackButton from "@/components/BackButton";
@@ -29,7 +29,7 @@ import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "./ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
 
-const MobileSingleProduct = (props: SingleProductPropsInterface) => {
+const MobileSingleProduct = (props: ISingleProductProps) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
     const { _id, images, name, price, discountedPrice, tags, description, sizes, colors, relatedProducts } = productData.product;
@@ -293,7 +293,7 @@ const MobileSingleProduct = (props: SingleProductPropsInterface) => {
                             <ProductCardItem
                                 product={p}
                                 href={PATH.singleProduct(p._id.toString(), p.name)}
-                                className="w-1/2 bg-secondary-50 dark:bg-secondary-700 shadow-none"
+                                className="w-1/2 bg-secondary-50 shadow-none dark:bg-secondary-700"
                             />
                         ))}
                     </div>

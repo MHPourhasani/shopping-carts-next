@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HomeIcon from "@/assets/icons/components/Home";
 import ProfileIcon from "@/assets/icons/components/Profile";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import ShopIcon from "@/assets/icons/components/Shop";

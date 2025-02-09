@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Sidebar from "@/components/Profile/Sidebar";
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import { redirect } from "next/navigation";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import DashboardHeader from "@/components/Profile/Header";
 import { Suspense } from "react";
 import Loading from "./loading";

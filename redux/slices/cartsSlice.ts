@@ -1,9 +1,9 @@
-import { CartInterface } from "@/interfaces/general";
+import { ICart } from "@/interfaces/general";
 import { Dispatch, createSlice } from "@reduxjs/toolkit";
 import { useAppDispatch } from "../hooks";
 
 interface initialState {
-    carts: CartInterface[];
+    carts: ICart[];
 }
 
 const initialState: initialState = {

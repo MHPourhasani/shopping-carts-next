@@ -1,8 +1,8 @@
-import { UserInterface } from "@/interfaces/general";
+import { IUser } from "@/interfaces/general";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
-    user: UserInterface | null;
+    user: IUser | null;
 }
 
 const initialState: InitialState = {

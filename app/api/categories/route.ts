@@ -1,4 +1,4 @@
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextResponse } from "next/server";
 import categoryModel from "@/models/category";
 

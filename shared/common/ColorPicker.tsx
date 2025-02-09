@@ -1,10 +1,10 @@
 import MultiSelect from "../common/MultiSelect";
 import colors from "@/assets/json/colors.json";
-import { ColorInterface } from "@/interfaces/general";
+import { IColor } from "@/interfaces/general";
 
 interface Props {
-    defaultColors?: ColorInterface[];
-    onChange: (selected: ColorInterface[]) => void;
+    defaultColors?: IColor[];
+    onChange: (selected: IColor[]) => void;
 }
 
 const ColorPicker = (props: Props) => {

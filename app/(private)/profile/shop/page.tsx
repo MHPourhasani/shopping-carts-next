@@ -1,11 +1,11 @@
-import { ShopInterface } from "@/interfaces/general";
-import { getServerAuthSession } from "@/utils/auth";
+import { IShop } from "@/interfaces/general";
+import { getServerAuthSession } from "@/shared/auth";
 import ShopInformation from "@/utils/pages/shop";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     const session = await getServerAuthSession();
-    const data: { shop: ShopInterface } = await getShop(session?.user.userId!);
+    const data: { shop: IShop } = await getShop(session?.user.userId!);
 
     return {
         title: `فروشگاه ${data.shop.name}`,
@@ -32,7 +32,7 @@ const getShop = async (user_id: string) => {
 
 const ProfileShopPage = async () => {
     const session = await getServerAuthSession();
-    const data: { shop: ShopInterface } = await getShop(session?.user.userId!);
+    const data: { shop: IShop } = await getShop(session?.user.userId!);
 
     return <ShopInformation shop={data.shop} />;
 };

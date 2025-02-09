@@ -5,7 +5,7 @@ import Textarea from "@/components/common/Textarea";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";

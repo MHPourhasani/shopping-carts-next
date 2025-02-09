@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/slices/authSlice";
 import Textarea from "@/components/common/Textarea";
-import PATH from "@/utils/path";
-import { ShopInterface } from "@/interfaces/general";
+import PATH from "@/shared/path";
+import { IShop } from "@/interfaces/general";
 import PageHeader from "@/components/PageHeader/PageHeader";
 
 interface Props {
-    shop: ShopInterface;
+    shop: IShop;
 }
 
 const ShopInformation = ({ shop }: Props) => {

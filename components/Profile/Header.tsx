@@ -1,6 +1,6 @@
 "use client";
 import { useAppSelector } from "@/redux/hooks";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/assets/icons/svgs/user.svg";

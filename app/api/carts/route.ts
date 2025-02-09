@@ -1,7 +1,7 @@
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import cartModel from "@/models/cart";
 import { NextRequest, NextResponse } from "next/server";
-import { CartInterface } from "@/interfaces/general";
+import { ICart } from "@/interfaces/general";
 
 export async function GET(_req: NextRequest, { params }: any) {
     connectToDB();
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         const findCart = await cartModel.findOne({ user });
 
         if (findCart) {
-            const findProduct = await findCart.products.find((item: CartInterface) => item.product.toString() === p._id);
+            const findProduct = await findCart.products.find((item: ICart) => item.product.toString() === p._id);
 
             if (findProduct && findProduct.size === +product.size && findProduct.color.hex === product.color.hex) {
                 findProduct.quantity += product.quantity;
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
                 const updateProduct = await cartModel.findOneAndUpdate(
                     { user },
                     {
-                        products: [...findCart.products.filter((item: CartInterface) => item.product !== findProduct.product), findProduct],
+                        products: [...findCart.products.filter((item: ICart) => item.product !== findProduct.product), findProduct],
                     },
                     { new: true },
                 );

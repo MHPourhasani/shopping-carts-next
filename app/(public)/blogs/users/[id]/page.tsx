@@ -1,8 +1,8 @@
 import BlogCard from "@/components/Blog/BlogCard";
 import BreadCrumb from "@/components/common/BreadCrumb";
-import { BlogInterface, UserInterface } from "@/interfaces/general";
-import API from "@/utils/api";
-import PATH from "@/utils/path";
+import { IBlog, IUser } from "@/interfaces/general";
+import API from "@/shared/api";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import userIcon from "@/assets/icons/svgs/user.svg";
@@ -13,8 +13,8 @@ interface Props {
 }
 
 interface DataInterface {
-    user: UserInterface;
-    blogs: BlogInterface[];
+    user: IUser;
+    blogs: IBlog[];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -1,12 +1,12 @@
 import CloseIcon from "@/assets/icons/components/Close";
-import { ProductInterface } from "@/interfaces/general";
+import { IProduct } from "@/interfaces/general";
 import Image from "next/image";
 import Button from "./common/Button";
 import Toman from "@/assets/icons/components/Toman";
-import { tomanFormat } from "@/utils/helper";
+import { tomanFormat } from "@/shared/helper";
 
 interface Props {
-    product: ProductInterface;
+    product: IProduct;
     onDelete: () => void;
     isTitles?: boolean;
     isCloseIcon?: boolean;

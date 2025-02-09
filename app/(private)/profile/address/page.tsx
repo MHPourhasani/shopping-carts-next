@@ -1,4 +1,4 @@
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import Address from "@/utils/pages/address";
 import { Metadata } from "next";
 

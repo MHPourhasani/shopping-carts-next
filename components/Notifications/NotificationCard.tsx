@@ -1,16 +1,16 @@
 "use client";
-import { NotificationInterface } from "@/interfaces/general";
+import { INotification } from "@/interfaces/general";
 import Button from "../common/Button";
 import TrashIcon from "@/assets/icons/components/Trash";
-import API from "@/utils/api";
+import API from "@/shared/api";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import toastMessage from "@/utils/toastMessage";
-import { showFullDate } from "@/utils/helper";
+import toastMessage from "@/shared/toastMessage";
+import { showFullDate } from "@/shared/helper";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
 interface Props {
-    notification: NotificationInterface;
+    notification: INotification;
     onDelete: (id: string) => void;
     onSelect: (id: string, status: boolean) => void;
     onRead: (id: string, status: boolean) => void;

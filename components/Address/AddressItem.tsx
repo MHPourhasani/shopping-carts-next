@@ -6,10 +6,10 @@ import EmptySquareIcon from "@/assets/icons/svgs/empty-square.svg";
 import EditIcon from "@/assets/icons/components/Edit";
 import Image from "next/image";
 import TrashIcon from "@/assets/icons/components/Trash";
-import { AddressInterface } from "@/interfaces/general";
+import { IAddress } from "@/interfaces/general";
 
 interface Props {
-    address: AddressInterface;
+    address: IAddress;
     selectAddressHandler: (a: any) => void;
     setIsAddAddress: any;
     setEditAddress: any;
@@ -55,7 +55,7 @@ const address = ({
                     <h4 className="text-lg dark:text-secondary-50">{address.address_title}</h4>
                 </div>
 
-                <span className="flex items-center h-6 gap-3">
+                <span className="flex h-6 items-center gap-3">
                     <EditIcon
                         onClick={() => {
                             setIsAddAddress(false);

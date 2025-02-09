@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Pagination from "@/components/Pagination";
-import { ColorInterface, ProductInterface } from "@/interfaces/general";
+import { IColor, IProduct } from "@/interfaces/general";
 import ProductCardItem from "@/components/Products/ProductCardItem";
 import CheckBox from "@/components/common/CheckBox";
 import Button from "@/components/common/Button";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { capitalizeTheFirstLettersOfWords } from "@/utils/helper";
+import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
@@ -15,13 +15,13 @@ import CloseIcon from "@/assets/icons/components/Close";
 import FilterIcon from "@/assets/icons/components/Filter";
 
 interface Props {
-    products: ProductInterface[];
+    products: IProduct[];
 }
 
 const Products = ({ products }: Props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredProducts, setFilteredProducts] = useState(products);
-    const [filteredOptions, setFilteredOptions] = useState<{ brands: string[]; colors: ColorInterface[] }>({ brands: [], colors: [] });
+    const [filteredOptions, setFilteredOptions] = useState<{ brands: string[]; colors: IColor[] }>({ brands: [], colors: [] });
     const [isShow, setIsShow] = useState<{ filter: boolean; brands: boolean; colors: boolean }>({
         filter: false,
         brands: false,
@@ -77,7 +77,7 @@ const Products = ({ products }: Props) => {
         }
     };
 
-    const selectColorHandler = (checked: boolean, color: ColorInterface) => {
+    const selectColorHandler = (checked: boolean, color: IColor) => {
         if (checked) {
             setFilteredOptions({ ...filteredOptions, colors: [...filteredOptions.colors, color] });
         } else {
@@ -299,7 +299,7 @@ const Products = ({ products }: Props) => {
                     <div className="flex w-full flex-1 flex-col items-center justify-center gap-10">
                         {!!currentProductsData.length && (
                             <div className="grid h-full w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                                {currentProductsData.map((product: ProductInterface) => {
+                                {currentProductsData.map((product: IProduct) => {
                                     return (
                                         <ProductCardItem
                                             product={product}

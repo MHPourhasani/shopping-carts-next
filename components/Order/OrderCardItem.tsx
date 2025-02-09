@@ -1,12 +1,12 @@
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import ReceiptIcon from "@/assets/icons/components/Receipt";
-import { OrderInterface } from "@/interfaces/general";
+import { IOrder } from "@/interfaces/general";
 
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 
 interface Props {
-    order: OrderInterface;
+    order: IOrder;
     href: Url;
 }
 

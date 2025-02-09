@@ -8,11 +8,11 @@ import { useEffect, useRef, useState } from "react";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import { toast } from "react-toastify";
-import { AddressInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { IAddress } from "@/interfaces/general";
+import PATH from "@/shared/path";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
-import { covertUserRoleToPersian } from "@/utils/helper";
+import { covertUserRoleToPersian } from "@/shared/helper";
 import EditIcon from "@/assets/icons/components/Edit";
 import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 
@@ -216,7 +216,7 @@ const DesktopProfile = (props: PropsInterface) => {
 
                     {userState?.addresses ? (
                         <p className="break-all text-gray-500 dark:text-gray-300">
-                            {userState.addresses.filter((adr: AddressInterface) => adr.isSelected)[0]?.address_value}
+                            {userState.addresses.filter((adr: IAddress) => adr.isSelected)[0]?.address_value}
                         </p>
                     ) : null}
                 </div>

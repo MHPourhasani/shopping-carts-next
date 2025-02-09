@@ -1,6 +1,6 @@
-import { OrderInterface } from "@/interfaces/general";
-import { getServerAuthSession } from "@/utils/auth";
-import PATH from "@/utils/path";
+import { IOrder } from "@/interfaces/general";
+import { getServerAuthSession } from "@/shared/auth";
+import PATH from "@/shared/path";
 import Link from "next/link";
 
 const getOrders = async (user_id: string) => {
@@ -23,7 +23,7 @@ const getOrders = async (user_id: string) => {
 
 const DashboardPage = async () => {
     const session = await getServerAuthSession();
-    const orders: OrderInterface[] = await getOrders(session?.user.userId!);
+    const orders: IOrder[] = await getOrders(session?.user.userId!);
 
     const summary = [
         { title: "سفارشات", length: orders?.length || 0 },

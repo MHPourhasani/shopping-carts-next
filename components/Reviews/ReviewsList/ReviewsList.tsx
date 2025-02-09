@@ -1,9 +1,9 @@
-import { ReviewInterface } from "@/interfaces/general";
+import { IReview } from "@/interfaces/general";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 
 interface Props {
-    reviews: ReviewInterface[];
+    reviews: IReview[];
     limit?: number;
     isLoading: boolean;
 }
@@ -21,7 +21,7 @@ const ReviewsList = ({ reviews, limit, isLoading }: Props) => {
                     {reviews && reviews.length ? (
                         <div className="flex w-full items-center gap-2">
                             <div className="no-scrollbar flex w-full items-center gap-2 overflow-x-auto lg:flex-col lg:overscroll-x-none">
-                                {reviews.slice(0, limit ? limit : undefined).map((review: ReviewInterface) => {
+                                {reviews.slice(0, limit ? limit : undefined).map((review: IReview) => {
                                     return <ReviewCard key={String(review._id)} {...review} />;
                                 })}
                             </div>

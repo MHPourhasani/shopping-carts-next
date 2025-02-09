@@ -4,7 +4,7 @@ import bagIcon from "@/assets/icons/svgs/bag.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProfileIcon from "@/assets/icons/components/Profile";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import ThemeSwitch from "@/components/ThemeSwitch";
 import { useAppSelector } from "@/redux/hooks";
 import DesktopMenu from "./DesktopMenu";

@@ -3,12 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import notImage from "@/assets/images/not-images.svg";
 import { toast } from "react-toastify";
-import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/utils/helper";
-import PATH from "@/utils/path";
+import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/helper";
+import PATH from "@/shared/path";
 import { ObjectId } from "mongoose";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setCarts } from "@/redux/slices/cartsSlice";
-import { CartInterface, ColorInterface } from "@/interfaces/general";
+import { ICart, IColor } from "@/interfaces/general";
 import TrashIcon from "@/assets/icons/components/Trash";
 import { useSession } from "next-auth/react";
 import Minus from "@/assets/icons/components/Minus";
@@ -21,7 +21,7 @@ interface IProps {
     size: number;
     quantity: number;
     getData?: any;
-    color: ColorInterface;
+    color: IColor;
 }
 
 const CartProductCard = (props: IProps) => {
@@ -40,7 +40,7 @@ const CartProductCard = (props: IProps) => {
         if (res.ok) {
             dispatch(
                 setCarts(
-                    cartsState.map((item: CartInterface) => {
+                    cartsState.map((item: ICart) => {
                         if (item) {
                             if (item._id === _id) {
                                 if (operator === "+") {

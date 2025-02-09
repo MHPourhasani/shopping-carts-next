@@ -1,4 +1,4 @@
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 import favoriteModel from "@/models/favorite";
 import { ObjectId } from "mongoose";

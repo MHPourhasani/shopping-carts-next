@@ -7,7 +7,7 @@ import AddIcon from "@/assets/icons/components/Add";
 import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/components/EmptyState";
 import { setUser } from "@/redux/slices/authSlice";
-import { AddressInterface } from "@/interfaces/general";
+import { IAddress } from "@/interfaces/general";
 import Input from "@/components/common/Input";
 import Textarea from "@/components/common/Textarea";
 import { ObjectId } from "mongoose";
@@ -16,7 +16,7 @@ import AddressItem from "@/components/Address/AddressItem";
 import PageHeader from "@/components/PageHeader/PageHeader";
 
 interface Props {
-    addresses: AddressInterface[];
+    addresses: IAddress[];
 }
 
 const Address = ({ addresses }: Props) => {
@@ -75,7 +75,7 @@ const Address = ({ addresses }: Props) => {
         if (res.ok) {
             dispatch(setUser({ ...userState, addresses: data }));
             toast.success(
-                `${userState.addresses.find((address: AddressInterface) => address._id === addressId).address_title} has been edited successfully`,
+                `${userState.addresses.find((address: IAddress) => address._id === addressId).address_title} has been edited successfully`,
             );
         } else {
             toast.error(`خطا در انتخاب آدرس`);
@@ -99,7 +99,7 @@ const Address = ({ addresses }: Props) => {
             dispatch(setUser({ ...userState, addresses: data }));
             setAddressData({ address_title: "", address_value: "" });
             toast.success(
-                `${userState.addresses.find((address: AddressInterface) => address._id === addressId).address_title} has been selected successfully`,
+                `${userState.addresses.find((address: IAddress) => address._id === addressId).address_title} has been selected successfully`,
             );
         } else {
             toast.error(`خطا در انتخاب آدرس`);
@@ -120,11 +120,11 @@ const Address = ({ addresses }: Props) => {
             dispatch(
                 setUser({
                     ...userState,
-                    addresses: userState.addresses.filter((address: AddressInterface) => address._id !== addressId),
+                    addresses: userState.addresses.filter((address: IAddress) => address._id !== addressId),
                 }),
             );
             toast.success(
-                `${userState.addresses.find((address: AddressInterface) => address._id === addressId).address_title} has been deleted successfully`,
+                `${userState.addresses.find((address: IAddress) => address._id === addressId).address_title} has been deleted successfully`,
             );
         } else {
             toast.error(`خطا در حذف آدرس`);
@@ -179,7 +179,7 @@ const Address = ({ addresses }: Props) => {
                     {userState?.addresses?.length ? (
                         <div className="flex w-full flex-1 flex-col items-start gap-4">
                             <div className="flex w-full flex-col gap-4">
-                                {userState.addresses.map((addressItem: AddressInterface) => {
+                                {userState.addresses.map((addressItem: IAddress) => {
                                     return (
                                         <AddressItem
                                             key={addressItem._id}

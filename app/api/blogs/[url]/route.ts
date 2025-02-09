@@ -1,5 +1,5 @@
 import blogModel from "@/models/blog";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(_req: NextRequest, { params }: any) {

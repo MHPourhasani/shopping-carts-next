@@ -1,11 +1,11 @@
 import EmptyState from "@/components/EmptyState";
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Orders from "@/utils/pages/orders";
 import Error500 from "@/components/Error500";
-import API from "@/utils/api";
+import API from "@/shared/api";
 import PageHeader from "@/components/PageHeader/PageHeader";
 
 export const metadata: Metadata = {

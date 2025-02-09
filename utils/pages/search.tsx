@@ -5,17 +5,17 @@ import notProductSearchFound from "@/assets/icons/svgs/search-illustration.svg";
 import ProductCardItem from "@/components/Products/ProductCardItem";
 import EmptyState from "@/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import Input from "@/components/common/Input";
-import { BlogInterface, ProductInterface } from "@/interfaces/general";
+import { IBlog, IProduct } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
-import API from "../api";
+import API from "../../shared/api";
 import BlogCard from "@/components/Blog/BlogCard";
 
 const Search = () => {
     const [data, setData] = useState<{
         count: number;
-        results: { products: ProductInterface[]; blogs: BlogInterface[] };
+        results: { products: IProduct[]; blogs: IBlog[] };
     }>({
         count: 0,
         results: { products: [], blogs: [] },

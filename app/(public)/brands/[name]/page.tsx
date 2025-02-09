@@ -1,8 +1,8 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
 import ProductCardItem from "@/components/Products/ProductCardItem";
-import { ProductInterface } from "@/interfaces/general";
-import { capitalizeTheFirstLettersOfWords } from "@/utils/helper";
-import PATH from "@/utils/path";
+import { IProduct } from "@/interfaces/general";
+import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 
 export const revalidate = 30;
@@ -59,7 +59,7 @@ export default async function Brands({ params }: Props) {
 
             <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                 {productsData.length
-                    ? productsData.map((product: ProductInterface) => {
+                    ? productsData.map((product: IProduct) => {
                           return (
                               <ProductCardItem
                                   key={product._id.toString()}

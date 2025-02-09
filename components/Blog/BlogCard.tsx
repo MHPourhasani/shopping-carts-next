@@ -1,11 +1,11 @@
 import ClockIcon from "@/assets/icons/components/Clock";
 import UserIcon from "@/assets/icons/components/User";
-import { BlogInterface } from "@/interfaces/general";
-import { cn } from "@/utils/helper";
+import { IBlog } from "@/interfaces/general";
+import { cn } from "@/shared/helper";
 import Link from "next/link";
 
 interface Props {
-    blog: BlogInterface;
+    blog: IBlog;
     link: string;
     className?: string;
 }
@@ -31,7 +31,7 @@ const BlogCard = ({ blog, link, className }: Props) => {
                     <UserIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
                     <p className="truncate">{author.first_name + " " + author.last_name || author.email}</p>
                 </span>
-                
+
                 <span className="flex items-center gap-1 truncate">
                     <ClockIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
                     {new Date(createdAt).toLocaleDateString("fa-IR")}

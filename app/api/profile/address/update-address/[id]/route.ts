@@ -1,6 +1,6 @@
-import { AddressInterface } from "@/interfaces/general";
+import { IAddress } from "@/interfaces/general";
 import userModel from "@/models/user";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(request: NextRequest, { params }: any) {
@@ -12,7 +12,7 @@ export async function PUT(request: NextRequest, { params }: any) {
 
     try {
         if (findUser) {
-            await findUser.addresses.map((adr: AddressInterface) => {
+            await findUser.addresses.map((adr: IAddress) => {
                 if (adr._id.toString() !== addressId) {
                     return adr;
                 } else {

@@ -1,12 +1,12 @@
 "use client";
 import EditIcon from "@/assets/icons/components/Edit";
 import { UserRoleEnum } from "@/interfaces/enums";
-import { ProductInterface } from "@/interfaces/general";
+import { IProduct } from "@/interfaces/general";
 import { useAppSelector } from "@/redux/hooks";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import Link from "next/link";
 
-const ProductEditIcon = ({ product }: { product: ProductInterface }) => {
+const ProductEditIcon = ({ product }: { product: IProduct }) => {
     const userState = useAppSelector((state: any) => state.auth.user);
     const shopState = useAppSelector((state: any) => state.shop.shop);
 

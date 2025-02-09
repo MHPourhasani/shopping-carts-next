@@ -1,10 +1,10 @@
 "use client";
-import { NotificationInterface } from "@/interfaces/general";
+import { INotification } from "@/interfaces/general";
 import NotificationCard from "./NotificationCard";
 import { useState } from "react";
 
 interface Props {
-    notifications: NotificationInterface[];
+    notifications: INotification[];
 }
 
 const NotificationsList = (props: Props) => {

@@ -1,10 +1,10 @@
-import { OrderInterface } from "@/interfaces/general";
+import { IOrder } from "@/interfaces/general";
 import { forwardRef } from "react";
 import ProductOrderCard from "./ProductOrderCard";
-import { covertPaymentToPersian, showFullDate, tomanFormat } from "@/utils/helper";
+import { covertPaymentToPersian, showFullDate, tomanFormat } from "@/shared/helper";
 import Toman from "@/assets/icons/components/Toman";
 
-const OrderPrint = forwardRef(function OrderPrint({ order }: { order: Partial<OrderInterface> }, ref: any) {
+const OrderPrint = forwardRef(function OrderPrint({ order }: { order: Partial<IOrder> }, ref: any) {
     return (
         <div id="single-order-print" ref={ref} dir="rtl" className="flex flex-col gap-8 p-8">
             <h1 className="mb-5 text-2xl font-bold">سفارش #{order.orderNo}</h1>

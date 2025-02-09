@@ -1,7 +1,7 @@
 import { RequestTypeEnum } from "@/interfaces/enums";
-import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface } from "@/interfaces/general";
-import API from "@/utils/api";
-import PATH from "@/utils/path";
+import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
+import API from "@/shared/api";
+import PATH from "@/shared/path";
 import { get } from "@/utils/scripts/api";
 import fs from "fs";
 import path from "path";
@@ -72,10 +72,10 @@ const getBlogs = async () => {
 };
 
 async function getRoutes() {
-    const banners: BannerInterface[] = await getBanners();
-    const categories: CategoryInterface[] = await getCategories();
-    const products: ProductInterface[] = await getProducts();
-    const blogs: BlogInterface[] = await getBlogs();
+    const banners: IBanner[] = await getBanners();
+    const categories: ICategory[] = await getCategories();
+    const products: IProduct[] = await getProducts();
+    const blogs: IBlog[] = await getBlogs();
 
     const routesOfFolders = getAllFolders(baseDir)
         .map((folder) => folder.split("\\").join("/").replace(baseDir, "").replace("/(public)", ""))

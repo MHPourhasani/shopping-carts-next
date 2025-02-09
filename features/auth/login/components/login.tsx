@@ -13,9 +13,9 @@ import Input from "@/components/common/Input";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import AppleLogo from "@/assets/icons/components/AppleLogo";
-import PATH from "@/utils/path";
-import API from "@/utils/api";
-import toastMessage from "@/utils/toastMessage";
+import PATH from "@/shared/path";
+import API from "@/shared/api";
+import toastMessage from "@/shared/toastMessage";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -83,7 +83,7 @@ const Login = () => {
 
     return (
         <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
-            <div className="hidden lg:flex lg:items-center lg:justify-center lg:flex-1 bg-gray-300">
+            <div className="hidden bg-gray-300 lg:flex lg:flex-1 lg:items-center lg:justify-center">
                 <Image src={loginImage} alt="login image" className="h-auto w-full 2xl:w-9/12" />
             </div>
 

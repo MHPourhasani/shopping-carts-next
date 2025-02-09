@@ -4,12 +4,12 @@ import TrashIcon from "@/assets/icons/components/Trash";
 import EmptyState from "@/components/EmptyState";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import ChangeRole from "@/components/Profile/ChangeRole";
-import { UserInterface } from "@/interfaces/general";
-import toastMessage from "@/utils/toastMessage";
+import { IUser } from "@/interfaces/general";
+import toastMessage from "@/shared/toastMessage";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import PATH from "../path";
+import PATH from "../../shared/path";
 import { useAppSelector } from "@/redux/hooks";
 import Button from "@/components/common/Button";
 import AddIcon from "@/assets/icons/components/Add";
@@ -17,7 +17,7 @@ import { UserRoleEnum } from "@/interfaces/enums";
 import { useSearchParams } from "next/navigation";
 
 interface Props {
-    users: UserInterface[];
+    users: IUser[];
 }
 
 const AllUsers = (props: Props) => {
@@ -38,12 +38,12 @@ const AllUsers = (props: Props) => {
 
     useEffect(() => {
         // if (sp.get("role")) {
-            
+
         // }
         setUsers(users.filter((user) => user.role.toLowerCase() === sp.get("role")));
     }, [users, filters]);
 
-    const deleteUserHandler = async (user: UserInterface) => {
+    const deleteUserHandler = async (user: IUser) => {
         const res = await fetch(`/api/auth/users/${user._id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },

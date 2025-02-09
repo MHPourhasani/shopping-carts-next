@@ -1,6 +1,6 @@
 "use client";
 import CloseIcon from "@/assets/icons/components/Close";
-import { cn } from "@/utils/helper";
+import { cn } from "@/shared/helper";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 

@@ -7,9 +7,9 @@ import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Image from "next/image";
 import { Navigation } from "swiper/modules";
 import ReviewsList from "@/components/Reviews/ReviewsList/ReviewsList";
-import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/utils/helper";
+import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/helper";
 import AddReview from "@/components/Reviews/AddReview";
-import { ColorInterface, SingleProductPropsInterface } from "@/interfaces/general";
+import { IColor, ISingleProductProps } from "@/interfaces/general";
 import EditIcon from "@/assets/icons/components/Edit";
 import { useSession } from "next-auth/react";
 import ProductTags from "../ProductTags";
@@ -17,7 +17,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import Button from "@/components/common/Button";
 import TickIcon from "@/assets/icons/components/Tick";
 import notImage from "@/assets/images/not-images.svg";
@@ -28,7 +28,7 @@ import ProductCardItem from "../ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
 import SingleProductTab from "./SingleProductTab";
 
-const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
+const DesktopSingleProduct = (props: ISingleProductProps) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
     const { _id, images, name, price, tags, description, relatedProducts, colors, sizes } = productData.product;
@@ -150,7 +150,7 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
                             <span className="font-semibold">رنگ</span>
 
                             <div className="flex flex-wrap gap-2">
-                                {colors?.map((color: ColorInterface, index) => {
+                                {colors?.map((color: IColor, index) => {
                                     return (
                                         <span
                                             key={index}
@@ -226,15 +226,17 @@ const DesktopSingleProduct = (props: SingleProductPropsInterface) => {
 
             <SingleProductTab />
 
-            {relatedProducts&&<section className="flex w-full flex-col gap-6 border-t py-10">
-                <h3 className="text-xl font-semibold">محصولات مشابه</h3>
+            {relatedProducts && (
+                <section className="flex w-full flex-col gap-6 border-t py-10">
+                    <h3 className="text-xl font-semibold">محصولات مشابه</h3>
 
-                <div className="no-scrollbar overflow-x-aut flex w-full flex-1 gap-4">
-                    {relatedProducts.map((p) => (
-                        <ProductCardItem product={p} href={PATH.singleProduct(p._id.toString(), p.name)} className="w-1/4 xl:w-1/6" />
-                    ))}
-                </div>
-            </section>}
+                    <div className="no-scrollbar overflow-x-aut flex w-full flex-1 gap-4">
+                        {relatedProducts.map((p) => (
+                            <ProductCardItem product={p} href={PATH.singleProduct(p._id.toString(), p.name)} className="w-1/4 xl:w-1/6" />
+                        ))}
+                    </div>
+                </section>
+            )}
         </section>
     );
 };

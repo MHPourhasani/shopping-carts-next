@@ -1,18 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { capitalizeTheFirstLettersOfWords } from "@/utils/helper";
-import { BrandsInterface, CategoryInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
+import { IBrands, ICategory } from "@/interfaces/general";
+import PATH from "@/shared/path";
 
 interface Props {
-    categories: CategoryInterface[];
+    categories: ICategory[];
 }
 
 const Categories = async ({ categories }: Props) => {
     return (
         <div className="no-scrollbar flex w-full items-center gap-2 overflow-x-auto px-4 lg:justify-center">
             {!!categories.length &&
-                categories.map((brand: BrandsInterface) => {
+                categories.map((brand: IBrands) => {
                     return (
                         <Link
                             key={String(brand._id)}

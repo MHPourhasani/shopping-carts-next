@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import notificationModel from "@/models/notification";
-import { NotificationInterface } from "@/interfaces/general";
+import { INotification } from "@/interfaces/general";
 
 export async function PUT(request: NextRequest, { params }: any) {
     connectToDB();
@@ -12,7 +12,7 @@ export async function PUT(request: NextRequest, { params }: any) {
 
     try {
         if (findUser) {
-            await findUser.notifications.map((notification: NotificationInterface) => {
+            await findUser.notifications.map((notification: INotification) => {
                 if (notification._id.toString() !== notificationId) {
                     notification.isViewed = notification.isViewed;
                 } else {
@@ -39,7 +39,7 @@ export async function DELETE(request: NextRequest, { params }: any) {
         if (findUser) {
             const updated = await notificationModel.findOneAndUpdate(
                 { user: userId },
-                { notifications: findUser.notifications.filter((n: NotificationInterface) => n._id === notificationId) },
+                { notifications: findUser.notifications.filter((n: INotification) => n._id === notificationId) },
                 { new: true },
             );
 

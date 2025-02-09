@@ -1,8 +1,8 @@
 import AddAndEditBlog from "@/components/Blog/AddAndEditBlog";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { BlogInterface } from "@/interfaces/general";
-import API from "@/utils/api";
+import { IBlog } from "@/interfaces/general";
+import API from "@/shared/api";
 import { Metadata } from "next";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const data: BlogInterface = await getBlog(params.url);
+    const data: IBlog = await getBlog(params.url);
 
     return {
         title: data && data.subject ? `ویرایش نوشته "${data?.subject}"` : "ویرایش نوشته",
@@ -36,7 +36,7 @@ const getBlog = async (url: string) => {
 };
 
 const ProfileEditBlogPage = async ({ params }: Props) => {
-    const data: BlogInterface = await getBlog(params.url);
+    const data: IBlog = await getBlog(params.url);
 
     if (!data) {
         return <Error500 />;

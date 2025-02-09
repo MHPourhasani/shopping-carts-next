@@ -1,9 +1,9 @@
 import ClockIcon from "@/assets/icons/components/Clock";
 import UserIcon from "@/assets/icons/components/User";
-import { ReviewInterface } from "@/interfaces/general";
-import { showFullDate } from "@/utils/helper";
+import { IReview } from "@/interfaces/general";
+import { showFullDate } from "@/shared/helper";
 
-const ReviewCard = ({ author, title, rating, description, createdAt }: ReviewInterface) => {
+const ReviewCard = ({ author, title, rating, description, createdAt }: IReview) => {
     const getRatingColor = (rating: number) => {
         const colors: any = { 1: "bg-red-500", 2: "bg-orange-500", 3: "bg-yellow-500", 4: "bg-green-400", 5: "bg-green-500" };
         return colors[rating];

@@ -1,7 +1,7 @@
 "use client";
-import { ProductInterface } from "@/interfaces/general";
-import { showFullDate, tomanFormat } from "@/utils/helper";
-import PATH from "@/utils/path";
+import { IProduct } from "@/interfaces/general";
+import { showFullDate, tomanFormat } from "@/shared/helper";
+import PATH from "@/shared/path";
 import Image from "next/image";
 import Link from "next/link";
 import ProductEditIcon from "./ProductEditIcon";
@@ -12,7 +12,7 @@ import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
 import notImage from "@/assets/images/not-images.svg";
 
 interface PropsInterface {
-    product: ProductInterface;
+    product: IProduct;
     href: string | object;
 }
 

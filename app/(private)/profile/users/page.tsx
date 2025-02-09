@@ -1,5 +1,5 @@
 import AllUsers from "@/utils/pages/users";
-import { getServerAuthSession } from "@/utils/auth";
+import { getServerAuthSession } from "@/shared/auth";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

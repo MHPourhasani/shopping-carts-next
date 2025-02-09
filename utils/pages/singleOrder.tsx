@@ -2,10 +2,10 @@
 import Error500 from "@/components/Error500";
 import ProductOrderCard from "@/components/Order/ProductOrderCard";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { OrderInterface } from "@/interfaces/general";
+import { IOrder } from "@/interfaces/general";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
-import { covertPaymentToPersian, showFullDate, tomanFormat } from "../helper";
+import { covertPaymentToPersian, showFullDate, tomanFormat } from "../../shared/helper";
 import Toman from "@/assets/icons/components/Toman";
 import OrderPrint from "@/components/Order/Print";
 import PrinterIcon from "@/assets/icons/components/Printer";
@@ -13,7 +13,7 @@ import Button from "@/components/common/Button";
 import { Margin, Resolution } from "react-to-pdf";
 import JsPDF from "jspdf";
 
-const SingleOrder = ({ order }: { order: OrderInterface }) => {
+const SingleOrder = ({ order }: { order: IOrder }) => {
     const printRef = useRef(null);
     const fileName = `Order-#${order.orderNo}-${showFullDate(order.createdAt!)?.replaceAll("-", "").replaceAll("/", "-").replaceAll(":", "-")}`;
 

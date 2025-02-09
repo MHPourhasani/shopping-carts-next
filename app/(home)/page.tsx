@@ -3,20 +3,20 @@ import Categories from "@/components/Categories/Categories";
 import Header from "@/components/ui/Header/Header";
 import MainBanners from "@/components/MainBanners/MainBanners";
 import ProductsList from "@/components/Products/ProductsList";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { get } from "@/utils/scripts/api";
 import Link from "next/link";
-import { BannerInterface, BlogInterface, CategoryInterface, ProductInterface } from "@/interfaces/general";
+import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
 import BlogCard from "@/components/Blog/BlogCard";
-import API from "@/utils/api";
+import API from "@/shared/api";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const products: ProductInterface[] = await getProducts({});
+    const products: IProduct[] = await getProducts({});
 
     return {
         keywords: [...products.map((item) => (item.tags ? item.tags : ""))],
@@ -70,11 +70,11 @@ const getBlogs = async ({ limit }: { limit?: number }) => {
 };
 
 export default async function Home() {
-    const banners: BannerInterface[] = await getBanners();
-    const categories: CategoryInterface[] = await getCategories();
-    const bestSellers: ProductInterface[] = await getProducts({ type: "best seller" });
-    const products: ProductInterface[] = await getProducts({ limit: 6 });
-    const blogs: BlogInterface[] = await getBlogs({ limit: 3 });
+    const banners: IBanner[] = await getBanners();
+    const categories: ICategory[] = await getCategories();
+    const bestSellers: IProduct[] = await getProducts({ type: "best seller" });
+    const products: IProduct[] = await getProducts({ limit: 6 });
+    const blogs: IBlog[] = await getBlogs({ limit: 3 });
 
     return (
         <main className="flex w-full flex-1 flex-col items-start gap-6 pb-20 pt-4 2xl:items-center 2xl:justify-center">

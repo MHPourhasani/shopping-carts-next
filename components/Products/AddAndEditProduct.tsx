@@ -6,18 +6,18 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 import Textarea from "@/components/common/Textarea";
-import { ColorInterface, ProductInterface, ShopInterface } from "@/interfaces/general";
+import { IColor, IProduct, IShop } from "@/interfaces/general";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { handleRefreshAfterBack, sizes } from "@/utils/helper";
+import { handleRefreshAfterBack, sizes } from "@/shared/helper";
 import MultiSelect from "../common/MultiSelect";
 import ColorPicker from "../common/ColorPicker";
 import { get } from "@/utils/scripts/api";
-import API from "@/utils/api";
-import toastMessage from "@/utils/toastMessage";
+import API from "@/shared/api";
+import toastMessage from "@/shared/toastMessage";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
 interface Props {
-    product?: ProductInterface;
+    product?: IProduct;
     isEdit?: boolean;
 }
 
@@ -40,8 +40,8 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                   relatedProducts: [],
               },
     );
-    const [, setShop] = useState<Partial<ShopInterface>>({ createdAt: new Date() });
-    const [allProducts, setAllProducts] = useState<Partial<ProductInterface[]>>([]);
+    const [, setShop] = useState<Partial<IShop>>({ createdAt: new Date() });
+    const [allProducts, setAllProducts] = useState<Partial<IProduct[]>>([]);
     const router = useRouter();
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                     return res.json();
                 })
                 .then(({ results }) => {
-                    setAllProducts(results.filter((p: ProductInterface) => p._id !== formData._id));
+                    setAllProducts(results.filter((p: IProduct) => p._id !== formData._id));
                 });
         };
 
@@ -82,7 +82,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const addColorHandler = (selectedColors: ColorInterface[]) => {
+    const addColorHandler = (selectedColors: IColor[]) => {
         setFormData({ ...formData, colors: selectedColors });
     };
 
@@ -113,7 +113,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                             "Content-Type": "application/json",
                             Accept: "application/json",
                         },
-                        body: JSON.stringify({ data: formData, relatedProducts: relatedProducts.map((p: ProductInterface) => p._id) }),
+                        body: JSON.stringify({ data: formData, relatedProducts: relatedProducts.map((p: IProduct) => p._id) }),
                     });
                 } else {
                     res = await fetch("/api/products", {
@@ -124,7 +124,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                         },
                         body: JSON.stringify({
                             product: formData,
-                            relatedProducts: relatedProducts.map((p: ProductInterface) => p._id),
+                            relatedProducts: relatedProducts.map((p: IProduct) => p._id),
                         }),
                     });
                 }
@@ -215,7 +215,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                     <MultiSelect
                         defaultValues={
                             formData.relatedProducts
-                                ? formData.relatedProducts.map((p: ProductInterface) => {
+                                ? formData.relatedProducts.map((p: IProduct) => {
                                       return { id: String(p?._id), title: String(p?.name), image: p?.images ? p?.images[0] : "" };
                                   })
                                 : undefined

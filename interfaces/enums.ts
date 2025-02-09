@@ -17,8 +17,3 @@ export enum OrderStatusEnum {
     PROCESS,
     REJECT,
 }
-
-export enum RequestTypeEnum {
-    CSR,
-    SSR,
-}

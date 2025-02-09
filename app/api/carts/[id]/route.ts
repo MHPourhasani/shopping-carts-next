@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import cartModel from "@/models/cart";
-import { CartInterface } from "@/interfaces/general";
+import { ICart } from "@/interfaces/general";
 
 export async function GET(_req: NextRequest, { params }: any) {
     connectToDB();
@@ -29,7 +29,7 @@ export async function PUT(request: NextRequest, { params }: any) {
 
     try {
         if (findCart) {
-            const findProduct = findCart.products.find((item: CartInterface) => item._id.toString() === productId);
+            const findProduct = findCart.products.find((item: ICart) => item._id.toString() === productId);
 
             if (operator === "+") {
                 findProduct.quantity += 1;

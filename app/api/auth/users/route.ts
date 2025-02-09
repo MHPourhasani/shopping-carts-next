@@ -1,6 +1,6 @@
 import { UserRoleEnum } from "@/interfaces/enums";
 import userModel from "@/models/user";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

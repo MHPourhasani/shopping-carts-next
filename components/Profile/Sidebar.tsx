@@ -3,7 +3,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { sidebarItems } from "@/utils/sidebar";
 import LogoutIcon from "@/assets/icons/components/Logout";
 
@@ -13,8 +13,8 @@ const Sidebar = () => {
 
     return (
         <aside className="no-scrollbar hidden h-full min-w-[250px] max-w-[250px] flex-col items-center justify-between gap-4 overflow-y-auto rounded-3xl bg-white p-4 py-5 dark:bg-secondary-700 lg:flex">
-            <div className="flex flex-col gap-8 w-full">
-                <Link href={PATH.home()} className="self-start text-3xl pt-8 font-bold dark:text-white">
+            <div className="flex w-full flex-col gap-8">
+                <Link href={PATH.home()} className="self-start pt-8 text-3xl font-bold dark:text-white">
                     {process.env.shop_name}
                 </Link>
 
@@ -31,9 +31,7 @@ const Sidebar = () => {
                                         key={item.href}
                                         href={item.href}
                                         className={`flex items-center gap-2 py-4 ${
-                                            isActive
-                                                ? "bg-gradient-to-l text-primary-100 dark:text-violet-300"
-                                                : ""
+                                            isActive ? "bg-gradient-to-l text-primary-100 dark:text-violet-300" : ""
                                         }`}
                                     >
                                         {item.icon}

@@ -2,8 +2,8 @@ import AddIcon from "@/assets/icons/components/Add";
 import BlogListItem from "@/components/Blog/BlogListItem";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { BlogInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { IBlog } from "@/interfaces/general";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -30,7 +30,7 @@ const getBlogs = async () => {
 };
 
 const ProfileBlogs = async () => {
-    const blogs: BlogInterface[] = await getBlogs();
+    const blogs: IBlog[] = await getBlogs();
 
     if (!blogs) {
         return <Error500 />;

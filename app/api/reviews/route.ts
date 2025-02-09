@@ -1,5 +1,5 @@
 import reviewModel from "@/models/review";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {

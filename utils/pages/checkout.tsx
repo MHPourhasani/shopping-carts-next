@@ -5,14 +5,14 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "@/components/common/Button";
-import { AddressInterface, CartInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { IAddress, ICart } from "@/interfaces/general";
+import PATH from "@/shared/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
 import Textarea from "@/components/common/Textarea";
-import API from "../api";
+import API from "../../shared/api";
 import Toman from "@/assets/icons/components/Toman";
 
-const Checkout = ({ carts }: { carts: CartInterface[] }) => {
+const Checkout = ({ carts }: { carts: ICart[] }) => {
     const { data: session } = useSession();
     const userState = useAppSelector((state: any) => state.auth.user);
     const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ const Checkout = ({ carts }: { carts: CartInterface[] }) => {
     const goToPayment = async () => {
         if (!userState?.first_name || !userState?.last_name || !userState?.phone_number) {
             setError({ ...error, information: "Please enter empty field" });
-        } else if (!userState?.addresses.find((adr: AddressInterface) => adr.isSelected)) {
+        } else if (!userState?.addresses.find((adr: IAddress) => adr.isSelected)) {
             setError({ ...error, address: "Please add an address" });
         } else {
             const res = await fetch(API.orders.orders_list(), {
@@ -51,7 +51,7 @@ const Checkout = ({ carts }: { carts: CartInterface[] }) => {
                 body: JSON.stringify({
                     userId: session?.user.userId,
                     products: carts,
-                    address: userState?.addresses.find((adr: AddressInterface) => adr.isSelected),
+                    address: userState?.addresses.find((adr: IAddress) => adr.isSelected),
                     description: description ? description : undefined,
                     payment: { method: "online", transportCost: 10 },
                     pricePaid: calculateTotalPrice(),
@@ -142,7 +142,7 @@ const Checkout = ({ carts }: { carts: CartInterface[] }) => {
 
                     {userState?.addresses.length ? (
                         <p className="break-all text-gray-500">
-                            {userState?.addresses.filter((adr: AddressInterface) => adr.isSelected)[0].address_value}
+                            {userState?.addresses.filter((adr: IAddress) => adr.isSelected)[0].address_value}
                         </p>
                     ) : null}
 

@@ -1,10 +1,10 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
 import ProductCardItem from "@/components/Products/ProductCardItem";
-import { ProductInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { IProduct } from "@/interfaces/general";
+import PATH from "@/shared/path";
 
 interface Props {
-    products: ProductInterface[];
+    products: IProduct[];
 }
 
 const Favorites = ({ products }: Props) => {
@@ -15,7 +15,7 @@ const Favorites = ({ products }: Props) => {
             </PageHeader>
 
             <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-                {products.map((product: ProductInterface) => {
+                {products.map((product: IProduct) => {
                     return (
                         <ProductCardItem
                             key={product._id.toString()}

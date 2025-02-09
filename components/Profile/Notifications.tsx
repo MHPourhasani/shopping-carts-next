@@ -4,15 +4,15 @@ import NotificationIcon from "@/assets/icons/components/Notificationbing";
 import NotificationsList from "../Notifications/NotificationsList";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { useEffect, useState } from "react";
-import API from "@/utils/api";
+import API from "@/shared/api";
 import { useSession } from "next-auth/react";
-import { NotificationInterface } from "@/interfaces/general";
+import { INotification } from "@/interfaces/general";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
 const DashboardNotifications = () => {
     const { data: session } = useSession();
     const [isShow, setIsShow] = useState(false);
-    const [notifications, setNotifications] = useState<NotificationInterface[] | undefined>(undefined);
+    const [notifications, setNotifications] = useState<INotification[] | undefined>(undefined);
     const [unReads, setUnReads] = useState<number | undefined>(undefined);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const DashboardNotifications = () => {
             if (response.ok) {
                 const { results } = await response.json();
                 setNotifications(results);
-                setUnReads(results.filter((item: NotificationInterface) => !item.isViewed).length);
+                setUnReads(results.filter((item: INotification) => !item.isViewed).length);
             }
         } catch (error: any) {
             console.error(error);

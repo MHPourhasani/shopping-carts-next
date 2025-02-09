@@ -8,16 +8,16 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import EmptyState from "@/components/EmptyState";
 import emptyCart from "@/assets/icons/svgs/cart-illustration.svg";
-import { CartInterface } from "@/interfaces/general";
+import { ICart } from "@/interfaces/general";
 import Button from "@/components/common/Button";
-import PATH from "../path";
-import toastMessage from "../toastMessage";
+import PATH from "../../shared/path";
+import toastMessage from "../../shared/toastMessage";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import Toman from "@/assets/icons/components/Toman";
-import { tomanFormat } from "../helper";
+import { tomanFormat } from "../../shared/helper";
 
 interface IProps {
-    carts: CartInterface[];
+    carts: ICart[];
 }
 
 const Carts = ({ carts }: IProps) => {
@@ -65,7 +65,7 @@ const Carts = ({ carts }: IProps) => {
             {cartsState.length ? (
                 <div className="flex flex-1 flex-col items-center justify-between gap-4 lg:flex-row lg:items-start">
                     <div className="flex w-full flex-col gap-2">
-                        {cartsState.map((cart: CartInterface, index: number) => {
+                        {cartsState.map((cart: ICart, index: number) => {
                             if (cart) {
                                 return <CartProductCard key={index} {...cart} />;
                             }

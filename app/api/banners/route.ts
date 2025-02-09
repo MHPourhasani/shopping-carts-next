@@ -1,5 +1,5 @@
 import bannerModel from "@/models/banner";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import { NextResponse } from "next/server";
 
 export async function GET() {

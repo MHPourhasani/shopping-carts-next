@@ -1,14 +1,14 @@
 import BreadCrumb from "@/components/common/BreadCrumb";
-import { BlogInterface } from "@/interfaces/general";
-import API from "@/utils/api";
-import PATH from "@/utils/path";
+import { IBlog } from "@/interfaces/general";
+import API from "@/shared/api";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import ClockIcon from "@/assets/icons/components/Clock";
 import BlogCard from "@/components/Blog/BlogCard";
-import { showFullDate } from "@/utils/helper";
+import { showFullDate } from "@/shared/helper";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
@@ -17,7 +17,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const data: BlogInterface = await getBlog(params.url);
+    const data: IBlog = await getBlog(params.url);
 
     const title = "بلاگ " + data.subject;
     const description = data.content;
@@ -68,8 +68,8 @@ const getBlogs = async () => {
 };
 
 const SingleBlogPage = async ({ params }: Props) => {
-    const data: BlogInterface = await getBlog(params.url);
-    const blogs: BlogInterface[] = await getBlogs();
+    const data: IBlog = await getBlog(params.url);
+    const blogs: IBlog[] = await getBlogs();
     const filteredBlogs = blogs.filter((blog) => blog.link !== params.url);
 
     const { subject, link, author, updatedAt, createdAt, readingTime, tags, content, relatedBlogs } = data;

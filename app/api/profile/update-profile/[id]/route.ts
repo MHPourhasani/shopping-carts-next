@@ -1,7 +1,7 @@
 import userModel from "@/models/user";
-import API from "@/utils/api";
-import { getServerAuthSession } from "@/utils/auth";
-import connectToDB from "@/utils/db";
+import API from "@/shared/api";
+import { getServerAuthSession } from "@/shared/auth";
+import connectToDB from "@/shared/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(request: NextRequest, { params }: any) {

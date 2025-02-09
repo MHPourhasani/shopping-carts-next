@@ -1,10 +1,10 @@
 import EditIcon from "@/assets/icons/components/Edit";
 import TrashIcon from "@/assets/icons/components/Trash";
 import BreadCrumb from "@/components/common/BreadCrumb";
-import { BlogInterface } from "@/interfaces/general";
-import API from "@/utils/api";
-import { showFullDate } from "@/utils/helper";
-import PATH from "@/utils/path";
+import { IBlog } from "@/interfaces/general";
+import API from "@/shared/api";
+import { showFullDate } from "@/shared/helper";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const data: BlogInterface = await getBlog(params.url);
+    const data: IBlog = await getBlog(params.url);
 
     return {
         title: data.subject,
@@ -40,7 +40,7 @@ const getBlog = async (url: string) => {
 };
 
 const ProfileSingleBlogPage = async ({ params }: Props) => {
-    const data: BlogInterface = await getBlog(params.url);
+    const data: IBlog = await getBlog(params.url);
 
     return (
         <section className="flex w-full flex-1 flex-col gap-8">

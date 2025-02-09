@@ -2,27 +2,27 @@
 import Button from "@/components/common/Button";
 import CompareItem from "@/components/CompareItem";
 import Modal from "@/components/Modal";
-import { productData, ProductInterface } from "@/interfaces/general";
+import { productData, IProduct } from "@/interfaces/general";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import PATH from "../path";
+import PATH from "../../shared/path";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import toastMessage from "../toastMessage";
+import toastMessage from "../../shared/toastMessage";
 import addIcon from "@/assets/icons/svgs/add.svg";
 import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Toman from "@/assets/icons/components/Toman";
-import { tomanFormat } from "../helper";
+import { tomanFormat } from "../../shared/helper";
 
 interface Props {
-    product1: ProductInterface;
-    product2: ProductInterface;
-    products: ProductInterface[];
+    product1: IProduct;
+    product2: IProduct;
+    products: IProduct[];
 }
 
 const Compare = ({ product1, product2, products }: Props) => {
-    const [compareProducts, setCompareProducts] = useState<{ product1: null | ProductInterface; product2: null | ProductInterface }>({
+    const [compareProducts, setCompareProducts] = useState<{ product1: null | IProduct; product2: null | IProduct }>({
         product1: null,
         product2: null,
     });
@@ -40,7 +40,7 @@ const Compare = ({ product1, product2, products }: Props) => {
         }
     }, [product1, product2]);
 
-    const selectProductsHandler = (product: ProductInterface) => {
+    const selectProductsHandler = (product: IProduct) => {
         if (openProductsModal === 1) {
             setCompareProducts({ ...compareProducts, product1: product });
             router.push(PATH.compare(product._id.toString(), compareProducts.product2 ? compareProducts.product2?._id.toString() : ""));

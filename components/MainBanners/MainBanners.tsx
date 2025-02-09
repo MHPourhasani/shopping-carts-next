@@ -6,11 +6,11 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { Navigation, Pagination } from "swiper/modules";
 import Link from "next/link";
-import { BannerInterface } from "@/interfaces/general";
-import PATH from "@/utils/path";
+import { IBanner } from "@/interfaces/general";
+import PATH from "@/shared/path";
 
 interface IProps {
-    banners: BannerInterface[];
+    banners: IBanner[];
 }
 
 const MainBanners = ({ banners }: IProps) => {
@@ -32,7 +32,7 @@ const MainBanners = ({ banners }: IProps) => {
                 className="aspect-auto w-full rounded-xl lg:aspect-[100/30]"
             >
                 {!!banners.length &&
-                    banners.map((banner: BannerInterface) => {
+                    banners.map((banner: IBanner) => {
                         return (
                             <SwiperSlide key={String(banner._id)} className="flex w-full items-center justify-start">
                                 <Link href={`${PATH.banners()}/${banner.name}`}>

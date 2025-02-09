@@ -1,5 +1,5 @@
 "use client";
-import { scrollToTop } from "@/utils/helper";
+import { scrollToTop } from "@/shared/helper";
 import Image from "next/image";
 import appStoreIcon from "@/assets/images/app-store.svg";
 import googlePlayIcon from "@/assets/images/google-play.svg";
@@ -8,7 +8,7 @@ import { useState } from "react";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 
 const Footer = () => {
     const [email, setEmail] = useState("");

@@ -3,16 +3,16 @@ import BreadCrumb from "@/components/common/BreadCrumb";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { RequestTypeEnum } from "@/interfaces/enums";
-import { BlogInterface } from "@/interfaces/general";
-import API from "@/utils/api";
-import PATH from "@/utils/path";
+import { IBlog } from "@/interfaces/general";
+import API from "@/shared/api";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const blogs: BlogInterface[] = await getBlogs();
+    const blogs: IBlog[] = await getBlogs();
 
     const title = "بلاگ ها";
     const url = PATH.blogs();
@@ -47,7 +47,7 @@ const getBlogs = async () => {
 };
 
 const Blogs = async () => {
-    const blogs: BlogInterface[] = await getBlogs();
+    const blogs: IBlog[] = await getBlogs();
 
     if (!blogs) {
         return <Error500 />;
@@ -55,11 +55,7 @@ const Blogs = async () => {
 
     return (
         <section className="flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
-            <BreadCrumb
-                items={[
-                    { title: "بلاگ", path: PATH.blogs() },
-                ]}
-            />
+            <BreadCrumb items={[{ title: "بلاگ", path: PATH.blogs() }]} />
 
             <PageHeader title="بلاگ" mobileBackButton={false} desktopBackButton={false} />
 

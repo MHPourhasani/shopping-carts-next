@@ -1,5 +1,5 @@
 import Login from "@/features/auth/login/components/login";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import { Metadata } from "next";
 
 export const revalidate = 30;

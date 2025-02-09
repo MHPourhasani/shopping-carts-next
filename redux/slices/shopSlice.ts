@@ -1,8 +1,8 @@
-import { ShopInterface } from "@/interfaces/general";
+import { IShop } from "@/interfaces/general";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface InitialState {
-    shop: ShopInterface | null;
+    shop: IShop | null;
 }
 
 const initialState: InitialState = {

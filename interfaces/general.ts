@@ -1,32 +1,32 @@
 import { ObjectId } from "mongoose";
 import { PaymentMethodEnum, UserRoleEnum } from "./enums";
 
-export interface CategoryInterface {
+export interface ICategory {
     _id: ObjectId;
     name: string;
     src: string;
 }
 
-export interface BannerInterface {
+export interface IBanner {
     _id: ObjectId;
     name: string;
     src: string;
     type: string;
 }
 
-export interface AddressInterface {
+export interface IAddress {
     _id: string;
     address_title: string;
     address_value: string;
     isSelected: boolean;
 }
 
-export interface FavoriteInterface {
+export interface IFavorite {
     _id: ObjectId;
     productId?: ObjectId;
 }
 
-export interface UserInterface {
+export interface IUser {
     _id: ObjectId;
     first_name: string;
     last_name: string;
@@ -35,25 +35,25 @@ export interface UserInterface {
     emailValid?: boolean;
     profile_image?: string;
     phone_number?: string;
-    addresses?: AddressInterface[];
+    addresses?: IAddress[];
     role: UserRoleEnum;
     createdAt: Date;
     updatedAt?: Date;
 }
 
-export interface ShopInterface {
+export interface IShop {
     _id: ObjectId;
     creator: ObjectId;
     name: string;
     phone_number: string;
     description?: string;
     logo?: string;
-    products?: ProductInterface[];
+    products?: IProduct[];
     createdAt: Date;
     updatedAt?: Date;
 }
 
-export interface NotificationInterface {
+export interface INotification {
     _id: string;
     title: string;
     message: string;
@@ -61,66 +61,66 @@ export interface NotificationInterface {
     createdAt: Date;
 }
 
-export interface CartInterface {
+export interface ICart {
     _id: ObjectId;
     product: string;
     quantity: number;
-    color: ColorInterface;
+    color: IColor;
     size: number;
 }
 
-export interface BrandsInterface {
+export interface IBrands {
     _id: ObjectId;
     name: string;
     src: string;
 }
 
-export interface ProductInterface {
+export interface IProduct {
     _id: ObjectId | string;
-    shopper: ShopInterface;
+    shopper: IShop;
     name: string;
     brand: string;
     price: number;
     discountedPrice?: number | null;
     images: string[];
     sizes: string;
-    colors: ColorInterface[];
+    colors: IColor[];
     categories: string;
     tags?: string;
     services?: string;
     description?: string;
-    relatedProducts?: ProductInterface[];
+    relatedProducts?: IProduct[];
     createdAt: Date;
     updatedAt?: Date;
 }
 
-export interface SingleProductPropsInterface {
+export interface ISingleProductProps {
     isAddReview: boolean;
     setIsAddReview: any;
     productData: productData;
     setProductData: any;
-    reviews: ReviewInterface[];
+    reviews: IReview[];
     setReviews: any;
     addToFavoriteHandler: () => void;
     addToCartsHandler: (productData: productData) => void;
 }
 
-export interface ColorInterface {
+export interface IColor {
     name: string;
     hex: string;
 }
 
 export interface productData {
     _id?: ObjectId | string;
-    product: ProductInterface;
+    product: IProduct;
     quantity: number;
     size: string;
-    color: ColorInterface;
+    color: IColor;
 }
 
-export interface ReviewInterface {
+export interface IReview {
     _id: ObjectId;
-    author: UserInterface;
+    author: IUser;
     title: string;
     rating: number;
     description: string;
@@ -134,20 +134,20 @@ export interface IconProps {
     onClick?: any;
 }
 
-export interface OrderInterface {
+export interface IOrder {
     _id: ObjectId;
     orderNo: string;
     products: productData[];
     payment: { method: PaymentMethodEnum; transportCost: number };
     pricePaid: number;
-    address: AddressInterface;
+    address: IAddress;
     description: string;
     createdAt: Date;
 }
 
-export interface BlogInterface {
+export interface IBlog {
     _id: ObjectId;
-    author: UserInterface;
+    author: IUser;
     link: string;
     subject: string;
     content: string;
@@ -155,7 +155,7 @@ export interface BlogInterface {
     keywords?: string;
     categories?: string;
     readingTime?: number;
-    relatedBlogs?: BlogInterface[];
+    relatedBlogs?: IBlog[];
     createdAt: Date;
     updatedAt?: Date;
 }

@@ -2,23 +2,23 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { handleRefreshAfterBack } from "../../utils/helper";
+import { handleRefreshAfterBack } from "../../shared/helper";
 import { useAppSelector } from "@/redux/hooks";
-import { BlogInterface } from "@/interfaces/general";
+import { IBlog } from "@/interfaces/general";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import Link from "next/link";
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import TextEditor from "../common/TextEditor";
 import TrashIcon from "@/assets/icons/components/Trash";
-import toastMessage from "@/utils/toastMessage";
+import toastMessage from "@/shared/toastMessage";
 import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "../common/MultiSelect";
-import API from "@/utils/api";
+import API from "@/shared/api";
 import { RequestTypeEnum } from "@/interfaces/enums";
 
 interface Props {
-    blog?: BlogInterface;
+    blog?: IBlog;
     isEdit?: boolean;
 }
 
@@ -28,7 +28,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
         isEdit ? blog! : { link: "", subject: "", content: "", tags: "", keywords: "", relatedBlogs: [] },
     );
     const [isEditLink, setIsEditLink] = useState(true);
-    const [allBlogs, setAllBlogs] = useState<Partial<BlogInterface[]>>([]);
+    const [allBlogs, setAllBlogs] = useState<Partial<IBlog[]>>([]);
     const router = useRouter();
 
     const changeHandler = (e: any) => {
@@ -47,7 +47,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 });
                 if (response.ok) {
                     const { results } = await response.json();
-                    setAllBlogs(results.filter((b: BlogInterface) => b._id !== data._id));
+                    setAllBlogs(results.filter((b: IBlog) => b._id !== data._id));
                 }
             } catch (error: any) {
                 console.error(error);
@@ -145,7 +145,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 <MultiSelect
                     defaultValues={
                         data.relatedBlogs
-                            ? data.relatedBlogs.map((b: BlogInterface) => {
+                            ? data.relatedBlogs.map((b: IBlog) => {
                                   return { id: String(b?._id), title: String(b?.subject) };
                               })
                             : undefined

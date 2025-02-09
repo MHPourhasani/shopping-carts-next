@@ -3,13 +3,13 @@ import ClockIcon from "@/assets/icons/components/Clock";
 import EditIcon from "@/assets/icons/components/Edit";
 import TrashIcon from "@/assets/icons/components/Trash";
 import UserIcon from "@/assets/icons/components/User";
-import { BlogInterface } from "@/interfaces/general";
-import { handleRefreshAfterBack } from "@/utils/helper";
-import toastMessage from "@/utils/toastMessage";
+import { IBlog } from "@/interfaces/general";
+import { handleRefreshAfterBack } from "@/shared/helper";
+import toastMessage from "@/shared/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-const BlogListItem = ({ blog, link }: { blog: BlogInterface; link: string }) => {
+const BlogListItem = ({ blog, link }: { blog: IBlog; link: string }) => {
     const { _id, subject, author, createdAt } = blog;
 
     const deleteHandler = async () => {

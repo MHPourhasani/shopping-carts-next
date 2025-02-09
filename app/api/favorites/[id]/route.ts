@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectToDB from "@/utils/db";
+import connectToDB from "@/shared/db";
 import favoriteModel from "@/models/favorite";
-import { FavoriteInterface } from "@/interfaces/general";
+import { IFavorite } from "@/interfaces/general";
 
 export async function GET(_req: NextRequest, { params }: any) {
     connectToDB();
@@ -16,7 +16,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     const userId = params.id;
     const { productId } = await request.json();
     const findUser = await favoriteModel.findOne({ user: userId });
-    const findFavorite = await findUser.products.find((item: FavoriteInterface) => item.toString() === productId);
+    const findFavorite = await findUser.products.find((item: IFavorite) => item.toString() === productId);
 
     try {
         if (findUser) {

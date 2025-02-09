@@ -1,10 +1,10 @@
-import PATH from "@/utils/path";
+import PATH from "@/shared/path";
 import ProductCardItem from "./ProductCardItem";
-import { ProductInterface } from "@/interfaces/general";
+import { IProduct } from "@/interfaces/general";
 
 interface Props {
     loading?: boolean;
-    products?: ProductInterface[];
+    products?: IProduct[];
 }
 
 const ProductsList = async ({ products, loading }: Props) => {
@@ -12,7 +12,7 @@ const ProductsList = async ({ products, loading }: Props) => {
         <section className="flex w-full flex-col gap-4 2xl:justify-center">
             {!loading ? (
                 <section className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-                    {products?.map((product: ProductInterface) => {
+                    {products?.map((product: IProduct) => {
                         return (
                             <ProductCardItem
                                 key={product._id.toString()}
