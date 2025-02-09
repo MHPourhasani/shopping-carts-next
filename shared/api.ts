@@ -1,4 +1,4 @@
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 const API = {
     auth: {

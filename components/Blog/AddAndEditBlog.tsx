@@ -15,7 +15,7 @@ import toastMessage from "@/shared/toastMessage";
 import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "../common/MultiSelect";
 import API from "@/shared/api";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 interface Props {
     blog?: IBlog;

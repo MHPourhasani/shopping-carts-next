@@ -10,7 +10,7 @@ import ClockIcon from "@/assets/icons/components/Clock";
 import BlogCard from "@/components/Blog/BlogCard";
 import { showFullDate } from "@/shared/helper";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 interface Props {
     params: { url: string };

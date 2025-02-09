@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 import toastMessage from "@/shared/toastMessage";
 import { handleRefreshAfterBack } from "@/shared/helper";
 import API from "@/shared/api";
-import { RequestTypeEnum, UserRoleEnum } from "@/interfaces/enums";
+import { UserRoleEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 const ProductDeleteIcon = ({ product }: { product: IProduct }) => {
     const userState = useAppSelector((state: any) => state.auth.user);

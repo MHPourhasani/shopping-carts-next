@@ -6,7 +6,7 @@ import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import userIcon from "@/assets/icons/svgs/user.svg";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 interface Props {
     params: { id: string };

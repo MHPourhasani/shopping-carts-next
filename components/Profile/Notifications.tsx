@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import API from "@/shared/api";
 import { useSession } from "next-auth/react";
 import { INotification } from "@/interfaces/general";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 const DashboardNotifications = () => {
     const { data: session } = useSession();

@@ -14,7 +14,7 @@ import ColorPicker from "../common/ColorPicker";
 import { get } from "@/utils/scripts/api";
 import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 interface Props {
     product?: IProduct;

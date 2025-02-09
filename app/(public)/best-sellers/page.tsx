@@ -3,12 +3,14 @@ import { IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import PATH from "@/shared/path";
+import { get } from "@/utils/scripts/api";
+import API from "@/shared/api";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const data: IProduct[] = await getData();
+    const data: IProduct[] = await getProducts();
     const products = data.filter((product: IProduct) => product.tags?.includes("best seller"));
     const productsName = products !== undefined ? products.map((item) => item.name) : [];
     const productsBrand = products !== undefined ? products.map((item) => item.brand) : [];
@@ -28,20 +30,18 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-const getData = async () => {
-    const res = await fetch(`${process.env.API_BASE_URL}/products/`, {
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-        },
-        cache: "no-store",
-    });
-    const data = await res.json();
-    return data;
+const getProducts = async () => {
+    return get(API.product.products_list())
+        .then((res) => {
+            return res.json();
+        })
+        .then(({ results }) => {
+            return results;
+        });
 };
 
 const BestSellersPage = async () => {
-    const products = await getData();
+    const products = await getProducts();
     const filteredProducts = products.filter((product: IProduct) => product.tags?.includes("best seller"));
 
     return (

@@ -2,7 +2,7 @@ import BlogCard from "@/components/Blog/BlogCard";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import Error500 from "@/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 import { IBlog } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";

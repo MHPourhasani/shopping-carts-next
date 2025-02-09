@@ -1,4 +1,4 @@
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";

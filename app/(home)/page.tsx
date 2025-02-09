@@ -10,7 +10,6 @@ import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
 import BlogCard from "@/components/Blog/BlogCard";
 import API from "@/shared/api";
-import { RequestTypeEnum } from "@/interfaces/enums";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -33,18 +32,14 @@ const getBanners = async () => {
         });
 };
 
-const getCategories = () => {
-    return get(API.category.categories_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then(({ results }) => {
-            return results;
-        });
+const getCategories = async () => {
+    const res = await get(API.category.categories_list());
+    const { results } = await res.json();
+    return results;
 };
 
 const getProducts = async ({ type, limit }: { type?: string; limit?: number }) => {
-    return get(API.product.products_list(RequestTypeEnum.SSR) + `?type=${type}&limit=${limit}`)
+    return get(API.product.products_list() + `?type=${type}&limit=${limit}`)
         .then((res) => {
             return res.json();
         })

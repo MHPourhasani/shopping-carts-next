@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/toastMessage";
 import { showFullDate } from "@/shared/helper";
-import { RequestTypeEnum } from "@/interfaces/enums";
+import { RequestTypeEnum } from "@/shared/enums";
 
 interface Props {
     notification: INotification;
