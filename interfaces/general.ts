@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose";
 import { PaymentMethodEnum, UserRoleEnum } from "./enums";
+import { IColor, IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/product.interface";
 
 export interface ICategory {
     _id: ObjectId;
@@ -73,58 +74,6 @@ export interface IBrands {
     _id: ObjectId;
     name: string;
     src: string;
-}
-
-export interface IProduct {
-    _id: ObjectId | string;
-    shopper: IShop;
-    name: string;
-    brand: string;
-    price: number;
-    discountedPrice?: number | null;
-    images: string[];
-    sizes: string;
-    colors: IColor[];
-    categories: string;
-    tags?: string;
-    services?: string;
-    description?: string;
-    relatedProducts?: IProduct[];
-    createdAt: Date;
-    updatedAt?: Date;
-}
-
-export interface ISingleProductProps {
-    isAddReview: boolean;
-    setIsAddReview: any;
-    productData: ISingleProductData;
-    setProductData: any;
-    reviews: IReview[];
-    setReviews: any;
-    addToFavoriteHandler: () => void;
-    addToCartsHandler: (productData: ISingleProductData) => void;
-}
-
-export interface IColor {
-    name: string;
-    hex: string;
-}
-
-export interface ISingleProductData {
-    _id?: ObjectId | string;
-    product: IProduct;
-    quantity: number;
-    size: string;
-    color: IColor;
-}
-
-export interface IReview {
-    _id: ObjectId;
-    author: IUser;
-    title: string;
-    rating: number;
-    description: string;
-    createdAt: Date;
 }
 
 export interface IconProps {
