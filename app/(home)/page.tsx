@@ -2,7 +2,7 @@ import BestSellers from "@/components/BestSellers/BestSellers";
 import Categories from "@/components/Categories/Categories";
 import Header from "@/components/ui/Header/Header";
 import MainBanners from "@/components/MainBanners/MainBanners";
-import ProductsList from "@/components/Products/ProductsList";
+import ProductsList from "@/features/SingleProductPage/components/ProductsList";
 import PATH from "@/shared/path";
 import { get } from "@/utils/scripts/api";
 import Link from "next/link";
@@ -104,7 +104,7 @@ export default async function Home() {
                     </Link>
                 </div>
                 <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
-                    {blogs.length
+                    {blogs&&blogs.length
                         ? blogs.map((item) => (
                               <BlogCard
                                   key={String(item._id)}

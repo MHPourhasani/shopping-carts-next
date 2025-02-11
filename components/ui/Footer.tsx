@@ -5,8 +5,8 @@ import appStoreIcon from "@/assets/images/app-store.svg";
 import googlePlayIcon from "@/assets/images/google-play.svg";
 import Link from "next/link";
 import { useState } from "react";
-import Button from "../common/Button";
-import Input from "../common/Input";
+import Button from "@/shared/components/common/Button";
+import Input from "@/shared/components/common/Input";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import PATH from "@/shared/path";
 

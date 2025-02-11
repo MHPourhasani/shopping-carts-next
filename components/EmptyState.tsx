@@ -1,6 +1,6 @@
+import Button from "@/shared/components/common/Button";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "./common/Button";
 
 interface Props {
     imgSrc?: any;

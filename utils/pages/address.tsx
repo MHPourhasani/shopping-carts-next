@@ -8,10 +8,10 @@ import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/components/EmptyState";
 import { setUser } from "@/redux/slices/authSlice";
 import { IAddress } from "@/interfaces/general";
-import Input from "@/components/common/Input";
-import Textarea from "@/components/common/Textarea";
+import Input from "@/shared/components/common/Input";
+import Textarea from "@/shared/components/common/Textarea";
 import { ObjectId } from "mongoose";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import AddressItem from "@/components/Address/AddressItem";
 import PageHeader from "@/components/PageHeader/PageHeader";
 

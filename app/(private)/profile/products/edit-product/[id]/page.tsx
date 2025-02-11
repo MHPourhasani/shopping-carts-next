@@ -1,4 +1,4 @@
-import AddAndEditProduct from "@/components/Products/AddAndEditProduct";
+import AddAndEditProduct from "@/features/SingleProductPage/components/AddAndEditProduct";
 import { IProduct } from "@/interfaces/general";
 import API from "@/shared/api";
 import { Metadata } from "next";

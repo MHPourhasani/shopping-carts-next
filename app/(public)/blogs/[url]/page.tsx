@@ -1,4 +1,3 @@
-import BreadCrumb from "@/components/common/BreadCrumb";
 import { IBlog } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";
@@ -11,6 +10,7 @@ import BlogCard from "@/components/Blog/BlogCard";
 import { showFullDate } from "@/shared/helper";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { RequestTypeEnum } from "@/shared/enums";
+import BreadCrumb from "@/shared/components/common/BreadCrumb";
 
 interface Props {
     params: { url: string };

@@ -2,17 +2,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Pagination from "@/components/Pagination";
 import { IColor, IProduct } from "@/interfaces/general";
-import ProductCardItem from "@/components/Products/ProductCardItem";
-import CheckBox from "@/components/common/CheckBox";
-import Button from "@/components/common/Button";
+import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
+import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
-import BreadCrumb from "@/components/common/BreadCrumb";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import CloseIcon from "@/assets/icons/components/Close";
 import FilterIcon from "@/assets/icons/components/Filter";
+import CheckBox from "@/shared/components/common/CheckBox";
+import BreadCrumb from "@/shared/components/common/BreadCrumb";
 
 interface Props {
     products: IProduct[];
@@ -27,7 +27,7 @@ const Products = ({ products }: Props) => {
         brands: false,
         colors: false,
     });
-    let PageSize = window.innerWidth > 1024 ? 20 : 10;
+    let PageSize = window && window.innerWidth > 1024 ? 20 : 10;
     const mobileFilterRef = useRef<any>();
 
     const currentProductsData = useMemo(() => {

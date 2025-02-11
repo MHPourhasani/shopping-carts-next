@@ -1,4 +1,4 @@
-import ProductCardItem from "@/components/Products/ProductCardItem";
+import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
 import PageHeader from "@/components/PageHeader/PageHeader";
@@ -42,7 +42,7 @@ const getProducts = async () => {
 
 const BestSellersPage = async () => {
     const products = await getProducts();
-    const filteredProducts = products.filter((product: IProduct) => product.tags?.includes("best seller"));
+    const filteredProducts = products?.filter((product: IProduct) => product.tags?.includes("best seller"));
 
     return (
         <section className="flex w-full flex-1 gap-8 lg:min-h-min">
@@ -50,13 +50,14 @@ const BestSellersPage = async () => {
                 <PageHeader title="Best Sellers" />
 
                 <div className="grid w-full grid-cols-2 gap-4 overflow-y-auto sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
-                    {filteredProducts.map((product: IProduct) => (
-                        <ProductCardItem
-                            key={product._id.toString()}
-                            product={product}
-                            href={PATH.singleProduct(product._id.toString(), product.name)}
-                        />
-                    ))}
+                    {filteredProducts &&
+                        filteredProducts.map((product: IProduct) => (
+                            <ProductCardItem
+                                key={product._id.toString()}
+                                product={product}
+                                href={PATH.singleProduct(product._id.toString(), product.name)}
+                            />
+                        ))}
                 </div>
             </div>
         </section>

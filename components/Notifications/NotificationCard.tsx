@@ -1,6 +1,6 @@
 "use client";
 import { INotification } from "@/interfaces/general";
-import Button from "../common/Button";
+import Button from "@/shared/components/common/Button";
 import TrashIcon from "@/assets/icons/components/Trash";
 import API from "@/shared/api";
 import { useSession } from "next-auth/react";

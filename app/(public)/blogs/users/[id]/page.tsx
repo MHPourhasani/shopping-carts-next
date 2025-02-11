@@ -1,5 +1,4 @@
 import BlogCard from "@/components/Blog/BlogCard";
-import BreadCrumb from "@/components/common/BreadCrumb";
 import { IBlog, IUser } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";
@@ -7,6 +6,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import { RequestTypeEnum } from "@/shared/enums";
+import BreadCrumb from "@/shared/components/common/BreadCrumb";
 
 interface Props {
     params: { id: string };

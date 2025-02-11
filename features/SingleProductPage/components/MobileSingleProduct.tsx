@@ -8,9 +8,9 @@ import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Image from "next/image";
 import Modal from "@/components/Modal";
 import { Navigation } from "swiper/modules";
-import ReviewsList from "@/components/Reviews/ReviewsList/ReviewsList";
+import ReviewsList from "@/features/SingleProductPage/components/Reviews/ReviewsList";
 import { capitalizeTheFirstLettersOfWords, isNumber, tomanFormat } from "@/shared/helper";
-import AddReview from "@/components/Reviews/AddReview";
+import AddReviewForm from "@/features/SingleProductPage/components/Reviews/AddReviewForm";
 import EditIcon from "@/assets/icons/components/Edit";
 import { ISingleProductProps } from "@/interfaces/general";
 import { useParams, useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ import ProductTags from "./ProductTags";
 import { useEffect, useRef, useState } from "react";
 import PATH from "@/shared/path";
 import TickIcon from "@/assets/icons/components/Tick";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import BackButton from "@/components/BackButton";
 import LoveIcon from "@/assets/icons/components/Love";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
@@ -224,31 +224,34 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
             </section>
 
             <section className="my-5 flex w-full flex-col gap-4">
-                <ReviewsList reviews={reviews} limit={5} isLoading={false} />
+                <div className="mb-2 flex items-center justify-between">
+                    <h3 className="text-lg font-semibold">نظرات</h3>
+                    {reviews && !!reviews.length && <span className="text-sm">{reviews.length} نظر</span>}
+                </div>
 
-                <span
-                    onClick={() => {
-                        if (session?.user.userId) {
-                            setIsAddReview(!isAddReview);
-                        } else {
-                            router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
-                        }
-                    }}
-                    className="flex cursor-pointer items-center gap-2"
-                >
-                    <EditIcon className="size-5 fill-primary-100" />
-                    <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
-                </span>
-
-                {isAddReview ? (
-                    <AddReview
-                        productId={String(params.slug)}
-                        onSubmit={(comment: any) => {
-                            setIsAddReview(false);
-                            setReviews((prev: any) => [...prev, comment]);
+                    <ReviewsList reviews={reviews} limit={5} isLoading={false} />
+                    <span
+                        onClick={() => {
+                            if (session?.user.userId) {
+                                setIsAddReview(!isAddReview);
+                            } else {
+                                router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
+                            }
                         }}
-                    />
-                ) : null}
+                        className="flex cursor-pointer items-center gap-2"
+                    >
+                        <EditIcon className="size-5 fill-primary-100" />
+                        <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
+                    </span>
+                    {isAddReview ? (
+                        <AddReviewForm
+                            productId={String(params.slug)}
+                            onSubmit={(comment: any) => {
+                                setIsAddReview(false);
+                                setReviews((prev: any) => [...prev, comment]);
+                            }}
+                        />
+                    ) : null}
             </section>
 
             <div className="fixed bottom-16 right-0 z-[2] flex w-full items-center justify-between gap-2 border-t bg-secondary-50 px-4 py-2 dark:bg-secondary-600">

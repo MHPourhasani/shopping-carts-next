@@ -1,17 +1,16 @@
 import { useState } from "react";
-import Input from "../common/Input";
-import Button from "../common/Button";
+import Input from "@/shared/components/common/Input";
+import Button from "@/shared/components/common/Button";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-
-import Textarea from "../common/Textarea";
+import Textarea from "@/shared/components/common/Textarea";
 
 interface Props {
     productId: string;
     onSubmit: any;
 }
 
-const AddReview = ({ productId, onSubmit }: Props) => {
+const AddReviewForm = ({ productId, onSubmit }: Props) => {
     const { data: session } = useSession();
     const [reviewValue, setReviewValue] = useState({ title: "", description: "", rating: 5 });
 
@@ -72,4 +71,4 @@ const AddReview = ({ productId, onSubmit }: Props) => {
     );
 };
 
-export default AddReview;
+export default AddReviewForm;

@@ -1,4 +1,4 @@
-import MultiSelect from "../common/MultiSelect";
+import MultiSelect from "./MultiSelect";
 import colors from "@/assets/json/colors.json";
 import { IColor } from "@/interfaces/general";
 

@@ -1,5 +1,5 @@
 "use client";
-import Error500 from "@/components/Error500";
+import Error500 from "@/shared/components/Error500";
 import ProductOrderCard from "@/components/Order/ProductOrderCard";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { IOrder } from "@/interfaces/general";
@@ -9,7 +9,7 @@ import { covertPaymentToPersian, showFullDate, tomanFormat } from "../../shared/
 import Toman from "@/assets/icons/components/Toman";
 import OrderPrint from "@/components/Order/Print";
 import PrinterIcon from "@/assets/icons/components/Printer";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import { Margin, Resolution } from "react-to-pdf";
 import JsPDF from "jspdf";
 

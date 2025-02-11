@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import SingleSelect from "../common/SingleSelect";
+import SingleSelect from "@/shared/components/common/SingleSelect";
 import { TOption, IUser } from "@/interfaces/general";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/toastMessage";

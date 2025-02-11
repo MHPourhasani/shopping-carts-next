@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PATH from "../../shared/path";
 import { useAppSelector } from "@/redux/hooks";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import AddIcon from "@/assets/icons/components/Add";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { useSearchParams } from "next/navigation";

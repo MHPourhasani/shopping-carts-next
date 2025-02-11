@@ -1,7 +1,6 @@
 "use client";
-import Button from "@/components/common/Button";
-import Input from "@/components/common/Input";
-import SingleSelect from "@/components/common/SingleSelect";
+import Button from "@/shared/components/common/Button";
+import Input from "@/shared/components/common/Input";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { IUser } from "@/interfaces/general";
 import API from "@/shared/api";
@@ -9,6 +8,7 @@ import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAft
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import SingleSelect from "@/shared/components/common/SingleSelect";
 
 interface Props {
     data?: IUser;

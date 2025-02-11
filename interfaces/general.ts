@@ -97,12 +97,12 @@ export interface IProduct {
 export interface ISingleProductProps {
     isAddReview: boolean;
     setIsAddReview: any;
-    productData: productData;
+    productData: ISingleProductData;
     setProductData: any;
     reviews: IReview[];
     setReviews: any;
     addToFavoriteHandler: () => void;
-    addToCartsHandler: (productData: productData) => void;
+    addToCartsHandler: (productData: ISingleProductData) => void;
 }
 
 export interface IColor {
@@ -110,7 +110,7 @@ export interface IColor {
     hex: string;
 }
 
-export interface productData {
+export interface ISingleProductData {
     _id?: ObjectId | string;
     product: IProduct;
     quantity: number;
@@ -137,7 +137,7 @@ export interface IconProps {
 export interface IOrder {
     _id: ObjectId;
     orderNo: string;
-    products: productData[];
+    products: ISingleProductData[];
     payment: { method: PaymentMethodEnum; transportCost: number };
     pricePaid: number;
     address: IAddress;

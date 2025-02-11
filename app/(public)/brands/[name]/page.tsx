@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
-import ProductCardItem from "@/components/Products/ProductCardItem";
+import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/interfaces/general";
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
 import PATH from "@/shared/path";

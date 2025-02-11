@@ -1,3 +1,4 @@
+"use client"
 import { usePagination, DOTS } from "@/hooks/usePagination";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 

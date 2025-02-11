@@ -1,6 +1,6 @@
 import AddIcon from "@/assets/icons/components/Add";
 import BlogListItem from "@/components/Blog/BlogListItem";
-import Error500 from "@/components/Error500";
+import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { IBlog } from "@/interfaces/general";
 import PATH from "@/shared/path";

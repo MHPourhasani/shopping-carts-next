@@ -4,11 +4,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import { IAddress, ICart } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
-import Textarea from "@/components/common/Textarea";
+import Textarea from "@/shared/components/common/Textarea";
 import API from "../../shared/api";
 import Toman from "@/assets/icons/components/Toman";
 

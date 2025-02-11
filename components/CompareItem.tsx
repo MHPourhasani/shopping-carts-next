@@ -1,9 +1,9 @@
 import CloseIcon from "@/assets/icons/components/Close";
 import { IProduct } from "@/interfaces/general";
 import Image from "next/image";
-import Button from "./common/Button";
 import Toman from "@/assets/icons/components/Toman";
 import { tomanFormat } from "@/shared/helper";
+import Button from "@/shared/components/common/Button";
 
 interface Props {
     product: IProduct;

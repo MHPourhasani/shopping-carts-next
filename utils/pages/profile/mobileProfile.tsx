@@ -9,7 +9,7 @@ import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { useRef, useState } from "react";
 import EditIcon from "@/assets/icons/components/Edit";
 import Modal from "@/components/Modal";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import { covertUserRoleToPersian, showFullDate } from "@/shared/helper";

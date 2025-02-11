@@ -1,5 +1,5 @@
 "use client";
-import CartProductCard from "@/components/Products/CartProductCard";
+import CartProductCard from "@/features/SingleProductPage/components/CartProductCard";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { setCarts } from "@/redux/slices/cartsSlice";
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import EmptyState from "@/components/EmptyState";
 import emptyCart from "@/assets/icons/svgs/cart-illustration.svg";
 import { ICart } from "@/interfaces/general";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import PATH from "../../shared/path";
 import toastMessage from "../../shared/toastMessage";
 import PageHeader from "@/components/PageHeader/PageHeader";

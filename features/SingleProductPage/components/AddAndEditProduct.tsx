@@ -1,20 +1,20 @@
 "use client";
-import Button from "@/components/common/Button";
-import Input from "@/components/common/Input";
+import Input from "@/shared/components/common/Input";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
-import Textarea from "@/components/common/Textarea";
+import Textarea from "@/shared/components/common/Textarea";
 import { IColor, IProduct, IShop } from "@/interfaces/general";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { handleRefreshAfterBack, sizes } from "@/shared/helper";
-import MultiSelect from "../common/MultiSelect";
-import ColorPicker from "../common/ColorPicker";
+import MultiSelect from "@/shared/components/common/MultiSelect";
+import ColorPicker from "@/shared/components/common/ColorPicker";
 import { get } from "@/utils/scripts/api";
 import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
 import { RequestTypeEnum } from "@/shared/enums";
+import Button from "@/shared/components/common/Button";
 
 interface Props {
     product?: IProduct;
@@ -87,7 +87,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
     };
 
     const submitProductHandler = async () => {
-        const { name, brand, price, discountedPrice, sizes, colors, categories, relatedProducts } = formData;
+        const { name, brand, price, discountedPrice, sizes, colors, relatedProducts } = formData;
 
         if (!name.trim()) {
             toast.error("نام محصول را وارد کنید.");

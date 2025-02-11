@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Button from "@/components/common/Button"; // import { login } from '@/redux/slices/authSlice';
+import Button from "@/shared/components/common/Button"; // import { login } from '@/redux/slices/authSlice';
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import loginImage from "@/assets/images/login-page.svg";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import Input from "@/components/common/Input";
+import Input from "@/shared/components/common/Input";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import AppleLogo from "@/assets/icons/components/AppleLogo";
@@ -83,7 +83,7 @@ const Login = () => {
 
     return (
         <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
-            <div className="hidden bg-gray-300 lg:flex lg:flex-1 lg:items-center lg:justify-center">
+            <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center">
                 <Image src={loginImage} alt="login image" className="h-auto w-full 2xl:w-9/12" />
             </div>
 

@@ -1,8 +1,9 @@
-import Error500 from "@/components/Error500";
+import Error500 from "@/shared/components/Error500";
 import { IProduct } from "@/interfaces/general";
 import API from "@/shared/api";
-import SingleProduct from "@/utils/pages/products/singleProduct";
+import SingleProduct from "@/features/SingleProductPage/components/singleProduct";
 import { Metadata } from "next";
+import { SingleProductProvider } from "@/features/SingleProductPage/context/ProductData";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -67,7 +68,13 @@ const SingleProductPage = async ({ params }: Props) => {
     const product: IProduct = await getSingleProduct(params.slug);
     const reviews = await getReviews(params.slug);
 
-    return product !== undefined ? <SingleProduct product={product} reviews={reviews} /> : <Error500 />;
+    return product !== undefined ? (
+        <SingleProductProvider initialData={{ product, reviews }}>
+            <SingleProduct />
+        </SingleProductProvider>
+    ) : (
+        <Error500 />
+    );
 };
 
 export default SingleProductPage;

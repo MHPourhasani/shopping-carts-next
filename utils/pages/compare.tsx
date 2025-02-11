@@ -1,8 +1,8 @@
 "use client";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import CompareItem from "@/components/CompareItem";
 import Modal from "@/components/Modal";
-import { productData, IProduct } from "@/interfaces/general";
+import { ISingleProductData, IProduct } from "@/interfaces/general";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PATH from "../../shared/path";
@@ -27,7 +27,7 @@ const Compare = ({ product1, product2, products }: Props) => {
         product2: null,
     });
     const [openProductsModal, setOpenProductModal] = useState<number | undefined>(undefined);
-    const [addToCartModal, setAddToCartModal] = useState<Partial<productData> | undefined>(undefined);
+    const [addToCartModal, setAddToCartModal] = useState<Partial<ISingleProductData> | undefined>(undefined);
     const router = useRouter();
     const pathname = usePathname();
     const { data: session } = useSession();

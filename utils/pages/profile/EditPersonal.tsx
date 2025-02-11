@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
+import Input from "@/shared/components/common/Input";
+import Button from "@/shared/components/common/Button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";

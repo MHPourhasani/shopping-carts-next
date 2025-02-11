@@ -1,7 +1,7 @@
 "use client";
-import Button from "@/components/common/Button";
-import Input from "@/components/common/Input";
-import Textarea from "@/components/common/Textarea";
+import Button from "@/shared/components/common/Button";
+import Input from "@/shared/components/common/Input";
+import Textarea from "@/shared/components/common/Textarea";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";

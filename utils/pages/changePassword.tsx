@@ -1,6 +1,6 @@
 "use client";
-import Button from "@/components/common/Button";
-import Input from "@/components/common/Input";
+import Button from "@/shared/components/common/Button";
+import Input from "@/shared/components/common/Input";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { useState } from "react";

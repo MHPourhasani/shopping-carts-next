@@ -3,28 +3,26 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { toast } from "react-toastify";
-import { useAppSelector } from "@/redux/hooks";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { IProduct, IReview, productData } from "@/interfaces/general";
-import MobileSingleProduct from "@/components/Products/MobileSingleProduct";
-import DesktopSingleProduct from "@/components/Products/Desctop/DesktopSingleProduct";
+import { IReview, ISingleProductData } from "@/interfaces/general";
+import MobileSingleProduct from "@/features/SingleProductPage/components/MobileSingleProduct";
+import DesktopSingleProduct from "@/features/SingleProductPage/components/Desctop/DesktopSingleProduct";
 import { usePathname, useRouter } from "next/navigation";
 import toastMessage from "@/shared/toastMessage";
 import PATH from "@/shared/path";
+import { useSingleProductData } from "../context/ProductData";
 
-interface Props {
-    product: IProduct;
-    reviews: IReview[];
-}
-
-export default function SingleProduct({ product, reviews }: Props) {
+export default function SingleProduct() {
     const { data: session } = useSession();
+    const { data } = useSingleProductData();
     const router = useRouter();
     const pathname = usePathname();
+    const product = data!.product;
+    const reviews = data!.reviews;
     const [isAddReview, setIsAddReview] = useState(false);
-    const [productData, setProductData] = useState<productData>({
-        product: product,
+    const [productData, setProductData] = useState<ISingleProductData>({
+        product,
         quantity: 1,
         size: product.sizes!.split(",")[0],
         color: product.colors![0],
@@ -51,7 +49,7 @@ export default function SingleProduct({ product, reviews }: Props) {
         }
     };
 
-    const addToCartsHandler = async (product: productData) => {
+    const addToCartsHandler = async (product: ISingleProductData) => {
         if (!session) {
             router.push(`${PATH.login()}?redirect=${pathname}`);
         } else {
@@ -83,12 +81,12 @@ export default function SingleProduct({ product, reviews }: Props) {
     };
 
     return (
-        <section className="flex w-full flex-col">
-            <div className="lg:hidden">
+        <section className="w-full">
+            <div className="w-full lg:hidden">
                 <MobileSingleProduct {...props} />
             </div>
 
-            <div className="hidden justify-center lg:flex">
+            <div className="hidden w-full justify-center lg:flex">
                 <DesktopSingleProduct {...props} />
             </div>
         </section>

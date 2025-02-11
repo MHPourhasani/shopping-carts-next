@@ -1,5 +1,5 @@
 import AddAndEditBlog from "@/components/Blog/AddAndEditBlog";
-import Error500 from "@/components/Error500";
+import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { IBlog } from "@/interfaces/general";
 import API from "@/shared/api";

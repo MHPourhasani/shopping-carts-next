@@ -1,12 +1,12 @@
 import BlogCard from "@/components/Blog/BlogCard";
-import BreadCrumb from "@/components/common/BreadCrumb";
-import Error500 from "@/components/Error500";
+import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { RequestTypeEnum } from "@/shared/enums";
 import { IBlog } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
+import BreadCrumb from "@/shared/components/common/BreadCrumb";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

@@ -1,4 +1,4 @@
-import AddAndEditProduct from "@/components/Products/AddAndEditProduct";
+import AddAndEditProduct from "@/features/SingleProductPage/components/AddAndEditProduct";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

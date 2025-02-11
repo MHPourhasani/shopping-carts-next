@@ -1,8 +1,8 @@
-import { productData } from "@/interfaces/general";
+import { ISingleProductData } from "@/interfaces/general";
 import Image from "next/image";
 import noImage from "@/assets/images/jpg/no-image.jpg";
 
-const ProductOrderCard = ({ product }: { product: productData }) => {
+const ProductOrderCard = ({ product }: { product: ISingleProductData }) => {
     return (
         <div className="flex w-full gap-4 rounded-xl bg-bg-2 p-2 dark:bg-secondary-700 dark:lg:bg-secondary-600 xl:p-4">
             <Image

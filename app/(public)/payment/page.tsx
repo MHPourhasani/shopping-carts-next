@@ -1,5 +1,5 @@
 import EmptyState from "@/components/EmptyState";
-import Button from "@/components/common/Button";
+import Button from "@/shared/components/common/Button";
 import { Metadata } from "next";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import PATH from "@/shared/path";

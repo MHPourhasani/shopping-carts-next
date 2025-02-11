@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
+import Input from "@/shared/components/common/Input";
+import Button from "@/shared/components/common/Button";
 import Image from "next/image";
 import signupImage from "@/assets/images/signup-page.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import PATH from "../../../../shared/path";
-import CheckBox from "@/components/common/CheckBox";
-import API from "../../../../shared/api";
+import PATH from "@/shared/path";
+import CheckBox from "@/shared/components/common/CheckBox";
+import API from "@/shared/api";
 import { signIn } from "next-auth/react";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
@@ -77,11 +77,7 @@ const SignUp = () => {
     };
 
     return (
-        <section className="flex w-full flex-1 md:items-center md:gap-10 xl:min-h-full xl:gap-0">
-            <div className="hidden lg:flex lg:h-screen lg:flex-1 lg:items-center lg:justify-center">
-                <Image src={signupImage} alt="sign up image" className="h-auto w-full 2xl:w-9/12" />
-            </div>
-
+        <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
             <div className="flex w-full items-center justify-center p-4 lg:flex-1">
                 <form className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]">
                     <h1 className="mb-5 text-3xl font-bold">ثبت نام</h1>
@@ -137,6 +133,10 @@ const SignUp = () => {
                         </Link>
                     </p>
                 </form>
+            </div>
+
+            <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center">
+                <Image src={signupImage} alt="sign up image" className="h-auto w-full 2xl:w-9/12" />
             </div>
         </section>
     );

@@ -1,8 +1,8 @@
 import EditIcon from "@/assets/icons/components/Edit";
 import TrashIcon from "@/assets/icons/components/Trash";
-import BreadCrumb from "@/components/common/BreadCrumb";
 import { IBlog } from "@/interfaces/general";
 import API from "@/shared/api";
+import BreadCrumb from "@/shared/components/common/BreadCrumb";
 import { showFullDate } from "@/shared/helper";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
