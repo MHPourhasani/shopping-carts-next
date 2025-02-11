@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: "/",
             disallow: ["/dashboard", "/dashboard/*", "/profile", "/profile/*"],
         },
-        sitemap: "https://mhp-shop.vercel.app",
+        sitemap: "https://mhp-shop.vercel.app/sitemap.xml",
     };
 }
