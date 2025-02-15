@@ -1,5 +1,5 @@
+import Profile from "@/features/ProfilePage/components/profile";
 import { getServerAuthSession } from "@/shared/auth";
-import Profile from "@/utils/pages/profile/profile";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";

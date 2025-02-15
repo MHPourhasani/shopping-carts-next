@@ -1,12 +1,12 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import DesktopProfile from "@/utils/pages/profile/desktopProfile";
-import MobileProfile from "@/utils/pages/profile/mobileProfile";
 import toastMessage from "@/shared/toastMessage";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import MobileProfile from "./mobileProfile";
+import DesktopProfile from "./desktopProfile";
 
 const Profile = () => {
     const userState = useAppSelector((state: any) => state.auth.user);

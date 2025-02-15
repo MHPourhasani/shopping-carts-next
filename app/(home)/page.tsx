@@ -38,8 +38,9 @@ const getCategories = async () => {
     return results;
 };
 
-const getProducts = async ({ type, limit }: { type?: string; limit?: number }) => {
-    return get(API.product.products_list() + `?type=${type}&limit=${limit}`)
+const getProducts = async ({ limit }: { limit?: number }) => {
+    console.log(API.product.products_list() + `?limit=${limit}`)
+    return get(API.product.products_list() + `?limit=${limit}`)
         .then((res) => {
             return res.json();
         })
@@ -48,9 +49,9 @@ const getProducts = async ({ type, limit }: { type?: string; limit?: number }) =
         });
 };
 
-const getBlogs = async ({ limit }: { limit?: number }) => {
+const getBlogs = async () => {
     try {
-        const response = await fetch(API.blogs.blogs_list() + `?limit=${limit}`, {
+        const response = await fetch(API.blogs.blogs_list() + "?limit=3", {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
@@ -58,7 +59,7 @@ const getBlogs = async ({ limit }: { limit?: number }) => {
             cache: "no-store",
         });
         const { results } = await response.json();
-        return results ? results : [];
+        return results;
     } catch (error: any) {
         console.error(error);
     }
@@ -67,9 +68,9 @@ const getBlogs = async ({ limit }: { limit?: number }) => {
 export default async function Home() {
     const banners: IBanner[] = await getBanners();
     const categories: ICategory[] = await getCategories();
-    const bestSellers: IProduct[] = await getProducts({ type: "best seller" });
+    const bestSellers: IProduct[] = await getProducts({});
     const products: IProduct[] = await getProducts({ limit: 6 });
-    const blogs: IBlog[] = await getBlogs({ limit: 3 });
+    const blogs: IBlog[] = await getBlogs();
 
     return (
         <section className="flex w-full flex-1 flex-col items-start gap-6 pb-20 pt-4 2xl:items-center 2xl:justify-center">
@@ -93,29 +94,29 @@ export default async function Home() {
                 <ProductsList products={products ? products : []} />
             </div>
 
-            <div className="mt-4 flex w-full flex-col gap-4">
-                <div className="flex w-full items-center justify-between px-4">
-                    <h2 className="text-xl font-semibold">آخرین بلاگ های منتشر شده</h2>
-                    <Link
-                        href={PATH.blogs()}
-                        className="hover-transition text-sm text-gray-500 hover:text-primary-100 dark:text-secondary-100"
-                    >
-                        مشاهده همه
-                    </Link>
+            {blogs && blogs.length ? (
+                <div className="mt-4 flex w-full flex-col gap-4">
+                    <div className="flex w-full items-center justify-between px-4">
+                        <h2 className="text-xl font-semibold">آخرین بلاگ های منتشر شده</h2>
+                        <Link
+                            href={PATH.blogs()}
+                            className="hover-transition text-sm text-gray-500 hover:text-primary-100 dark:text-secondary-100"
+                        >
+                            مشاهده همه
+                        </Link>
+                    </div>
+                    <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
+                        {blogs.map((item) => (
+                            <BlogCard
+                                key={String(item._id)}
+                                link={PATH.singleBlog(item.link)}
+                                blog={item}
+                                className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
+                            />
+                        ))}
+                    </div>
                 </div>
-                <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
-                    {blogs && blogs.length
-                        ? blogs.map((item) => (
-                              <BlogCard
-                                  key={String(item._id)}
-                                  link={PATH.singleBlog(item.link)}
-                                  blog={item}
-                                  className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
-                              />
-                          ))
-                        : null}
-                </div>
-            </div>
+            ) : null}
         </section>
     );
 }

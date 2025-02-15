@@ -42,7 +42,7 @@ const getProducts = async () => {
 
 const BestSellersPage = async () => {
     const products = await getProducts();
-    const filteredProducts = products?.filter((product: IProduct) => product.tags?.includes("best seller"));
+    const filteredProducts = products;
 
     return (
         <section className="flex w-full flex-1 gap-8 lg:min-h-min">

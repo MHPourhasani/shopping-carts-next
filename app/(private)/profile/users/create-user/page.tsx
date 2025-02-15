@@ -1,5 +1,5 @@
+import AddAndEditUser from "@/features/ProfilePage/components/users/AddAndEditUser";
 import PageHeader from "@/shared/components/PageHeader";
-import AddAndEditUser from "@/utils/pages/profile/users/AddAndEditUser";
 
 const CreateUser = () => {
     return (

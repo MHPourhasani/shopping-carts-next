@@ -5,15 +5,15 @@ import Modal from "@/shared/components/Modal";
 import { ISingleProductData, IProduct } from "@/interfaces/general";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import PATH from "../../shared/path";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import toastMessage from "../../shared/toastMessage";
 import addIcon from "@/assets/icons/svgs/add.svg";
 import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Toman from "@/assets/icons/components/Toman";
-import { tomanFormat } from "../../shared/helper";
+import PATH from "@/shared/path";
+import toastMessage from "@/shared/toastMessage";
+import { tomanFormat } from "@/shared/helper";
 
 interface Props {
     product1: IProduct;
