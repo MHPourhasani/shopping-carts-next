@@ -1,6 +1,6 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/interfaces/general";
+import PageHeader from "@/shared/components/PageHeader";
 import PATH from "@/shared/path";
 
 interface Props {

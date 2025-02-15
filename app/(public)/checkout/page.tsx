@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import API from "@/shared/api";
 import { getServerAuthSession } from "@/shared/auth";
 import Checkout from "@/features/CheckoutPage/components/checkout";

@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/shared/components/Pagination";
 import { IColor, IProduct } from "@/interfaces/general";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
-import useOnClickOutside from "@/hooks/useOnClickOutside";
+import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import CloseIcon from "@/assets/icons/components/Close";
 import FilterIcon from "@/assets/icons/components/Filter";
 import CheckBox from "@/shared/components/common/CheckBox";

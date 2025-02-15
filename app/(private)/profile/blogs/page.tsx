@@ -1,7 +1,7 @@
 import AddIcon from "@/assets/icons/components/Add";
-import BlogListItem from "@/components/Blog/BlogListItem";
+import BlogListItem from "@/features/Blog/components/BlogListItem";
 import Error500 from "@/shared/components/Error500";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { IBlog } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import { Metadata } from "next";

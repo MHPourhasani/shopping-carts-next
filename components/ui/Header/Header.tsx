@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProfileIcon from "@/assets/icons/components/Profile";
 import PATH from "@/shared/path";
-import ThemeSwitch from "@/components/ThemeSwitch";
+import ThemeSwitch from "@/shared/components/ThemeSwitch";
 import { useAppSelector } from "@/redux/hooks";
 import DesktopMenu from "./DesktopMenu";
 import Search from "@/components/Search";

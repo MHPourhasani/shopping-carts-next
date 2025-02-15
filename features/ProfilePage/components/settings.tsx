@@ -1,9 +1,9 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
-import ThemeSwitch from "@/components/ThemeSwitch";
+import PageHeader from "@/shared/components/PageHeader";
+import ThemeSwitch from "@/shared/components/ThemeSwitch";
 
 const Settings = () => {
     return (
-        <section className="flex w-full flex-col gap-4 flex-1 lg:gap-8">
+        <section className="flex w-full flex-1 flex-col gap-4 lg:gap-8">
             <PageHeader title="تنظیمات" desktopBackButton={false} />
 
             <div className="flex w-full flex-col gap-4">

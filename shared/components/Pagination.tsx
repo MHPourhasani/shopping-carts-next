@@ -1,5 +1,5 @@
-"use client"
-import { usePagination, DOTS } from "@/hooks/usePagination";
+"use client";
+import { usePagination, DOTS } from "@/shared/hooks/usePagination";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 
 interface Props {

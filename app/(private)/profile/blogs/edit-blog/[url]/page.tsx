@@ -1,6 +1,6 @@
-import AddAndEditBlog from "@/components/Blog/AddAndEditBlog";
+import AddAndEditBlog from "@/features/Blog/components/AddAndEditBlog";
 import Error500 from "@/shared/components/Error500";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { IBlog } from "@/interfaces/general";
 import API from "@/shared/api";
 import { Metadata } from "next";

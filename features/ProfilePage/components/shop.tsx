@@ -9,7 +9,7 @@ import { setUser } from "@/redux/slices/authSlice";
 import Textarea from "@/shared/components/common/Textarea";
 import PATH from "@/shared/path";
 import { IShop } from "@/interfaces/general";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 
 interface Props {
     shop: IShop;

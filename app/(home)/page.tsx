@@ -1,14 +1,14 @@
 import BestSellers from "@/components/BestSellers/BestSellers";
-import Categories from "@/components/Categories/Categories";
+import Categories from "@/features/HomePage/components/Categories";
 import Header from "@/components/ui/Header/Header";
-import MainBanners from "@/components/MainBanners/MainBanners";
+import MainBanners from "@/features/HomePage/components/MainBanners";
 import ProductsList from "@/features/SingleProductPage/components/ProductsList";
 import PATH from "@/shared/path";
 import { get } from "@/shared/apiCaller";
 import Link from "next/link";
 import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
-import BlogCard from "@/components/Blog/BlogCard";
+import BlogCard from "@/features/Blog/components/BlogCard";
 import API from "@/shared/api";
 
 export const revalidate = 30;

@@ -1,4 +1,4 @@
-import EmptyState from "../../components/EmptyState";
+import EmptyState from "./EmptyState";
 
 const Error500 = () => {
     return <EmptyState title="مشکل سمت سرور" description="لطفاً چند دقیقه دیگر امتحان کنید." />;

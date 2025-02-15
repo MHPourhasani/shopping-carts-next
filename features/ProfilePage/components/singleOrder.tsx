@@ -1,7 +1,7 @@
 "use client";
 import Error500 from "@/shared/components/Error500";
 import ProductOrderCard from "@/components/Order/ProductOrderCard";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { IOrder } from "@/interfaces/general";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";

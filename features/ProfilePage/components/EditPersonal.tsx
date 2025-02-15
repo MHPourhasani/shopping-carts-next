@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/slices/authSlice";
 import PATH from "@/shared/path";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 
 const EditPersonalInformation = () => {
     const userState = useAppSelector((state: any) => state.auth.user);

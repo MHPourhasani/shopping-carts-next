@@ -1,10 +1,10 @@
 "use client";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import { IOrder } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import OrderCardItem from "@/components/Order/OrderCardItem";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { UserRoleEnum } from "@/interfaces/enums";

@@ -2,7 +2,7 @@
 import Button from "@/shared/components/common/Button";
 import Input from "@/shared/components/common/Input";
 import Textarea from "@/shared/components/common/Textarea";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import PATH from "@/shared/path";

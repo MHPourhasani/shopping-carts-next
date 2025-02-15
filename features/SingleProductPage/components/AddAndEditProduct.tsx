@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 import Textarea from "@/shared/components/common/Textarea";
 import { IColor, IProduct, IShop } from "@/interfaces/general";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { handleRefreshAfterBack, sizes } from "@/shared/helper";
 import MultiSelect from "@/shared/components/common/MultiSelect";
 import ColorPicker from "@/shared/components/common/ColorPicker";

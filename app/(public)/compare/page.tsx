@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { IProduct } from "@/interfaces/general";
 import API from "@/shared/api";
 import Compare from "@/features/ComparePage/compare";

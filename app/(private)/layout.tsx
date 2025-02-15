@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Sidebar from "@/components/Profile/Sidebar";
+import Sidebar from "@/features/ProfilePage/components/Sidebar";
 import { getServerAuthSession } from "@/shared/auth";
 import { redirect } from "next/navigation";
 import PATH from "@/shared/path";
-import DashboardHeader from "@/components/Profile/Header";
+import DashboardHeader from "@/features/ProfilePage/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
 

@@ -1,9 +1,8 @@
 "use client";
 import EyeIcon from "@/assets/icons/components/Eye";
 import TrashIcon from "@/assets/icons/components/Trash";
-import EmptyState from "@/components/EmptyState";
-import PageHeader from "@/components/PageHeader/PageHeader";
-import ChangeRole from "@/components/Profile/ChangeRole";
+import EmptyState from "@/shared/components/EmptyState";
+import ChangeRole from "@/features/ProfilePage/components/ChangeRole";
 import { IUser } from "@/interfaces/general";
 import toastMessage from "@/shared/toastMessage";
 import Link from "next/link";
@@ -15,6 +14,7 @@ import Button from "@/shared/components/common/Button";
 import AddIcon from "@/assets/icons/components/Add";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { useSearchParams } from "next/navigation";
+import PageHeader from "@/shared/components/PageHeader";
 
 interface Props {
     users: IUser[];

@@ -1,4 +1,4 @@
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import { getServerAuthSession } from "@/shared/auth";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import PATH from "@/shared/path";

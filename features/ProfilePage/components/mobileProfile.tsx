@@ -8,7 +8,7 @@ import userIcon from "@/assets/icons/svgs/user.svg";
 import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { useRef, useState } from "react";
 import EditIcon from "@/assets/icons/components/Edit";
-import Modal from "@/components/Modal";
+import Modal from "@/shared/components/Modal";
 import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";

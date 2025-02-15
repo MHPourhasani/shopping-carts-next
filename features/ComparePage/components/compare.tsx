@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/shared/components/common/Button";
 import CompareItem from "@/components/CompareItem";
-import Modal from "@/components/Modal";
+import Modal from "@/shared/components/Modal";
 import { ISingleProductData, IProduct } from "@/interfaces/general";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

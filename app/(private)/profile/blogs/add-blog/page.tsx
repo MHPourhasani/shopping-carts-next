@@ -1,5 +1,5 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
-import AddAndEditBlog from "@/components/Blog/AddAndEditBlog";
+import PageHeader from "@/shared/components/PageHeader";
+import AddAndEditBlog from "@/features/Blog/components/AddAndEditBlog";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import AddIcon from "@/assets/icons/components/Add";
 import Button from "@/shared/components/common/Button";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import ProductListItem from "@/features/SingleProductPage/components/ProductListItem";
 import { IProduct } from "@/interfaces/general";
 import { getServerAuthSession } from "@/shared/auth";

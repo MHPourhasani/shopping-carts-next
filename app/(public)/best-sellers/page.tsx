@@ -1,7 +1,7 @@
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import PATH from "@/shared/path";
 import { get } from "@/shared/apiCaller";
 import API from "@/shared/api";

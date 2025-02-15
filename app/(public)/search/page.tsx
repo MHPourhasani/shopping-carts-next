@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import Search from "@/features/SearchPage/search";
 import PATH from "@/shared/path";
 import { Metadata } from "next";

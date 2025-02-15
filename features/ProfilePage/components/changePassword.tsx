@@ -6,7 +6,7 @@ import { setUser } from "@/redux/slices/authSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 
 const ChangePassword = () => {
     const userState = useAppSelector((state: any) => state.auth.user);

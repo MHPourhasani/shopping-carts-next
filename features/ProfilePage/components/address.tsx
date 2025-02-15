@@ -5,15 +5,15 @@ import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 import AddIcon from "@/assets/icons/components/Add";
 import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import { setUser } from "@/redux/slices/authSlice";
 import { IAddress } from "@/interfaces/general";
 import Input from "@/shared/components/common/Input";
 import Textarea from "@/shared/components/common/Textarea";
 import { ObjectId } from "mongoose";
 import Button from "@/shared/components/common/Button";
-import AddressItem from "@/components/Address/AddressItem";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import AddressItem from "@/features/ProfilePage/components/AddressItem";
+import PageHeader from "@/shared/components/PageHeader";
 
 interface Props {
     addresses: IAddress[];

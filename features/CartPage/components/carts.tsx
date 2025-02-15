@@ -6,15 +6,15 @@ import { setCarts } from "@/redux/slices/cartsSlice";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import emptyCart from "@/assets/icons/svgs/cart-illustration.svg";
 import { ICart } from "@/interfaces/general";
 import Button from "@/shared/components/common/Button";
 import PATH from "../../../shared/path";
 import toastMessage from "../../../shared/toastMessage";
-import PageHeader from "@/components/PageHeader/PageHeader";
 import Toman from "@/assets/icons/components/Toman";
 import { tomanFormat } from "../../../shared/helper";
+import PageHeader from "@/shared/components/PageHeader";
 
 interface IProps {
     carts: ICart[];

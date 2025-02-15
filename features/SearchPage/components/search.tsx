@@ -3,14 +3,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import notProductSearchFound from "@/assets/icons/svgs/search-illustration.svg";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/shared/path";
 import Input from "@/shared/components/common/Input";
 import { IBlog, IProduct } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
 import API from "../../shared/api";
-import BlogCard from "@/components/Blog/BlogCard";
+import BlogCard from "@/features/Blog/components/BlogCard";
 
 const Search = () => {
     const [data, setData] = useState<{
