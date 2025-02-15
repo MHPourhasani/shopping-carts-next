@@ -1,5 +1,5 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
-import Search from "@/utils/pages/search";
+import Search from "@/features/SearchPage/search";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
 import { Suspense } from "react";

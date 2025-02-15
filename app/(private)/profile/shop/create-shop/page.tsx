@@ -1,4 +1,4 @@
-import CreateShop from "@/utils/pages/createShop";
+import CreateShop from "@/features/ProfilePage/components/createShop";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

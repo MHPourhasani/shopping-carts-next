@@ -5,7 +5,7 @@ import PageHeader from "@/components/PageHeader/PageHeader";
 import { IOrder } from "@/interfaces/general";
 import { useReactToPrint } from "react-to-print";
 import { useRef } from "react";
-import { covertPaymentToPersian, showFullDate, tomanFormat } from "../../shared/helper";
+import { covertPaymentToPersian, showFullDate, tomanFormat } from "../../../shared/helper";
 import Toman from "@/assets/icons/components/Toman";
 import OrderPrint from "@/components/Order/Print";
 import PrinterIcon from "@/assets/icons/components/Printer";

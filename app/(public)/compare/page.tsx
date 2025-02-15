@@ -1,7 +1,7 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
 import { IProduct } from "@/interfaces/general";
 import API from "@/shared/api";
-import Compare from "@/utils/pages/compare";
+import Compare from "@/features/ComparePage/compare";
 
 interface Props {
     searchParams: { p1: string; p2: string };

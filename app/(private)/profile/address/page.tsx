@@ -1,5 +1,5 @@
 import { getServerAuthSession } from "@/shared/auth";
-import Address from "@/utils/pages/address";
+import Address from "@/features/ProfilePage/components/address";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

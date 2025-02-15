@@ -1,4 +1,4 @@
-import Settings from "@/utils/pages/settings";
+import Settings from "@/features/ProfilePage/components/settings";
 import { Metadata } from "next";
 
 export const revalidate = 30;

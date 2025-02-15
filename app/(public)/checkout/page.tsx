@@ -1,7 +1,7 @@
 import PageHeader from "@/components/PageHeader/PageHeader";
 import API from "@/shared/api";
 import { getServerAuthSession } from "@/shared/auth";
-import Checkout from "@/utils/pages/checkout";
+import Checkout from "@/features/CheckoutPage/components/checkout";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";

@@ -9,7 +9,7 @@ import toastMessage from "@/shared/toastMessage";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import PATH from "../../shared/path";
+import PATH from "../../../../shared/path";
 import { useAppSelector } from "@/redux/hooks";
 import Button from "@/shared/components/common/Button";
 import AddIcon from "@/assets/icons/components/Add";

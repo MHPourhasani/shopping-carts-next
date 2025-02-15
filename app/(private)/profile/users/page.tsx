@@ -1,4 +1,4 @@
-import AllUsers from "@/utils/pages/users";
+import AllUsers from "@/features/ProfilePage/components/users/users";
 import { getServerAuthSession } from "@/shared/auth";
 import { Metadata } from "next";
 

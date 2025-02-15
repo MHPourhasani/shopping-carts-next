@@ -3,7 +3,7 @@ import { IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
 import PageHeader from "@/components/PageHeader/PageHeader";
 import PATH from "@/shared/path";
-import { get } from "@/utils/scripts/api";
+import { get } from "@/shared/apiCaller";
 import API from "@/shared/api";
 
 export const revalidate = 30;

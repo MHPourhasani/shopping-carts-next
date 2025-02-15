@@ -10,7 +10,7 @@ import PageHeader from "@/components/PageHeader/PageHeader";
 import { handleRefreshAfterBack, sizes } from "@/shared/helper";
 import MultiSelect from "@/shared/components/common/MultiSelect";
 import ColorPicker from "@/shared/components/common/ColorPicker";
-import { get } from "@/utils/scripts/api";
+import { get } from "@/shared/apiCaller";
 import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
 import { RequestTypeEnum } from "@/shared/enums";

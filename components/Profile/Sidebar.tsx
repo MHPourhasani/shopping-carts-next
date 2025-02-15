@@ -4,7 +4,7 @@ import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import PATH from "@/shared/path";
-import { sidebarItems } from "@/utils/sidebar";
+import { sidebarItems } from "@/features/ProfilePage/components/sidebar";
 import LogoutIcon from "@/assets/icons/components/Logout";
 
 const Sidebar = () => {

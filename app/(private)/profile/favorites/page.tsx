@@ -1,5 +1,5 @@
 import EmptyState from "@/components/EmptyState";
-import Favorites from "@/utils/pages/favorites";
+import Favorites from "@/features/ProfilePage/components/favorites";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { getServerAuthSession } from "@/shared/auth";
 import { Metadata } from "next";

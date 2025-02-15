@@ -1,4 +1,4 @@
-import PATH from "../shared/path";
+import PATH from "../../../shared/path";
 import CategoryIcon from "@/assets/icons/components/Category";
 import UsersIcon from "@/assets/icons/components/Users";
 import InfoIcon from "@/assets/icons/components/Info";

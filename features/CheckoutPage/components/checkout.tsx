@@ -9,7 +9,7 @@ import { IAddress, ICart } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
 import Textarea from "@/shared/components/common/Textarea";
-import API from "../../shared/api";
+import API from "../../../shared/api";
 import Toman from "@/assets/icons/components/Toman";
 
 const Checkout = ({ carts }: { carts: ICart[] }) => {

@@ -4,7 +4,7 @@ import Header from "@/components/ui/Header/Header";
 import MainBanners from "@/components/MainBanners/MainBanners";
 import ProductsList from "@/features/SingleProductPage/components/ProductsList";
 import PATH from "@/shared/path";
-import { get } from "@/utils/scripts/api";
+import { get } from "@/shared/apiCaller";
 import Link from "next/link";
 import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
@@ -104,7 +104,7 @@ export default async function Home() {
                     </Link>
                 </div>
                 <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
-                    {blogs&&blogs.length
+                    {blogs && blogs.length
                         ? blogs.map((item) => (
                               <BlogCard
                                   key={String(item._id)}

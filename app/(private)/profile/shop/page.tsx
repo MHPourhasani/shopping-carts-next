@@ -1,6 +1,6 @@
 import { IShop } from "@/interfaces/general";
 import { getServerAuthSession } from "@/shared/auth";
-import ShopInformation from "@/utils/pages/shop";
+import ShopInformation from "@/features/ProfilePage/components/shop";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

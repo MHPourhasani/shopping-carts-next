@@ -1,4 +1,4 @@
-import Carts from "@/utils/pages/carts";
+import Carts from "@/features/CartPage/components/carts";
 import { Metadata } from "next";
 import API from "@/shared/api";
 import { getServerAuthSession } from "@/shared/auth";
