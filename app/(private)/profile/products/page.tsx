@@ -2,11 +2,11 @@ import AddIcon from "@/assets/icons/components/Add";
 import Button from "@/shared/components/common/Button";
 import PageHeader from "@/shared/components/PageHeader";
 import ProductListItem from "@/features/SingleProductPage/components/ProductListItem";
-import { IProduct } from "@/interfaces/general";
 import { getServerAuthSession } from "@/shared/auth";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Link from "next/link";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 
 export const metadata: Metadata = {
     title: "محصولات",

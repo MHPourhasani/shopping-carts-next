@@ -1,6 +1,6 @@
 "use client";
-import { IProduct, IReview } from "@/interfaces/general";
 import { createContext, useContext, useState } from "react";
+import { IProduct, IReview } from "../interface/product.interface";
 
 interface IDataContext {
     data: IData;
@@ -12,7 +12,7 @@ interface IData {
     reviews: IReview[];
 }
 
-const ProductDataContext = createContext<Partial<IDataContext>>({  });
+const ProductDataContext = createContext<Partial<IDataContext>>({});
 
 interface IProviderProps {
     children: React.ReactNode;

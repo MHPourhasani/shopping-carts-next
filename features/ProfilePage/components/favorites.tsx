@@ -1,5 +1,5 @@
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import PageHeader from "@/shared/components/PageHeader";
 import PATH from "@/shared/path";
 

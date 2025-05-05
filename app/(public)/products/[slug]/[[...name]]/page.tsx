@@ -1,5 +1,5 @@
 import Error500 from "@/shared/components/Error500";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import API from "@/shared/api";
 import SingleProduct from "@/features/SingleProductPage/components/singleProduct";
 import { Metadata } from "next";

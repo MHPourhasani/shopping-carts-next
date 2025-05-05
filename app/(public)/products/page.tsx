@@ -1,4 +1,4 @@
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import API from "@/shared/api";
 import Products from "@/features/ProductsPage/components/products";
 import PATH from "@/shared/path";
@@ -41,7 +41,7 @@ const getProducts = async () => {
 const ProductsPage = async () => {
     const products = await getProducts();
 
-    return products !== undefined ? <Products products={products ? products : []} /> : "هیچ محصولی وجود ندارد.";
+    return !!products && !!products.length ? <Products products={products ? products : []} /> : "هیچ محصولی وجود ندارد.";
 };
 
 export default ProductsPage;

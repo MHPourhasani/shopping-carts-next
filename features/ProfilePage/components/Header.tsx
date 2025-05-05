@@ -4,8 +4,8 @@ import PATH from "@/shared/path";
 import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/assets/icons/svgs/user.svg";
-import DashboardNotifications from "./Notifications";
 import HomeIcon from "@/assets/icons/components/Home";
+import DashboardNotifications from "./notifications";
 
 const DashboardHeader = () => {
     const userState = useAppSelector((state: any) => state.auth.user);

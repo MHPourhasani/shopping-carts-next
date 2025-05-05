@@ -4,10 +4,10 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
     connectToDB();
-    const mainBanners = await bannerModel.find({ type: "main" });
     try {
-        return NextResponse.json({ results: mainBanners ? mainBanners : [] }, { status: 200 });
+        const mainBanners = await bannerModel.find({ type: "main" });
+        return NextResponse.json({ results: mainBanners ?? [] }, { status: 200 });
     } catch (error: any) {
-        return NextResponse.json({ message: error }, { status: 500 });
+        return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }

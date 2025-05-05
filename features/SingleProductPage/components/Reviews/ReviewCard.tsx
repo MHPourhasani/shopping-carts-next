@@ -1,7 +1,7 @@
 import ClockIcon from "@/assets/icons/components/Clock";
 import UserIcon from "@/assets/icons/components/User";
-import { IReview } from "@/interfaces/general";
 import { showFullDate } from "@/shared/helper";
+import { IReview } from "../../interface/product.interface";
 
 const ReviewCard = ({ author, title, rating, description, createdAt }: IReview) => {
     const getRatingColor = (rating: number) => {

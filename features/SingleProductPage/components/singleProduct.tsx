@@ -5,13 +5,13 @@ import "swiper/css/navigation";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { IReview, ISingleProductData } from "@/interfaces/general";
 import MobileSingleProduct from "@/features/SingleProductPage/components/MobileSingleProduct";
 import DesktopSingleProduct from "@/features/SingleProductPage/components/Desctop/DesktopSingleProduct";
 import { usePathname, useRouter } from "next/navigation";
 import toastMessage from "@/shared/toastMessage";
 import PATH from "@/shared/path";
 import { useSingleProductData } from "../context/ProductData";
+import { IReview, ISingleProductData } from "../interface/product.interface";
 
 export default function SingleProduct() {
     const { data: session } = useSession();

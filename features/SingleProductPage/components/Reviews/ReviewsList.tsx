@@ -1,4 +1,4 @@
-import { IReview } from "@/interfaces/general";
+import { IReview } from "../../interface/product.interface";
 import ReviewCard from "./ReviewCard";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 
@@ -11,8 +11,6 @@ interface Props {
 const ReviewsList = ({ reviews, limit, isLoading }: Props) => {
     return (
         <section className="w-full">
-            
-
             {!isLoading ? (
                 <div className="no-scrollbar flex w-full gap-2 lg:flex-col lg:overflow-y-auto">
                     {reviews && reviews.length ? (

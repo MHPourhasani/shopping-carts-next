@@ -2,7 +2,7 @@
 import notImage from "@/assets/images/not-images.svg";
 import Image from "next/image";
 import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/helper";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import LoveIcon from "@/assets/icons/components/Love";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

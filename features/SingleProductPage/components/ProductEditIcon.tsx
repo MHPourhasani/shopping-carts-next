@@ -1,7 +1,7 @@
 "use client";
 import EditIcon from "@/assets/icons/components/Edit";
 import { UserRoleEnum } from "@/interfaces/enums";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import { useAppSelector } from "@/redux/hooks";
 import PATH from "@/shared/path";
 import Link from "next/link";

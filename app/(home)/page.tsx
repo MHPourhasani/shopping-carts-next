@@ -6,10 +6,11 @@ import ProductsList from "@/features/SingleProductPage/components/ProductsList";
 import PATH from "@/shared/path";
 import { get } from "@/shared/apiCaller";
 import Link from "next/link";
-import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
+import { IBanner, IBlog, ICategory } from "@/interfaces/general";
 import { Metadata } from "next";
 import BlogCard from "@/features/Blog/components/BlogCard";
 import API from "@/shared/api";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -39,7 +40,7 @@ const getCategories = async () => {
 };
 
 const getProducts = async ({ limit }: { limit?: number }) => {
-    console.log(API.product.products_list() + `?limit=${limit}`)
+    console.log(API.product.products_list() + `?limit=${limit}`);
     return get(API.product.products_list() + `?limit=${limit}`)
         .then((res) => {
             return res.json();
@@ -117,6 +118,19 @@ export default async function Home() {
                     </div>
                 </div>
             ) : null}
+
+            <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
+                {blogs && blogs.length
+                    ? blogs.map((item) => (
+                          <BlogCard
+                              key={String(item._id)}
+                              link={PATH.singleBlog(item.link)}
+                              blog={item}
+                              className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
+                          />
+                      ))
+                    : null}
+            </div>
         </section>
     );
 }

@@ -1,10 +1,11 @@
 import { RequestTypeEnum } from "@/shared/enums";
-import { IBanner, IBlog, ICategory, IProduct } from "@/interfaces/general";
+import { IBanner, IBlog, ICategory } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";
 import { get } from "@/shared/apiCaller";
 import fs from "fs";
 import path from "path";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 
 const baseUrl = "https://mhp-shop.vercel.app";
 const baseDir = "app";

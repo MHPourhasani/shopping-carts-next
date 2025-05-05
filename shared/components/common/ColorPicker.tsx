@@ -1,6 +1,6 @@
+import { IColor } from "@/features/SingleProductPage/interface/product.interface";
 import MultiSelect from "./MultiSelect";
 import colors from "@/assets/json/colors.json";
-import { IColor } from "@/interfaces/general";
 
 interface Props {
     defaultColors?: IColor[];

@@ -2,7 +2,6 @@
 import Button from "@/shared/components/common/Button";
 import CompareItem from "@/components/CompareItem";
 import Modal from "@/shared/components/Modal";
-import { ISingleProductData, IProduct } from "@/interfaces/general";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -14,6 +13,7 @@ import Toman from "@/assets/icons/components/Toman";
 import PATH from "@/shared/path";
 import toastMessage from "@/shared/toastMessage";
 import { tomanFormat } from "@/shared/helper";
+import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/product.interface";
 
 interface Props {
     product1: IProduct;

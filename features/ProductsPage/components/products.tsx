@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Pagination from "@/shared/components/Pagination";
-import { IColor, IProduct } from "@/interfaces/general";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
@@ -13,6 +12,9 @@ import CloseIcon from "@/assets/icons/components/Close";
 import FilterIcon from "@/assets/icons/components/Filter";
 import CheckBox from "@/shared/components/common/CheckBox";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
+import { IColor, IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+import { DeviceSize } from "@/shared/enums";
 
 interface Props {
     products: IProduct[];
@@ -27,7 +29,8 @@ const Products = ({ products }: Props) => {
         brands: false,
         colors: false,
     });
-    let PageSize = window && window.innerWidth > 1024 ? 20 : 10;
+    const isDesktop = useMediaQuery(DeviceSize.DESKTOP);
+    let PageSize = isDesktop ? 20 : 10;
     const mobileFilterRef = useRef<any>();
 
     const currentProductsData = useMemo(() => {

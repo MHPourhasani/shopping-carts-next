@@ -12,7 +12,6 @@ import ReviewsList from "@/features/SingleProductPage/components/Reviews/Reviews
 import { capitalizeTheFirstLettersOfWords, isNumber, tomanFormat } from "@/shared/helper";
 import AddReviewForm from "@/features/SingleProductPage/components/Reviews/AddReviewForm";
 import EditIcon from "@/assets/icons/components/Edit";
-import { ISingleProductProps } from "@/interfaces/general";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ProductTags from "./ProductTags";
@@ -28,6 +27,7 @@ import Link from "next/link";
 import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "./ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
+import { ISingleProductProps } from "../interface/product.interface";
 
 const MobileSingleProduct = (props: ISingleProductProps) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =

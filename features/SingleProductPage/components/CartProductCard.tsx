@@ -8,12 +8,13 @@ import PATH from "@/shared/path";
 import { ObjectId } from "mongoose";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setCarts } from "@/redux/slices/cartsSlice";
-import { ICart, IColor } from "@/interfaces/general";
+import { ICart } from "@/interfaces/general";
 import TrashIcon from "@/assets/icons/components/Trash";
 import { useSession } from "next-auth/react";
 import Minus from "@/assets/icons/components/Minus";
 import AddIcon from "@/assets/icons/components/Add";
 import Toman from "@/assets/icons/components/Toman";
+import { IColor } from "../interface/product.interface";
 
 interface IProps {
     _id: ObjectId;

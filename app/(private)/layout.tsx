@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Sidebar from "@/features/ProfilePage/components/Sidebar";
 import { getServerAuthSession } from "@/shared/auth";
 import { redirect } from "next/navigation";
 import PATH from "@/shared/path";
 import DashboardHeader from "@/features/ProfilePage/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
+import Sidebar from "@/features/ProfilePage/components/sidebar";
 
 export const metadata: Metadata = {
     title: {

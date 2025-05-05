@@ -1,5 +1,5 @@
 import PageHeader from "@/shared/components/PageHeader";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import API from "@/shared/api";
 import Compare from "@/features/ComparePage/components/compare";
 

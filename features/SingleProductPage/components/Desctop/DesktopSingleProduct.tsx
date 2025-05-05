@@ -7,7 +7,6 @@ import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Image from "next/image";
 import { Navigation } from "swiper/modules";
 import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/helper";
-import { IColor, ISingleProductProps } from "@/interfaces/general";
 import ProductTags from "../ProductTags";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -22,6 +21,7 @@ import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "../ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
 import SingleProductTab from "./SingleProductTab";
+import { IColor, ISingleProductProps } from "../../interface/product.interface";
 
 const DesktopSingleProduct = (props: ISingleProductProps) => {
     const { addToCartsHandler, productData, setProductData, addToFavoriteHandler } = props;
@@ -142,7 +142,7 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                             <span className="font-semibold">رنگ</span>
 
                             <div className="flex flex-wrap gap-2">
-                                {colors?.map((color: IColor, index) => {
+                                {colors?.map((color: IColor, index: number) => {
                                     return (
                                         <span
                                             key={index}

@@ -1,6 +1,6 @@
 import PATH from "@/shared/path";
 import ProductCardItem from "./ProductCardItem";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 
 interface Props {
     loading?: boolean;

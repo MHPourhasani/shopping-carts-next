@@ -1,9 +1,9 @@
 import PageHeader from "@/shared/components/PageHeader";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
-import { IProduct } from "@/interfaces/general";
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

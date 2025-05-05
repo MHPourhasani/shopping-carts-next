@@ -1,5 +1,5 @@
 "use client";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import { showFullDate, tomanFormat } from "@/shared/helper";
 import PATH from "@/shared/path";
 import Image from "next/image";

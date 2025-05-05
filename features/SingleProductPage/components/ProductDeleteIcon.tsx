@@ -1,6 +1,6 @@
 "use client";
 import TrashIcon from "@/assets/icons/components/Trash";
-import { IProduct } from "@/interfaces/general";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/toastMessage";

@@ -7,10 +7,11 @@ import EmptyState from "@/shared/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/shared/path";
 import Input from "@/shared/components/common/Input";
-import { IBlog, IProduct } from "@/interfaces/general";
+import { IBlog } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
 import API from "@/shared/api";
 import BlogCard from "@/features/Blog/components/BlogCard";
+import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 
 const Search = () => {
     const [data, setData] = useState<{

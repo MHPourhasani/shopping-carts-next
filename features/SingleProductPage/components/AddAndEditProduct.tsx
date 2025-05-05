@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 import Textarea from "@/shared/components/common/Textarea";
-import { IColor, IProduct, IShop } from "@/interfaces/general";
+import { IShop } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
 import { handleRefreshAfterBack, sizes } from "@/shared/helper";
 import MultiSelect from "@/shared/components/common/MultiSelect";
@@ -15,6 +15,7 @@ import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
 import { RequestTypeEnum } from "@/shared/enums";
 import Button from "@/shared/components/common/Button";
+import { IColor, IProduct } from "../interface/product.interface";
 
 interface Props {
     product?: IProduct;
