@@ -1,4 +1,4 @@
-import ChangePassword from "@/utils/pages/changePassword";
+import ChangePassword from "@/features/ProfilePage/components/changePassword";
 import { Metadata } from "next";
 
 export const revalidate = 30;

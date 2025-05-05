@@ -1,9 +1,9 @@
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import { getServerAuthSession } from "@/shared/auth";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import PATH from "@/shared/path";
 import API from "@/shared/api";
-import SingleOrder from "@/utils/pages/singleOrder";
+import SingleOrder from "@/features/ProfilePage/components/singleOrder";
 import { IOrder } from "@/interfaces/general";
 import { Metadata } from "next";
 

@@ -1,4 +1,4 @@
-import PageLoader from "@/components/PageLoader";
+import PageLoader from "@/shared/components/PageLoader";
 
 const Loading = () => {
     return <PageLoader />;

@@ -1,4 +1,4 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/interfaces/general";
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";

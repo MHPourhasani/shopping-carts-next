@@ -1,10 +1,10 @@
-import EmptyState from "@/components/EmptyState";
-import Favorites from "@/utils/pages/favorites";
+import EmptyState from "@/shared/components/EmptyState";
+import Favorites from "@/features/ProfilePage/components/favorites";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { getServerAuthSession } from "@/shared/auth";
 import { Metadata } from "next";
 import PATH from "@/shared/path";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 
 export const metadata: Metadata = {
     title: "علاقه مندی ها",

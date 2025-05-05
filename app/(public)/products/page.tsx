@@ -1,9 +1,9 @@
 import { IProduct } from "@/interfaces/general";
 import API from "@/shared/api";
-import Products from "@/utils/pages/products/products";
+import Products from "@/features/ProductsPage/components/products";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
-import { get } from "@/utils/scripts/api";
+import { get } from "@/shared/apiCaller";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

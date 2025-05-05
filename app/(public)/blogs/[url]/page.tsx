@@ -6,9 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import ClockIcon from "@/assets/icons/components/Clock";
-import BlogCard from "@/components/Blog/BlogCard";
+import BlogCard from "@/features/Blog/components/BlogCard";
 import { showFullDate } from "@/shared/helper";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import { RequestTypeEnum } from "@/shared/enums";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 

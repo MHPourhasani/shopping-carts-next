@@ -8,6 +8,13 @@ const withPWA = require("next-pwa")({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: false,
+    purge: [
+        "./components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./features/**/*.{js,ts,jsx,tsx,mdx}",
+        "./shared/**/*.{js,ts,jsx,tsx,mdx}",
+        "./app/**/*.{js,ts,jsx,tsx,mdx}",
+        "./assets/**/*.{jsx,tsx}",
+    ],
     swcMinify: true,
     env: {
         API_BASE_URL: "https://mhp-shop.vercel.app/api",
@@ -36,6 +43,10 @@ const nextConfig = {
                 destination: "/app/robots",
             },
         ];
+    },
+    experimental: {
+        optimizeCss: true,
+        optimizeFonts: true,
     },
 };
 

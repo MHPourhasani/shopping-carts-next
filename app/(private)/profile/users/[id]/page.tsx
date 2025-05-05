@@ -1,5 +1,5 @@
-import PageHeader from "@/components/PageHeader/PageHeader";
-import AddAndEditUser from "@/utils/pages/profile/users/AddAndEditUser";
+import AddAndEditUser from "@/features/ProfilePage/components/users/AddAndEditUser";
+import PageHeader from "@/shared/components/PageHeader";
 
 interface Params {
     id: string;

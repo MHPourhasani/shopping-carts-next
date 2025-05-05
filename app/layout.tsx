@@ -1,12 +1,12 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Providers } from "@/redux/provider";
-import NextAuthSessionProvider from "@/providers/SessionProvider";
+import NextAuthSessionProvider from "@/shared/providers/Session";
 import React, { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ThemeProviders } from "@/providers/Theme";
+import { ThemeProviders } from "@/shared/providers/Theme";
 import Wrapper from "./_wrapper";
-import Toast from "@/components/Toast";
+import Toast from "@/shared/components/Toast";
 import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
 import Loading from "./loading";

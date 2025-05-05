@@ -1,12 +1,12 @@
-import EmptyState from "@/components/EmptyState";
+import EmptyState from "@/shared/components/EmptyState";
 import { getServerAuthSession } from "@/shared/auth";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
-import Orders from "@/utils/pages/orders";
+import Orders from "@/features/ProfilePage/components/orders";
 import Error500 from "@/shared/components/Error500";
 import API from "@/shared/api";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 
 export const metadata: Metadata = {
     title: "سفارشات",

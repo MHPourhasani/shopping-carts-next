@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import arrow from "@/assets/icons/svgs/arrow.svg";
 import close from "@/assets/icons/svgs/close.svg";
-import useOnClickOutside from "@/hooks/useOnClickOutside";
+import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import { TOption } from "@/interfaces/general";
 import { cn } from "@/shared/helper";
 import Image from "next/image";

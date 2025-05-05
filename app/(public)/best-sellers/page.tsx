@@ -1,9 +1,9 @@
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/interfaces/general";
 import { Metadata } from "next";
-import PageHeader from "@/components/PageHeader/PageHeader";
+import PageHeader from "@/shared/components/PageHeader";
 import PATH from "@/shared/path";
-import { get } from "@/utils/scripts/api";
+import { get } from "@/shared/apiCaller";
 import API from "@/shared/api";
 
 export const revalidate = 30;
@@ -42,7 +42,7 @@ const getProducts = async () => {
 
 const BestSellersPage = async () => {
     const products = await getProducts();
-    const filteredProducts = products?.filter((product: IProduct) => product.tags?.includes("best seller"));
+    const filteredProducts = products;
 
     return (
         <section className="flex w-full flex-1 gap-8 lg:min-h-min">

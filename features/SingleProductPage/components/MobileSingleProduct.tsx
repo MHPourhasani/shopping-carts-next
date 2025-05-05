@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import addIcon from "@/assets/icons/svgs/add.svg";
 import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Image from "next/image";
-import Modal from "@/components/Modal";
+import Modal from "@/shared/components/Modal";
 import { Navigation } from "swiper/modules";
 import ReviewsList from "@/features/SingleProductPage/components/Reviews/ReviewsList";
 import { capitalizeTheFirstLettersOfWords, isNumber, tomanFormat } from "@/shared/helper";
@@ -20,7 +20,7 @@ import { useEffect, useRef, useState } from "react";
 import PATH from "@/shared/path";
 import TickIcon from "@/assets/icons/components/Tick";
 import Button from "@/shared/components/common/Button";
-import BackButton from "@/components/BackButton";
+import BackButton from "@/shared/components/BackButton";
 import LoveIcon from "@/assets/icons/components/Love";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
 import notImage from "@/assets/images/not-images.svg";
@@ -229,29 +229,29 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                     {reviews && !!reviews.length && <span className="text-sm">{reviews.length} نظر</span>}
                 </div>
 
-                    <ReviewsList reviews={reviews} limit={5} isLoading={false} />
-                    <span
-                        onClick={() => {
-                            if (session?.user.userId) {
-                                setIsAddReview(!isAddReview);
-                            } else {
-                                router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
-                            }
+                <ReviewsList reviews={reviews} limit={5} isLoading={false} />
+                <span
+                    onClick={() => {
+                        if (session?.user.userId) {
+                            setIsAddReview(!isAddReview);
+                        } else {
+                            router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
+                        }
+                    }}
+                    className="flex cursor-pointer items-center gap-2"
+                >
+                    <EditIcon className="size-5 fill-primary-100" />
+                    <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
+                </span>
+                {isAddReview ? (
+                    <AddReviewForm
+                        productId={String(params.slug)}
+                        onSubmit={(comment: any) => {
+                            setIsAddReview(false);
+                            setReviews((prev: any) => [...prev, comment]);
                         }}
-                        className="flex cursor-pointer items-center gap-2"
-                    >
-                        <EditIcon className="size-5 fill-primary-100" />
-                        <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
-                    </span>
-                    {isAddReview ? (
-                        <AddReviewForm
-                            productId={String(params.slug)}
-                            onSubmit={(comment: any) => {
-                                setIsAddReview(false);
-                                setReviews((prev: any) => [...prev, comment]);
-                            }}
-                        />
-                    ) : null}
+                    />
+                ) : null}
             </section>
 
             <div className="fixed bottom-16 right-0 z-[2] flex w-full items-center justify-between gap-2 border-t bg-secondary-50 px-4 py-2 dark:bg-secondary-600">

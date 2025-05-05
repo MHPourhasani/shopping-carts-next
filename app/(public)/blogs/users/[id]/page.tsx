@@ -1,4 +1,4 @@
-import BlogCard from "@/components/Blog/BlogCard";
+import BlogCard from "@/features/Blog/components/BlogCard";
 import { IBlog, IUser } from "@/interfaces/general";
 import API from "@/shared/api";
 import PATH from "@/shared/path";
