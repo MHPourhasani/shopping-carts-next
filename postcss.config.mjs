@@ -1,7 +1,8 @@
-module.exports = {
+const config = {
     plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
+        "@tailwindcss/postcss": {},
         ...(process.env.NODE_ENV === "production" ? { cssnano: {} } : {}),
     },
 };
+
+export default config;
