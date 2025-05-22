@@ -2,9 +2,9 @@ import CloseIcon from "@/assets/icons/components/Close";
 import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import { cn } from "@/shared/helper";
 import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
-import CheckBox from "./CheckBox";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
 import Image from "next/image";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type TOption = { id?: string | number; title: string; color?: string; icon?: string; image?: string };
 
@@ -90,7 +90,7 @@ const MultiSelect = (props: MultiSelectProps) => {
         <div
             ref={multiSelectRef}
             className={cn(
-                `relative w-full max-w-full hover:border-secondary-600 dark:border-secondary-400 ${selectedOptions.length ? "bg-transparent" : "border-transparent"} ${props.disabled ? "cursor-not-allowed bg-secondary-100" : "cursor-pointer"}`,
+                `hover:border-secondary-600 dark:border-secondary-400 relative w-full max-w-full ${selectedOptions.length ? "bg-transparent" : "border-transparent"} ${props.disabled ? "bg-secondary-100 cursor-not-allowed" : "cursor-pointer"}`,
                 props.className,
             )}
         >
@@ -105,7 +105,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                         selectedOptions.map((item) => (
                             <div
                                 key={item.title}
-                                className="flex w-auto max-w-[200px] cursor-default items-center justify-between gap-4 rounded-md bg-secondary-100 px-2 py-1 text-secondary-800 dark:bg-secondary-300"
+                                className="bg-secondary-100 text-secondary-800 dark:bg-secondary-300 flex w-auto max-w-[200px] cursor-default items-center justify-between gap-4 rounded-md px-2 py-1"
                             >
                                 <span className="flex items-center gap-2">
                                     {item.icon && <Image src={item.icon} alt={item.title} width={50} height={50} className="size-5" />}
@@ -115,7 +115,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                                     {item.color && (
                                         <div style={{ backgroundColor: item.color }} className="aspect-square size-5 rounded-full" />
                                     )}
-                                    <p dir="auto" className="max-w-[200px] truncate dark:text-secondary-100">
+                                    <p dir="auto" className="dark:text-secondary-100 max-w-[200px] truncate">
                                         {item.title}
                                     </p>
                                 </span>
@@ -137,7 +137,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                         onKeyDown={keyDownHandler}
                         disabled={props.disabled}
                         className={cn(
-                            `min-w-[250px] flex-1 border-0 bg-transparent px-4 text-sm text-secondary-800 outline-none placeholder:text-right focus:border-0 focus:outline-none disabled:cursor-not-allowed dark:text-secondary-100 ltr:placeholder:text-left`,
+                            `text-secondary-800 dark:text-secondary-100 min-w-[250px] flex-1 border-0 bg-transparent px-4 text-sm outline-none placeholder:text-right focus:border-0 focus:outline-none disabled:cursor-not-allowed ltr:placeholder:text-left`,
                             props.inputProps?.className,
                         )}
                     />
@@ -147,7 +147,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                     onClick={() => {
                         if (!props.disabled) setShowOptions(!showOptions);
                     }}
-                    className={`hover-transition flex size-6 items-center justify-center rounded-full hover:bg-secondary-100 dark:bg-secondary-600 ${props.disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`hover-transition hover:bg-secondary-100 dark:bg-secondary-600 flex size-6 items-center justify-center rounded-full ${props.disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
                 >
                     <ArrowDownIcon
                         className={`hover-transition stroke-secondary-600 dark:stroke-secondary-100 ${showOptions ? "rotate-180" : ""}`}
@@ -157,16 +157,19 @@ const MultiSelect = (props: MultiSelectProps) => {
 
             {showOptions && (
                 <div
-                    className={`no-scrollbar border-primary-500 absolute z-10 flex h-fit max-h-96 w-full flex-col overflow-y-auto rounded-b-[10px] border-[1.5px] border-t-0 bg-white text-secondary-800 shadow-md dark:bg-secondary-600`}
+                    className={`no-scrollbar border-primary-500 text-secondary-800 dark:bg-secondary-600 absolute z-10 flex h-fit max-h-96 w-full flex-col overflow-y-auto rounded-b-[10px] border-[1.5px] border-t-0 bg-white shadow-md`}
                 >
                     {filteredOptions.length ? (
                         filteredOptions.map((option) => (
                             <span
                                 key={option.title}
                                 onClick={() => selectOptionHandler(option)}
-                                className={`flex w-full cursor-pointer items-center px-4 py-3 text-sm hover:bg-secondary-100 dark:hover:bg-secondary-500 ${filteredOptions.findIndex((item) => item === option) === index ? "bg-secondary-100 dark:bg-secondary-300" : ""}`}
+                                className={`hover:bg-secondary-100 dark:hover:bg-secondary-500 flex w-full cursor-pointer items-center px-4 py-3 text-sm ${filteredOptions.findIndex((item) => item === option) === index ? "bg-secondary-100 dark:bg-secondary-300" : ""}`}
                             >
-                                <CheckBox checked={!!selectedOptions.find((item) => item.title === option.title)} label={option.title} />
+                                <Checkbox
+                                    checked={!!selectedOptions.find((item) => item.title === option.title)}
+                                    // label={option.title}
+                                />
                                 <span>
                                     {option.icon && (
                                         <Image src={option.icon} alt={option.title} width={50} height={50} className="size-5" />
@@ -181,7 +184,7 @@ const MultiSelect = (props: MultiSelectProps) => {
                             </span>
                         ))
                     ) : (
-                        <p dir="auto" className="cursor-default px-4 py-3 text-sm dark:text-secondary-100">
+                        <p dir="auto" className="dark:text-secondary-100 cursor-default px-4 py-3 text-sm">
                             {props.emptySearchText || "هیچ موردی یافت نشد."}
                         </p>
                     )}

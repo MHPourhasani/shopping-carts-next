@@ -12,7 +12,6 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import PATH from "@/shared/path";
-import Button from "@/shared/components/common/Button";
 import TickIcon from "@/assets/icons/components/Tick";
 import notImage from "@/assets/images/not-images.svg";
 import LoveIcon from "@/assets/icons/components/Love";
@@ -22,6 +21,7 @@ import ProductCardItem from "../ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
 import SingleProductTab from "./SingleProductTab";
 import { IColor, ISingleProductProps } from "../../interface/product.interface";
+import { Button } from "@/components/ui/button";
 
 const DesktopSingleProduct = (props: ISingleProductProps) => {
     const { addToCartsHandler, productData, setProductData, addToFavoriteHandler } = props;
@@ -35,7 +35,7 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
     }, [imageActive]);
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-4">
+        <section className="container flex w-full flex-1 flex-col gap-4">
             <BreadCrumb
                 items={[
                     { title: "محصولات", path: PATH.products() },
@@ -92,20 +92,20 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
 
                 <div className="flex w-7/12 flex-col gap-8">
                     <div className="flex w-full flex-col gap-8">
-                        <span className="flex w-full items-center justify-between text-xl font-bold text-secondary-600">
-                            <h1 className="text-2xl text-customBlack-200 dark:text-white xl:text-3xl">
+                        <span className="text-secondary-600 flex w-full items-center justify-between text-xl font-bold">
+                            <h1 className="text-customBlack-200 text-2xl xl:text-3xl dark:text-white">
                                 {capitalizeTheFirstLettersOfWords(name)}
                             </h1>
 
                             <div className="flex items-center gap-4">
                                 <Link
                                     href={PATH.compare(_id.toString())}
-                                    className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-bg-2 p-2 dark:bg-customBlack-50"
+                                    className="bg-bg-2 dark:bg-customBlack-50 flex size-10 cursor-pointer items-center justify-center rounded-full p-2"
                                 >
                                     <CompareIcon className="fill-customBlack-200 dark:fill-white" />
                                 </Link>
 
-                                <span className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-bg-2 p-2 dark:bg-customBlack-50">
+                                <span className="bg-bg-2 dark:bg-customBlack-50 flex size-10 cursor-pointer items-center justify-center rounded-full p-2">
                                     <LoveIcon onClick={addToFavoriteHandler} className="fill-customBlack-200 dark:fill-white" />
                                 </span>
                             </div>
@@ -127,7 +127,7 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                                         <span
                                             key={size}
                                             onClick={() => setProductData({ ...productData, size: size })}
-                                            className={`flex aspect-square h-12 cursor-pointer items-center justify-center rounded-full bg-bg-2 ${
+                                            className={`bg-bg-2 flex aspect-square h-12 cursor-pointer items-center justify-center rounded-full ${
                                                 size === productData.size ? "bg-primary-100 font-semibold text-white" : "text-secondary-600"
                                             }`}
                                         >
@@ -149,11 +149,11 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                                             title={color.name}
                                             onClick={() => setProductData({ ...productData, color: color })}
                                             style={{ backgroundColor: color.hex }}
-                                            className={`group relative flex size-10 cursor-pointer flex-col items-center justify-center rounded-full dark:bg-customBlack-50 ${color === productData.color ? "border-2 border-gray-300 dark:border-white" : ""}`}
+                                            className={`group dark:bg-customBlack-50 relative flex size-10 cursor-pointer flex-col items-center justify-center rounded-full ${color === productData.color ? "border-2 border-gray-300 dark:border-white" : ""}`}
                                         >
                                             {color === productData.color && (
                                                 <TickIcon
-                                                    className={`top-1/5 absolute w-5 fill-white ${color !== productData.color && "opacity-30"}`}
+                                                    className={`absolute top-1/5 w-5 fill-white ${color !== productData.color && "opacity-30"}`}
                                                 />
                                             )}
                                             <p className="absolute -top-9 hidden items-center justify-center rounded-md bg-gray-500 p-1 text-white group-hover:flex">
@@ -167,15 +167,15 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
 
                         <div className="flex h-12 w-full items-center gap-8 rounded-full">
                             <span className="font-semibold">تعداد</span>
-                            <div className="flex items-center gap-6 rounded-full bg-bg-2 p-2 dark:bg-secondary-600">
+                            <div className="bg-bg-2 dark:bg-secondary-600 flex items-center gap-4 rounded-full p-2">
                                 <span
                                     onClick={() => setProductData({ ...productData, quantity: productData.quantity + 1 })}
-                                    className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-primary-100"
+                                    className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={addIcon} alt="add" />
                                 </span>
 
-                                <span>{productData.quantity}</span>
+                                <span className="min-w-5 text-center">{productData.quantity}</span>
 
                                 <span
                                     onClick={() =>
@@ -184,7 +184,7 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                                             quantity: productData.quantity === 1 ? 1 : productData.quantity - 1,
                                         })
                                     }
-                                    className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-primary-100"
+                                    className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={minusIcon} alt="minus" />
                                 </span>
@@ -193,7 +193,11 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                     </section>
 
                     <div className="flex gap-4">
-                        <Button variant="Primary" onClick={() => addToCartsHandler(productData)} className="justify-between px-6">
+                        <Button
+                            size="xl"
+                            onClick={() => addToCartsHandler(productData)}
+                            className="flex-1 cursor-pointer justify-between px-6"
+                        >
                             <span className="flex items-center gap-2 text-lg font-bold">
                                 {tomanFormat(price)} <Toman className="text-white" />
                             </span>
@@ -201,12 +205,13 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                         </Button>
 
                         <Button
-                            variant="Tertiary"
+                            variant="secondary"
+                            size="xl"
                             onClick={() => {
                                 addToCartsHandler(productData);
                                 router.push(PATH.carts());
                             }}
-                            className="border px-6 shadow-lg shadow-gray-50 dark:shadow-secondary-700"
+                            className="flex-1 cursor-pointer"
                         >
                             خرید آنی
                         </Button>

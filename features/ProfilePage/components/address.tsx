@@ -8,12 +8,12 @@ import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/shared/components/EmptyState";
 import { setUser } from "@/redux/slices/authSlice";
 import { IAddress } from "@/interfaces/general";
-import Input from "@/shared/components/common/Input";
-import Textarea from "@/shared/components/common/Textarea";
 import { ObjectId } from "mongoose";
-import Button from "@/shared/components/common/Button";
 import AddressItem from "@/features/ProfilePage/components/AddressItem";
 import PageHeader from "@/shared/components/PageHeader";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     addresses: IAddress[];
@@ -139,20 +139,20 @@ const Address = ({ addresses }: Props) => {
                         setEditAddress({ id: "", status: false });
                         setIsAddAddress(true);
                     }}
-                    className="h-auto w-6 cursor-pointer stroke-secondary-600 dark:stroke-white"
+                    className="stroke-secondary-600 h-auto w-6 cursor-pointer dark:stroke-white"
                 />
             </PageHeader>
 
             <section className={`flex w-full flex-1 flex-col ${!userState?.addresses?.length ? "items-center justify-center" : ""}`}>
                 {isAddAddress ? (
                     <div className="mb-4 flex w-full flex-col items-start gap-4">
-                        <span className="flex w-full flex-col items-end justify-between gap-2 rounded-2xl bg-bg-2 p-4 text-gray-500">
-                            <Input
+                        <span className="bg-bg-2 flex w-full flex-col items-end justify-between gap-2 rounded-2xl p-4 text-gray-500">
+                            <InputWithLabel
                                 name="address_title"
                                 label="عنوان آدرس"
                                 autoFocus
                                 onChange={addressChangeHandler}
-                                inputClassName="focus:border-primary-100"
+                                className="focus:border-primary-100"
                             />
 
                             <Textarea
@@ -160,14 +160,14 @@ const Address = ({ addresses }: Props) => {
                                 name="address_value"
                                 label="آدرس"
                                 onChange={addressChangeHandler}
-                                textareaClassName="max-h-60 focus:border-primary-100"
+                                className="focus:border-primary-100 max-h-60"
                             />
 
                             <div className="flex w-full gap-4">
-                                <Button variant="Text" onClick={() => setIsAddAddress(false)} className="flex-1">
+                                <Button variant="text" onClick={() => setIsAddAddress(false)} className="flex-1">
                                     انصراف
                                 </Button>
-                                <Button variant="Text" onClick={addAddressHandler} className="flex-1">
+                                <Button variant="text" onClick={addAddressHandler} className="flex-1">
                                     افزودن
                                 </Button>
                             </div>

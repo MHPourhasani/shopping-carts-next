@@ -3,7 +3,7 @@ import { IProduct } from "@/features/SingleProductPage/interface/product.interfa
 import Image from "next/image";
 import Toman from "@/assets/icons/components/Toman";
 import { tomanFormat } from "@/shared/helper";
-import Button from "@/shared/components/common/Button";
+import { Button } from "./ui/button";
 
 interface Props {
     product: IProduct;
@@ -20,7 +20,7 @@ const CompareItem = ({ product, onDelete, isTitles, isCloseIcon = true, onAddToC
                 {isCloseIcon && (
                     <CloseIcon
                         onClick={onDelete}
-                        className="absolute -left-2 -top-2 cursor-pointer fill-secondary-700 dark:fill-secondary-100 lg:-left-5 lg:-top-5"
+                        className="fill-secondary-700 dark:fill-secondary-100 absolute -top-2 -left-2 cursor-pointer lg:-top-5 lg:-left-5"
                     />
                 )}
                 <Image src={product?.images[0]} alt={product?.name} width={150} height={150} className="size-32 rounded-xl lg:size-40" />

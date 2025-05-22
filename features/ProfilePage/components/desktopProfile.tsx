@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { useEffect, useRef, useState } from "react";
-import Input from "@/shared/components/common/Input";
-import Button from "@/shared/components/common/Button";
 import { toast } from "react-toastify";
 import { IAddress } from "@/interfaces/general";
 import PATH from "@/shared/path";
@@ -15,6 +13,9 @@ import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import { covertUserRoleToPersian } from "@/shared/helper";
 import EditIcon from "@/assets/icons/components/Edit";
 import loadingIcon from "@/assets/icons/svgs/refresh.svg";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface PropsInterface {
     isLoading: boolean;
@@ -99,13 +100,13 @@ const DesktopProfile = (props: PropsInterface) => {
             <div className="flex w-full flex-col items-center justify-center gap-8">
                 <div className="relative flex aspect-square w-1/4 items-center justify-center rounded-full shadow-lg xl:w-1/5">
                     <div>
-                        <span className="absolute bottom-0 left-0 flex size-10 items-center justify-center rounded-full bg-white shadow-2xl dark:bg-secondary-700">
+                        <span className="dark:bg-secondary-700 absolute bottom-0 left-0 flex size-10 items-center justify-center rounded-full bg-white shadow-2xl">
                             {isLoading ? (
                                 <Image src={loadingIcon} alt="loading" className="animate-spin" />
                             ) : (
                                 <EditIcon
                                     // onClick={() => setIsChangeProfileImage(true)}
-                                    className="cursor-pointer fill-customBlack-200 dark:fill-secondary-100"
+                                    className="fill-customBlack-200 dark:fill-secondary-100 cursor-pointer"
                                 />
                             )}
                         </span>
@@ -127,7 +128,7 @@ const DesktopProfile = (props: PropsInterface) => {
                             /> */}
                     </div>
 
-                    <input
+                    <Input
                         type="file"
                         ref={fileInputRef}
                         accept="image/png, image/jpg, image/jpeg, image/webp"
@@ -136,7 +137,7 @@ const DesktopProfile = (props: PropsInterface) => {
                     />
 
                     <span
-                        className={`flex aspect-square w-full items-center justify-center rounded-full ${userState?.profile_image ? "bg-gradient-to-tr from-primary-100 to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
+                        className={`flex aspect-square w-full items-center justify-center rounded-full ${userState?.profile_image ? "from-primary-100 bg-gradient-to-tr to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
                     >
                         <Image
                             src={userState?.profile_image ? userState.profile_image : userIcon}
@@ -148,33 +149,33 @@ const DesktopProfile = (props: PropsInterface) => {
                     </span>
                 </div>
 
-                <span className="rounded-lg bg-secondary-100 px-2 py-1 dark:bg-secondary-700">
+                <span className="bg-secondary-100 dark:bg-secondary-700 rounded-lg px-2 py-1">
                     <p>{covertUserRoleToPersian(userState?.role)}</p>
                 </span>
 
                 <div className="flex w-full flex-col items-start gap-4">
                     <div className="grid w-full grid-cols-2 gap-3 text-gray-500">
-                        <Input
+                        <InputWithLabel
                             dir="auto"
                             label="نام"
                             name="first_name"
                             value={formData.first_name}
                             onChange={changeHandler}
                             error={formDataError.first_name}
-                            inputClassName="focus:border-primary-100"
+                            className="focus:border-primary-100"
                         />
 
-                        <Input
+                        <InputWithLabel
                             dir="auto"
                             label="نام خانوادگی"
                             name="last_name"
                             value={formData.last_name}
                             onChange={changeHandler}
                             error={formDataError.last_name}
-                            inputClassName="focus:border-primary-100"
+                            className="focus:border-primary-100"
                         />
 
-                        <Input
+                        <InputWithLabel
                             dir="ltr"
                             type="tel"
                             label="شماره تماس"
@@ -183,26 +184,26 @@ const DesktopProfile = (props: PropsInterface) => {
                             onChange={changeHandler}
                             error={formDataError.phone_number}
                             maxLength={11}
-                            inputClassName="focus:border-primary-100"
+                            className="focus:border-primary-100"
                         />
 
-                        <Input
+                        <InputWithLabel
                             dir="ltr"
                             label="ایمیل"
                             name="email"
                             value={formData.email}
                             onChange={changeHandler}
                             error={formDataError.email}
-                            inputClassName="focus:border-primary-100"
+                            className="focus:border-primary-100"
                         />
                     </div>
 
-                    <Button variant="Primary" onClick={saveChangesHandler}>
+                    <Button onClick={saveChangesHandler} className="cursor-pointer">
                         ذخیره تغییرات
                     </Button>
                 </div>
 
-                <div className="flex w-full flex-col items-start gap-4 rounded-xl bg-bg-2 p-4 dark:bg-secondary-600">
+                <div className="bg-bg-2 dark:bg-secondary-600 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <Link href={PATH.profile.address()} className="flex w-full items-center justify-between">
                         <span className="text-secondary-600 dark:text-white">آدرس</span>
                         <span className="text-primary-100">
@@ -223,12 +224,12 @@ const DesktopProfile = (props: PropsInterface) => {
             </div>
 
             <Link href={PATH.profile.change_password()}>
-                <Button variant="Secondary" className="rounded-lg border-sky-600 px-4 text-sky-600">
+                <Button variant="secondary" className="rounded-lg border-sky-600 px-4 text-sky-600">
                     تغییر رمز عبور
                 </Button>
             </Link>
 
-            <Button variant="Text" onClick={deleteAccountHandler} className="w-auto hover:text-red-600">
+            <Button variant="text" onClick={deleteAccountHandler} className="w-auto hover:text-red-600">
                 حذف حساب کاربری
             </Button>
         </section>

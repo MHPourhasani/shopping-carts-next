@@ -1,10 +1,8 @@
 "use client";
-import Input from "@/shared/components/common/Input";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
-import Textarea from "@/shared/components/common/Textarea";
 import { IShop } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
 import { handleRefreshAfterBack, sizes } from "@/shared/helper";
@@ -14,8 +12,11 @@ import { get } from "@/shared/apiCaller";
 import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
 import { RequestTypeEnum } from "@/shared/enums";
-import Button from "@/shared/components/common/Button";
 import { IColor, IProduct } from "../interface/product.interface";
+import { Input } from "@/components/ui/input";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     product?: IProduct;
@@ -165,10 +166,10 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
             <PageHeader title={isEdit ? `ویرایش محصول "${formData.name}"` : "افزودن محصول"} />
 
             <div className="flex flex-col gap-4">
-                <Input name="name" label="نام" value={formData.name} onChange={changeHandler} />
-                <Input name="brand" label="برند" value={formData.brand} onChange={changeHandler} />
-                <Input name="price" label="قیمت" value={formData.price} type="number" onChange={changeHandler} />
-                <Input
+                <InputWithLabel name="name" label="نام" value={formData.name} onChange={changeHandler} />
+                <InputWithLabel name="brand" label="برند" value={formData.brand} onChange={changeHandler} />
+                <InputWithLabel name="price" label="قیمت" value={formData.price} type="number" onChange={changeHandler} />
+                <InputWithLabel
                     name="discountedPrice"
                     value={formData.discountedPrice}
                     label="قیمت تخفیف خورده"
@@ -195,15 +196,21 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
 
                 <ColorPicker defaultColors={formData.colors} onChange={addColorHandler} />
 
-                <Input
+                <InputWithLabel
                     name="categories"
                     label="دسته بندی ها"
                     value={formData.categories}
                     onChange={changeHandler}
                     hint="لطفا دسته بندی ها را با , از هم جدا کنید."
                 />
-                <Input name="tags" label="تگ ها" value={formData.tags} onChange={changeHandler} hint="لطفا تگ ها را با , از هم جدا کنید." />
-                <Input
+                <InputWithLabel
+                    name="tags"
+                    label="تگ ها"
+                    value={formData.tags}
+                    onChange={changeHandler}
+                    hint="لطفا تگ ها را با , از هم جدا کنید."
+                />
+                <InputWithLabel
                     name="services"
                     label="خدمات"
                     value={formData.services}
@@ -241,16 +248,16 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                     defaultValue={formData.description}
                     onChange={changeHandler}
                     hint="حداقل باید 15 کاراکتر وارد کنید."
-                    textareaClassName="min-h-80"
+                    className="min-h-80"
                 />
 
                 <div className="flex items-center justify-between gap-4">
-                    <Button variant="Primary" disabled={!formData} onClick={submitProductHandler}>
+                    <Button disabled={!formData} onClick={submitProductHandler}>
                         {isEdit ? "ویرایش" : "افزودن محصول"}
                     </Button>
 
                     {isEdit && (
-                        <Button variant="Tertiary" onClick={deleteProductHandler} className="border-red-600 !text-red-600">
+                        <Button variant="secondary" onClick={deleteProductHandler} className="border-red-600 !text-red-600">
                             حذف
                         </Button>
                     )}

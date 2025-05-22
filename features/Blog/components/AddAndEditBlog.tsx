@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 import { handleRefreshAfterBack } from "../../../shared/helper";
 import { useAppSelector } from "@/redux/hooks";
 import { IBlog } from "@/interfaces/general";
-import Input from "@/shared/components/common/Input";
-import Button from "@/shared/components/common/Button";
 import Link from "next/link";
 import PATH from "@/shared/path";
 import TextEditor from "@/shared/components/common/TextEditor";
@@ -16,6 +14,8 @@ import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "@/shared/components/common/MultiSelect";
 import API from "@/shared/api";
 import { RequestTypeEnum } from "@/shared/enums";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     blog?: IBlog;
@@ -120,8 +120,8 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
         <div className="flex w-full flex-1 flex-col gap-4">
             <div className="flex w-full flex-col items-start gap-2">
                 <div className="flex w-full items-end gap-2">
-                    <Input name="link" label="لینک صفحه" value={data.link} disabled={!isEditLink} onChange={changeHandler} />
-                    <Button variant="Tertiary" onClick={() => setIsEditLink(!isEditLink)} className="w-auto rounded-xl px-4">
+                    <InputWithLabel name="link" label="لینک صفحه" value={data.link} disabled={!isEditLink} onChange={changeHandler} />
+                    <Button variant="secondary" onClick={() => setIsEditLink(!isEditLink)} className="w-auto rounded-xl px-4">
                         {isEditLink ? "تأیید" : "ویرایش"}
                     </Button>
                 </div>
@@ -134,11 +134,17 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 )}
             </div>
 
-            <Input name="readingTime" label="زمان مطالعه (دقیقه)" type="number" value={data.readingTime} onChange={changeHandler} />
-            <Input name="subject" label="موضوع" value={data.subject} onChange={changeHandler} />
+            <InputWithLabel
+                name="readingTime"
+                label="زمان مطالعه (دقیقه)"
+                type="number"
+                value={data.readingTime}
+                onChange={changeHandler}
+            />
+            <InputWithLabel name="subject" label="موضوع" value={data.subject} onChange={changeHandler} />
             <TextEditor value={data.content!} onChange={(content) => setData({ ...data, content })} />
-            <Input name="tags" label="تگ ها" value={data.tags} onChange={changeHandler} />
-            <Input name="keywords" label="کلمات کلیدی" value={data.keywords} onChange={changeHandler} />
+            <InputWithLabel name="tags" label="تگ ها" value={data.tags} onChange={changeHandler} />
+            <InputWithLabel name="keywords" label="کلمات کلیدی" value={data.keywords} onChange={changeHandler} />
 
             <div className="flex flex-col gap-2">
                 <label className="dark:text-secondary-100">بلاگ های مرتبط</label>
@@ -177,7 +183,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 </Button>
                 {isEdit && (
                     <Button
-                        variant="Tertiary"
+                        variant="secondary"
                         onClick={deleteHandler}
                         className="border-red-600 text-red-600 hover:border-red-500 dark:border-red-500 dark:text-red-500"
                     >

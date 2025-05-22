@@ -46,7 +46,7 @@ const ComparePage = async ({ searchParams }: Props) => {
     const props = { product1, product2, products };
 
     return (
-        <section className="flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
+        <section className="container flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
             <PageHeader title="مقایسه محصولات" desktopBackButton={false} />
 
             <Compare {...props} />

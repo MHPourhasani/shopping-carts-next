@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Button from "@/shared/components/common/Button"; // import { login } from '@/redux/slices/authSlice';
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import loginImage from "@/assets/images/login-page.svg";
@@ -9,13 +8,14 @@ import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import Input from "@/shared/components/common/Input";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import AppleLogo from "@/assets/icons/components/AppleLogo";
 import PATH from "@/shared/path";
 import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -93,7 +93,7 @@ const Login = () => {
                     className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
                 >
                     <h1 className="mb-5 text-3xl font-bold">ورود به حساب کاربری</h1>
-                    <Input
+                    <InputWithLabel
                         dir="ltr"
                         type="email"
                         label="ایمیل"
@@ -101,22 +101,17 @@ const Login = () => {
                         placeholder="example@gmail.com"
                         value={formData.email}
                         onChange={changeHandler}
-                        inputClassName="focus:border-primary-100"
                     />
-                    <Input
+                    <InputWithLabel
                         dir="auto"
                         type="password"
                         label="رمز عبور"
                         name="password"
                         value={formData.password}
                         onChange={changeHandler}
-                        inputClassName="focus:border-primary-100"
                     />
 
-                    <Button
-                        variant="Primary"
-                        disabled={!(formData.email || formData.password || formData.password.length >= 8) || isLoading}
-                    >
+                    <Button disabled={!(formData.email || formData.password || formData.password.length >= 8) || isLoading}>
                         {isLoading ? "لطفا صبر کنید..." : "ورود به حساب کاربری"}
                     </Button>
 
@@ -135,15 +130,15 @@ const Login = () => {
 
                     <div className="flex flex-col gap-4">
                         <Button
-                            variant="Tertiary"
-                            className="flex justify-center gap-2 rounded-full border-[0] bg-bg-2 px-4 py-3 dark:bg-secondary-700"
+                            variant="secondary"
+                            className="bg-bg-2 dark:bg-secondary-700 flex justify-center gap-2 rounded-full border-[0] px-4 py-3"
                         >
                             <p>ورود با اکانت اپل</p>
                             <AppleLogo className="fill-secondary-800 dark:fill-secondary-100" />
                         </Button>
                         <Button
-                            variant="Tertiary"
-                            className="flex justify-center gap-2 rounded-full border-[0] bg-bg-2 px-4 py-3 dark:bg-secondary-700"
+                            variant="secondary"
+                            className="bg-bg-2 dark:bg-secondary-700 flex justify-center gap-2 rounded-full border-[0] px-4 py-3"
                         >
                             <p>ورود با اکانت گوگل</p>
                             <Image src={googleLogo} alt="google" />

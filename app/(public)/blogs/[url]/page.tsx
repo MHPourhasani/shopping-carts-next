@@ -75,7 +75,7 @@ const SingleBlogPage = async ({ params }: Props) => {
     const { subject, link, author, updatedAt, createdAt, readingTime, tags, content, relatedBlogs } = data;
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-8">
+        <section className="container flex w-full flex-1 flex-col gap-8">
             <BreadCrumb
                 items={[
                     { title: "بلاگ", path: PATH.blogs() },
@@ -90,7 +90,7 @@ const SingleBlogPage = async ({ params }: Props) => {
                     <div className="flex items-center gap-4 pb-4 text-sm">
                         <Link href={PATH.singleBlogAuthor(String(author._id))} className="flex items-center gap-1">
                             <span
-                                className={`flex aspect-square size-7 items-center justify-center rounded-full bg-bg-2 dark:bg-secondary-700`}
+                                className={`bg-bg-2 dark:bg-secondary-700 flex aspect-square size-7 items-center justify-center rounded-full`}
                             >
                                 <Image
                                     src={author.profile_image ? author.profile_image : userIcon}
@@ -101,21 +101,21 @@ const SingleBlogPage = async ({ params }: Props) => {
                                 />
                             </span>
                             <p className="hidden text-gray-300 lg:flex">نویسنده: </p>
-                            <p className="hover-transition truncate hover:text-primary-100 dark:hover:text-violet-400">
+                            <p className="hover-transition hover:text-primary-100 truncate dark:hover:text-violet-400">
                                 {author.first_name} {author.last_name}
                             </p>
                         </Link>
 
                         {readingTime && (
-                            <span className="flex items-center gap-1 text-secondary-400 dark:text-gray-300">
-                                <ClockIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
+                            <span className="text-secondary-400 flex items-center gap-1 dark:text-gray-300">
+                                <ClockIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />
                                 <p className="hidden lg:flex">زمان مطالعه: </p>
                                 {readingTime}
                             </span>
                         )}
 
-                        <span className="flex items-center gap-1 text-secondary-400 dark:text-gray-300">
-                            <ClockIcon className="size-5 fill-secondary-400 dark:fill-secondary-100" />
+                        <span className="text-secondary-400 flex items-center gap-1 dark:text-gray-300">
+                            <ClockIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />
                             <p className="hidden lg:flex">{updatedAt ? "تاریخ به روزرسانی" : "تاریخ انتشار"}: </p>
                             {updatedAt ? showFullDate(updatedAt) : showFullDate(createdAt)}
                         </span>
@@ -128,7 +128,7 @@ const SingleBlogPage = async ({ params }: Props) => {
                             <h6>تگ ها</h6>
                             <div className="flex gap-2">
                                 {tags.split(", ").map((tag) => (
-                                    <span key={tag} className="rounded-lg bg-secondary-100 px-2 py-1 text-sm dark:bg-secondary-700">
+                                    <span key={tag} className="bg-secondary-100 dark:bg-secondary-700 rounded-lg px-2 py-1 text-sm">
                                         {tag}
                                     </span>
                                 ))}
@@ -154,7 +154,7 @@ const SingleBlogPage = async ({ params }: Props) => {
                     )}
                 </div>
 
-                <aside className="no-scrollbar flex w-full flex-col gap-4 overflow-x-auto border-t pt-4 lg:min-w-[300px] lg:max-w-[300px] lg:overflow-y-auto lg:border-0 lg:pt-0">
+                <aside className="no-scrollbar flex w-full flex-col gap-4 overflow-x-auto border-t pt-4 lg:max-w-[300px] lg:min-w-[300px] lg:overflow-y-auto lg:border-0 lg:pt-0">
                     <h2 className="text-lg font-semibold">آخرین بلاگ ها</h2>
                     {filteredBlogs.length ? (
                         <div>

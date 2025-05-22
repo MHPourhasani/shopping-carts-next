@@ -4,13 +4,13 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Button from "@/shared/components/common/Button";
 import { IAddress, ICart } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
-import Textarea from "@/shared/components/common/Textarea";
 import API from "../../../shared/api";
 import Toman from "@/assets/icons/components/Toman";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 const Checkout = ({ carts }: { carts: ICart[] }) => {
     const { data: session } = useSession();
@@ -90,13 +90,13 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
     return (
         <div className="flex w-full flex-1 flex-col items-start justify-between gap-4 lg:flex-row lg:gap-8">
             <div className="flex w-full flex-col gap-4 lg:flex-1">
-                <div className="flex w-full flex-col items-start gap-4 rounded-xl bg-bg-2 p-4 dark:bg-secondary-700">
+                <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">اطلاعات مشتری</span>
                         <Link href={PATH.profile.edit_personal()} className="text-primary-100 lg:hidden">
                             ویرایش
                         </Link>
-                        <Link href={PATH.profile.main()} className="hidden text-primary-100 lg:flex">
+                        <Link href={PATH.profile.main()} className="text-primary-100 hidden lg:flex">
                             ویرایش
                         </Link>
                     </div>
@@ -126,7 +126,7 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                     {error.information && <p className="text-red-500">{error.information}</p>}
                 </div>
 
-                <div className="flex w-full flex-col items-start gap-4 rounded-xl bg-bg-2 p-4 dark:bg-secondary-700">
+                <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">آدرس</span>
                         <span onClick={() => router.push(PATH.profile.address())} className="text-primary-100 lg:hidden">
@@ -134,7 +134,7 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                         </span>
                         <span
                             onClick={() => router.push(PATH.profile.address())}
-                            className="hidden cursor-pointer text-primary-100 lg:flex"
+                            className="text-primary-100 hidden cursor-pointer lg:flex"
                         >
                             {userState?.addresses.length ? "ویرایش" : "افزودن"}
                         </span>
@@ -149,17 +149,17 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                     {error.address && <p className="text-red-500">{error.address}</p>}
                 </div>
 
-                <div className="flex w-full flex-col items-start gap-4 rounded-xl bg-bg-2 p-4 dark:bg-secondary-700">
-                    <span className="text-lg font-bold">توضیحات</span>
+                <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <Textarea
+                        label="توضیحات"
                         defaultValue={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="max-h-96 min-h-60 w-full bg-gray-400 dark:bg-secondary-600"
+                        className="dark:bg-secondary-600 max-h-96 min-h-60 w-full bg-gray-400"
                     />
                 </div>
             </div>
 
-            <div className="flex w-full flex-col gap-4 border-t !pt-4 lg:w-1/4 lg:rounded-xl lg:border-[0] lg:bg-bg-2 lg:p-4 lg:dark:bg-secondary-700">
+            <div className="lg:bg-bg-2 lg:dark:bg-secondary-700 flex w-full flex-col gap-4 border-t !pt-4 lg:w-1/4 lg:rounded-xl lg:border-[0] lg:p-4">
                 <span className="flex items-center justify-between">
                     <p className="dark:text-secondary-100">جمع</p>
                     <p className="flex items-center gap-2 dark:text-white">
@@ -186,7 +186,7 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                     </p>
                 </span>
 
-                <Button variant="Primary" onClick={goToPayment} className="mt-3">
+                <Button onClick={goToPayment} className="mt-3">
                     پرداخت
                 </Button>
             </div>

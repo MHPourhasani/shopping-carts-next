@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import Input from "@/shared/components/common/Input";
-import Button from "@/shared/components/common/Button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/slices/authSlice";
 import PATH from "@/shared/path";
 import PageHeader from "@/shared/components/PageHeader";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Button } from "@/components/ui/button";
 
 const EditPersonalInformation = () => {
     const userState = useAppSelector((state: any) => state.auth.user);
@@ -77,32 +77,32 @@ const EditPersonalInformation = () => {
             <PageHeader title="ویرایش اطلاعات شخصی" />
 
             <div className="flex flex-col gap-4">
-                <Input
+                <InputWithLabel
                     label="نام"
                     name="firstName"
                     value={formData.firstName}
                     onChange={changeHandler}
                     error={formDataError.firstName}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
-                <Input
+                <InputWithLabel
                     label="نام خانوادگی"
                     name="lastName"
                     value={formData.lastName}
                     onChange={changeHandler}
                     error={formDataError.lastName}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
-                <Input
+                <InputWithLabel
                     dir="ltr"
                     label="ایمیل"
                     name="email"
                     value={formData.email}
                     onChange={changeHandler}
                     error={formDataError.email}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
-                <Input
+                <InputWithLabel
                     type="tel"
                     label="شماره تماس"
                     name="phoneNumber"
@@ -110,10 +110,10 @@ const EditPersonalInformation = () => {
                     onChange={changeHandler}
                     error={formDataError.phoneNumber}
                     maxLength={11}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
 
-                <Button variant="Primary" onClick={saveChangesHandler} className="md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
+                <Button onClick={saveChangesHandler} className="cursor-pointer md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
                     ذخیره تغییرات
                 </Button>
             </div>

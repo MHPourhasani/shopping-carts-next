@@ -81,7 +81,7 @@ export default function SingleProduct() {
     };
 
     return (
-        <section className="w-full">
+        <section className="container w-full">
             <div className="w-full lg:hidden">
                 <MobileSingleProduct {...props} />
             </div>

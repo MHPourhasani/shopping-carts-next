@@ -1,18 +1,18 @@
 "use client";
 import { useState } from "react";
-import Input from "@/shared/components/common/Input";
-import Button from "@/shared/components/common/Button";
 import Image from "next/image";
 import signupImage from "@/assets/images/signup-page.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import PATH from "@/shared/path";
-import CheckBox from "@/shared/components/common/CheckBox";
 import API from "@/shared/api";
 import { signIn } from "next-auth/react";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "", checkbox: false });
@@ -81,7 +81,7 @@ const SignUp = () => {
             <div className="flex w-full items-center justify-center p-4 lg:flex-1">
                 <form className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]">
                     <h1 className="mb-5 text-3xl font-bold">ثبت نام</h1>
-                    <Input
+                    <InputWithLabel
                         dir="ltr"
                         type="email"
                         label="ایمیل"
@@ -90,35 +90,34 @@ const SignUp = () => {
                         value={formData.email}
                         onChange={changeHandler}
                         error={formDataError.email}
-                        inputClassName="focus:border-primary-100"
+                        className="focus:border-primary-100"
                     />
-                    <Input
+                    <InputWithLabel
                         type="password"
                         label="رمز عبور"
                         name="password"
                         value={formData.password}
                         onChange={changeHandler}
                         error={formDataError.password}
-                        inputClassName="focus:border-primary-100"
+                        className="focus:border-primary-100"
                     />
-                    <Input
+                    <InputWithLabel
                         type="password"
                         label="تکرار رمز عبور"
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={changeHandler}
                         error={formDataError.confirmPassword}
-                        inputClassName="focus:border-primary-100"
+                        className="focus:border-primary-100"
                     />
 
-                    <CheckBox
+                    <Checkbox
                         id="terms"
-                        label="قوانین و مقررات"
-                        onChange={(e) => setFormData({ ...formData, checkbox: e.currentTarget.checked })}
+                        // label="قوانین و مقررات"
+                        onCheckedChange={(checked) => setFormData({ ...formData, checkbox: Boolean(checked) })}
                     />
 
                     <Button
-                        variant="Primary"
                         onClick={signupHandler}
                         disabled={!formData.email || !formData.password || !formData.confirmPassword || !formData.checkbox}
                         className="my-4"

@@ -9,9 +9,9 @@ import { covertPaymentToPersian, showFullDate, tomanFormat } from "../../../shar
 import Toman from "@/assets/icons/components/Toman";
 import OrderPrint from "@/components/Order/Print";
 import PrinterIcon from "@/assets/icons/components/Printer";
-import Button from "@/shared/components/common/Button";
 import { Margin, Resolution } from "react-to-pdf";
 import JsPDF from "jspdf";
+import { Button } from "@/components/ui/button";
 
 const SingleOrder = ({ order }: { order: IOrder }) => {
     const printRef = useRef(null);
@@ -84,7 +84,7 @@ const SingleOrder = ({ order }: { order: IOrder }) => {
                 </div>
             </div>
 
-            <Button variant="Secondary" onClick={printHandler} className="">
+            <Button variant="secondary" onClick={printHandler} className="">
                 دانلود PDF
             </Button>
 

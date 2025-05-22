@@ -1,6 +1,6 @@
 import BestSellers from "@/components/BestSellers/BestSellers";
 import Categories from "@/features/HomePage/components/Categories";
-import Header from "@/components/ui/Header/Header";
+import Header from "@/features/Layout/components/Header/Header";
 import MainBanners from "@/features/HomePage/components/MainBanners";
 import ProductsList from "@/features/SingleProductPage/components/ProductsList";
 import PATH from "@/shared/path";
@@ -74,7 +74,7 @@ export default async function Home() {
     const blogs: IBlog[] = await getBlogs();
 
     return (
-        <section className="flex w-full flex-1 flex-col items-start gap-6 pb-20 pt-4 2xl:items-center 2xl:justify-center">
+        <section className="flex w-full flex-1 flex-col items-start gap-6 pt-4 pb-20 2xl:items-center 2xl:justify-center">
             <div className="w-full px-4 lg:hidden">
                 <Header />
             </div>
@@ -87,7 +87,7 @@ export default async function Home() {
                     <h2 className="text-xl font-semibold">محصولات</h2>
                     <Link
                         href={PATH.products()}
-                        className="hover-transition text-sm text-gray-500 hover:text-primary-100 dark:text-secondary-100"
+                        className="hover-transition hover:text-primary-100 dark:text-secondary-100 text-sm text-gray-500"
                     >
                         مشاهده همه
                     </Link>
@@ -101,7 +101,7 @@ export default async function Home() {
                         <h2 className="text-xl font-semibold">آخرین بلاگ های منتشر شده</h2>
                         <Link
                             href={PATH.blogs()}
-                            className="hover-transition text-sm text-gray-500 hover:text-primary-100 dark:text-secondary-100"
+                            className="hover-transition hover:text-primary-100 dark:text-secondary-100 text-sm text-gray-500"
                         >
                             مشاهده همه
                         </Link>
@@ -118,19 +118,6 @@ export default async function Home() {
                     </div>
                 </div>
             ) : null}
-
-            <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
-                {blogs && blogs.length
-                    ? blogs.map((item) => (
-                          <BlogCard
-                              key={String(item._id)}
-                              link={PATH.singleBlog(item.link)}
-                              blog={item}
-                              className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
-                          />
-                      ))
-                    : null}
-            </div>
         </section>
     );
 }

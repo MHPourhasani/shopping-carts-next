@@ -1,4 +1,4 @@
-import Button from "@/shared/components/common/Button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ const EmptyState = ({ imgSrc, className, imgClassName, title, description, linkH
             {linkHref && linkTitle ? (
                 <Link
                     href={linkHref}
-                    className="flex w-9/12 items-center justify-center rounded-full bg-primary-100 py-2.5 text-white hover:bg-violet-700 md:max-w-3xl lg:py-3 xl:max-w-[200px]"
+                    className="bg-primary-100 flex w-9/12 items-center justify-center rounded-full py-2.5 text-white hover:bg-violet-700 md:max-w-3xl lg:py-3 xl:max-w-[200px]"
                 >
                     {linkTitle}
                 </Link>

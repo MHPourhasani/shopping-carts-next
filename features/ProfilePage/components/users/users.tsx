@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PATH from "../../../../shared/path";
 import { useAppSelector } from "@/redux/hooks";
-import Button from "@/shared/components/common/Button";
 import AddIcon from "@/assets/icons/components/Add";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { useSearchParams } from "next/navigation";
 import PageHeader from "@/shared/components/PageHeader";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     users: IUser[];
@@ -61,9 +61,9 @@ const AllUsers = (props: Props) => {
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="کاربران" desktopBackButton={false}>
                 <Link href={PATH.profile.users.create_user()}>
-                    <Button variant="Text" className="text-primary-100">
+                    <Button variant="text" className="text-primary-100">
                         ایجاد کاربر جدید
-                        <AddIcon className="size-5 cursor-pointer stroke-primary-100 lg:size-6" />
+                        <AddIcon className="stroke-primary-100 size-5 cursor-pointer lg:size-6" />
                     </Button>
                 </Link>
             </PageHeader>
@@ -85,7 +85,7 @@ const AllUsers = (props: Props) => {
                     users.map((user) => (
                         <div
                             key={String(user._id)}
-                            className="flex w-full max-w-full items-center justify-between gap-4 rounded-xl border bg-bg-2 p-4 dark:border-secondary-700 dark:bg-secondary-600"
+                            className="bg-bg-2 dark:border-secondary-700 dark:bg-secondary-600 flex w-full max-w-full items-center justify-between gap-4 rounded-xl border p-4"
                         >
                             <div className="flex w-full flex-col gap-4 text-gray-400 dark:text-gray-300">
                                 {itemsTitle.map((title) => (
@@ -105,7 +105,7 @@ const AllUsers = (props: Props) => {
                                         <TrashIcon onClick={() => deleteUserHandler(user)} className="size-5 cursor-pointer fill-red-500" />
 
                                         <Link href={PATH.profile.users.edit_user(String(user._id))}>
-                                            <EyeIcon className="h-5 w-auto cursor-pointer stroke-customBlack-200" />
+                                            <EyeIcon className="stroke-customBlack-200 h-5 w-auto cursor-pointer" />
                                         </Link>
                                     </span>
                                 )}

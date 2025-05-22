@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/shared/components/common/Button";
 import CompareItem from "@/components/CompareItem";
 import Modal from "@/shared/components/Modal";
 import { usePathname, useRouter } from "next/navigation";
@@ -14,6 +13,7 @@ import PATH from "@/shared/path";
 import toastMessage from "@/shared/toastMessage";
 import { tomanFormat } from "@/shared/helper";
 import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/product.interface";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     product1: IProduct;
@@ -145,7 +145,7 @@ const Compare = ({ product1, product2, products }: Props) => {
                                     className={`flex aspect-square size-10 cursor-pointer items-center justify-center rounded-full text-lg ${
                                         s === addToCartModal.size
                                             ? "bg-primary-100 font-semibold text-white"
-                                            : "bg-gray-100 dark:bg-secondary-600"
+                                            : "dark:bg-secondary-600 bg-gray-100"
                                     }`}
                                 >
                                     {s}
@@ -161,7 +161,7 @@ const Compare = ({ product1, product2, products }: Props) => {
                                 <span
                                     onClick={() => setAddToCartModal({ ...addToCartModal, color: c })}
                                     className={`flex cursor-pointer items-center justify-center gap-2 rounded-full p-2 text-lg ${
-                                        c === addToCartModal.color ? "bg-primary-100 text-white" : "bg-gray-100 dark:bg-secondary-600"
+                                        c === addToCartModal.color ? "bg-primary-100 text-white" : "dark:bg-secondary-600 bg-gray-100"
                                     }`}
                                 >
                                     <div
@@ -175,10 +175,10 @@ const Compare = ({ product1, product2, products }: Props) => {
 
                         <div className="flex flex-col items-start gap-4">
                             <p className="font-medium">تعداد</p>
-                            <div className="flex w-auto items-center gap-6 rounded-full bg-bg-2 p-2 dark:bg-secondary-500">
+                            <div className="bg-bg-2 dark:bg-secondary-500 flex w-auto items-center gap-6 rounded-full p-2">
                                 <span
                                     onClick={() => setAddToCartModal({ ...addToCartModal, quantity: addToCartModal!.quantity! + 1 })}
-                                    className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-primary-100"
+                                    className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={addIcon} alt="add" />
                                 </span>
@@ -192,7 +192,7 @@ const Compare = ({ product1, product2, products }: Props) => {
                                             quantity: addToCartModal!.quantity === 1 ? 1 : addToCartModal!.quantity! - 1,
                                         })
                                     }
-                                    className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-primary-100"
+                                    className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={minusIcon} alt="minus" />
                                 </span>

@@ -18,7 +18,6 @@ import ProductTags from "./ProductTags";
 import { useEffect, useRef, useState } from "react";
 import PATH from "@/shared/path";
 import TickIcon from "@/assets/icons/components/Tick";
-import Button from "@/shared/components/common/Button";
 import BackButton from "@/shared/components/BackButton";
 import LoveIcon from "@/assets/icons/components/Love";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
@@ -28,6 +27,7 @@ import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "./ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
 import { ISingleProductProps } from "../interface/product.interface";
+import { Button } from "@/components/ui/button";
 
 const MobileSingleProduct = (props: ISingleProductProps) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
@@ -53,11 +53,11 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                 <div className="flex items-center gap-4">
                     <Link
                         href={PATH.compare(_id.toString())}
-                        className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-bg-2 p-2 dark:bg-customBlack-50"
+                        className="bg-bg-2 dark:bg-customBlack-50 flex size-10 cursor-pointer items-center justify-center rounded-full p-2"
                     >
                         <CompareIcon className="fill-customBlack-200 dark:fill-white" />
                     </Link>
-                    <span className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-bg-2 p-2 dark:bg-customBlack-50">
+                    <span className="bg-bg-2 dark:bg-customBlack-50 flex size-10 cursor-pointer items-center justify-center rounded-full p-2">
                         <LoveIcon onClick={addToFavoriteHandler} className="fill-customBlack-200 dark:fill-white" />
                     </span>
                 </div>
@@ -108,19 +108,19 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    <h1 className="mb-2 w-full text-2xl font-bold text-customBlack-200 dark:text-white">
+                    <h1 className="text-customBlack-200 mb-2 w-full text-2xl font-bold dark:text-white">
                         {capitalizeTheFirstLettersOfWords(name)}
                     </h1>
 
                     <section className="flex flex-col gap-2">
                         <div
                             onClick={() => setIsChooseSize(true)}
-                            className="flex h-12 w-full items-center justify-between rounded-full bg-bg-2 px-4 dark:bg-secondary-600"
+                            className="bg-bg-2 dark:bg-secondary-600 flex h-12 w-full items-center justify-between rounded-full px-4"
                         >
                             <span>سایز</span>
                             <span className="flex items-center gap-7">
                                 <span className="font-semibold">{productData.size}</span>
-                                <ArrowDownIcon className="size-6 stroke-secondary-600 dark:stroke-white" />
+                                <ArrowDownIcon className="stroke-secondary-600 size-6 dark:stroke-white" />
                             </span>
                         </div>
 
@@ -134,7 +134,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                                             className={`flex h-12 w-full items-center justify-between gap-4 rounded-full px-4 ${
                                                 size === productData.size
                                                     ? "bg-primary-100 font-semibold text-white"
-                                                    : "bg-gray-100 dark:bg-secondary-600"
+                                                    : "dark:bg-secondary-600 bg-gray-100"
                                             }`}
                                         >
                                             {size}
@@ -147,13 +147,13 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
 
                         <div
                             onClick={() => setIsChooseColor(true)}
-                            className="flex h-12 w-full items-center justify-between rounded-full bg-bg-2 px-4 dark:bg-secondary-600"
+                            className="bg-bg-2 dark:bg-secondary-600 flex h-12 w-full items-center justify-between rounded-full px-4"
                         >
                             <span>رنگ ها</span>
                             {productData.color ? (
                                 <div className="flex items-center gap-7">
                                     <div style={{ backgroundColor: productData.color.hex }} className={`size-6 rounded-full`} />
-                                    <ArrowDownIcon className="size-6 stroke-secondary-600 dark:stroke-white" />
+                                    <ArrowDownIcon className="stroke-secondary-600 size-6 dark:stroke-white" />
                                 </div>
                             ) : (
                                 <p>هیچ رنگی نیست</p>
@@ -170,7 +170,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                                             className={`flex h-12 w-full items-center justify-between gap-4 rounded-full px-4 ${
                                                 color === productData.color
                                                     ? "bg-primary-100 font-semibold text-white"
-                                                    : "bg-gray-100 dark:bg-secondary-600"
+                                                    : "dark:bg-secondary-600 bg-gray-100"
                                             }`}
                                         >
                                             {color.name}
@@ -187,12 +187,12 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                             </div>
                         </Modal>
 
-                        <div className="flex h-12 w-full items-center justify-between rounded-full bg-bg-2 px-4 dark:bg-secondary-600">
+                        <div className="bg-bg-2 dark:bg-secondary-600 flex h-12 w-full items-center justify-between rounded-full px-4">
                             <span>تعداد</span>
                             <div className="flex items-center gap-6">
                                 <span
                                     onClick={() => setProductData({ ...productData, quantity: productData.quantity + 1 })}
-                                    className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-primary-100"
+                                    className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={addIcon} alt="add" />
                                 </span>
@@ -206,7 +206,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                                             quantity: productData.quantity === 1 ? 1 : productData.quantity - 1,
                                         })
                                     }
-                                    className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-primary-100"
+                                    className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={minusIcon} alt="minus" />
                                 </span>
@@ -240,7 +240,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                     }}
                     className="flex cursor-pointer items-center gap-2"
                 >
-                    <EditIcon className="size-5 fill-primary-100" />
+                    <EditIcon className="fill-primary-100 size-5" />
                     <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
                 </span>
                 {isAddReview ? (
@@ -254,14 +254,14 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                 ) : null}
             </section>
 
-            <div className="fixed bottom-16 right-0 z-[2] flex w-full items-center justify-between gap-2 border-t bg-secondary-50 px-4 py-2 dark:bg-secondary-600">
-                <Button variant="Primary" onClick={() => addToCartsHandler(productData)} className="w-auto px-4 font-light">
+            <div className="bg-secondary-50 dark:bg-secondary-600 fixed right-0 bottom-16 z-[2] flex w-full items-center justify-between gap-2 border-t px-4 py-2">
+                <Button onClick={() => addToCartsHandler(productData)} className="w-auto cursor-pointer px-4 font-light">
                     افزودن به سبد خرید
                 </Button>
 
-                <div className="flex items-center gap-2 text-xl font-semibold text-primary-100">
+                <div className="text-primary-100 flex items-center gap-2 text-xl font-semibold">
                     <span
-                        className={`flex items-center gap-2 ${isNumber(discountedPrice) ? "text-base font-normal text-gray-600 line-through dark:text-gray-500" : "font-medium text-primary-100 dark:text-secondary-100"}`}
+                        className={`flex items-center gap-2 ${isNumber(discountedPrice) ? "text-base font-normal text-gray-600 line-through dark:text-gray-500" : "text-primary-100 dark:text-secondary-100 font-medium"}`}
                     >
                         {price > 0 ? (
                             <>
@@ -296,7 +296,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                             <ProductCardItem
                                 product={p}
                                 href={PATH.singleProduct(p._id.toString(), p.name)}
-                                className="w-1/2 bg-secondary-50 shadow-none dark:bg-secondary-700"
+                                className="bg-secondary-50 dark:bg-secondary-700 w-1/2 shadow-none"
                             />
                         ))}
                     </div>

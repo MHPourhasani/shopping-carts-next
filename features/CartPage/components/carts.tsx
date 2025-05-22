@@ -9,12 +9,12 @@ import { toast } from "react-toastify";
 import EmptyState from "@/shared/components/EmptyState";
 import emptyCart from "@/assets/icons/svgs/cart-illustration.svg";
 import { ICart } from "@/interfaces/general";
-import Button from "@/shared/components/common/Button";
 import PATH from "../../../shared/path";
 import toastMessage from "../../../shared/toastMessage";
 import Toman from "@/assets/icons/components/Toman";
 import { tomanFormat } from "../../../shared/helper";
 import PageHeader from "@/shared/components/PageHeader";
+import { Button } from "@/components/ui/button";
 
 interface IProps {
     carts: ICart[];
@@ -53,10 +53,10 @@ const Carts = ({ carts }: IProps) => {
     }, [cartsState]);
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-4">
+        <section className="container flex w-full flex-1 flex-col gap-4">
             <PageHeader title="سبد خرید" desktopBackButton={false}>
                 {cartsState.length ? (
-                    <Button variant="Text" onClick={deleteAllCarts} className="w-fit text-sm dark:text-secondary-50">
+                    <Button variant="text" onClick={deleteAllCarts} className="dark:text-secondary-50 w-fit text-sm">
                         حذف همه
                     </Button>
                 ) : null}
@@ -72,7 +72,7 @@ const Carts = ({ carts }: IProps) => {
                         })}
                     </div>
 
-                    <div className="flex w-full flex-col gap-4 lg:w-40 lg:rounded-xl lg:bg-bg-2 lg:p-4 lg:dark:bg-secondary-700">
+                    <div className="lg:bg-bg-2 lg:dark:bg-secondary-700 flex w-full flex-col gap-4 lg:w-40 lg:rounded-xl lg:p-4">
                         <span className="flex items-center justify-between lg:text-lg">
                             <p>هزینه محصولات</p>
                             <p dir="ltr" className="flex items-center gap-2 font-semibold">
@@ -81,9 +81,7 @@ const Carts = ({ carts }: IProps) => {
                         </span>
 
                         <Link href={PATH.checkout()}>
-                            <Button className="mt-5" variant="Primary">
-                                تسویه حساب
-                            </Button>
+                            <Button className="mt-5">تسویه حساب</Button>
                         </Link>
                     </div>
                 </div>

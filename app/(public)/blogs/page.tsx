@@ -54,7 +54,7 @@ const Blogs = async () => {
     }
 
     return (
-        <section className="flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
+        <section className="container flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
             <BreadCrumb items={[{ title: "بلاگ", path: PATH.blogs() }]} />
 
             <PageHeader title="بلاگ" mobileBackButton={false} desktopBackButton={false} />

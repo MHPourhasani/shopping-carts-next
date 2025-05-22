@@ -16,37 +16,38 @@ const Header = () => {
     const userState = useAppSelector((state: any) => state.auth.user);
 
     return (
-        <header className="flex w-full flex-col items-center justify-center gap-8 dark:border-gray-400 lg:gap-12 lg:border-b-2 lg:p-4">
-            <section className="custom-container flex items-center justify-between gap-20">
-                <div className="flex items-center gap-8 lg:hidden">
-                    <ThemeSwitch />
-                </div>
-
-                <div className="flex w-full items-center gap-24">
-                    <Link href={PATH.home()} className="text-xl font-bold dark:text-white lg:text-3xl">
-                        {process.env.shop_name}
-                    </Link>
-
-                    <Suspense fallback={"loading..."}>
-                        <div className="hidden max-w-[600px] flex-1 lg:flex">
-                            <Search />
-                        </div>
-                    </Suspense>
-                </div>
-
-                <div className="flex items-center gap-8">
-                    <div className="hidden lg:flex">
+        <header className="w-full border-gray-200 lg:gap-6 lg:border-b-2 lg:py-5 dark:border-gray-400">
+            <div className="container flex flex-col justify-center gap-8">
+                <section className="flex justify-between gap-20">
+                    <div className="flex items-center gap-8 lg:hidden">
                         <ThemeSwitch />
                     </div>
-                    <div className="group relative">
-                        <Link
-                            href={PATH.carts()}
-                            className="flex size-10 items-center justify-center rounded-full bg-primary-100 p-2 lg:size-12"
-                        >
-                            <Image src={bagIcon} alt="bag" className="h-full w-full" />
+
+                    <div className="flex w-full items-center gap-24">
+                        <Link href={PATH.home()} className="text-xl font-bold lg:text-3xl dark:text-white">
+                            {process.env.shop_name}
                         </Link>
 
-                        {/* {userState?.carts && (
+                        <Suspense fallback={"loading..."}>
+                            <div className="hidden max-w-[600px] flex-1 lg:flex">
+                                <Search />
+                            </div>
+                        </Suspense>
+                    </div>
+
+                    <div className="flex items-center gap-8">
+                        <div className="hidden lg:flex">
+                            <ThemeSwitch />
+                        </div>
+                        <div className="group relative">
+                            <Link
+                                href={PATH.carts()}
+                                className="bg-primary-100 flex size-10 items-center justify-center rounded-full p-2 lg:size-12"
+                            >
+                                <Image src={bagIcon} alt="bag" className="h-full w-full" />
+                            </Link>
+
+                            {/* {userState?.carts && (
                     <section className="absolute top-0 z-50 hidden w-80 flex-col rounded-xl shadow-xl group-hover:flex">
                         <div className="flex flex-col gap-2">
                             {userState.carts.products.map((product: any) => (
@@ -95,25 +96,27 @@ const Header = () => {
                         </div>
                     </section>
                 )} */}
+                        </div>
+                        <Link
+                            href={session?.user.userId ? PATH.profile.main() : PATH.login()}
+                            className="dark:bg-secondary-700 hidden items-center justify-center gap-2 rounded-xl border border-gray-200 p-3 shadow-lg shadow-gray-200 lg:flex lg:max-w-48 dark:shadow-none"
+                        >
+                            <ProfileIcon className="stroke-black dark:stroke-white" />
+                            <span className="truncate">
+                                {userState ? `${userState.first_name ? userState.first_name : "کاربر"}` : "ورود | ثبت نام"}
+                            </span>
+                        </Link>
                     </div>
-                    <Link
-                        href={session?.user.userId ? PATH.profile.main() : PATH.login()}
-                        className="hidden items-center justify-center gap-2 rounded-xl border border-gray-200 p-3 shadow-lg shadow-gray-200 dark:bg-secondary-700 dark:shadow-none lg:flex lg:max-w-48"
-                    >
-                        <ProfileIcon className="stroke-black dark:stroke-white" />
-                        <span className="truncate">
-                            {userState ? `${userState.first_name ? userState.first_name : "کاربر"}` : "ورود | ثبت نام"}
-                        </span>
-                    </Link>
-                </div>
-            </section>
+                </section>
 
-            <Suspense fallback={"loading..."}>
-                <div className="flex w-full flex-1 lg:hidden">
-                    <Search />
-                </div>
-            </Suspense>
-            <DesktopMenu />
+                <Suspense fallback={"loading..."}>
+                    <div className="flex w-full flex-1 lg:hidden">
+                        <Search />
+                    </div>
+                </Suspense>
+
+                <DesktopMenu />
+            </div>
         </header>
     );
 };

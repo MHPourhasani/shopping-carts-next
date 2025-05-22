@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Pagination from "@/shared/components/Pagination";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
-import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
 import PageHeader from "@/shared/components/PageHeader";
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
@@ -10,11 +9,13 @@ import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import CloseIcon from "@/assets/icons/components/Close";
 import FilterIcon from "@/assets/icons/components/Filter";
-import CheckBox from "@/shared/components/common/CheckBox";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 import { IColor, IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { DeviceSize } from "@/shared/enums";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface Props {
     products: IProduct[];
@@ -96,21 +97,21 @@ const Products = ({ products }: Props) => {
     });
 
     return (
-        <>
-            {isShow.filter && window.innerWidth < 1024 && (
+        <div className="container">
+            {isShow.filter && !isDesktop && (
                 <div
                     ref={mobileFilterRef}
                     style={{ minWidth: "70%", maxWidth: "70%" }}
-                    className="absolute left-0 right-0 top-0 z-10 flex h-full flex-col gap-8 rounded-l-xl rounded-r-xl bg-bg-2 p-4 dark:bg-secondary-600"
+                    className="bg-bg-2 dark:bg-secondary-600 absolute top-0 right-0 left-0 z-10 flex h-full flex-col gap-8 rounded-l-xl rounded-r-xl p-4"
                 >
                     <div className="flex items-center justify-between">
                         <span className="flex items-center gap-2">
-                            <FilterIcon className="h-5 stroke-secondary-700 dark:stroke-secondary-100" />
+                            <FilterIcon className="stroke-secondary-700 dark:stroke-secondary-100 h-5" />
                             <h3 className="text-xl font-semibold">فیلتر</h3>
                         </span>
                         <CloseIcon
                             onClick={() => setIsShow({ ...isShow, filter: false })}
-                            className="cursor-pointer fill-secondary-700 dark:fill-secondary-100"
+                            className="fill-secondary-700 dark:fill-secondary-100 cursor-pointer"
                         />
                     </div>
 
@@ -133,16 +134,18 @@ const Products = ({ products }: Props) => {
                             </div>
 
                             {isShow.brands && (
-                                <ul className="mr-2 flex flex-col gap-2 dark:bg-secondary-500">
+                                <ul className="dark:bg-secondary-500 mr-2 flex flex-col gap-2">
                                     {getFilterItems().brands.map((brand) => (
-                                        <CheckBox
-                                            key={brand}
-                                            label={capitalizeTheFirstLettersOfWords(brand)}
-                                            id={brand}
-                                            checked={filteredOptions.brands.includes(brand)}
-                                            onChange={(e) => selectBrandHandler(e.currentTarget.checked, brand)}
-                                            className="!size-9"
-                                        />
+                                        <>
+                                            <Label>{capitalizeTheFirstLettersOfWords(brand)}</Label>
+                                            <Checkbox
+                                                key={brand}
+                                                id={brand}
+                                                checked={filteredOptions.brands.includes(brand)}
+                                                onChange={(checked) => selectBrandHandler(Boolean(checked), brand)}
+                                                className="!size-9"
+                                            />
+                                        </>
                                     ))}
                                 </ul>
                             )}
@@ -173,12 +176,12 @@ const Products = ({ products }: Props) => {
                                             color.name &&
                                             color.hex && (
                                                 <li className="flex items-center justify-between gap-4">
-                                                    <CheckBox
+                                                    <Label>{capitalizeTheFirstLettersOfWords(color?.name)}</Label>
+                                                    <Checkbox
                                                         key={color.name}
-                                                        label={capitalizeTheFirstLettersOfWords(color?.name)}
                                                         id={color.name}
                                                         checked={filteredOptions.colors.includes(color)}
-                                                        onChange={(e) => selectColorHandler(e.currentTarget.checked, color)}
+                                                        onChange={(checked) => selectColorHandler(Boolean(checked), color)}
                                                         className="!size-9"
                                                     />
                                                     <div
@@ -201,9 +204,9 @@ const Products = ({ products }: Props) => {
 
                 <PageHeader title="همه محصولات" desktopBackButton={false}>
                     <Button
-                        variant="Text"
+                        variant="text"
                         onClick={() => setIsShow({ ...isShow, filter: !isShow.filter })}
-                        className="w-auto rounded-md px-2 text-primary-100 dark:text-violet-400 lg:hidden"
+                        className="text-primary-100 w-auto rounded-md px-2 lg:hidden dark:text-violet-400"
                     >
                         <FilterIcon className="stroke-primary-100 dark:stroke-violet-400" />
                     </Button>
@@ -212,7 +215,7 @@ const Products = ({ products }: Props) => {
                 <div className="flex w-full gap-10 lg:items-start">
                     <aside
                         style={{ minWidth: "20%" }}
-                        className="hidden h-auto max-h-[90vh] flex-col gap-8 overflow-y-auto rounded-xl bg-bg-2 p-4 shadow-lg dark:bg-secondary-700 lg:flex"
+                        className="bg-bg-2 dark:bg-secondary-700 hidden h-auto max-h-[90vh] flex-col gap-8 overflow-y-auto rounded-xl p-4 shadow-lg lg:flex"
                     >
                         {!!getFilterItems()?.brands && (
                             <div className="flex w-full flex-col gap-4">
@@ -237,14 +240,16 @@ const Products = ({ products }: Props) => {
                                 {isShow.brands && (
                                     <ul className="mr-2 flex flex-col gap-2">
                                         {getFilterItems().brands.map((brand) => (
-                                            <CheckBox
-                                                key={brand}
-                                                label={capitalizeTheFirstLettersOfWords(brand)}
-                                                id={brand}
-                                                checked={filteredOptions.brands.includes(brand)}
-                                                onChange={(e) => selectBrandHandler(e.currentTarget.checked, brand)}
-                                                className="!size-9"
-                                            />
+                                            <>
+                                                <Label>{capitalizeTheFirstLettersOfWords(brand)}</Label>
+                                                <Checkbox
+                                                    key={brand}
+                                                    id={brand}
+                                                    checked={filteredOptions.brands.includes(brand)}
+                                                    onChange={(checked) => selectBrandHandler(Boolean(checked), brand)}
+                                                    className="!size-9"
+                                                />
+                                            </>
                                         ))}
                                     </ul>
                                 )}
@@ -273,25 +278,22 @@ const Products = ({ products }: Props) => {
                                 {isShow.colors && (
                                     <ul className="flex flex-col gap-2">
                                         {getFilterItems().colors.map((color) => {
-                                            return (
-                                                color.name &&
-                                                color.hex && (
-                                                    <li className="flex items-center justify-between gap-4">
-                                                        <CheckBox
-                                                            key={color.name}
-                                                            label={capitalizeTheFirstLettersOfWords(color?.name)}
-                                                            id={color.name}
-                                                            checked={filteredOptions.colors.includes(color)}
-                                                            onChange={(e) => selectColorHandler(e.currentTarget.checked, color)}
-                                                            className="!size-9"
-                                                        />
-                                                        <div
-                                                            style={{ backgroundColor: color.hex }}
-                                                            className="aspect-square size-5 rounded-full"
-                                                        />
-                                                    </li>
-                                                )
-                                            );
+                                            return color.name && color.hex ? (
+                                                <li className="flex items-center justify-between gap-4">
+                                                    <Label>{capitalizeTheFirstLettersOfWords(color?.name)}</Label>
+                                                    <Checkbox
+                                                        key={color.name}
+                                                        id={color.name}
+                                                        checked={filteredOptions.colors.includes(color)}
+                                                        onCheckedChange={(checked) => selectColorHandler(Boolean(checked), color)}
+                                                        className="!size-9"
+                                                    />
+                                                    <div
+                                                        style={{ backgroundColor: color.hex }}
+                                                        className="aspect-square size-5 rounded-full"
+                                                    />
+                                                </li>
+                                            ) : null;
                                         })}
                                     </ul>
                                 )}
@@ -301,7 +303,7 @@ const Products = ({ products }: Props) => {
 
                     <div className="flex w-full flex-1 flex-col items-center justify-center gap-10">
                         {!!currentProductsData.length && (
-                            <div className="grid h-full w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                            <div className="grid h-full w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
                                 {currentProductsData.map((product: IProduct) => {
                                     return (
                                         <ProductCardItem
@@ -324,7 +326,7 @@ const Products = ({ products }: Props) => {
                     </div>
                 </div>
             </section>
-        </>
+        </div>
     );
 };
 

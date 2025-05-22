@@ -6,12 +6,12 @@ import ProductCardItem from "@/features/SingleProductPage/components/ProductCard
 import EmptyState from "@/shared/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/shared/path";
-import Input from "@/shared/components/common/Input";
 import { IBlog } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
 import API from "@/shared/api";
 import BlogCard from "@/features/Blog/components/BlogCard";
 import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { Input } from "@/components/ui/input";
 
 const Search = () => {
     const [data, setData] = useState<{
@@ -65,7 +65,7 @@ const Search = () => {
                     <SearchIcon
                         onClick={searchHandler}
                         style={{ right: "16px" }}
-                        className="absolute top-1/4 z-[1] h-auto w-5 cursor-pointer stroke-secondary-700 dark:stroke-secondary-100"
+                        className="stroke-secondary-700 dark:stroke-secondary-100 absolute top-1/4 z-[1] h-auto w-5 cursor-pointer"
                     />
                     <Input
                         autoFocus
@@ -74,7 +74,7 @@ const Search = () => {
                         onChange={changeHandler}
                         onKeyDown={searchHandler}
                         style={{ paddingRight: "40px", paddingLeft: "40px" }}
-                        inputClassName="!px-10 text-sm dark:bg-secondary-700 dark:lg:bg-secondary-600"
+                        className="dark:bg-secondary-700 dark:lg:bg-secondary-600 !px-10 text-sm"
                     />
                     <CloseIcon
                         onClick={() => {
@@ -83,7 +83,7 @@ const Search = () => {
                             getResults("");
                         }}
                         style={{ left: "16px" }}
-                        className="absolute top-1/4 h-auto w-5 translate-x-20 cursor-pointer fill-secondary-700 dark:fill-secondary-100"
+                        className="fill-secondary-700 dark:fill-secondary-100 absolute top-1/4 h-auto w-5 translate-x-20 cursor-pointer"
                     />
                 </span>
 

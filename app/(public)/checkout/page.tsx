@@ -35,7 +35,7 @@ const CheckoutPage = async () => {
     const carts = await getCarts(session?.user.userId!);
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-4 lg:gap-8">
+        <section className="container flex w-full flex-1 flex-col gap-4 lg:gap-8">
             <PageHeader title="تسویه حساب" />
             <Checkout carts={carts ? carts : []} />;
         </section>

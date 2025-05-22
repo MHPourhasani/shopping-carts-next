@@ -1,5 +1,4 @@
 import AddIcon from "@/assets/icons/components/Add";
-import Button from "@/shared/components/common/Button";
 import PageHeader from "@/shared/components/PageHeader";
 import ProductListItem from "@/features/SingleProductPage/components/ProductListItem";
 import { getServerAuthSession } from "@/shared/auth";
@@ -7,6 +6,7 @@ import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Link from "next/link";
 import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
     title: "محصولات",
@@ -38,9 +38,9 @@ const ProfileProductsPage = async () => {
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="محصولات" desktopBackButton={false}>
                 <Link href={PATH.profile.products.add_product()}>
-                    <Button variant="Text" className="text-primary-100">
+                    <Button variant="text" className="text-primary-100">
                         افزودن محصول جدید
-                        <AddIcon className="size-5 cursor-pointer stroke-primary-100 lg:size-6" />
+                        <AddIcon className="stroke-primary-100 size-5 cursor-pointer lg:size-6" />
                     </Button>
                 </Link>
             </PageHeader>

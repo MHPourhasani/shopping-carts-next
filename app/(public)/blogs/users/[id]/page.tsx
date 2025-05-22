@@ -58,7 +58,7 @@ const SingleBlogAuthorPage = async ({ params }: Props) => {
     const { user, blogs } = data;
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-8">
+        <section className="container flex w-full flex-1 flex-col gap-8">
             <BreadCrumb
                 items={[
                     { title: "بلاگ", path: PATH.blogs() },
@@ -68,8 +68,8 @@ const SingleBlogAuthorPage = async ({ params }: Props) => {
             />
 
             <div className="flex flex-col gap-8 lg:gap-14">
-                <div className="flex items-center gap-4 rounded-xl p-4 shadow-lg dark:bg-secondary-700 lg:gap-8">
-                    <span className={`flex aspect-square size-20 items-center justify-center rounded-full bg-bg-2 dark:bg-secondary-600`}>
+                <div className="dark:bg-secondary-700 flex items-center gap-4 rounded-xl p-4 shadow-lg lg:gap-8">
+                    <span className={`bg-bg-2 dark:bg-secondary-600 flex aspect-square size-20 items-center justify-center rounded-full`}>
                         <Image
                             src={user.profile_image ? user.profile_image : userIcon}
                             alt="user"

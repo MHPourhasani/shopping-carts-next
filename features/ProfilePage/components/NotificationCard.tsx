@@ -1,6 +1,5 @@
 "use client";
 import { INotification } from "@/interfaces/general";
-import Button from "@/shared/components/common/Button";
 import TrashIcon from "@/assets/icons/components/Trash";
 import API from "@/shared/api";
 import { useSession } from "next-auth/react";
@@ -8,6 +7,7 @@ import { toast } from "react-toastify";
 import toastMessage from "@/shared/toastMessage";
 import { showFullDate } from "@/shared/helper";
 import { RequestTypeEnum } from "@/shared/enums";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     notification: INotification;
@@ -60,7 +60,7 @@ const NotificationCard = ({ notification, onDelete, onRead, selectNotification, 
                 }
                 onSelect(id, !selectNotification.status);
             }}
-            className={`flex w-full flex-col items-start justify-between gap-4 rounded-lg bg-bg-2 p-4 dark:bg-secondary-700 lg:gap-2 dark:lg:bg-secondary-600`}
+            className={`bg-bg-2 dark:bg-secondary-700 dark:lg:bg-secondary-600 flex w-full flex-col items-start justify-between gap-4 rounded-lg p-4 lg:gap-2`}
         >
             <div className="flex w-full items-center justify-between">
                 <h3 className="font-medium">{title}</h3>
@@ -76,14 +76,14 @@ const NotificationCard = ({ notification, onDelete, onRead, selectNotification, 
             <span className="flex w-full flex-col gap-4 lg:gap-2">
                 <span className="flex w-full justify-between gap-2">
                     <p className={`text-gray-500 ${selectNotification.id !== id && "truncate"}`}>{message}</p>
-                    {selectNotification.id !== id && <span className="cursor-pointer text-primary-100">بیشتر</span>}
+                    {selectNotification.id !== id && <span className="text-primary-100 cursor-pointer">بیشتر</span>}
                 </span>
 
                 <span className="text-sm text-gray-400">{showFullDate(createdAt)}</span>
 
                 {selectNotification.id === id && (
                     <Button
-                        variant="Secondary"
+                        variant="secondary"
                         onClick={() => {
                             convertToReadHandler(id, false);
                             onSelect("", false);

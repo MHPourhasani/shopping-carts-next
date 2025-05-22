@@ -1,12 +1,12 @@
 "use client";
-import Button from "@/shared/components/common/Button";
-import Input from "@/shared/components/common/Input";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import PageHeader from "@/shared/components/PageHeader";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Button } from "@/components/ui/button";
 
 const ChangePassword = () => {
     const userState = useAppSelector((state: any) => state.auth.user);
@@ -67,34 +67,32 @@ const ChangePassword = () => {
             <PageHeader title="تغییر رمز عبور" />
 
             <div className="flex flex-col gap-3">
-                <Input
+                <InputWithLabel
                     label="رمز عبور فعلی"
                     name="oldPassword"
                     value={formData.oldPassword}
                     onChange={changeHandler}
                     error={formDataError.oldPassword}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
-                <Input
+                <InputWithLabel
                     label="رمز عبور جدید"
                     name="newPassword"
                     value={formData.newPassword}
                     onChange={changeHandler}
                     error={formDataError.newPassword}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
-                <Input
+                <InputWithLabel
                     label="تکرار رمز عبور جدید"
                     name="confirmNewPassword"
                     value={formData.confirmNewPassword}
                     onChange={changeHandler}
                     error={formDataError.confirmNewPassword}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
 
-                <Button variant="Primary" onClick={changesPasswordHandler}>
-                    تغییر رمز
-                </Button>
+                <Button onClick={changesPasswordHandler}>تغییر رمز</Button>
             </div>
         </section>
     );

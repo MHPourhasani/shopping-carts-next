@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
-import Input from "@/shared/components/common/Input";
-import Button from "@/shared/components/common/Button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/slices/authSlice";
-import Textarea from "@/shared/components/common/Textarea";
 import PATH from "@/shared/path";
 import { IShop } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
+import { Button } from "@/components/ui/button";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Textarea } from "@/components/ui/textarea";
 
 interface Props {
     shop: IShop;
@@ -75,13 +75,13 @@ const ShopInformation = ({ shop }: Props) => {
     return (
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="اطلاعات فروشگاه" desktopBackButton={false}>
-                <Button variant="Text" onClick={() => setIsEdit(!isEdit)} className="w-auto text-primary-100">
+                <Button variant="text" onClick={() => setIsEdit(!isEdit)} className="text-primary-100 w-auto">
                     {isEdit ? "انصراف" : "ویرایش"}
                 </Button>
             </PageHeader>
 
             <div className="flex flex-col gap-4">
-                <Input
+                <InputWithLabel
                     dir="auto"
                     label="نام"
                     name="name"
@@ -89,9 +89,9 @@ const ShopInformation = ({ shop }: Props) => {
                     onChange={changeHandler}
                     disabled={!isEdit}
                     error={formDataError.name}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
-                <Input
+                <InputWithLabel
                     type="tel"
                     label="شماره تماس"
                     name="phone_number"
@@ -99,7 +99,7 @@ const ShopInformation = ({ shop }: Props) => {
                     onChange={changeHandler}
                     disabled={!isEdit}
                     error={formDataError.phone_number}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
                 <Textarea
                     dir="auto"
@@ -109,11 +109,11 @@ const ShopInformation = ({ shop }: Props) => {
                     onChange={changeHandler}
                     disabled={!isEdit}
                     error={formDataError.description}
-                    textareaClassName="min-h-72 max-h-80 w-full focus:border-primary-100"
+                    className="focus:border-primary-100 max-h-80 min-h-72 w-full"
                 />
 
                 {isEdit && (
-                    <Button variant="Primary" onClick={editShopHandler} className="md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
+                    <Button onClick={editShopHandler} className="md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
                         ویرایش فروشگاه
                     </Button>
                 )}

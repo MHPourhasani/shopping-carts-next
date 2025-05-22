@@ -1,6 +1,4 @@
 "use client";
-import Button from "@/shared/components/common/Button";
-import Input from "@/shared/components/common/Input";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { IUser } from "@/interfaces/general";
 import API from "@/shared/api";
@@ -9,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import SingleSelect from "@/shared/components/common/SingleSelect";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Button } from "@/components/ui/button";
 
 interface Props {
     data?: IUser;
@@ -91,25 +91,25 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
     return (
         <div className="flex w-full flex-col items-start gap-4 lg:gap-8">
             <div className="grid w-full grid-cols-2 gap-4">
-                <Input
+                <InputWithLabel
                     dir="auto"
                     label="نام"
                     name="first_name"
                     value={user.first_name}
                     onChange={changeHandler}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
 
-                <Input
+                <InputWithLabel
                     dir="auto"
                     label="نام خانوادگی"
                     name="last_name"
                     value={user.last_name}
                     onChange={changeHandler}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
 
-                <Input
+                <InputWithLabel
                     dir="ltr"
                     type="tel"
                     label="شماره تماس"
@@ -117,26 +117,26 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                     value={user.phone_number}
                     onChange={changeHandler}
                     maxLength={11}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
 
-                <Input
+                <InputWithLabel
                     dir="ltr"
                     type="email"
                     label="ایمیل"
                     name="email"
                     value={user.email}
                     onChange={changeHandler}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
 
-                <Input
+                <InputWithLabel
                     dir="ltr"
                     label={isEdit ? "رمز عبور جدید" : "رمز عبور"}
                     name="password"
                     value={user.password}
                     onChange={changeHandler}
-                    inputClassName="focus:border-primary-100"
+                    className="focus:border-primary-100"
                 />
 
                 <div className="flex w-full flex-col gap-2">
@@ -153,13 +153,11 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
             </div>
 
             <div className="flex w-full flex-col items-center gap-4 lg:flex-row">
-                <Button variant="Primary" onClick={submitHandler}>
-                    {isEdit ? "ویرایش" : "ایجاد"}
-                </Button>
+                <Button onClick={submitHandler}>{isEdit ? "ویرایش" : "ایجاد"}</Button>
 
                 {isEdit && (
                     <Button
-                        variant="Tertiary"
+                        variant="secondary"
                         onClick={deleteUserHandler}
                         className="border-red-600 text-red-600 hover:border-red-500 dark:border-red-500 dark:text-red-500"
                     >

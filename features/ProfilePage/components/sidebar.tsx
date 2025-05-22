@@ -12,13 +12,13 @@ const Sidebar = () => {
     const pathname = usePathname();
 
     return (
-        <aside className="no-scrollbar hidden h-full min-w-[250px] max-w-[250px] flex-col items-center justify-between gap-4 overflow-y-auto rounded-3xl bg-white p-4 py-5 dark:bg-secondary-700 lg:flex">
+        <aside className="no-scrollbar dark:bg-secondary-700 hidden h-full max-w-[250px] min-w-[250px] flex-col items-center justify-between gap-4 overflow-y-auto rounded-3xl bg-white p-4 py-5 lg:flex">
             <div className="flex w-full flex-col gap-8">
                 <Link href={PATH.home()} className="self-start pt-8 text-3xl font-bold dark:text-white">
                     {process.env.shop_name}
                 </Link>
 
-                <div className="flex w-full flex-1 flex-col text-customBlack-100 dark:text-secondary-100">
+                <div className="text-customBlack-100 dark:text-secondary-100 flex w-full flex-1 flex-col overflow-auto">
                     {userState &&
                         userState.role &&
                         sidebarItems(pathname)
@@ -31,7 +31,7 @@ const Sidebar = () => {
                                         key={item.href}
                                         href={item.href}
                                         className={`flex items-center gap-2 py-4 ${
-                                            isActive ? "bg-gradient-to-l text-primary-100 dark:text-violet-300" : ""
+                                            isActive ? "text-primary-100 bg-gradient-to-l dark:text-violet-300" : ""
                                         }`}
                                     >
                                         {item.icon}

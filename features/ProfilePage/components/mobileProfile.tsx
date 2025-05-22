@@ -9,11 +9,11 @@ import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { useRef, useState } from "react";
 import EditIcon from "@/assets/icons/components/Edit";
 import Modal from "@/shared/components/Modal";
-import Button from "@/shared/components/common/Button";
 import PATH from "@/shared/path";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import { covertUserRoleToPersian, showFullDate } from "@/shared/helper";
 import { UserRoleEnum } from "@/interfaces/enums";
+import { Button } from "@/components/ui/button";
 
 interface PropsInterface {
     isLoading: boolean;
@@ -68,13 +68,13 @@ const MobileProfile = (props: PropsInterface) => {
             <div className="flex w-full flex-col items-center justify-center gap-8">
                 <div className="relative flex aspect-square w-1/2 items-center justify-center rounded-full shadow-xl">
                     <div>
-                        <span className="absolute bottom-0 left-0 flex size-10 items-center justify-center rounded-full bg-white shadow-2xl dark:bg-secondary-700">
+                        <span className="dark:bg-secondary-700 absolute bottom-0 left-0 flex size-10 items-center justify-center rounded-full bg-white shadow-2xl">
                             {isLoading ? (
                                 <Image src={loadingIcon} alt="loading" className="animate-spin" />
                             ) : (
                                 <EditIcon
                                     onClick={() => setIsChangeProfileImage(true)}
-                                    className="cursor-pointer fill-customBlack-200 dark:fill-secondary-100"
+                                    className="fill-customBlack-200 dark:fill-secondary-100 cursor-pointer"
                                 />
                             )}
                         </span>
@@ -101,7 +101,7 @@ const MobileProfile = (props: PropsInterface) => {
                     />
 
                     <span
-                        className={`flex aspect-square w-full items-center justify-center rounded-full ${userState?.profile_image ? "bg-gradient-to-tr from-primary-100 to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
+                        className={`flex aspect-square w-full items-center justify-center rounded-full ${userState?.profile_image ? "from-primary-100 bg-gradient-to-tr to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
                     >
                         <Image
                             src={userState?.profile_image ? userState.profile_image : userIcon}
@@ -113,11 +113,11 @@ const MobileProfile = (props: PropsInterface) => {
                     </span>
                 </div>
 
-                <span className="rounded-lg bg-secondary-100 px-2 py-1 dark:bg-secondary-700">
+                <span className="bg-secondary-100 dark:bg-secondary-700 rounded-lg px-2 py-1">
                     <p>{covertUserRoleToPersian(userState?.role)}</p>
                 </span>
 
-                <div className="flex w-full flex-col items-start gap-4 rounded-xl bg-bg-2 p-4 dark:bg-secondary-700">
+                <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">اطلاعات شخصی</span>
                         <Link href={PATH.profile.edit_personal()} className="text-primary-100">
@@ -129,7 +129,7 @@ const MobileProfile = (props: PropsInterface) => {
                         {userData.map((data) => (
                             <span key={data.title} className="flex w-full justify-between gap-2">
                                 <span className="w-fit min-w-fit">{data.title}</span>
-                                <p dir="ltr" className="w-full truncate text-secondary-700 dark:text-white">
+                                <p dir="ltr" className="text-secondary-700 w-full truncate dark:text-white">
                                     {data.value ? data.value : "-"}
                                 </p>
                             </span>
@@ -138,7 +138,7 @@ const MobileProfile = (props: PropsInterface) => {
                         <span className="flex w-full justify-between gap-2">
                             <span className="min-w-fit">ایجاد شده در</span>
 
-                            <p dir="ltr" className="w-full truncate text-secondary-700 dark:text-white">
+                            <p dir="ltr" className="text-secondary-700 w-full truncate dark:text-white">
                                 {userState?.createdAt ? showFullDate(userState.createdAt) : "-"}
                             </p>
                         </span>
@@ -146,14 +146,14 @@ const MobileProfile = (props: PropsInterface) => {
                         <span className="flex w-full justify-between gap-2">
                             <span className="min-w-fit">آپدیت شده در</span>
 
-                            <p dir="ltr" className="w-full truncate text-secondary-700 dark:text-white">
+                            <p dir="ltr" className="text-secondary-700 w-full truncate dark:text-white">
                                 {userState?.updatedAt ? showFullDate(userState.updatedAt) : "-"}
                             </p>
                         </span>
                     </div>
                 </div>
 
-                <div className="flex w-full flex-col items-start gap-4 rounded-xl bg-bg-2 p-4 dark:bg-secondary-700">
+                <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <Link href={PATH.profile.address()} className="flex w-full items-center justify-between">
                         <span className="text-secondary-700 dark:text-white">آدرس</span>
                         <ArrowLeft className="stroke-secondary-600 dark:stroke-white" />
@@ -166,7 +166,7 @@ const MobileProfile = (props: PropsInterface) => {
                             <Link
                                 key={index}
                                 href={item.href}
-                                className="flex items-center justify-between rounded-lg bg-bg-2 p-4 dark:bg-secondary-700"
+                                className="bg-bg-2 dark:bg-secondary-700 flex items-center justify-between rounded-lg p-4"
                             >
                                 <span className="text-secondary-700 dark:text-white">{item.title}</span>
                                 <ArrowLeft className="stroke-secondary-600 dark:stroke-white" />
@@ -179,7 +179,7 @@ const MobileProfile = (props: PropsInterface) => {
                     adminPages.map((page) => (
                         <Link
                             href={page.href}
-                            className="flex w-full items-center justify-between rounded-lg bg-bg-2 p-4 dark:bg-secondary-700"
+                            className="bg-bg-2 dark:bg-secondary-700 flex w-full items-center justify-between rounded-lg p-4"
                         >
                             <span className="text-secondary-700 dark:text-white">{page.title}</span>
                             <ArrowLeft className="stroke-secondary-600 dark:stroke-white" />
@@ -189,15 +189,15 @@ const MobileProfile = (props: PropsInterface) => {
 
             <div className="w-full">
                 <Link href={PATH.profile.change_password()}>
-                    <Button variant="Secondary" type="submit" className="mb-4 rounded-lg border-sky-600 text-sky-600">
+                    <Button variant="secondary" type="submit" className="mb-4 rounded-lg border-sky-600 text-sky-600">
                         تغییر رمز عبور
                     </Button>
                 </Link>
 
-                <Button variant="Secondary" onClick={logoutHandler} className="rounded-lg border-red-600 text-red-600">
+                <Button variant="secondary" onClick={logoutHandler} className="rounded-lg border-red-600 text-red-600">
                     خروج از حساب کاربری
                 </Button>
-                <Button variant="Text" onClick={deleteAccountHandler} className="text-customBlack-50">
+                <Button variant="text" onClick={deleteAccountHandler} className="text-customBlack-50">
                     حذف اکانت
                 </Button>
             </div>

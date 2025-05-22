@@ -1,7 +1,4 @@
 "use client";
-import Button from "@/shared/components/common/Button";
-import Input from "@/shared/components/common/Input";
-import Textarea from "@/shared/components/common/Textarea";
 import PageHeader from "@/shared/components/PageHeader";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
@@ -9,6 +6,9 @@ import PATH from "@/shared/path";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { InputWithLabel } from "@/components/ui/inputWithLabel";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 const CreateShop = () => {
     const userState = useAppSelector((state: any) => state.auth.user);
@@ -67,15 +67,15 @@ const CreateShop = () => {
             <PageHeader title="ساخت فروشگاه" desktopBackButton={false} />
 
             <div className="flex flex-col gap-4">
-                <Input
+                <InputWithLabel
                     label="نام"
                     name="name"
                     value={formData.name}
                     onChange={changeHandler}
                     error={formDataError.name}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
-                <Input
+                <InputWithLabel
                     type="tel"
                     label="شماره تماس"
                     name="phone_number"
@@ -83,7 +83,7 @@ const CreateShop = () => {
                     onChange={changeHandler}
                     error={formDataError.phone_number}
                     maxLength={11}
-                    inputClassName="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
                 <Textarea
                     label="توضیحات"
@@ -91,10 +91,10 @@ const CreateShop = () => {
                     defaultValue={formData.description}
                     onChange={changeHandler}
                     error={formDataError.description}
-                    className="max-h-96 min-h-60 w-full bg-gray-400 dark:bg-secondary-600"
+                    className="dark:bg-secondary-600 max-h-96 min-h-60 w-full bg-gray-400"
                 />
 
-                <Button variant="Primary" onClick={createShopHandler} className="md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
+                <Button onClick={createShopHandler} className="md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
                     ساخت فروشگاه
                 </Button>
             </div>
