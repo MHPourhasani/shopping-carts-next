@@ -128,7 +128,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
 
                 {data.link && (
                     <Link dir="ltr" href={PATH.singleBlog(data.link)} className="text-primary-100">
-                        {process.env.API_BASE_URL}
+                        {window.origin}
                         {PATH.singleBlog(data.link)}
                     </Link>
                 )}

@@ -7,9 +7,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProviders } from "@/shared/providers/Theme";
 import Wrapper from "./_wrapper";
 import Toast from "@/shared/components/Toast";
-import localFont from "next/font/local";
 import Navbar from "@/components/Navbar";
 import Loading from "./loading";
+import { iranSans } from "./fonts";
 
 const title = process.env.shop_name!;
 const description = "این یک پروژه فروشگاهی حرفه ای است.";
@@ -142,47 +142,12 @@ export const viewport: Viewport = {
     ],
 };
 
-const iranSans = localFont({
-    src: [
-        {
-            style: "normal",
-            weight: "900",
-            path: "../assets/fonts/IRANSansWeb(FaNum)_Black.ttf",
-        },
-        {
-            style: "normal",
-            weight: "bold",
-            path: "../assets/fonts/IRANSansWeb(FaNum)_Bold.ttf",
-        },
-        {
-            style: "normal",
-            weight: "500",
-            path: "../assets/fonts/IRANSansWeb(FaNum)_Medium.ttf",
-        },
-        {
-            style: "normal",
-            weight: "300",
-            path: "../assets/fonts/IRANSansWeb(FaNum)_Light.ttf",
-        },
-        {
-            style: "normal",
-            weight: "200",
-            path: "../assets/fonts/IRANSansWeb(FaNum)_UltraLight.ttf",
-        },
-        {
-            style: "normal",
-            weight: "normal",
-            path: "../assets/fonts/IRANSansWeb(FaNum).ttf",
-        },
-    ],
-});
-
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="fa" dir="rtl">
             <Suspense fallback={<Loading />}>
                 <body
-                    className={`flex min-h-screen w-full max-w-full flex-col items-center justify-start overflow-x-hidden bg-white dark:bg-secondary-800 ${iranSans.className}`}
+                    className={`dark:bg-secondary-800 flex min-h-screen w-full max-w-full flex-col items-center justify-start overflow-x-hidden bg-white ${iranSans.variable}`}
                 >
                     <Providers>
                         <NextAuthSessionProvider>
