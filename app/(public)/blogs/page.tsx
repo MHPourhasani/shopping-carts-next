@@ -61,7 +61,7 @@ const Blogs = async () => {
 
             <div className="grid w-full gap-4 lg:grid-cols-3">
                 {blogs.map((item) => (
-                    <BlogCard key={String(item._id)} link={PATH.singleBlog(item.link)} blog={item} />
+                    <BlogCard key={String(item._id)} link={PATH.singleBlog(item.link)} blog={item} className="max-w-full" />
                 ))}
             </div>
         </section>

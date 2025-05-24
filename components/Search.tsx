@@ -29,20 +29,21 @@ const Search = ({ onChange }: Props) => {
     };
 
     return (
-        <section className="relative flex w-full flex-col items-center justify-center">
-            <SearchIcon
-                onClick={() => router.push(`${PATH.search()}?q=${searchValue}`)}
-                className="stroke-secondary-300 dark:stroke-secondary-100 absolute top-1/4 left-4 h-auto w-5 cursor-pointer"
-            />
+        <div className="relative flex w-full flex-col items-center justify-center">
             <Input
                 type="search"
                 placeholder="جست و جو ..."
                 value={searchValue}
                 onChange={onChange || changeHandler}
                 onKeyDown={searchHandler}
-                className="bg-bg-2 dark:bg-secondary-700 dark:lg:bg-secondary-600 w-full pr-4 !pl-12 text-sm"
+                className="!pl-12"
             />
-        </section>
+
+            <SearchIcon
+                onClick={() => router.push(`${PATH.search()}?q=${searchValue}`)}
+                className="stroke-secondary-300 absolute top-1/4 left-4 h-auto w-5 cursor-pointer dark:stroke-gray-300"
+            />
+        </div>
     );
 };
 

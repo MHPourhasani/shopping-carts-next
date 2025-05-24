@@ -8,12 +8,12 @@ interface Props {
 
 const BestSellers = async ({ products }: Props) => {
     return (
-        <section className="mt-4 flex w-full flex-col gap-4 px-4">
+        <section className="container mt-4 flex w-full flex-col gap-4">
             <div className="flex w-full items-center justify-between">
                 <h2 className="text-xl font-semibold">Best Sellers</h2>
                 <Link
                     href={`/best-sellers`}
-                    className="hover-transition text-sm text-gray-500 hover:text-primary-100 dark:text-secondary-100"
+                    className="hover-transition hover:text-primary-100 dark:text-secondary-100 text-sm text-gray-500"
                 >
                     {/* مشاهده همه */}
                 </Link>

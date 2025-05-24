@@ -46,7 +46,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
     }, [imageActive]);
 
     return (
-        <section className="flex w-full flex-col gap-4 pb-14">
+        <section className="flex w-full flex-col gap-4 pt-4 pb-14">
             <div className="flex w-full items-center justify-between">
                 <BackButton />
 
@@ -254,7 +254,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                 ) : null}
             </section>
 
-            <div className="bg-secondary-50 dark:bg-secondary-600 fixed right-0 bottom-16 z-[2] flex w-full items-center justify-between gap-2 border-t px-4 py-2">
+            <div className="bg-secondary-50 dark:bg-secondary-600 fixed right-0 bottom-16 z-[2] flex w-full items-center justify-between gap-2 border-t border-gray-500 px-4 py-2">
                 <Button onClick={() => addToCartsHandler(productData)} className="w-auto cursor-pointer px-4 font-light">
                     افزودن به سبد خرید
                 </Button>

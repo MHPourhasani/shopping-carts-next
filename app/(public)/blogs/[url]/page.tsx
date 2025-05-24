@@ -121,7 +121,7 @@ const SingleBlogPage = async ({ params }: Props) => {
                         </span>
                     </div>
 
-                    <div dangerouslySetInnerHTML={{ __html: content }} className="text-lg"></div>
+                    <div dangerouslySetInnerHTML={{ __html: content }} className="text-lg break-all whitespace-pre-line"></div>
 
                     {tags && (
                         <div className="flex flex-col gap-4">

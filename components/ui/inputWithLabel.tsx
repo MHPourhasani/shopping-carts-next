@@ -13,7 +13,7 @@ const InputWithLabel = React.forwardRef<HTMLInputElement, Props>(({ className, t
     const id = React.useId();
 
     return (
-        <div className="flex flex-col items-start gap-2">
+        <div className="flex flex-col items-start gap-2.5">
             <Label htmlFor={id}>{label}</Label>
             <Input id={id} type={type} className={cn("", className)} ref={ref} {...props} />
 

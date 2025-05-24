@@ -75,14 +75,14 @@ export default async function Home() {
 
     return (
         <section className="flex w-full flex-1 flex-col items-start gap-6 pt-4 pb-20 2xl:items-center 2xl:justify-center">
-            <div className="w-full px-4 lg:hidden">
+            <div className="w-full lg:hidden">
                 <Header />
             </div>
             <MainBanners banners={banners ? banners : []} />
             <Categories categories={categories ? categories : []} />
             <BestSellers products={bestSellers ? bestSellers : []} />
 
-            <div className="mt-4 flex w-full flex-col gap-4 px-4">
+            <div className="container mt-4 flex w-full flex-col gap-4">
                 <div className="flex w-full items-center justify-between">
                     <h2 className="text-xl font-semibold">محصولات</h2>
                     <Link
@@ -92,6 +92,7 @@ export default async function Home() {
                         مشاهده همه
                     </Link>
                 </div>
+
                 <ProductsList products={products ? products : []} />
             </div>
 

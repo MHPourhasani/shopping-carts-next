@@ -17,8 +17,8 @@ export async function GET(req: NextRequest, {}: any) {
             const user = await userModel.findOne({ _id: user_id });
 
             if (user) {
-                const products = await ProductModel.find({});
-                return NextResponse.json({ results: products ? products : [] }, { status: 200 });
+                const shop = await shopModel.findOne({ creator: user_id });
+                return NextResponse.json({ result: shop ? shop : null }, { status: 200 });
             } else {
                 return NextResponse.json({ message: "فروشگاه یافت نشد." }, { status: 404 });
             }

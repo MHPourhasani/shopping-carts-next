@@ -75,7 +75,7 @@ const ShopInformation = ({ shop }: Props) => {
     return (
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="اطلاعات فروشگاه" desktopBackButton={false}>
-                <Button variant="text" onClick={() => setIsEdit(!isEdit)} className="text-primary-100 w-auto">
+                <Button variant="text" onClick={() => setIsEdit(!isEdit)} className="text-primary-100 w-auto px-0">
                     {isEdit ? "انصراف" : "ویرایش"}
                 </Button>
             </PageHeader>

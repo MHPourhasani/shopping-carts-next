@@ -97,109 +97,116 @@ const Products = ({ products }: Props) => {
     });
 
     return (
-        <div className="container">
+        <>
             {isShow.filter && !isDesktop && (
-                <div
-                    ref={mobileFilterRef}
-                    style={{ minWidth: "70%", maxWidth: "70%" }}
-                    className="bg-bg-2 dark:bg-secondary-600 absolute top-0 right-0 left-0 z-10 flex h-full flex-col gap-8 rounded-l-xl rounded-r-xl p-4"
-                >
-                    <div className="flex items-center justify-between">
-                        <span className="flex items-center gap-2">
-                            <FilterIcon className="stroke-secondary-700 dark:stroke-secondary-100 h-5" />
-                            <h3 className="text-xl font-semibold">فیلتر</h3>
-                        </span>
-                        <CloseIcon
-                            onClick={() => setIsShow({ ...isShow, filter: false })}
-                            className="fill-secondary-700 dark:fill-secondary-100 cursor-pointer"
-                        />
-                    </div>
+                <div className="relative z-50 h-dvh w-screen">
+                    <div className="fixed inset-0 bg-gray-500 opacity-60" />
+                    <div
+                        ref={mobileFilterRef}
+                        style={{ minWidth: "70%", maxWidth: "70%" }}
+                        className="dark:bg-secondary-600 absolute top-0 z-10 flex h-full flex-col gap-8 rounded-l-2xl rounded-r-xl bg-white p-4"
+                    >
+                        <div className="flex items-center justify-between">
+                            <span className="flex items-center gap-2">
+                                <FilterIcon className="stroke-secondary-700 dark:stroke-secondary-100 h-5" />
+                                <h3 className="text-xl font-semibold">فیلتر</h3>
+                            </span>
+                            <CloseIcon
+                                onClick={() => setIsShow({ ...isShow, filter: false })}
+                                className="fill-secondary-700 dark:fill-secondary-100 cursor-pointer"
+                            />
+                        </div>
 
-                    {!!getFilterItems()?.brands && (
-                        <div className="flex w-full flex-col gap-4 border-b">
-                            <div
-                                onClick={() => setIsShow({ ...isShow, brands: !isShow.brands })}
-                                className="flex cursor-pointer items-center justify-between"
-                            >
-                                <h2>برند ها</h2>
-                                <span className="flex items-center gap-2">
-                                    {!!filteredOptions.brands.length && (
-                                        <div
-                                            style={{ backgroundColor: "#dc2626", width: "8px" }}
-                                            className="aspect-square rounded-full bg-red-600"
-                                        />
-                                    )}
-                                    <ArrowLeft className={`stroke-secondary-600 dark:stroke-white ${isShow.brands ? "-rotate-45" : ""}`} />
-                                </span>
-                            </div>
-
-                            {isShow.brands && (
-                                <ul className="dark:bg-secondary-500 mr-2 flex flex-col gap-2">
-                                    {getFilterItems().brands.map((brand) => (
-                                        <>
-                                            <Label>{capitalizeTheFirstLettersOfWords(brand)}</Label>
-                                            <Checkbox
-                                                key={brand}
-                                                id={brand}
-                                                checked={filteredOptions.brands.includes(brand)}
-                                                onChange={(checked) => selectBrandHandler(Boolean(checked), brand)}
-                                                className="!size-9"
+                        {!!getFilterItems()?.brands && (
+                            <div className="flex w-full flex-col gap-4 border-b">
+                                <div
+                                    onClick={() => setIsShow({ ...isShow, brands: !isShow.brands })}
+                                    className="flex cursor-pointer items-center justify-between"
+                                >
+                                    <h2>برند ها</h2>
+                                    <span className="flex items-center gap-2">
+                                        {!!filteredOptions.brands.length && (
+                                            <div
+                                                style={{ backgroundColor: "#dc2626", width: "8px" }}
+                                                className="aspect-square rounded-full bg-red-600"
                                             />
-                                        </>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    )}
-
-                    {!!getFilterItems().colors && (
-                        <div className="flex w-full flex-col gap-4">
-                            <div
-                                onClick={() => setIsShow({ ...isShow, colors: !isShow.colors })}
-                                className="flex cursor-pointer items-center justify-between"
-                            >
-                                <h2>رنگ ها</h2>
-                                <span className="flex items-center gap-2">
-                                    {!!filteredOptions.colors.length && (
-                                        <div
-                                            style={{ backgroundColor: "#dc2626", width: "8px" }}
-                                            className="aspect-square rounded-full bg-red-600"
+                                        )}
+                                        <ArrowLeft
+                                            className={`stroke-secondary-600 dark:stroke-white ${isShow.brands ? "-rotate-45" : ""}`}
                                         />
-                                    )}
-                                    <ArrowLeft className={`stroke-secondary-600 dark:stroke-white ${isShow.colors ? "-rotate-45" : ""}`} />
-                                </span>
+                                    </span>
+                                </div>
+
+                                {isShow.brands && (
+                                    <ul className="dark:bg-secondary-500 mr-2 flex flex-col gap-2">
+                                        {getFilterItems().brands.map((brand) => (
+                                            <>
+                                                <Label>{capitalizeTheFirstLettersOfWords(brand)}</Label>
+                                                <Checkbox
+                                                    key={brand}
+                                                    id={brand}
+                                                    checked={filteredOptions.brands.includes(brand)}
+                                                    onChange={(checked) => selectBrandHandler(Boolean(checked), brand)}
+                                                    className="!size-9"
+                                                />
+                                            </>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
-                            {isShow.colors && (
-                                <ul className="flex flex-col gap-2">
-                                    {getFilterItems().colors.map((color) => {
-                                        return (
-                                            color.name &&
-                                            color.hex && (
-                                                <li className="flex items-center justify-between gap-4">
-                                                    <Label>{capitalizeTheFirstLettersOfWords(color?.name)}</Label>
-                                                    <Checkbox
-                                                        key={color.name}
-                                                        id={color.name}
-                                                        checked={filteredOptions.colors.includes(color)}
-                                                        onChange={(checked) => selectColorHandler(Boolean(checked), color)}
-                                                        className="!size-9"
-                                                    />
-                                                    <div
-                                                        style={{ backgroundColor: color.hex }}
-                                                        className="aspect-square size-5 rounded-full"
-                                                    />
-                                                </li>
-                                            )
-                                        );
-                                    })}
-                                </ul>
-                            )}
-                        </div>
-                    )}
+                        )}
+
+                        {!!getFilterItems().colors && (
+                            <div className="flex w-full flex-col gap-4">
+                                <div
+                                    onClick={() => setIsShow({ ...isShow, colors: !isShow.colors })}
+                                    className="flex cursor-pointer items-center justify-between"
+                                >
+                                    <h2>رنگ ها</h2>
+                                    <span className="flex items-center gap-2">
+                                        {!!filteredOptions.colors.length && (
+                                            <div
+                                                style={{ backgroundColor: "#dc2626", width: "8px" }}
+                                                className="aspect-square rounded-full bg-red-600"
+                                            />
+                                        )}
+                                        <ArrowLeft
+                                            className={`stroke-secondary-600 dark:stroke-white ${isShow.colors ? "-rotate-45" : ""}`}
+                                        />
+                                    </span>
+                                </div>
+                                {isShow.colors && (
+                                    <ul className="flex flex-col gap-2">
+                                        {getFilterItems().colors.map((color) => {
+                                            return (
+                                                color.name &&
+                                                color.hex && (
+                                                    <li className="flex items-center justify-between gap-4">
+                                                        <Label>{capitalizeTheFirstLettersOfWords(color?.name)}</Label>
+                                                        <Checkbox
+                                                            key={color.name}
+                                                            id={color.name}
+                                                            checked={filteredOptions.colors.includes(color)}
+                                                            onChange={(checked) => selectColorHandler(Boolean(checked), color)}
+                                                            className="!size-9"
+                                                        />
+                                                        <div
+                                                            style={{ backgroundColor: color.hex }}
+                                                            className="aspect-square size-5 rounded-full"
+                                                        />
+                                                    </li>
+                                                )
+                                            );
+                                        })}
+                                    </ul>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
 
-            <section className="flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
+            <section className="container flex w-full flex-1 flex-col items-start gap-4 lg:gap-8">
                 <BreadCrumb items={[{ title: "همه محصولات", path: PATH.products() }]} />
 
                 <PageHeader title="همه محصولات" desktopBackButton={false}>
@@ -326,7 +333,7 @@ const Products = ({ products }: Props) => {
                     </div>
                 </div>
             </section>
-        </div>
+        </>
     );
 };
 

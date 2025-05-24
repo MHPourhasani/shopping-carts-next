@@ -15,7 +15,7 @@ interface IProps {
 
 const MainBanners = ({ banners }: IProps) => {
     return (
-        <section className="h-fit w-full rounded-xl px-4">
+        <section className="container h-fit w-full rounded-xl">
             <Swiper
                 slidesPerView={1}
                 spaceBetween={10}

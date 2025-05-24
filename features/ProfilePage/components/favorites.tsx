@@ -21,7 +21,6 @@ const Favorites = ({ products }: Props) => {
                             key={product._id.toString()}
                             product={product}
                             href={PATH.singleProduct(product._id.toString(), product.name)}
-                            className="bg-secondary-600"
                         />
                     );
                 })}

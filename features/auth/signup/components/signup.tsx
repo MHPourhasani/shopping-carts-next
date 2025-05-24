@@ -13,6 +13,7 @@ import { setUser } from "@/redux/slices/authSlice";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import PageHeader from "@/shared/components/PageHeader";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "", checkbox: false });
@@ -77,10 +78,10 @@ const SignUp = () => {
     };
 
     return (
-        <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
+        <section className="flex w-full justify-center md:items-center md:gap-10 lg:p-0 xl:gap-0">
             <div className="flex w-full items-center justify-center p-4 lg:flex-1">
                 <form className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]">
-                    <h1 className="mb-5 text-3xl font-bold">ثبت نام</h1>
+                    <PageHeader title="ثبت نام" />
                     <InputWithLabel
                         dir="ltr"
                         type="email"
@@ -118,6 +119,7 @@ const SignUp = () => {
                     />
 
                     <Button
+                        size="xl"
                         onClick={signupHandler}
                         disabled={!formData.email || !formData.password || !formData.confirmPassword || !formData.checkbox}
                         className="my-4"

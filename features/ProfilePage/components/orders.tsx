@@ -8,6 +8,9 @@ import PageHeader from "@/shared/components/PageHeader";
 import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { UserRoleEnum } from "@/interfaces/enums";
+import { Input } from "@/components/ui/input";
+import SearchIcon from "@/assets/icons/components/Search";
+import { useRouter } from "next/navigation";
 
 interface Props {
     orders: IOrder[];
@@ -20,6 +23,7 @@ const Orders = (props: Props) => {
     const [filter, setFilter] = useState({});
     const [orders, setOrders] = useState(props.orders);
     const userState = useAppSelector((state: any) => state.auth.user);
+    const router = useRouter();
 
     useEffect(() => {
         if (search.trim()) {
@@ -33,16 +37,19 @@ const Orders = (props: Props) => {
         <section className="no-scrollbar flex w-full flex-1 flex-col gap-4 overflow-y-auto lg:gap-8">
             <PageHeader title="سفارشات" mobileBackButton={true} desktopBackButton={false} />
 
-            <div className="flex items-center gap-4">
-                <input
+            <div className="relative flex w-full flex-col items-center justify-center">
+                <Input
                     type="search"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="جستجوی سفارش مورد نظر"
-                    className="w-full rounded-xl px-4 py-3 outline-none"
+                    className="!pl-12"
                 />
 
-                <div></div>
+                <SearchIcon
+                    // onClick={() => router.push(`${PATH.search()}?q=${searchValue}`)}
+                    className="stroke-secondary-300 absolute top-1/4 left-4 h-auto w-5 cursor-pointer dark:stroke-gray-300"
+                />
             </div>
 
             <div className="flex flex-1 flex-col gap-4">

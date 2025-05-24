@@ -5,10 +5,10 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
     const session = await getServerAuthSession();
-    const data: { shop: IShop } = await getShop(session?.user.userId!);
+    const data: IShop = await getShop(session?.user.userId!);
 
     return {
-        title: `فروشگاه ${data.shop.name}`,
+        title: `فروشگاه ${data.name}`,
     };
 }
 
@@ -22,8 +22,8 @@ const getShop = async (user_id: string) => {
             cache: "no-store",
         });
         if (response.ok) {
-            const { results } = await response.json();
-            return results;
+            const { result } = await response.json();
+            return result;
         }
     } catch (error) {
         console.error(error);
@@ -32,9 +32,9 @@ const getShop = async (user_id: string) => {
 
 const ProfileShopPage = async () => {
     const session = await getServerAuthSession();
-    const data: { shop: IShop } = await getShop(session?.user.userId!);
+    const data: IShop = await getShop(session?.user.userId!);
 
-    return <ShopInformation shop={data.shop} />;
+    return <ShopInformation shop={data} />;
 };
 
 export default ProfileShopPage;

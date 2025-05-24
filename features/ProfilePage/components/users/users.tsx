@@ -61,14 +61,14 @@ const AllUsers = (props: Props) => {
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="کاربران" desktopBackButton={false}>
                 <Link href={PATH.profile.users.create_user()}>
-                    <Button variant="text" className="text-primary-100">
+                    <Button variant="text" className="text-primary-100 px-0">
+                        <AddIcon className="stroke-primary-100 h-auto w-6 cursor-pointer dark:stroke-violet-400" />
                         ایجاد کاربر جدید
-                        <AddIcon className="stroke-primary-100 size-5 cursor-pointer lg:size-6" />
                     </Button>
                 </Link>
             </PageHeader>
 
-            <div className="flex w-full items-center gap-4 border-b [&>*]:cursor-pointer">
+            <div className="flex w-full items-center gap-4 border-b pb-2 [&>*]:cursor-pointer">
                 {tabs.map((tab) => (
                     <span
                         key={tab.key}

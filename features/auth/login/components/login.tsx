@@ -16,6 +16,7 @@ import API from "@/shared/api";
 import toastMessage from "@/shared/toastMessage";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
+import PageHeader from "@/shared/components/PageHeader";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -92,7 +93,7 @@ const Login = () => {
                     onSubmit={handleSubmit(loginHandler, errorHandler)}
                     className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
                 >
-                    <h1 className="mb-5 text-3xl font-bold">ورود به حساب کاربری</h1>
+                    <PageHeader title="ورود به حساب کاربری" />
                     <InputWithLabel
                         dir="ltr"
                         type="email"
@@ -111,7 +112,7 @@ const Login = () => {
                         onChange={changeHandler}
                     />
 
-                    <Button disabled={!(formData.email || formData.password || formData.password.length >= 8) || isLoading}>
+                    <Button size="xl" disabled={!(formData.email || formData.password || formData.password.length >= 8) || isLoading}>
                         {isLoading ? "لطفا صبر کنید..." : "ورود به حساب کاربری"}
                     </Button>
 
@@ -123,25 +124,27 @@ const Login = () => {
                     </div>
 
                     <div className="flex w-full items-center gap-2">
-                        <hr className="flex-1 border border-gray-200 dark:border-gray-300" />
+                        <hr className="h-[0.5px] flex-1 border-0 bg-gray-200 dark:bg-gray-500" />
                         <span className="-translate-y-0.5">یا</span>
-                        <hr className="flex-1 border border-gray-200 dark:border-gray-300" />
+                        <hr className="h-[0.5px] flex-1 border-0 bg-gray-200 dark:bg-gray-500" />
                     </div>
 
                     <div className="flex flex-col gap-4">
                         <Button
                             variant="secondary"
-                            className="bg-bg-2 dark:bg-secondary-700 flex justify-center gap-2 rounded-full border-[0] px-4 py-3"
+                            size="xl"
+                            className="bg-bg-2 dark:bg-secondary-700 justify-center rounded-full border-[0]"
                         >
-                            <p>ورود با اکانت اپل</p>
                             <AppleLogo className="fill-secondary-800 dark:fill-secondary-100" />
+                            <p>ورود با اکانت اپل</p>
                         </Button>
                         <Button
                             variant="secondary"
-                            className="bg-bg-2 dark:bg-secondary-700 flex justify-center gap-2 rounded-full border-[0] px-4 py-3"
+                            size="xl"
+                            className="bg-bg-2 dark:bg-secondary-700 justify-center rounded-full border-[0]"
                         >
+                            <Image src={googleLogo} alt="google" width={20} height={20} />
                             <p>ورود با اکانت گوگل</p>
-                            <Image src={googleLogo} alt="google" />
                         </Button>
                     </div>
                 </form>
