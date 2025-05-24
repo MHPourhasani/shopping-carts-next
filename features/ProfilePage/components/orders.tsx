@@ -1,7 +1,7 @@
 "use client";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/shared/components/EmptyState";
-import { IOrder } from "@/interfaces/general";
+import { IOrder, IUser } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import OrderCardItem from "@/components/Order/OrderCardItem";
 import PageHeader from "@/shared/components/PageHeader";
@@ -13,7 +13,7 @@ import SearchIcon from "@/assets/icons/components/Search";
 import { useRouter } from "next/navigation";
 
 interface Props {
-    orders: IOrder[];
+    orders: { user: IUser; orders: IOrder[] };
 }
 
 const orderStatus = [""];
@@ -21,7 +21,7 @@ const orderStatus = [""];
 const Orders = (props: Props) => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState({});
-    const [orders, setOrders] = useState(props.orders);
+    const [orders, setOrders] = useState(props.orders.orders);
     const userState = useAppSelector((state: any) => state.auth.user);
     const router = useRouter();
 
@@ -29,7 +29,7 @@ const Orders = (props: Props) => {
         if (search.trim()) {
             setOrders((prev) => prev.filter((orders) => orders.orderNo.toLowerCase().includes(search.trim().toLowerCase())));
         } else {
-            setOrders(props.orders);
+            setOrders(props.orders.orders);
         }
     }, [search, orders]);
 
@@ -53,7 +53,7 @@ const Orders = (props: Props) => {
             </div>
 
             <div className="flex flex-1 flex-col gap-4">
-                <div className="grid grid-cols-11 items-center justify-between gap-2 border-b border-gray-300 pb-2">
+                <div className="grid grid-cols-11 items-center justify-between gap-2 border-b border-gray-300 pb-2 lg:pr-16">
                     <span className="col-span-4">شماره سفارش</span>
                     <span className="col-span-2">تاریخ</span>
                     <span className="col-span-2">نام مشتری</span>
@@ -64,7 +64,14 @@ const Orders = (props: Props) => {
                 {orders && orders.length ? (
                     <div className="flex w-full flex-1 flex-col gap-4">
                         {orders.map((item: IOrder) => {
-                            return <OrderCardItem key={item.orderNo} href={PATH.profile.order.single_order(item.orderNo)} order={item} />;
+                            return (
+                                <OrderCardItem
+                                    key={item.orderNo}
+                                    href={PATH.profile.order.single_order(item.orderNo)}
+                                    user={props.orders.user}
+                                    order={item}
+                                />
+                            );
                         })}
                     </div>
                 ) : (

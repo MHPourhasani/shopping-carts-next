@@ -14,13 +14,14 @@ const Favorites = ({ products }: Props) => {
                 {products.length && <span className="font-medium">{products.length} محصول</span>}
             </PageHeader>
 
-            <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+            <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
                 {products.map((product: IProduct) => {
                     return (
                         <ProductCardItem
                             key={product._id.toString()}
                             product={product}
                             href={PATH.singleProduct(product._id.toString(), product.name)}
+                            className="dark:lg:bg-customBlack-100"
                         />
                     );
                 })}

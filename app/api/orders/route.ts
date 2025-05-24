@@ -14,8 +14,8 @@ export async function GET(req: NextRequest) {
             const user = await userModel.findById(user_id);
 
             if (user && (user.role === UserRoleEnum.SHOPPER || user.role === UserRoleEnum.ADMIN)) {
-                const findUser = await orderModel.findOne({ user: user_id });
-                return NextResponse.json({ results: findUser ? findUser.orders : [] }, { status: 200 });
+                const findUser = await orderModel.findOne({ user: user_id }).populate("user").lean();
+                return NextResponse.json({ results: findUser ? findUser : null }, { status: 200 });
             }
         } else {
             return NextResponse.json({ message: "آیدی کاربر نباید خالی باشد." }, { status: 429 });
