@@ -20,7 +20,7 @@ interface PropsInterface {
 }
 
 const ProductCardItem = ({ product, href, className }: PropsInterface) => {
-    const { _id, name, price, discountedPrice, images } = product;
+    const { _id, name, basePrice, discountedPrice, images } = product;
     const userState = useAppSelector((state: any) => state.auth.user);
     const { data: session } = useSession();
     const router = useRouter();
@@ -51,13 +51,13 @@ const ProductCardItem = ({ product, href, className }: PropsInterface) => {
     return (
         <section
             className={cn(
-                `relative w-full min-w-[150px] rounded-xl shadow-xl shadow-bg-2 dark:shadow-secondary-700 lg:rounded-xl`,
+                `shadow-bg-2 dark:shadow-secondary-700 relative w-full min-w-[150px] rounded-xl shadow-xl lg:rounded-xl`,
                 className,
             )}
         >
             <LoveIcon
                 onClick={addToFavoriteHandler}
-                className="hover-transition absolute right-3 top-3 h-auto w-5 cursor-pointer fill-gray-300 drop-shadow-xl hover:fill-red-600"
+                className="hover-transition absolute top-3 right-3 h-auto w-5 cursor-pointer fill-gray-300 drop-shadow-xl hover:fill-red-600"
             />
 
             <Link href={href} className={`aspect-square w-full ${images.length ? "" : "bg-bg-2 dark:bg-secondary-700"}`}>
@@ -76,9 +76,9 @@ const ProductCardItem = ({ product, href, className }: PropsInterface) => {
                     <span
                         className={`flex items-center gap-2 font-medium ${isNumber(discountedPrice) ? "text-sm text-gray-600 line-through dark:text-gray-500" : "text-gray-900 dark:text-white"}`}
                     >
-                        {price > 0 ? (
+                        {basePrice > 0 ? (
                             <>
-                                {tomanFormat(price)}
+                                {tomanFormat(basePrice)}
                                 <Toman className="size-4" />
                             </>
                         ) : (

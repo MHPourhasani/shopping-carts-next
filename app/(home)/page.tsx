@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
     const products: IProduct[] = await getProducts({});
 
     return {
-        keywords: [...products.map((item) => (item.tags ? item.tags : ""))],
+        // keywords: products.map((item) => (item.tags ? item.tags : "")),
     };
 }
 
@@ -40,12 +40,12 @@ const getCategories = async () => {
 };
 
 const getProducts = async ({ limit }: { limit?: number }) => {
-    console.log(API.product.products_list() + `?limit=${limit}`);
     return get(API.product.products_list() + `?limit=${limit}`)
         .then((res) => {
             return res.json();
         })
         .then(({ results }) => {
+            console.log(results);
             return results;
         });
 };

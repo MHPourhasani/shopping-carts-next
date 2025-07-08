@@ -39,7 +39,7 @@ export interface IProduct {
     shopper: IShop;
     name: string;
     brand: string;
-    price: number;
+    basePrice: number;
     discountedPrice?: number | null;
     images: string[];
     sizes: string;
