@@ -23,8 +23,6 @@ const getShop = async (user_id: string) => {
         });
         if (response.ok) {
             const { results } = await response.json();
-
-            console.log(results);
             return results;
         }
     } catch (error) {

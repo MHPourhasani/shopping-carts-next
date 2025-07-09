@@ -45,7 +45,6 @@ const getProducts = async ({ limit }: { limit?: number }) => {
             return res.json();
         })
         .then(({ results }) => {
-            console.log(results);
             return results;
         });
 };

@@ -41,7 +41,6 @@ const getSingleProduct = async (product_id: string) => {
             cache: "no-store",
         });
         const data = await res.json();
-        console.log(data);
         return data;
     } catch (error: any) {
         console.error(error.message);
