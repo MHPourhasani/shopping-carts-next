@@ -1,7 +1,7 @@
 import Error500 from "@/shared/components/Error500";
 import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
 import API from "@/shared/api";
-import SingleProduct from "@/features/SingleProductPage/components/singleProduct";
+import SingleProduct from "@/features/SingleProductPage/components/SingleProduct";
 import { Metadata } from "next";
 import { SingleProductProvider } from "@/features/SingleProductPage/context/ProductData";
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: title,
         description: description,
-        keywords: data?.tags?.split(","),
+        keywords: data?.tags,
         openGraph: { title: title, description: description },
         twitter: { title: title, description: description },
     };
@@ -40,8 +40,9 @@ const getSingleProduct = async (product_id: string) => {
             },
             cache: "no-store",
         });
-        const { result } = await res.json();
-        return result;
+        const data = await res.json();
+        console.log(data);
+        return data;
     } catch (error: any) {
         console.error(error.message);
     }

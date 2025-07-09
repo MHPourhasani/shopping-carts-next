@@ -40,7 +40,7 @@ const Footer = () => {
                     <Button
                         variant="secondary"
                         onClick={scrollToTop}
-                        className="border-secondary-100 text-secondary-400 dark:text-secondary-100 w-fit cursor-pointer rounded-lg border p-2"
+                        className="border-secondary-100 text-secondary-400 dark:text-secondary-100 w-fit cursor-pointer rounded-lg border p-2 dark:bg-gray-700"
                     >
                         برگشت به بالا
                         <ArrowLeft className="stroke-secondary-400 dark:stroke-secondary-100 rotate-90" />

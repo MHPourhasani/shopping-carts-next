@@ -76,7 +76,7 @@ const ProductCardItem = ({ product, href, className }: PropsInterface) => {
                     <span
                         className={`flex items-center gap-2 font-medium ${isNumber(discountedPrice) ? "text-sm text-gray-600 line-through dark:text-gray-500" : "text-gray-900 dark:text-white"}`}
                     >
-                        {basePrice > 0 ? (
+                        {basePrice && basePrice > 0 ? (
                             <>
                                 {tomanFormat(basePrice)}
                                 <Toman className="size-4" />

@@ -2,8 +2,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import addIcon from "@/assets/icons/svgs/add.svg";
-import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Image from "next/image";
 import { Navigation } from "swiper/modules";
 import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/helper";
@@ -12,20 +10,18 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import PATH from "@/shared/path";
-import TickIcon from "@/assets/icons/components/Tick";
 import notImage from "@/assets/images/not-images.svg";
 import LoveIcon from "@/assets/icons/components/Love";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
-import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "../ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
-import SingleProductTab from "./SingleProductTab";
-import { IColor, ISingleProductProps } from "../../interface/product.interface";
+import { ISingleProductProps } from "../../interface/product.interface";
 import { Button } from "@/components/ui/button";
+import Toman from "@/assets/icons/components/Toman";
 
 const DesktopSingleProduct = (props: ISingleProductProps) => {
-    const { addToCartsHandler, productData, setProductData, addToFavoriteHandler } = props;
-    const { _id, images, name, price, tags, description, relatedProducts, colors, sizes } = productData.product;
+    const { addToCartsHandler, productData, addToFavoriteHandler, handleSelectAttributes } = props;
+    const { _id, images, name, basePrice, tags, description, relatedProducts, attributes } = productData.product;
     const [imageActive, setImageActive] = useState(0);
     const router = useRouter();
     const swiperRef = useRef<any>();
@@ -117,7 +113,26 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                         </div>
                     </div>
 
-                    <section className="flex flex-col gap-8">
+                    <div>
+                        {attributes.map((attr) => (
+                            <div key={attr.slug} className="mb-4">
+                                <h4 className="mb-1 text-sm font-semibold">{attr.name}</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {attr.values.map((value) => (
+                                        <button
+                                            key={value}
+                                            className="rounded border px-3 py-1 text-sm hover:bg-gray-100"
+                                            onClick={() => handleSelectAttributes(attr.slug, value)}
+                                        >
+                                            {value}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* <section className="flex flex-col gap-8">
                         <div className="flex flex-col gap-4">
                             <span className="font-semibold">سایز</span>
 
@@ -190,7 +205,7 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                                 </span>
                             </div>
                         </div>
-                    </section>
+                    </section> */}
 
                     <div className="flex gap-4">
                         <Button
@@ -199,7 +214,13 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                             className="flex-1 cursor-pointer justify-between px-6"
                         >
                             <span className="flex items-center gap-2 text-lg font-bold">
-                                {tomanFormat(price)} <Toman className="text-white" />
+                                {basePrice ? (
+                                    <>
+                                        {tomanFormat(basePrice)} <Toman className="text-white" />
+                                    </>
+                                ) : (
+                                    "محصول در انبار موجود نیست"
+                                )}
                             </span>
                             <span>افزودن به سبد خرید</span>
                         </Button>
@@ -217,11 +238,11 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                         </Button>
                     </div>
 
-                    {tags && <ProductTags tags={tags.split(",")} />}
+                    {tags && <ProductTags tags={tags} />}
                 </div>
             </section>
 
-            <SingleProductTab />
+            {/* <SingleProductTab /> */}
 
             {relatedProducts && (
                 <section className="flex w-full flex-col gap-6 border-t py-10">
@@ -229,7 +250,7 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
 
                     <div className="no-scrollbar overflow-x-aut flex w-full flex-1 gap-4">
                         {relatedProducts.map((p) => (
-                            <ProductCardItem product={p} href={PATH.singleProduct(p._id.toString(), p.name)} className="w-1/4 xl:w-1/6" />
+                            <ProductCardItem product={p} href={PATH.singleProduct(String(p._id), p.name)} className="w-1/4 xl:w-1/6" />
                         ))}
                     </div>
                 </section>

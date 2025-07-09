@@ -40,7 +40,7 @@ const SignUp = () => {
             const { email, password } = formData;
 
             try {
-                const res = await fetch(API.auth.signup(), {
+                const res = await fetch(API.auth.register(), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -136,7 +136,7 @@ const SignUp = () => {
                 </form>
             </div>
 
-            <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center">
+            <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center dark:bg-gray-950">
                 <Image src={signupImage} alt="sign up image" className="h-auto w-full 2xl:w-9/12" />
             </div>
         </section>

@@ -40,7 +40,7 @@ const getCategories = async () => {
 };
 
 const getProducts = async ({ limit }: { limit?: number }) => {
-    return get(API.product.products_list() + `?limit=${limit}`)
+    return get(API.product.products_list())
         .then((res) => {
             return res.json();
         })

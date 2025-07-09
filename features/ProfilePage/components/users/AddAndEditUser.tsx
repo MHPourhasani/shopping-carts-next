@@ -51,7 +51,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                     }),
                 });
             } else {
-                res = await fetch(API.auth.signup(), {
+                res = await fetch(API.auth.register(), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

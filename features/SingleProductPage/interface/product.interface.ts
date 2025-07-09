@@ -1,54 +1,64 @@
-import { IShop, IUser } from "@/interfaces/general";
 import { ObjectId } from "mongoose";
 
-export interface ISingleProductProps {
-    isAddReview: boolean;
-    setIsAddReview: any;
-    productData: ISingleProductData;
-    setProductData: any;
-    reviews: IReview[];
-    setReviews: any;
-    addToFavoriteHandler: () => void;
-    addToCartsHandler: (productData: ISingleProductData) => void;
-}
-
-export interface ISingleProductData {
-    _id?: ObjectId | string;
-    product: IProduct;
-    quantity: number;
-    size: string;
-    color: IColor;
-}
-
-export interface IReview {
-    _id: ObjectId;
-    author: IUser;
-    title: string;
-    rating: number;
-    description: string;
-    createdAt: Date;
-}
-
-export interface IColor {
+export interface IAttribute {
     name: string;
-    hex: string;
+    slug: string;
+    values: string[];
+}
+
+export interface IProductVariation {
+    sku: string;
+    price: number;
+    quantity: number;
+    image?: string;
+    attributes: {
+        [key: string]: string;
+    };
+}
+
+export enum ProductStatus {
+    ACTIVE = "active",
+    INACTIVE = "inactive",
 }
 
 export interface IProduct {
     _id: ObjectId | string;
-    shopper: IShop;
+    creator: ObjectId;
     name: string;
-    brand: string;
-    basePrice: number;
-    discountedPrice?: number | null;
+    slug: string;
+    description: string;
+    basePrice?: number;
+    baseQuantity?: number;
     images: string[];
-    sizes: string;
-    colors: IColor[];
-    categories: string;
-    tags?: string;
-    services?: string;
-    description?: string;
-    relatedProducts?: IProduct[];
-    createdAt: Date;
+    category: string;
+    brand?: string;
+    tags?: string[];
+    services?: string[];
+    status: ProductStatus;
+    attributes: IAttribute[];
+    relatedProducts: IProduct[];
+    variations: IProductVariation[];
+    createdAt?: Date;
     updatedAt?: Date;
+}
+
+export interface ISingleProductData {
+    product: IProduct;
+    addToCartsHandler: any;
+    selectedAttributes: { [key: string]: string };
+    setProductData: any;
+    addToFavoriteHandler: any;
+    handleSelectAttributes: any;
+}
+
+export interface ISingleProductProps {
+    isAddReview: any;
+    setIsAddReview: any;
+    productData: ISingleProductData;
+    setProductData: any;
+    reviews: any;
+    setReviews: any;
+    addToFavoriteHandler: any;
+    addToCartsHandler: any;
+    handleSelectAttributes: any;
 }

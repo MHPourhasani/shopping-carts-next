@@ -219,7 +219,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                         <h2 className="text-gray-500 dark:text-gray-400">{description}</h2>
                     </div>
 
-                    {tags && <ProductTags tags={tags.split(",")} />}
+                    {tags && <ProductTags tags={tags} />}
                 </div>
             </section>
 

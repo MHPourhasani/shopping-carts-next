@@ -1,7 +1,7 @@
 const API = {
     auth: {
-        login: () => `${process.env.API_BASE_URL}/api/auth/login`,
-        signup: () => `${process.env.API_BASE_URL}/api/auth/signup`,
+        login: () => `${process.env.API_BASE_URL}/auth/login`,
+        register: () => `${process.env.API_BASE_URL}/auth/register`,
     },
     banners: {
         banners_list: () => `${process.env.API_BASE_URL}/banners`,
@@ -16,8 +16,8 @@ const API = {
         allNotifications: () => `${process.env.API_BASE_URL}/notifications`,
     },
     product: {
-        products_list: () => `${process.env.API_BASE_URL}/product`,
-        single_product: (id: string) => `${process.env.API_BASE_URL}/products/single-product/${id}`,
+        products_list: () => `${process.env.API_BASE_URL}/products  `,
+        single_product: (id: string) => `${process.env.API_BASE_URL}/products/${id}`,
         reviews: (id: string) => `${process.env.API_BASE_URL}/reviews/${id}`,
     },
     orders: {

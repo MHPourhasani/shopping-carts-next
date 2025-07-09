@@ -5,7 +5,7 @@ import Image from "next/image";
 import loginImage from "@/assets/images/login-page.svg";
 import googleLogo from "@/assets/icons/svgs/google-logo.svg";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "@/redux/hooks";
@@ -41,10 +41,6 @@ const Login = () => {
 
         try {
             setIsLoading(true);
-            await signIn("credentials", {
-                email,
-                password,
-            });
 
             if (redirectParams) {
                 router.push(redirectParams);
@@ -84,7 +80,7 @@ const Login = () => {
 
     return (
         <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
-            <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center">
+            <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center dark:bg-gray-950">
                 <Image src={loginImage} alt="login image" className="h-auto w-full 2xl:w-9/12" />
             </div>
 

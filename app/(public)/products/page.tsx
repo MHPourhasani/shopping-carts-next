@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
         title: title,
         description: description,
-        keywords: [...productsName, ...productsBrand],
+        keywords: [...productsName],
         alternates: { canonical: url },
         openGraph: { title: title, description: description, url: url },
         twitter: { title: title, description: description, site: url },
@@ -33,8 +33,8 @@ const getProducts = async () => {
         .then((res) => {
             return res.json();
         })
-        .then(({ results }) => {
-            return results;
+        .then((data) => {
+            return data.results;
         });
 };
 

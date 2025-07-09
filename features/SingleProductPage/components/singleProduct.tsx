@@ -11,10 +11,9 @@ import { usePathname, useRouter } from "next/navigation";
 import toastMessage from "@/shared/toastMessage";
 import PATH from "@/shared/path";
 import { useSingleProductData } from "../context/ProductData";
-import { IReview, ISingleProductData } from "../interface/product.interface";
+import { ISingleProductData } from "../interface/product.interface";
 
 export default function SingleProduct() {
-    const { data: session } = useSession();
     const { data } = useSingleProductData();
     const router = useRouter();
     const pathname = usePathname();
@@ -24,49 +23,54 @@ export default function SingleProduct() {
     const [productData, setProductData] = useState<ISingleProductData>({
         product,
         quantity: 1,
-        size: product.sizes!.split(",")[0],
-        color: product.colors![0],
+        selectedAttributes: {},
     });
     const [reviewsList, setReviewsList] = useState<IReview[]>(reviews);
 
     const addToFavoriteHandler = async () => {
-        if (!session) {
-            router.push(`${PATH.login()}?redirect=${pathname}`);
-        } else {
-            const res = await fetch(`/api/favorites/${session.user.userId}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ productId: product._id }),
-            });
+        // if (!session) {
+        //     router.push(`${PATH.login()}?redirect=${pathname}`);
+        // } else {
+        //     const res = await fetch(`/api/favorites/${session.user.userId}`, {
+        //         method: "PUT",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({ productId: product._id }),
+        //     });
+        //     const { message } = await res.json();
+        //     if (res.ok) {
+        //         toast.success(message);
+        //     } else {
+        //         toast.error("خطا در افزودن محصول به علاقه مندی ها");
+        //     }
+        // }
+    };
 
-            const { message } = await res.json();
-
-            if (res.ok) {
-                toast.success(message);
-            } else {
-                toast.error("خطا در افزودن محصول به علاقه مندی ها");
-            }
-        }
+    const handleSelectAttributes = (slug: string, value: string) => {
+        setProductData((prev) => ({
+            ...prev,
+            selectedAttributes: {
+                ...prev.selectedAttributes,
+                [slug]: value,
+            },
+        }));
     };
 
     const addToCartsHandler = async (product: ISingleProductData) => {
-        if (!session) {
-            router.push(`${PATH.login()}?redirect=${pathname}`);
-        } else {
-            const res = await fetch(`/api/carts`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user: session.user.userId, product }),
-            });
-
-            const { message } = await res.json();
-
-            if (res.ok) {
-                toast.success(message);
-            } else {
-                toast.error(toastMessage.product.failedAddedToCart);
-            }
-        }
+        // if (!session) {
+        //     router.push(`${PATH.login()}?redirect=${pathname}`);
+        // } else {
+        //     const res = await fetch(`/api/carts`, {
+        //         method: "POST",
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify({ user: session.user.userId, product }),
+        //     });
+        //     const { message } = await res.json();
+        //     if (res.ok) {
+        //         toast.success(message);
+        //     } else {
+        //         toast.error(toastMessage.product.failedAddedToCart);
+        //     }
+        // }
     };
 
     const props = {
@@ -78,13 +82,12 @@ export default function SingleProduct() {
         setReviews: setReviewsList,
         addToFavoriteHandler,
         addToCartsHandler,
+        handleSelectAttributes,
     };
 
     return (
         <section className="container w-full">
-            <div className="w-full lg:hidden">
-                <MobileSingleProduct {...props} />
-            </div>
+            <div className="w-full lg:hidden">{/* <MobileSingleProduct {...props} /> */}</div>
 
             <div className="hidden w-full justify-center lg:flex">
                 <DesktopSingleProduct {...props} />
