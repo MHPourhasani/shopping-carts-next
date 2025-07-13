@@ -10,7 +10,7 @@ import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 
 const EditPersonalInformation = () => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({
         firstName: userState?.first_name ? userState?.first_name : "",
         lastName: userState?.last_name ? userState?.last_name : "",
@@ -65,7 +65,7 @@ const EditPersonalInformation = () => {
                 });
                 dispatch(setUser(data));
                 toast.success(message);
-                router.push(PATH.profile.main());
+                router.push(PATH.dashboard.main());
             } else {
                 toast.error(`خطا در ویرایش پروفایل`);
             }

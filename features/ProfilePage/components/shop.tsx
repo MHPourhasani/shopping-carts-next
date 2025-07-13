@@ -16,7 +16,7 @@ interface Props {
 }
 
 const ShopInformation = ({ shop }: Props) => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const [isEdit, setIsEdit] = useState(false);
     const [formData, setFormData] = useState({
         name: shop.name,
@@ -65,7 +65,7 @@ const ShopInformation = ({ shop }: Props) => {
             if (res.ok) {
                 dispatch(setUser(data));
                 toast.success(message);
-                router.push(PATH.profile.main());
+                router.push(PATH.dashboard.main());
             } else {
                 toast.error(message);
             }

@@ -3,7 +3,7 @@ import ProductCardItem from "@/features/SingleProductPage/components/ProductCard
 import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

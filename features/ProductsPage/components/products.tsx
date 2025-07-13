@@ -10,7 +10,7 @@ import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import CloseIcon from "@/assets/icons/components/Close";
 import FilterIcon from "@/assets/icons/components/Filter";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
-import { IColor, IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { IColor, IProduct } from "@/features/SingleProductPage/interface/interface";
 import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
 import { DeviceSize } from "@/shared/enums";
 import { Label } from "@/components/ui/label";

@@ -6,7 +6,7 @@ export const revalidate = 30;
 export const dynamic = "force-static";
 
 const title = "ثبت نام";
-const url = PATH.signup();
+const url = PATH.register();
 
 export const metadata: Metadata = {
     title: title,

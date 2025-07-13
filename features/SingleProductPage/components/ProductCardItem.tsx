@@ -2,7 +2,7 @@
 import notImage from "@/assets/images/not-images.svg";
 import Image from "next/image";
 import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/helper";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import LoveIcon from "@/assets/icons/components/Love";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ interface PropsInterface {
 
 const ProductCardItem = ({ product, href, className }: PropsInterface) => {
     const { _id, name, basePrice, discountedPrice, images } = product;
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const { data: session } = useSession();
     const router = useRouter();
     const dispatch = useAppDispatch();

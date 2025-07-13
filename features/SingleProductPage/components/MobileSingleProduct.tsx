@@ -26,7 +26,7 @@ import Link from "next/link";
 import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "./ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
-import { ISingleProductProps } from "../interface/product.interface";
+import { ISingleProductProps } from "../interface/interface";
 import { Button } from "@/components/ui/button";
 
 const MobileSingleProduct = (props: ISingleProductProps) => {

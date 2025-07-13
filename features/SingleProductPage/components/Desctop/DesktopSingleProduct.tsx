@@ -15,7 +15,7 @@ import LoveIcon from "@/assets/icons/components/Love";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 import ProductCardItem from "../ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
-import { ISingleProductProps } from "../../interface/product.interface";
+import { ISingleProductProps } from "../../interface/interface";
 import { Button } from "@/components/ui/button";
 import Toman from "@/assets/icons/components/Toman";
 

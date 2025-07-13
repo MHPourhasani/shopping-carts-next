@@ -1,12 +1,11 @@
 "use client";
 import { INotification } from "@/interfaces/general";
 import TrashIcon from "@/assets/icons/components/Trash";
-import API from "@/shared/api";
+import API from "@/shared/libs/api/endpoints";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/toastMessage";
 import { showFullDate } from "@/shared/helper";
-import { RequestTypeEnum } from "@/shared/enums";
 import { Button } from "@/components/ui/button";
 
 interface Props {
@@ -22,7 +21,7 @@ const NotificationCard = ({ notification, onDelete, onRead, selectNotification, 
     const { data: session } = useSession();
 
     const deleteHandler = async (notificationId: string) => {
-        const res = await fetch(API.notification.single_notification(notificationId, RequestTypeEnum.CSR), {
+        const res = await fetch(API.notification.single_notification(notificationId), {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -39,7 +38,7 @@ const NotificationCard = ({ notification, onDelete, onRead, selectNotification, 
     };
 
     const convertToReadHandler = async (notificationId: string, status: boolean) => {
-        const res = await fetch(API.notification.single_notification(notificationId, RequestTypeEnum.CSR), {
+        const res = await fetch(API.notification.single_notification(notificationId), {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

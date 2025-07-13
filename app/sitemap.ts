@@ -1,11 +1,11 @@
-import { RequestTypeEnum } from "@/shared/enums";
-import { IBanner, IBlog, ICategory } from "@/interfaces/general";
-import API from "@/shared/api";
+import { IBanner, IPost, ICategory } from "@/interfaces/general";
+import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/path";
-import { get } from "@/shared/apiCaller";
 import fs from "fs";
 import path from "path";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import { get } from "@/shared/libs/api/client";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 const baseUrl = "https://mhp-shop.vercel.app";
 const baseDir = "app";
@@ -27,38 +27,23 @@ function getAllFolders(dirPath: string) {
 }
 
 const getBanners = async () => {
-    return get(API.banners.banners_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            return data;
-        });
+    const data = await get<IBanner[]>(API.banners.banners_list());
+    return data;
 };
 
-const getCategories = () => {
-    return get(API.category.categories_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            return data;
-        });
+const getCategories = async () => {
+    const data = await get<ICategory[]>(API.category.categories_list());
+    return data;
 };
 
 const getProducts = async () => {
-    return get(API.product.products_list(RequestTypeEnum.SSR))
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            return data;
-        });
+    const data = await get<IPaginatedResponse<IProduct[]>>(API.product.products());
+    return data.results;
 };
 
 const getBlogs = async () => {
     try {
-        const response = await fetch(API.blogs.blogs_list(), {
+        const response = await fetch(API.blogs.posts(), {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
@@ -73,14 +58,14 @@ const getBlogs = async () => {
 };
 
 async function getRoutes() {
-    const banners: IBanner[] = await getBanners();
-    const categories: ICategory[] = await getCategories();
-    const products: IProduct[] = await getProducts();
-    const blogs: IBlog[] = await getBlogs();
+    const banners = await getBanners();
+    const categories = await getCategories();
+    const products = await getProducts();
+    const blogs = await getBlogs();
 
     const routesOfFolders = getAllFolders(baseDir)
         .map((folder) => folder.split("\\").join("/").replace(baseDir, "").replace("/(public)", ""))
-        .filter((folder) => !folder.startsWith(PATH.profile.main()))
+        .filter((folder) => !folder.startsWith(PATH.dashboard.main()))
         .filter((folder) => !folder.startsWith("/api"))
         .filter((folder) => !folder.startsWith("/dashboard"))
         .filter((folder) => ![""].includes(folder));

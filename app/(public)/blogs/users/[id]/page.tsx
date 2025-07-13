@@ -1,11 +1,10 @@
-import BlogCard from "@/features/Blog/components/BlogCard";
-import { IBlog, IUser } from "@/interfaces/general";
-import API from "@/shared/api";
+import PostCard from "@/features/Blog/components/PostCard";
+import { IPost, IUser } from "@/interfaces/general";
+import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import userIcon from "@/assets/icons/svgs/user.svg";
-import { RequestTypeEnum } from "@/shared/enums";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 
 interface Props {
@@ -14,7 +13,7 @@ interface Props {
 
 interface DataInterface {
     user: IUser;
-    blogs: IBlog[];
+    blogs: IPost[];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -38,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const getUser = async (id: string) => {
     try {
-        const response = await fetch(API.blogs.blog_author(id, RequestTypeEnum.SSR), {
+        const response = await fetch(API.blogs.blog_author(id), {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
@@ -85,7 +84,7 @@ const SingleBlogAuthorPage = async ({ params }: Props) => {
                     <h1 className="text-lg font-bold lg:text-xl">مقالات منتشر شده</h1>
                     <div className="grid w-full gap-4 lg:grid-cols-3">
                         {blogs.map((item) => (
-                            <BlogCard key={String(item._id)} link={PATH.singleBlog(item.link)} blog={item} />
+                            <PostCard key={String(item._id)} link={PATH.singleBlog(item.link)} blog={item} />
                         ))}
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { IReview } from "../../interface/product.interface";
+import { IReview } from "../../interface/interface";
 import ReviewCard from "./ReviewCard";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 
@@ -23,8 +23,8 @@ const ReviewsList = ({ reviews, limit, isLoading }: Props) => {
 
                             {limit && reviews.length > limit && (
                                 <span className="ml-2 flex w-16 cursor-pointer flex-col items-center gap-2 text-center">
-                                    <span className="rounded-md border-[1.5px] border-primary-100 p-1">
-                                        <ArrowLeft className="rotate-180 stroke-primary-100" />
+                                    <span className="border-primary-100 rounded-md border-[1.5px] p-1">
+                                        <ArrowLeft className="stroke-primary-100 rotate-180" />
                                     </span>
                                     مشاهده همه
                                 </span>

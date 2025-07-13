@@ -20,7 +20,7 @@ const toastMessage = {
         successfullyDeleted: "پیام با موفقیت حذف شد.",
         failedDeleted: "حذف پیام با خطا مواجه شد.",
     },
-    blog: {
+    post: {
         successfullyEdit: "بلاگ با موفقیت ویرایش شد.",
         successfullyDelete: "بلاگ با موفقیت حذف شد.",
         failedDeleted: "حذف بلاگ با خطا مواجه شد.",

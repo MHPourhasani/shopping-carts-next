@@ -5,30 +5,27 @@ import Image from "next/image";
 import loginImage from "@/assets/images/login-page.svg";
 import googleLogo from "@/assets/icons/svgs/google-logo.svg";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/slices/authSlice";
 import AppleLogo from "@/assets/icons/components/AppleLogo";
 import PATH from "@/shared/path";
-import API from "@/shared/api";
+import API from "@/shared/libs/api/endpoints";
 import toastMessage from "@/shared/toastMessage";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
+import { authToken } from "@/shared/utils/token";
+import { post } from "@/shared/libs/api/client";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [isLoading, setIsLoading] = useState(false);
-    const { data: session } = useSession();
     const router = useRouter();
     const redirectParams = useSearchParams().get("redirect");
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (session?.user) router.push(redirectParams ? redirectParams : PATH.home());
-    }, [redirectParams, session]);
+        if (authToken.get()?.access) router.push(redirectParams ?? PATH.home());
+    }, [authToken.get()?.access]);
 
     const { handleSubmit } = useForm();
 
@@ -36,33 +33,25 @@ const Login = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const loginHandler = async () => {
+    const handleLogin = async () => {
         const { email, password } = formData;
+        setIsLoading(true);
 
         try {
-            setIsLoading(true);
-
-            if (redirectParams) {
-                router.push(redirectParams);
-            }
-
-            const res = await fetch(API.auth.login(), {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-                body: JSON.stringify({ email, password }),
+            const data = await post<{
+                access: string;
+                refresh: string;
+            }>(API.auth.login(), {
+                email,
+                password,
             });
-            const { user } = await res.json();
-            dispatch(setUser(user));
 
-            if (res.ok) {
-                setIsLoading(false);
-                toast.success(toastMessage.auth.login.successfulLogin);
-            }
+            authToken.set({ access: data.access, refresh: data.refresh });
+            toast.success(toastMessage.auth.login.successfulLogin);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -70,12 +59,8 @@ const Login = () => {
         console.error(errors);
     };
 
-    const goToLogin = () => {
-        if (redirectParams) {
-            return PATH.signup() + `?redirect=${redirectParams}`;
-        } else {
-            return PATH.signup();
-        }
+    const goToRegister = () => {
+        return PATH.register() + (!!redirectParams ? `?redirect=${redirectParams}` : "");
     };
 
     return (
@@ -86,7 +71,7 @@ const Login = () => {
 
             <div className="flex w-full items-center justify-center lg:flex-1">
                 <form
-                    onSubmit={handleSubmit(loginHandler, errorHandler)}
+                    onSubmit={handleSubmit(handleLogin, errorHandler)}
                     className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
                 >
                     <PageHeader title="ورود به حساب کاربری" />
@@ -114,7 +99,7 @@ const Login = () => {
 
                     <div className="flex gap-2">
                         <p>اکانت ندارید؟</p>
-                        <Link href={goToLogin()} className="font-semibold">
+                        <Link href={goToRegister()} className="font-semibold">
                             ساخت اکانت
                         </Link>
                     </div>

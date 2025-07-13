@@ -22,7 +22,7 @@ const Orders = (props: Props) => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState({});
     const [orders, setOrders] = useState(props.orders.orders);
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const router = useRouter();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const Orders = (props: Props) => {
         }
     }, [search, orders]);
 
-    return userState?.role === UserRoleEnum.SHOPPER || userState?.role === UserRoleEnum.ADMIN ? (
+    return userState?.role === UserRoleEnum.SELLER || userState?.role === UserRoleEnum.ADMIN ? (
         <section className="no-scrollbar flex w-full flex-1 flex-col gap-4 overflow-y-auto lg:gap-8">
             <PageHeader title="سفارشات" mobileBackButton={true} desktopBackButton={false} />
 
@@ -67,7 +67,7 @@ const Orders = (props: Props) => {
                             return (
                                 <OrderCardItem
                                     key={item.orderNo}
-                                    href={PATH.profile.order.single_order(item.orderNo)}
+                                    href={PATH.dashboard.order.single_order(item.orderNo)}
                                     user={props.orders.user}
                                     order={item}
                                 />

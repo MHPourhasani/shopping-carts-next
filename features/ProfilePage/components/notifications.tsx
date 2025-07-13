@@ -3,10 +3,9 @@ import EmptyState from "@/shared/components/EmptyState";
 import NotificationIcon from "@/assets/icons/components/Notificationbing";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { useEffect, useState } from "react";
-import API from "@/shared/api";
+import API from "@/shared/libs/api/endpoints";
 import { useSession } from "next-auth/react";
 import { INotification } from "@/interfaces/general";
-import { RequestTypeEnum } from "@/shared/enums";
 import NotificationsList from "./NotificationsList";
 
 const DashboardNotifications = () => {
@@ -23,7 +22,7 @@ const DashboardNotifications = () => {
 
     const getNotifications = async () => {
         try {
-            const response = await fetch(API.notification.notifications_list(session?.user.userId!, RequestTypeEnum.CSR), {
+            const response = await fetch(API.notification.notifications_list(session?.user.userId!), {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
@@ -44,17 +43,17 @@ const DashboardNotifications = () => {
         <section className="relative flex flex-col gap-4">
             <span onClick={() => setIsShow(!isShow)} className="relative">
                 {notifications && notifications.find((item) => !item.isViewed) && (
-                    <div className="absolute right-1 top-0 size-2 animate-pulse rounded-full bg-red-500" />
+                    <div className="absolute top-0 right-1 size-2 animate-pulse rounded-full bg-red-500" />
                 )}
                 <NotificationIcon
-                    className={`hover-transition cursor-pointer hover:stroke-primary-100 ${isShow ? "stroke-primary-100" : "stroke-gray-500"}`}
+                    className={`hover-transition hover:stroke-primary-100 cursor-pointer ${isShow ? "stroke-primary-100" : "stroke-gray-500"}`}
                 />
             </span>
 
             {isShow && <div onClick={() => setIsShow(false)} className="fixed inset-0 z-10 bg-black/50" />}
 
             {isShow && (
-                <div className="absolute left-0 top-10 z-20 flex h-96 max-h-96 min-w-[28rem] max-w-[30rem] flex-col gap-4 rounded-xl bg-white p-4 shadow-xl dark:bg-secondary-700">
+                <div className="dark:bg-secondary-700 absolute top-10 left-0 z-20 flex h-96 max-h-96 max-w-[30rem] min-w-[28rem] flex-col gap-4 rounded-xl bg-white p-4 shadow-xl">
                     <span className="flex items-center justify-between">
                         <h3 className="font-semibold lg:text-lg">پیام ها</h3>
                         {!!unReads && <span className="text-sm">{unReads} خوانده نشده</span>}

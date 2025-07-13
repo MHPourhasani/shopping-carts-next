@@ -1,5 +1,5 @@
 import CloseIcon from "@/assets/icons/components/Close";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import Image from "next/image";
 import Toman from "@/assets/icons/components/Toman";
 import { tomanFormat } from "@/shared/helper";

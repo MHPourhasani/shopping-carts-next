@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import toastMessage from "@/shared/toastMessage";
 import PATH from "@/shared/path";
 import { useSingleProductData } from "../context/ProductData";
-import { ISingleProductData } from "../interface/product.interface";
+import { ISingleProductData } from "../interface/interface";
 
 export default function SingleProduct() {
     const { data } = useSingleProductData();

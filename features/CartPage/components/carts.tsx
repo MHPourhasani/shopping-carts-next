@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const Carts = ({ carts }: IProps) => {
-    const cartsState: any = useAppSelector((state: any) => state.carts.carts);
+    const cartsState: any = useAppSelector((state) => state.carts.carts);
     const dispatch = useAppDispatch();
     const { data: session } = useSession();
 

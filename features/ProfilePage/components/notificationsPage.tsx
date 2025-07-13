@@ -1,7 +1,7 @@
 "use client";
 import EmptyState from "@/shared/components/EmptyState";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
-import API from "@/shared/api";
+import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/path";
 import { INotification } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
@@ -63,7 +63,7 @@ const Notifications = () => {
             <EmptyState
                 imgSrc={notificationImage}
                 title="لطفاً وارد شوید"
-                linkHref={`${PATH.login()}?redirect=${PATH.profile.notifications()}`}
+                linkHref={`${PATH.login()}?redirect=${PATH.dashboard.notifications()}`}
                 linkTitle="ورود به حساب کاربری"
             />
         </div>

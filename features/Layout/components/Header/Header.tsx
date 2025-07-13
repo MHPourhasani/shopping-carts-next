@@ -2,7 +2,6 @@
 import Image from "next/image";
 import bagIcon from "@/assets/icons/svgs/bag.svg";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import ProfileIcon from "@/assets/icons/components/Profile";
 import PATH from "@/shared/path";
 import ThemeSwitch from "@/shared/components/ThemeSwitch";
@@ -10,10 +9,10 @@ import { useAppSelector } from "@/redux/hooks";
 import DesktopMenu from "./DesktopMenu";
 import Search from "@/components/Search";
 import { Suspense } from "react";
+import { authToken } from "@/shared/utils/token";
 
 const Header = () => {
-    const { data: session } = useSession();
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
 
     return (
         <header className="w-full border-gray-200 lg:gap-6 lg:border-b-2 lg:py-5 dark:border-gray-400">
@@ -97,13 +96,14 @@ const Header = () => {
                     </section>
                 )} */}
                         </div>
+
                         <Link
-                            href={session?.user.userId ? PATH.profile.main() : PATH.login()}
+                            href={authToken.get()?.access ? PATH.dashboard.main() : PATH.login()}
                             className="dark:bg-secondary-700 hidden items-center justify-center gap-2 rounded-xl border border-gray-200 p-3 shadow-lg shadow-gray-200 lg:flex lg:max-w-48 dark:shadow-none"
                         >
                             <ProfileIcon className="stroke-black dark:stroke-white" />
                             <span className="truncate">
-                                {userState ? `${userState.first_name ? userState.first_name : "کاربر"}` : "ورود | ثبت نام"}
+                                {!!userState ? `${(userState.first_name || userState.last_name) ?? "کاربر"}` : "ورود | ثبت نام"}
                             </span>
                         </Link>
                     </div>

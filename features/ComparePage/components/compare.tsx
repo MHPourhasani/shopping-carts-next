@@ -12,7 +12,7 @@ import Toman from "@/assets/icons/components/Toman";
 import PATH from "@/shared/path";
 import toastMessage from "@/shared/toastMessage";
 import { tomanFormat } from "@/shared/helper";
-import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/product.interface";
+import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/interface";
 import { Button } from "@/components/ui/button";
 
 interface Props {

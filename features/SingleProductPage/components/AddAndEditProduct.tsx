@@ -2,223 +2,205 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useSession } from "next-auth/react";
-import { IShop } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
-import { handleRefreshAfterBack, sizes } from "@/shared/helper";
-import MultiSelect from "@/shared/components/common/MultiSelect";
-import ColorPicker from "@/shared/components/common/ColorPicker";
-import { get } from "@/shared/apiCaller";
-import API from "@/shared/api";
+import { handleRefreshAfterBack } from "@/shared/helper";
+import API from "@/shared/libs/api/endpoints";
 import toastMessage from "@/shared/toastMessage";
-import { RequestTypeEnum } from "@/shared/enums";
-import { IColor, IProduct } from "../interface/product.interface";
-import { Input } from "@/components/ui/input";
+import { CreateProductDto } from "../interface/interface";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { get, post, put } from "@/shared/libs/api/client";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useFieldArray, useForm } from "react-hook-form";
+import { ProductStatusEnum } from "../interface/enums";
+import { Input } from "@/components/ui/input";
 
-interface Props {
-    product?: IProduct;
+interface ProductFormProps {
     isEdit?: boolean;
+    initialData?: CreateProductDto;
+    productId?: string;
 }
 
-const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
-    const { data: session } = useSession();
-    const [formData, setFormData] = useState<any>(
-        isEdit
-            ? product
-            : {
-                  name: "",
-                  brand: "",
-                  price: null,
-                  discountedPrice: null,
-                  sizes: "",
-                  colors: [],
-                  categories: "",
-                  tags: "",
-                  services: "",
-                  description: "",
-                  relatedProducts: [],
-              },
-    );
-    const [, setShop] = useState<Partial<IShop>>({ createdAt: new Date() });
-    const [allProducts, setAllProducts] = useState<Partial<IProduct[]>>([]);
+export const productSchema = yup.object({
+    name: yup.string().required("نام محصول الزامی است"),
+    slug: yup.string().required("لینک الزامی است"),
+    description: yup.string().optional(),
+
+    basePrice: yup.number().typeError("قیمت باید یک عدد باشد").min(0, "قیمت نمی‌تواند منفی باشد").optional(),
+
+    baseQuantity: yup.number().typeError("تعداد باید یک عدد باشد").min(0, "تعداد نمی‌تواند کمتر از صفر باشد").optional(),
+
+    images: yup.array().of(yup.string().required("آدرس عکس نمی‌تواند خالی باشد")).optional(),
+
+    categories: yup.array().of(yup.string().required("دسته‌بندی نمی‌تواند خالی باشد")).optional(),
+
+    brand: yup.string().optional(),
+
+    tags: yup.array().of(yup.string().required("تگ نمی‌تواند خالی باشد")).optional(),
+
+    services: yup.array().of(yup.string().required("خدمت نمی‌تواند خالی باشد")).optional(),
+
+    status: yup.mixed<ProductStatusEnum>().oneOf(Object.values(ProductStatusEnum), "وضعیت نامعتبر است").optional(),
+
+    relatedProducts: yup.array().of(yup.string().required("شناسه محصول مرتبط الزامی است")).optional(),
+
+    attributes: yup
+        .array()
+        .of(
+            yup.object({
+                name: yup.string().required("نام ویژگی الزامی است"),
+                slug: yup.string().required("اسلاگ ویژگی الزامی است"),
+                values: yup
+                    .array()
+                    .of(yup.string().required("مقدار ویژگی الزامی است"))
+                    .min(1, "حداقل یک مقدار باید وارد شود")
+                    .required("مقادیر ویژگی الزامی است"),
+            }),
+        )
+        .min(1, "حداقل یک ویژگی باید تعریف شود")
+        .required("ویژگی‌ها الزامی هستند"),
+
+    variations: yup
+        .array()
+        .of(
+            yup.object({
+                sku: yup.string().required("کد SKU الزامی است"),
+                price: yup.number().required("قیمت ترکیب الزامی است"),
+                quantity: yup.number().required("موجودی ترکیب الزامی است"),
+                image: yup.string().optional(),
+                attributes: yup.object().required("ویژگی‌های ترکیب الزامی است"),
+            }),
+        )
+        .min(1, "حداقل یک ترکیب باید وارد شود")
+        .required("ترکیب‌ها الزامی هستند"),
+});
+
+const AddAndEditProduct = ({ isEdit = false, initialData, productId }: ProductFormProps) => {
+    const [, setMessage] = useState("");
     const router = useRouter();
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        watch,
+        formState: { errors, isSubmitting },
+    } = useForm({
+        resolver: yupResolver(productSchema),
+        defaultValues: {
+            name: "",
+            slug: "",
+            basePrice: 0,
+            baseQuantity: 0,
+            attributes: [],
+            variations: [],
+        },
+    });
+    const { fields: attrFields, append: addAttr } = useFieldArray({ control, name: "attributes" });
+    const { fields: varFields, append: addVariation } = useFieldArray({ control, name: "variations" });
 
     useEffect(() => {
-        if (session) {
-            (async () => {
-                try {
-                    const response = await fetch(`/api/shop?user_id=${session.user.userId!}`, {
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                        },
-                        cache: "no-store",
-                    });
-                    const data = await response.json();
-                    setShop(data.shop);
-                } catch (error) {
-                    console.error(error);
-                }
-            })();
+        if (isEdit && initialData) {
+            reset(initialData);
         }
-    }, [session]);
+    }, [isEdit, initialData, reset]);
+
+    const onSubmit = async (data: CreateProductDto) => {
+        try {
+            if (isEdit && productId) {
+                await put(API.product.single_product(productId), data);
+                setMessage("✅ محصول با موفقیت ویرایش شد");
+            } else {
+                await post(API.product.products(), data);
+                setMessage("✅ محصول با موفقیت ثبت شد");
+                reset();
+            }
+        } catch (e) {
+            console.error("❌ خطا در ذخیره محصول", e);
+            setMessage("❌ خطا در ذخیره محصول");
+        }
+    };
 
     useEffect(() => {
         const getProducts = async () => {
-            return get(API.product.products_list(RequestTypeEnum.CSR))
-                .then((res) => {
-                    return res.json();
-                })
-                .then(({ results }) => {
-                    setAllProducts(results.filter((p: IProduct) => p._id !== formData._id));
-                });
+            const data = await get(API.product.products());
+            return data;
         };
 
         getProducts();
     }, []);
 
-    const changeHandler = (e: any) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const deleteProductHandler = async () => {
+        if (isEdit && productId) {
+            const res = await fetch(API.product.single_product(productId), {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+            });
 
-    const addColorHandler = (selectedColors: IColor[]) => {
-        setFormData({ ...formData, colors: selectedColors });
-    };
-
-    const submitProductHandler = async () => {
-        const { name, brand, price, discountedPrice, sizes, colors, relatedProducts } = formData;
-
-        if (!name.trim()) {
-            toast.error("نام محصول را وارد کنید.");
-        } else if (!brand.trim()) {
-            toast.error("نام برند را وارد کنید.");
-        } else if (!price) {
-            toast.error("قیمت محصول را وارد کنید.");
-        } else if (price <= 0) {
-            toast.error("قیمت محصول نباید منفی باشد.");
-        } else if (discountedPrice && discountedPrice >= price) {
-            toast.error("قیمت تخفبف خورده نباید از قیمت اصلی بالاتر باشد.");
-        } else if (!sizes.trim()) {
-            toast.error("سایز(های) محصول را وارد کنید.");
-        } else if (!colors.length) {
-            toast.error("رنگ(های) محصول را وارد کنید.");
-        } else {
-            try {
-                let res: any;
-                if (isEdit) {
-                    res = await fetch(API.product.single_product(formData._id.toString(), RequestTypeEnum.CSR), {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                        },
-                        body: JSON.stringify({ data: formData, relatedProducts: relatedProducts.map((p: IProduct) => p._id) }),
-                    });
-                } else {
-                    res = await fetch("/api/products", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                        },
-                        body: JSON.stringify({
-                            product: formData,
-                            relatedProducts: relatedProducts.map((p: IProduct) => p._id),
-                        }),
-                    });
-                }
-
-                const { message } = await res.json();
-
-                if (res.ok) {
-                    toast.success("محصول با موفقیت ثبت شد.");
-                    router.back();
-                    handleRefreshAfterBack();
-                } else {
-                    toast.error(message);
-                }
-            } catch (error: any) {
-                console.error(error);
+            if (res.ok) {
+                toast.success(toastMessage.product.deletedProductSuccessfully(watch("name")));
+                router.back();
+                handleRefreshAfterBack();
+            } else {
+                toast.success(toastMessage.product.deletedProductFailed(watch("name")));
             }
         }
     };
 
-    const deleteProductHandler = async () => {
-        const res = await fetch(API.product.single_product(formData._id.toString(), RequestTypeEnum.CSR), {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-        });
-
-        if (res.ok) {
-            toast.success(toastMessage.product.deletedProductSuccessfully(formData.name));
-            router.back();
-            handleRefreshAfterBack();
-        } else {
-            toast.success(toastMessage.product.deletedProductFailed(formData.name));
-        }
-    };
-
     return (
-        <section className="flex w-full flex-col gap-4">
-            <PageHeader title={isEdit ? `ویرایش محصول "${formData.name}"` : "افزودن محصول"} />
+        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-4">
+            <PageHeader title={isEdit ? `ویرایش محصول "${watch("name")}"` : "افزودن محصول"} />
 
             <div className="flex flex-col gap-4">
-                <InputWithLabel name="name" label="نام" value={formData.name} onChange={changeHandler} />
-                <InputWithLabel name="brand" label="برند" value={formData.brand} onChange={changeHandler} />
-                <InputWithLabel name="price" label="قیمت" value={formData.price} type="number" onChange={changeHandler} />
-                <InputWithLabel
-                    name="discountedPrice"
-                    value={formData.discountedPrice}
-                    label="قیمت تخفیف خورده"
-                    type="number"
-                    onChange={changeHandler}
-                />
+                <InputWithLabel label="نام" {...register("name")} />
+                <InputWithLabel label="لینک" {...register("slug")} />
+                <InputWithLabel label="برند" {...register("brand")} />
+                <InputWithLabel label="قیمت" {...register("basePrice")} />
+                <InputWithLabel label="تعداد" {...register("baseQuantity")} />
 
-                <div className="flex flex-col gap-2">
-                    <label className="dark:text-secondary-100">سایز ها</label>
-                    <MultiSelect
-                        defaultValues={
-                            formData.sizes.trim()
-                                ? formData.sizes.split(", ").map((s: string) => {
-                                      return { title: String(s) };
-                                  })
-                                : undefined
-                        }
-                        options={sizes.map((s) => {
-                            return { title: String(s) };
-                        })}
-                        onChange={(selected) => setFormData({ ...formData, sizes: selected.map((s) => s.title).join(", ") })}
-                    />
+                <div>
+                    <h3 className="font-bold">ویژگی‌ها</h3>
+                    {attrFields.map((item, index) => (
+                        <div key={item.id} className="mb-2 border p-2">
+                            <Input {...register(`attributes.${index}.name`)} placeholder="نام ویژگی" />
+                            <Input {...register(`attributes.${index}.slug`)} placeholder="slug ویژگی" />
+                            <Input {...register(`attributes.${index}.values.0`)} placeholder="مقدار 1" />
+                            <Input {...register(`attributes.${index}.values.1`)} placeholder="مقدار 2" />
+                            {errors.attributes?.[index]?.name && (
+                                <p className="text-sm text-red-500">{errors.attributes[index].name?.message}</p>
+                            )}
+                        </div>
+                    ))}
+                    <Button onClick={() => addAttr({ name: "", slug: "", values: [""] })} className="text-blue-600">
+                        ➕ افزودن ویژگی
+                    </Button>
                 </div>
 
-                <ColorPicker defaultColors={formData.colors} onChange={addColorHandler} />
+                {/* ترکیب‌ها */}
+                <div>
+                    <h3 className="font-bold">ترکیب‌ها</h3>
+                    {varFields.map((item, index) => (
+                        <div key={item.id} className="mb-2 border p-2">
+                            <Input {...register(`variations.${index}.sku`)} placeholder="SKU" />
+                            <Input type="number" {...register(`variations.${index}.price`)} placeholder="قیمت" />
+                            <Input type="number" {...register(`variations.${index}.quantity`)} placeholder="موجودی" />
+                            <Input {...register(`variations.${index}.attributes`)} placeholder="رنگ (اختیاری)" />
+                            <Input {...register(`variations.${index}.attributes`)} placeholder="سایز (اختیاری)" />
+                        </div>
+                    ))}
+                    <Button onClick={() => addVariation({ sku: "", price: 0, quantity: 0, attributes: {} })} className="text-blue-600">
+                        ➕ افزودن ترکیب
+                    </Button>
+                </div>
 
-                <InputWithLabel
-                    name="categories"
-                    label="دسته بندی ها"
-                    value={formData.categories}
-                    onChange={changeHandler}
-                    hint="لطفا دسته بندی ها را با , از هم جدا کنید."
-                />
-                <InputWithLabel
-                    name="tags"
-                    label="تگ ها"
-                    value={formData.tags}
-                    onChange={changeHandler}
-                    hint="لطفا تگ ها را با , از هم جدا کنید."
-                />
-                <InputWithLabel
-                    name="services"
-                    label="خدمات"
-                    value={formData.services}
-                    onChange={changeHandler}
-                    hint="لطفا خدمات را با , از هم جدا کنید."
-                />
+                <InputWithLabel label="دسته بندی ها" {...register("categories")} />
 
-                <div className="flex flex-col gap-2">
+                <InputWithLabel label="تگ ها" {...register("tags")} />
+                <InputWithLabel label="خدمات" {...register("services")} />
+
+                {/* <div className="flex flex-col gap-2">
                     <label className="dark:text-secondary-100">محصولات مرتبط</label>
                     <MultiSelect
                         defaultValues={
@@ -240,20 +222,13 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                             })
                         }
                     />
-                </div>
+                </div> */}
 
-                <Textarea
-                    name="description"
-                    label="توضیحات"
-                    defaultValue={formData.description}
-                    onChange={changeHandler}
-                    hint="حداقل باید 15 کاراکتر وارد کنید."
-                    className="min-h-80"
-                />
+                <Textarea label="توضیحات" {...register("description")} hint="حداقل باید 15 کاراکتر وارد کنید." className="min-h-80" />
 
                 <div className="flex items-center justify-between gap-4">
-                    <Button disabled={!formData} onClick={submitProductHandler}>
-                        {isEdit ? "ویرایش" : "افزودن محصول"}
+                    <Button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "در حال ارسال..." : isEdit ? "ویرایش محصول" : "ثبت محصول"}
                     </Button>
 
                     {isEdit && (
@@ -263,7 +238,7 @@ const AddAndEditProduct = ({ product, isEdit = false }: Props) => {
                     )}
                 </div>
             </div>
-        </section>
+        </form>
     );
 };
 

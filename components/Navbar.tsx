@@ -10,7 +10,7 @@ import ShopIcon from "@/assets/icons/components/Shop";
 import PaperNote from "@/assets/icons/components/PaperNote";
 
 const Navbar = () => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const pathname = usePathname();
     let isActive = false;
 
@@ -20,17 +20,24 @@ const Navbar = () => {
         { title: "بلاگ", icon: <PaperNote className="fill-inherit" />, href: PATH.blogs() },
         {
             title: "پروفایل",
-            icon: userState ? (
-                <Image src={userState?.profile_image} alt="user" width={100} height={100} className="aspect-square size-6 rounded-full" />
-            ) : (
-                <ProfileIcon />
-            ),
-            href: PATH.profile.main(),
+            icon:
+                !!userState && userState?.profile_image ? (
+                    <Image
+                        src={userState.profile_image}
+                        alt="user"
+                        width={100}
+                        height={100}
+                        className="aspect-square size-6 rounded-full"
+                    />
+                ) : (
+                    <ProfileIcon />
+                ),
+            href: PATH.dashboard.main(),
         },
     ];
 
     return (
-        <nav className="fixed bottom-0 z-40 flex h-16 w-full items-center justify-around bg-white dark:bg-secondary-700 lg:hidden">
+        <nav className="dark:bg-secondary-700 fixed bottom-0 z-40 flex h-16 w-full items-center justify-around bg-white lg:hidden">
             {navbarItems.map((navItem) => {
                 isActive = pathname === navItem.href;
 

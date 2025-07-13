@@ -1,25 +1,26 @@
-import BlogCard from "@/features/Blog/components/BlogCard";
+import PostCard from "@/features/Blog/components/PostCard";
 import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/shared/components/PageHeader";
-import { RequestTypeEnum } from "@/shared/enums";
-import { IBlog } from "@/interfaces/general";
-import API from "@/shared/api";
+import { IPost } from "@/interfaces/general";
+import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
+import { get } from "@/shared/libs/api/client";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const blogs: IBlog[] = await getBlogs();
+    const blogs = await getBlogs();
 
     const title = "بلاگ ها";
     const url = PATH.blogs();
 
     return {
         title: title,
-        keywords: blogs ? blogs.map((blog) => blog.keywords || "") : "",
+        // keywords: blogs.length ? blogs.map((blog) => blog.keywords?.join(",") || []) : "",
         openGraph: { title: title, url: url },
         twitter: { title: title, site: url },
         other: {
@@ -29,25 +30,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const getBlogs = async () => {
-    try {
-        const response = await fetch(API.blogs.blogs_list(RequestTypeEnum.SSR), {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const { results } = await response.json();
-            return results;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+    const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
+    return data.results;
 };
 
 const Blogs = async () => {
-    const blogs: IBlog[] = await getBlogs();
+    const blogs = await getBlogs();
 
     if (!blogs) {
         return <Error500 />;
@@ -61,7 +49,7 @@ const Blogs = async () => {
 
             <div className="grid w-full gap-4 lg:grid-cols-3">
                 {blogs.map((item) => (
-                    <BlogCard key={String(item._id)} link={PATH.singleBlog(item.link)} blog={item} className="max-w-full" />
+                    <PostCard key={String(item._id)} post={item} className="max-w-full" />
                 ))}
             </div>
         </section>

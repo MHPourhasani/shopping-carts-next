@@ -25,11 +25,11 @@ const ChangeRole = ({ user }: Props) => {
 
             if (res.ok) {
                 toast.success(
-                    toastMessage.profile.successfulChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email),
+                    toastMessage.dashboard.successfulChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email),
                 );
             } else {
                 toast.error(
-                    toastMessage.profile.failedChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email),
+                    toastMessage.dashboard.failedChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email),
                 );
             }
         }

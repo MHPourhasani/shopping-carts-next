@@ -21,14 +21,14 @@ interface Props {
 
 const Address = ({ addresses }: Props) => {
     const { data: session } = useSession();
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const [isAddAddress, setIsAddAddress] = useState(false);
     const [editAddress, setEditAddress] = useState({ id: "", status: false });
     const [addressData, setAddressData] = useState({ address_title: "", address_value: "" });
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(setUser({ ...userState?.user, addresses: addresses }));
+        dispatch(setUser({ ...userState, addresses }));
     }, []);
 
     const addressChangeHandler = (e: any) => {
@@ -75,7 +75,7 @@ const Address = ({ addresses }: Props) => {
         if (res.ok) {
             dispatch(setUser({ ...userState, addresses: data }));
             toast.success(
-                `${userState.addresses.find((address: IAddress) => address._id === addressId).address_title} has been edited successfully`,
+                `${userState.addresses.find((address: IAddress) => address._id === addressId).title} has been edited successfully`,
             );
         } else {
             toast.error(`خطا در انتخاب آدرس`);
@@ -99,7 +99,7 @@ const Address = ({ addresses }: Props) => {
             dispatch(setUser({ ...userState, addresses: data }));
             setAddressData({ address_title: "", address_value: "" });
             toast.success(
-                `${userState.addresses.find((address: IAddress) => address._id === addressId).address_title} has been selected successfully`,
+                `${userState.addresses.find((address: IAddress) => address._id === addressId).title} has been selected successfully`,
             );
         } else {
             toast.error(`خطا در انتخاب آدرس`);
@@ -124,7 +124,7 @@ const Address = ({ addresses }: Props) => {
                 }),
             );
             toast.success(
-                `${userState.addresses.find((address: IAddress) => address._id === addressId).address_title} has been deleted successfully`,
+                `${userState.addresses.find((address: IAddress) => address._id === addressId).title} has been deleted successfully`,
             );
         } else {
             toast.error(`خطا در حذف آدرس`);
@@ -182,7 +182,7 @@ const Address = ({ addresses }: Props) => {
                                 {userState.addresses.map((addressItem: IAddress) => {
                                     return (
                                         <AddressItem
-                                            key={addressItem._id}
+                                            key={String(addressItem._id)}
                                             address={addressItem}
                                             selectAddressHandler={selectAddressHandler}
                                             setIsAddAddress={setIsAddAddress}

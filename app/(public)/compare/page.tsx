@@ -1,6 +1,6 @@
 import PageHeader from "@/shared/components/PageHeader";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
-import API from "@/shared/api";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import API from "@/shared/libs/api/endpoints";
 import Compare from "@/features/ComparePage/components/compare";
 
 interface Props {
@@ -25,7 +25,7 @@ const getSingleProduct = async (product_id: string) => {
 
 const getProducts = async () => {
     try {
-        const response = await fetch(API.product.products_list(), {
+        const response = await fetch(API.product.products(), {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",

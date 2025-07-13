@@ -1,7 +1,7 @@
 "use client";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { IUser } from "@/interfaces/general";
-import API from "@/shared/api";
+import API from "@/shared/libs/api/endpoints";
 import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/shared/helper";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -142,7 +142,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                 <div className="flex w-full flex-col gap-2">
                     <label>نقش</label>
                     <SingleSelect
-                        defaultValue={{ title: covertUserRoleToPersian(user.role ? user.role : UserRoleEnum.USER) }}
+                        defaultValue={{ title: covertUserRoleToPersian(user.role ? user.role : UserRoleEnum.CUSTOMER) }}
                         options={Object.values(UserRoleEnum).map((item) => {
                             return { title: covertUserRoleToPersian(item) };
                         })}

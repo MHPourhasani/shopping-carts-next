@@ -1,5 +1,5 @@
 "use client";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { showFullDate, tomanFormat } from "@/shared/helper";
 import PATH from "@/shared/path";
 import Image from "next/image";
@@ -17,13 +17,13 @@ interface PropsInterface {
 }
 
 const ProductListItem = ({ product, href }: PropsInterface) => {
-    const { name, price, categories, images, createdAt, updatedAt } = product;
+    const { name, basePrice, categories, images, createdAt, updatedAt } = product;
     const [open, setIsOpen] = useState(window.innerWidth > 1024 ? true : false);
 
     return (
         <div
             onClick={() => setIsOpen(window.innerWidth > 1024 ? true : !open)}
-            className="flex w-full flex-col gap-4 rounded-xl bg-white p-2 odd:bg-secondary-50 dark:bg-secondary-700 dark:shadow-secondary-700 dark:odd:bg-secondary-600 lg:grid lg:grid-cols-11 lg:items-center lg:gap-2 lg:rounded-2xl"
+            className="odd:bg-secondary-50 dark:bg-secondary-700 dark:shadow-secondary-700 dark:odd:bg-secondary-600 flex w-full flex-col gap-4 rounded-xl bg-white p-2 lg:grid lg:grid-cols-11 lg:items-center lg:gap-2 lg:rounded-2xl"
         >
             <div className="flex items-center justify-between lg:col-span-3">
                 <span className="flex items-center gap-4 lg:gap-5">
@@ -40,7 +40,7 @@ const ProductListItem = ({ product, href }: PropsInterface) => {
                 </span>
 
                 <ArrowDownIcon
-                    className={`size-5 stroke-secondary-600 dark:stroke-white lg:hidden ${open ? "rotate-180 transition-all ease-in-out" : ""}`}
+                    className={`stroke-secondary-600 size-5 lg:hidden dark:stroke-white ${open ? "rotate-180 transition-all ease-in-out" : ""}`}
                 />
             </div>
 
@@ -55,11 +55,17 @@ const ProductListItem = ({ product, href }: PropsInterface) => {
 
                     <div className="flex w-full flex-col gap-4 lg:flex-row lg:items-center lg:gap-0">
                         <span className="flex items-center gap-2 truncate lg:basis-1/4">
-                            {tomanFormat(price)} <Toman className="size-4" />
+                            {basePrice ? (
+                                <>
+                                    {tomanFormat(basePrice)} <Toman className="size-4" />
+                                </>
+                            ) : (
+                                "در انبار موجود نیست"
+                            )}
                         </span>
                         <span className="lg:basis-1/4 lg:text-sm">
                             {categories
-                                ? categories.split(", ").map((item) => (
+                                ? categories.map((item) => (
                                       <Link key={item} href={PATH.home()}>
                                           {item}
                                       </Link>
@@ -80,6 +86,7 @@ const ProductListItem = ({ product, href }: PropsInterface) => {
                                 </span>
                             )}
                         </div>
+
                         <div className="flex items-center gap-4 lg:basis-1/4">
                             <ProductEditIcon product={product} />
                             <ProductDeleteIcon product={product} />

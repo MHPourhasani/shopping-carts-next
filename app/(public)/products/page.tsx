@@ -1,9 +1,10 @@
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
-import API from "@/shared/api";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import API from "@/shared/libs/api/endpoints";
 import Products from "@/features/ProductsPage/components/products";
 import PATH from "@/shared/path";
 import { Metadata } from "next";
-import { get } from "@/shared/apiCaller";
+import { get } from "@/shared/libs/api/client";
+import { PaginatedResponse } from "@/shared/interfaces";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -11,7 +12,6 @@ export const dynamic = "force-static";
 export async function generateMetadata(): Promise<Metadata> {
     const products: IProduct[] = await getProducts();
     const productsName = products !== undefined ? products.map((item) => item.name) : [];
-    const productsBrand = products !== undefined ? products.map((item) => item.brand) : [];
 
     const title = "محصولات";
     const description = "در این صفحه همه محصولات قابل مشاهده است.";
@@ -29,13 +29,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const getProducts = async () => {
-    return get(API.product.products_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then((data) => {
-            return data.results;
-        });
+    const data = await get<PaginatedResponse<IProduct>>(API.product.products());
+    return data.results;
 };
 
 const ProductsPage = async () => {

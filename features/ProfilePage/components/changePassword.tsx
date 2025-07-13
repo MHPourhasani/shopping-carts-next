@@ -9,7 +9,7 @@ import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 
 const ChangePassword = () => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
     const [formDataError, setFormDataError] = useState({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
     const dispatch = useAppDispatch();

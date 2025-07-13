@@ -4,73 +4,50 @@ import Header from "@/features/Layout/components/Header/Header";
 import MainBanners from "@/features/HomePage/components/MainBanners";
 import ProductsList from "@/features/SingleProductPage/components/ProductsList";
 import PATH from "@/shared/path";
-import { get } from "@/shared/apiCaller";
 import Link from "next/link";
-import { IBanner, IBlog, ICategory } from "@/interfaces/general";
+import { IPost } from "@/interfaces/general";
 import { Metadata } from "next";
-import BlogCard from "@/features/Blog/components/BlogCard";
-import API from "@/shared/api";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import PostCard from "@/features/Blog/components/PostCard";
+import API from "@/shared/libs/api/endpoints";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import { get } from "@/shared/libs/api/client";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
 
 export async function generateMetadata(): Promise<Metadata> {
-    const products: IProduct[] = await getProducts({});
-
     return {
-        // keywords: products.map((item) => (item.tags ? item.tags : "")),
+        // keywords: products.map((item) => (item.tags ?? "")),
     };
 }
 
 const getBanners = async () => {
-    return get(API.banners.banners_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then(({ results }) => {
-            return results;
-        });
+    // const data = await get<IBanner[]>(API.banners.banners_list());
+    return [];
 };
 
 const getCategories = async () => {
-    const res = await get(API.category.categories_list());
-    const { results } = await res.json();
-    return results;
+    // const data = await get<ICategory[]>(API.category.categories_list());
+    return [];
 };
 
-const getProducts = async ({ limit }: { limit?: number }) => {
-    return get(API.product.products_list())
-        .then((res) => {
-            return res.json();
-        })
-        .then(({ results }) => {
-            return results;
-        });
+const getProducts = async () => {
+    const data = await get<IPaginatedResponse<IProduct>>(API.product.products(), { limit: 3 });
+    return data.results;
 };
 
 const getBlogs = async () => {
-    try {
-        const response = await fetch(API.blogs.blogs_list() + "?limit=3", {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        const { results } = await response.json();
-        return results;
-    } catch (error: any) {
-        console.error(error);
-    }
+    const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
+    return data.results;
 };
 
 export default async function Home() {
-    const banners: IBanner[] = await getBanners();
-    const categories: ICategory[] = await getCategories();
-    const bestSellers: IProduct[] = await getProducts({});
-    const products: IProduct[] = await getProducts({ limit: 6 });
-    const blogs: IBlog[] = await getBlogs();
+    const banners = await getBanners();
+    const categories = await getCategories();
+    const bestSellers = await getProducts();
+    const products = await getProducts();
+    const blogs = await getBlogs();
 
     return (
         <section className="flex w-full flex-1 flex-col items-start gap-6 pt-4 pb-20 2xl:items-center 2xl:justify-center">
@@ -108,12 +85,7 @@ export default async function Home() {
                     </div>
                     <div className="no-scrollbar flex w-full gap-4 overflow-x-auto px-4 lg:grid lg:grid-cols-3 lg:overflow-hidden">
                         {blogs.map((item) => (
-                            <BlogCard
-                                key={String(item._id)}
-                                link={PATH.singleBlog(item.link)}
-                                blog={item}
-                                className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`}
-                            />
+                            <PostCard key={String(item._id)} post={item} className={`${blogs.length > 1 ? "w-11/12 lg:w-full" : ""}`} />
                         ))}
                     </div>
                 </div>

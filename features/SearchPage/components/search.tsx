@@ -6,17 +6,17 @@ import ProductCardItem from "@/features/SingleProductPage/components/ProductCard
 import EmptyState from "@/shared/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/shared/path";
-import { IBlog } from "@/interfaces/general";
+import { IPost } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
-import API from "@/shared/api";
-import BlogCard from "@/features/Blog/components/BlogCard";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
+import API from "@/shared/libs/api/endpoints";
+import PostCard from "@/features/Blog/components/PostCard";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { Input } from "@/components/ui/input";
 
 const Search = () => {
     const [data, setData] = useState<{
         count: number;
-        results: { products: IProduct[]; blogs: IBlog[] };
+        results: { products: IProduct[]; blogs: IPost[] };
     }>({
         count: 0,
         results: { products: [], blogs: [] },
@@ -129,7 +129,7 @@ const Search = () => {
                     <div className="grid w-full gap-4 sm:grid-cols-3 lg:grid-cols-2">
                         {data.results.blogs?.length ? (
                             data.results.blogs.map((blog) => {
-                                return <BlogCard key={blog._id.toString()} blog={blog} link={PATH.singleBlog(blog.link)} />;
+                                return <PostCard key={blog._id.toString()} blog={blog} link={PATH.singleBlog(blog.link)} />;
                             })
                         ) : (
                             <p>هیچ بلاگی یافت نشد.</p>

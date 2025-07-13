@@ -1,6 +1,6 @@
 import Error500 from "@/shared/components/Error500";
-import { IProduct } from "@/features/SingleProductPage/interface/product.interface";
-import API from "@/shared/api";
+import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import API from "@/shared/libs/api/endpoints";
 import SingleProduct from "@/features/SingleProductPage/components/SingleProduct";
 import { Metadata } from "next";
 import { SingleProductProvider } from "@/features/SingleProductPage/context/ProductData";

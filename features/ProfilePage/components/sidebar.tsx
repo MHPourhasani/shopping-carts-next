@@ -1,18 +1,28 @@
 "use client";
-import { useAppSelector } from "@/redux/hooks";
-import { signOut } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import PATH from "@/shared/path";
 import { sidebarItems } from "@/features/ProfilePage/components/sidebarItems";
 import LogoutIcon from "@/assets/icons/components/Logout";
+import { authToken } from "@/shared/utils/token";
+import { Button } from "@/components/ui/button";
+import { setUser } from "@/redux/slices/authSlice";
 
 const Sidebar = () => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const pathname = usePathname();
+    const router = useRouter();
+    const dispatch = useAppDispatch();
+
+    const handleLogout = () => {
+        authToken.remove();
+        dispatch(setUser(null));
+        router.push(PATH.home());
+    };
 
     return (
-        <aside className="no-scrollbar dark:bg-secondary-700 hidden h-full max-w-[250px] min-w-[250px] flex-col items-center justify-between gap-4 overflow-y-auto rounded-3xl bg-white p-4 py-5 lg:flex">
+        <aside className="no-scrollbar dark:bg-secondary-700 hidden h-full max-w-[250px] min-w-[250px] flex-col justify-between gap-4 overflow-y-auto rounded-3xl bg-white p-4 py-5 lg:flex">
             <div className="flex w-full flex-col gap-8">
                 <Link href={PATH.home()} className="self-start pt-8 text-3xl font-bold dark:text-white">
                     {process.env.shop_name}
@@ -42,12 +52,14 @@ const Sidebar = () => {
                 </div>
             </div>
 
-            <div className="flex w-full items-center gap-2">
-                <LogoutIcon className="fill-red-600" />
-                <button type="submit" onClick={() => signOut()} className="hover-transition text-red-600 hover:text-red-700">
-                    خروج از حساب کاربری
-                </button>
-            </div>
+            <Button
+                variant="text"
+                onClick={handleLogout}
+                className="group w-full cursor-pointer justify-start !px-0 text-red-500 hover:text-red-600"
+            >
+                <LogoutIcon className="fill-red-600 group-hover:fill-red-700" />
+                خروج از حساب کاربری
+            </Button>
         </aside>
     );
 };

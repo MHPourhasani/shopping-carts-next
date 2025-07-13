@@ -14,7 +14,7 @@ import { useSession } from "next-auth/react";
 import Minus from "@/assets/icons/components/Minus";
 import AddIcon from "@/assets/icons/components/Add";
 import Toman from "@/assets/icons/components/Toman";
-import { IColor } from "../interface/product.interface";
+import { IColor } from "../interface/interface";
 
 interface IProps {
     _id: ObjectId;
@@ -28,7 +28,7 @@ interface IProps {
 const CartProductCard = (props: IProps) => {
     const { _id, product, size, quantity, color } = props;
     const { data: session } = useSession();
-    const cartsState: any = useAppSelector((state: any) => state.carts.carts);
+    const cartsState: any = useAppSelector((state) => state.carts.carts);
     const dispatch = useAppDispatch();
 
     const updateQuantity = async (operator: "+" | "-") => {
@@ -65,7 +65,7 @@ const CartProductCard = (props: IProps) => {
     };
 
     return (
-        <div className="flex w-full min-w-fit items-center justify-between gap-3 rounded-xl bg-bg-2 p-2 dark:bg-secondary-700 lg:p-4">
+        <div className="bg-bg-2 dark:bg-secondary-700 flex w-full min-w-fit items-center justify-between gap-3 rounded-xl p-2 lg:p-4">
             <Link
                 href={PATH.singleProduct(product._id.toString(), product.name)}
                 className="size-24 hover:opacity-80 md:size-36 lg:size-28"
@@ -83,7 +83,7 @@ const CartProductCard = (props: IProps) => {
                 <section className="flex w-full items-center justify-between">
                     <Link
                         href={PATH.singleProduct(product._id.toString(), product.name)}
-                        className="truncate text-lg font-semibold hover:text-gray-950 dark:hover:text-secondary-100 md:text-xl"
+                        className="dark:hover:text-secondary-100 truncate text-lg font-semibold hover:text-gray-950 md:text-xl"
                     >
                         {capitalizeTheFirstLettersOfWords(product?.name)}
                     </Link>
@@ -100,7 +100,7 @@ const CartProductCard = (props: IProps) => {
                     <div className="flex items-center gap-4 text-sm md:text-base lg:text-lg">
                         <span className="flex items-center gap-1 text-gray-400">
                             سایز:
-                            <p className="font-semibold text-secondary-600 dark:text-secondary-100">{size}</p>
+                            <p className="text-secondary-600 dark:text-secondary-100 font-semibold">{size}</p>
                         </span>
                         <span className="flex items-center gap-1 text-gray-400">
                             رنگ:
@@ -111,7 +111,7 @@ const CartProductCard = (props: IProps) => {
                     <div className="flex items-center gap-1">
                         <span
                             onClick={() => updateQuantity("+")}
-                            className="hover-transition flex aspect-square size-9 cursor-pointer items-center justify-center rounded-full border border-primary-100 hover:border-violet-600 lg:size-10"
+                            className="hover-transition border-primary-100 flex aspect-square size-9 cursor-pointer items-center justify-center rounded-full border hover:border-violet-600 lg:size-10"
                         >
                             <AddIcon className="stroke-primary-100 hover:stroke-violet-600" />
                         </span>

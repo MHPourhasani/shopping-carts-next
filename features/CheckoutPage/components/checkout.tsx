@@ -1,27 +1,26 @@
 "use client";
 import { redirect, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IAddress, ICart } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
-import API from "../../../shared/api";
+import API from "../../../shared/libs/api/endpoints";
 import Toman from "@/assets/icons/components/Toman";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { authToken } from "@/shared/utils/token";
 
 const Checkout = ({ carts }: { carts: ICart[] }) => {
-    const { data: session } = useSession();
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
     const [error, setError] = useState({ information: "", address: "" });
     const [description, setDescription] = useState("");
     const router = useRouter();
     const taxPercent = Number(process.env.TAX_PERCENT) || 9;
 
-    if (!session) {
+    if (!authToken.get()?.access) {
         redirect(`${PATH.login()}?redirect=${PATH.checkout()}`);
     }
 
@@ -38,7 +37,7 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
     };
 
     const goToPayment = async () => {
-        if (!userState?.first_name || !userState?.last_name || !userState?.phone_number) {
+        if (!userState?.first_name || !userState?.last_name || !userState?.phone) {
             setError({ ...error, information: "Please enter empty field" });
         } else if (!userState?.addresses.find((adr: IAddress) => adr.isSelected)) {
             setError({ ...error, address: "Please add an address" });
@@ -93,10 +92,10 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">اطلاعات مشتری</span>
-                        <Link href={PATH.profile.edit_personal()} className="text-primary-100 lg:hidden">
+                        <Link href={PATH.dashboard.edit_personal()} className="text-primary-100 lg:hidden">
                             ویرایش
                         </Link>
-                        <Link href={PATH.profile.main()} className="text-primary-100 hidden lg:flex">
+                        <Link href={PATH.dashboard.main()} className="text-primary-100 hidden lg:flex">
                             ویرایش
                         </Link>
                     </div>
@@ -114,7 +113,7 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
 
                         <span className="flex w-full justify-between gap-4">
                             <span className="min-w-fit">شماره تماس</span>
-                            <p>{userState?.phone_number ? userState.phone_number : "empty"}</p>
+                            <p>{userState?.phone ? userState.phone : "empty"}</p>
                         </span>
 
                         <span className="flex w-full justify-between gap-4">
@@ -129,11 +128,11 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">آدرس</span>
-                        <span onClick={() => router.push(PATH.profile.address())} className="text-primary-100 lg:hidden">
+                        <span onClick={() => router.push(PATH.dashboard.address())} className="text-primary-100 lg:hidden">
                             {userState?.addresses.length ? "ویرایش" : "افزودن"}
                         </span>
                         <span
-                            onClick={() => router.push(PATH.profile.address())}
+                            onClick={() => router.push(PATH.dashboard.address())}
                             className="text-primary-100 hidden cursor-pointer lg:flex"
                         >
                             {userState?.addresses.length ? "ویرایش" : "افزودن"}

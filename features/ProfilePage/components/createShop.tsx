@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 const CreateShop = () => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({ name: "", description: "", phone_number: "" });
     const [formDataError, setFormDataError] = useState({ name: "", description: "", phone_number: "" });
     const dispatch = useAppDispatch();
@@ -55,7 +55,7 @@ const CreateShop = () => {
             if (res.ok) {
                 dispatch(setUser(data));
                 toast.success(message);
-                router.push(PATH.profile.main());
+                router.push(PATH.dashboard.main());
             } else {
                 toast.error(`خطا در فروشگاه شما`);
             }

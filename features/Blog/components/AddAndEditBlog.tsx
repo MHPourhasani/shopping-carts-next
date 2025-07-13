@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { handleRefreshAfterBack } from "../../../shared/helper";
 import { useAppSelector } from "@/redux/hooks";
-import { IBlog } from "@/interfaces/general";
+import { IPost } from "@/interfaces/general";
 import Link from "next/link";
 import PATH from "@/shared/path";
 import TextEditor from "@/shared/components/common/TextEditor";
@@ -12,23 +12,22 @@ import TrashIcon from "@/assets/icons/components/Trash";
 import toastMessage from "@/shared/toastMessage";
 import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "@/shared/components/common/MultiSelect";
-import API from "@/shared/api";
-import { RequestTypeEnum } from "@/shared/enums";
+import API from "@/shared/libs/api/endpoints";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 
 interface Props {
-    blog?: IBlog;
+    blog?: IPost;
     isEdit?: boolean;
 }
 
 const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const [data, setData] = useState<any>(
         isEdit ? blog! : { link: "", subject: "", content: "", tags: "", keywords: "", relatedBlogs: [] },
     );
     const [isEditLink, setIsEditLink] = useState(true);
-    const [allBlogs, setAllBlogs] = useState<Partial<IBlog[]>>([]);
+    const [allBlogs, setAllBlogs] = useState<Partial<IPost[]>>([]);
     const router = useRouter();
 
     const changeHandler = (e: any) => {
@@ -38,7 +37,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
     useEffect(() => {
         const getBlogs = async () => {
             try {
-                const response = await fetch(API.blogs.blogs_list(RequestTypeEnum.CSR), {
+                const response = await fetch(API.blogs.blogs_list(), {
                     headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json",
@@ -47,7 +46,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 });
                 if (response.ok) {
                     const { results } = await response.json();
-                    setAllBlogs(results.filter((b: IBlog) => b._id !== data._id));
+                    setAllBlogs(results.filter((b: IPost) => b._id !== data._id));
                 }
             } catch (error: any) {
                 console.error(error);
@@ -151,7 +150,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 <MultiSelect
                     defaultValues={
                         data.relatedBlogs
-                            ? data.relatedBlogs.map((b: IBlog) => {
+                            ? data.relatedBlogs.map((b: IPost) => {
                                   return { id: String(b?._id), title: String(b?.subject) };
                               })
                             : undefined

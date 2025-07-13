@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import userIcon from "@/assets/icons/svgs/user.svg";
@@ -14,6 +13,8 @@ import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import { covertUserRoleToPersian, showFullDate } from "@/shared/helper";
 import { UserRoleEnum } from "@/interfaces/enums";
 import { Button } from "@/components/ui/button";
+import { authToken } from "@/shared/utils/token";
+import { useRouter } from "next/navigation";
 
 interface PropsInterface {
     isLoading: boolean;
@@ -23,44 +24,38 @@ interface PropsInterface {
 }
 
 const pageItems = [
-    { title: "سفارشات", href: PATH.profile.order.orders() },
-    { title: "علاقه مندی ها", href: PATH.profile.favorites() },
-    { title: "پیام ها", href: PATH.profile.notifications() },
-    { title: "تنظیمات", href: PATH.profile.settings() },
-    { title: "پشتیبانی", href: PATH.profile.support() },
+    { title: "سفارشات", href: PATH.dashboard.order.orders() },
+    { title: "علاقه مندی ها", href: PATH.dashboard.favorites() },
+    { title: "پیام ها", href: PATH.dashboard.notifications() },
+    { title: "تنظیمات", href: PATH.dashboard.settings() },
+    { title: "پشتیبانی", href: PATH.dashboard.support() },
 ];
 
 const adminPages = [
-    { title: "فروشگاه", href: PATH.profile.shop() },
-    { title: "نوشته ها", href: PATH.profile.blog.blogs() },
-    { title: "کاربران", href: PATH.profile.users.main() },
+    { title: "فروشگاه", href: PATH.dashboard.shop() },
+    { title: "نوشته ها", href: PATH.dashboard.blog.blogs() },
+    { title: "کاربران", href: PATH.dashboard.users.main() },
 ];
 
 const MobileProfile = (props: PropsInterface) => {
     const { isLoading, imageFileHandler, deleteProfileImage, deleteAccountHandler } = props;
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
     const [isChangeProfileImage, setIsChangeProfileImage] = useState(false);
     const fileInputRef = useRef<any>();
+    const router = useRouter();
 
     const userData = [
         { title: "نام", value: userState?.first_name },
         { title: "نام خانوادگی", value: userState?.last_name },
-        { title: "شماره تماس", value: userState?.phone_number },
+        { title: "شماره تماس", value: userState?.phone },
         { title: "ایمیل", value: userState?.email },
     ];
 
     const logoutHandler = async () => {
-        await signOut();
+        authToken.remove();
         dispatch(setUser(null));
-        await fetch("/api/notifications", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                user: userState.email,
-                notification: { title: "خروج از حساب کاربری", message: `از حساب کاربری خود با موفقیت خارج شدید.` },
-            }),
-        });
+        router.push(PATH.home());
     };
 
     return (
@@ -120,7 +115,7 @@ const MobileProfile = (props: PropsInterface) => {
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">اطلاعات شخصی</span>
-                        <Link href={PATH.profile.edit_personal()} className="text-primary-100">
+                        <Link href={PATH.dashboard.edit_personal()} className="text-primary-100">
                             ویرایش
                         </Link>
                     </div>
@@ -154,7 +149,7 @@ const MobileProfile = (props: PropsInterface) => {
                 </div>
 
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
-                    <Link href={PATH.profile.address()} className="flex w-full items-center justify-between">
+                    <Link href={PATH.dashboard.address()} className="flex w-full items-center justify-between">
                         <span className="text-secondary-700 dark:text-white">آدرس</span>
                         <ArrowLeft className="stroke-secondary-600 dark:stroke-white" />
                     </Link>
@@ -188,7 +183,7 @@ const MobileProfile = (props: PropsInterface) => {
             </div>
 
             <div className="w-full">
-                <Link href={PATH.profile.change_password()}>
+                <Link href={PATH.dashboard.change_password()}>
                     <Button variant="secondary" type="submit" className="mb-4 rounded-lg border-sky-600 text-sky-600">
                         تغییر رمز عبور
                     </Button>

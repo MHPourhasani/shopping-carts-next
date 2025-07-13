@@ -1,9 +1,9 @@
 import Carts from "@/features/CartPage/components/carts";
 import { Metadata } from "next";
-import API from "@/shared/api";
-import { getServerAuthSession } from "@/shared/auth";
+import API from "@/shared/libs/api/endpoints";
 import { redirect } from "next/navigation";
 import PATH from "@/shared/path";
+import { authToken } from "@/shared/utils/token";
 
 export const metadata: Metadata = {
     title: "سبد خرید",
@@ -27,11 +27,10 @@ const getCarts = async (user_id: string) => {
 };
 
 const CartsPage = async () => {
-    const session = await getServerAuthSession();
-    if (!session) {
+    if (!authToken.get()?.access) {
         redirect(`${PATH.login()}?redirect=${PATH.carts()}`);
     }
-    const carts = await getCarts(session?.user.userId!);
+    const carts = await getCarts(authToken.get()!.access);
 
     return <Carts carts={carts ? carts : []} />;
 };

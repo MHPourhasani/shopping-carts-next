@@ -6,8 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import PATH from "@/shared/path";
-import API from "@/shared/api";
-import { signIn } from "next-auth/react";
+import API from "@/shared/libs/api/endpoints";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
@@ -52,10 +51,6 @@ const SignUp = () => {
                 const { message } = await res.json();
 
                 if (res.ok) {
-                    await signIn("credentials", {
-                        email,
-                        password,
-                    });
                     const res = await fetch(API.auth.login(), {
                         method: "POST",
                         headers: {

@@ -1,4 +1,4 @@
-import { IColor } from "@/features/SingleProductPage/interface/product.interface";
+import { IColor } from "@/features/SingleProductPage/interface/interface";
 import MultiSelect from "./MultiSelect";
 import colors from "@/assets/json/colors.json";
 

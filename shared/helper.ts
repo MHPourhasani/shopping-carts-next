@@ -47,11 +47,11 @@ export const handleRefreshAfterBack = () => {
 
 export const covertUserRoleToPersian = (role: UserRoleEnum) => {
     switch (true) {
-        case role === UserRoleEnum.USER:
+        case role === UserRoleEnum.CUSTOMER:
             return "کاربر";
         case role === UserRoleEnum.AUTHOR:
             return "نویسنده";
-        case role === UserRoleEnum.SHOPPER:
+        case role === UserRoleEnum.SELLER:
             return "فروشنده";
         case role === UserRoleEnum.ADMIN:
             return "مدیر کل";
@@ -63,15 +63,15 @@ export const covertUserRoleToPersian = (role: UserRoleEnum) => {
 export const covertUserRoleToUserRoleEnum = (role: string) => {
     switch (true) {
         case role === "کاربر":
-            return UserRoleEnum.USER;
+            return UserRoleEnum.CUSTOMER;
         case role === "نویسنده":
             return UserRoleEnum.AUTHOR;
         case role === "فروشنده":
-            return UserRoleEnum.SHOPPER;
+            return UserRoleEnum.SELLER;
         case role === "مدیر کل":
             return UserRoleEnum.ADMIN;
         default:
-            return UserRoleEnum.USER;
+            return UserRoleEnum.CUSTOMER;
     }
 };
 

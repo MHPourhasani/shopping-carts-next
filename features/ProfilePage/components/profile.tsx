@@ -9,7 +9,7 @@ import MobileProfile from "./mobileProfile";
 import DesktopProfile from "./desktopProfile";
 
 const Profile = () => {
-    const userState = useAppSelector((state: any) => state.auth.user);
+    const userState = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
 

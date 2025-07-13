@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { IAddress } from "@/interfaces/general";
+import { IAddress, IUser } from "@/interfaces/general";
 import PATH from "@/shared/path";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
@@ -16,6 +16,8 @@ import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { put } from "@/shared/libs/api/client";
+import API from "@/shared/libs/api/endpoints";
 
 interface PropsInterface {
     isLoading: boolean;
@@ -26,14 +28,9 @@ interface PropsInterface {
 
 const DesktopProfile = (props: PropsInterface) => {
     const { isLoading, imageFileHandler, deleteAccountHandler } = props;
-    const userState = useAppSelector((state: any) => state.auth.user);
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone_number: "",
-    });
-    const [formDataError, setFormDataError] = useState({ first_name: "", last_name: "", email: "", phone_number: "" });
+    const userState = useAppSelector((state) => state.auth.user);
+    const [formData, setFormData] = useState<IUser>();
+    const [formDataError, setFormDataError] = useState({ first_name: "", last_name: "", email: "", phone: "" });
     const dispatch = useAppDispatch();
     const router = useRouter();
     const fileInputRef = useRef<any>();
@@ -47,48 +44,43 @@ const DesktopProfile = (props: PropsInterface) => {
     };
 
     const saveChangesHandler = async () => {
-        const { first_name, last_name, email, phone_number } = formData;
+        if (!!formData) {
+            const { first_name, last_name, phone } = formData;
 
-        if (!first_name.trim()) {
-            setFormDataError({ ...formDataError, first_name: "نام نباید خالی باشد." });
-        } else if (!last_name?.trim()) {
-            setFormDataError({ ...formDataError, last_name: "نام خانوادگی نباید خالی باشد." });
-        } else if (!email?.trim()) {
-            setFormDataError({ ...formDataError, email: "ایمیل نباید خالی باشد." });
-        } else if (!phone_number?.trim()) {
-            setFormDataError({ ...formDataError, phone_number: "شماره تماس نباید خالی باشد." });
-        } else if (+phone_number.trim() < 11) {
-            setFormDataError({ ...formDataError, phone_number: "شماره تماس نباید کمتر از 11 رقم باشد." });
-        } else {
-            const res = await fetch(`/api/profile/update-profile/${userState._id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    first_name: first_name,
-                    last_name: last_name,
-                    email,
-                    phone_number: phone_number,
-                }),
-            });
-
-            const { message, data } = await res.json();
-
-            if (res.ok) {
-                await fetch("/api/notifications", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        user: userState._id,
-                        notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
-                    }),
-                });
-                dispatch(setUser(data));
-                toast.success(message);
-                router.back();
+            if (!first_name.trim()) {
+                setFormDataError({ ...formDataError, first_name: "نام نباید خالی باشد." });
+            } else if (!last_name?.trim()) {
+                setFormDataError({ ...formDataError, last_name: "نام خانوادگی نباید خالی باشد." });
+            } else if (!phone?.trim()) {
+                setFormDataError({ ...formDataError, phone: "شماره تماس نباید خالی باشد." });
+            } else if (+phone.trim() < 11) {
+                setFormDataError({ ...formDataError, phone: "شماره تماس نباید کمتر از 11 رقم باشد." });
             } else {
-                toast.error(`خطا در آپدیت پروفایل`);
+                const res = await put(API.users.updateProfile(String(userState!._id)), {
+                    first_name,
+                    last_name,
+                    phone,
+                });
+
+                const { message, data } = await res.json();
+
+                if (res.ok) {
+                    await fetch("/api/notifications", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            user: userState._id,
+                            notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
+                        }),
+                    });
+                    dispatch(setUser(data));
+                    toast.success(message);
+                    router.back();
+                } else {
+                    toast.error(`خطا در آپدیت پروفایل`);
+                }
             }
         }
     };
@@ -179,10 +171,10 @@ const DesktopProfile = (props: PropsInterface) => {
                             dir="ltr"
                             type="tel"
                             label="شماره تماس"
-                            name="phone_number"
-                            value={formData.phone_number}
+                            name="phone"
+                            value={formData.phone}
                             onChange={changeHandler}
-                            error={formDataError.phone_number}
+                            error={formDataError.phone}
                             maxLength={11}
                             className="focus:border-primary-100"
                         />
@@ -191,6 +183,7 @@ const DesktopProfile = (props: PropsInterface) => {
                             dir="ltr"
                             label="ایمیل"
                             name="email"
+                            disabled
                             value={formData.email}
                             onChange={changeHandler}
                             error={formDataError.email}
@@ -204,7 +197,7 @@ const DesktopProfile = (props: PropsInterface) => {
                 </div>
 
                 <div className="bg-bg-2 dark:bg-secondary-600 flex w-full flex-col items-start gap-4 rounded-xl p-4">
-                    <Link href={PATH.profile.address()} className="flex w-full items-center justify-between">
+                    <Link href={PATH.dashboard.address()} className="flex w-full items-center justify-between">
                         <span className="text-secondary-600 dark:text-white">آدرس</span>
                         <span className="text-primary-100">
                             {userState?.addresses?.length ? (
@@ -223,13 +216,13 @@ const DesktopProfile = (props: PropsInterface) => {
                 </div>
             </div>
 
-            <Link href={PATH.profile.change_password()}>
-                <Button variant="secondary" className="rounded-lg border-sky-600 px-4 text-sky-600">
+            <Link href={PATH.dashboard.change_password()}>
+                <Button variant="secondary" className="cursor-pointer rounded-lg border-sky-600 px-4 text-sky-600">
                     تغییر رمز عبور
                 </Button>
             </Link>
 
-            <Button variant="text" onClick={deleteAccountHandler} className="w-auto hover:text-red-600">
+            <Button variant="text" onClick={deleteAccountHandler} className="w-auto cursor-pointer text-red-500 hover:text-red-600">
                 حذف حساب کاربری
             </Button>
         </section>

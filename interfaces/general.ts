@@ -1,55 +1,46 @@
-import { ObjectId } from "mongoose";
-import { PaymentMethodEnum, UserRoleEnum } from "./enums";
-import { IColor, IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/product.interface";
+import { Types } from "mongoose";
+import { PaymentMethodEnum, PostStatusEnum, UserRoleEnum } from "./enums";
+import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/interface";
 
 export interface ICategory {
-    _id: ObjectId;
+    _id: Types.ObjectId;
     name: string;
     src: string;
 }
 
 export interface IBanner {
-    _id: ObjectId;
+    _id: Types.ObjectId;
     name: string;
     src: string;
     type: string;
 }
 
 export interface IAddress {
-    _id: string;
-    address_title: string;
-    address_value: string;
-    isSelected: boolean;
+    _id: Types.ObjectId;
+    title: string;
+    address: string;
+    city: string;
+    postalCode: string;
+    isDefault: boolean;
 }
 
 export interface IFavorite {
-    _id: ObjectId;
-    productId?: ObjectId;
+    _id: Types.ObjectId;
+    productId?: Types.ObjectId;
 }
 
 export interface IUser {
-    _id: ObjectId;
+    _id: Types.ObjectId;
     first_name: string;
     last_name: string;
     email: string;
     password: string;
-    emailValid?: boolean;
+    is_email_verified?: boolean;
+    is_phone_verified?: boolean;
     profile_image?: string;
-    phone_number?: string;
-    addresses?: IAddress[];
+    phone?: string;
+    addresses: IAddress[];
     role: UserRoleEnum;
-    createdAt: Date;
-    updatedAt?: Date;
-}
-
-export interface IShop {
-    _id: ObjectId;
-    creator: ObjectId;
-    name: string;
-    phone_number: string;
-    description?: string;
-    logo?: string;
-    products?: IProduct[];
     createdAt: Date;
     updatedAt?: Date;
 }
@@ -63,15 +54,15 @@ export interface INotification {
 }
 
 export interface ICart {
-    _id: ObjectId;
+    _id: Types.ObjectId;
     product: string;
     quantity: number;
-    color: IColor;
+    color: any;
     size: number;
 }
 
 export interface IBrands {
-    _id: ObjectId;
+    _id: Types.ObjectId;
     name: string;
     src: string;
 }
@@ -84,7 +75,7 @@ export interface IconProps {
 }
 
 export interface IOrder {
-    _id: ObjectId;
+    _id: Types.ObjectId;
     orderNo: string;
     products: ISingleProductData[];
     payment: { method: PaymentMethodEnum; transportCost: number };
@@ -94,19 +85,22 @@ export interface IOrder {
     createdAt: Date;
 }
 
-export interface IBlog {
-    _id: ObjectId;
-    author: IUser;
-    link: string;
-    subject: string;
+export interface IPost {
+    _id: Types.ObjectId;
+    title: string;
+    slug: string;
     content: string;
-    tags?: string;
-    keywords?: string;
-    categories?: string;
-    readingTime?: number;
-    relatedBlogs?: IBlog[];
+    excerpt?: string;
+    status: PostStatusEnum;
+    tags: string[];
+    categories: string[];
+    author: IUser;
+    seoTitle?: string;
+    seoDescription?: string;
+    keywords?: string[];
     createdAt: Date;
-    updatedAt?: Date;
+    updatedAt: Date;
+    publishedAt?: Date;
 }
 
 export type TOption = { id?: string | number; title: string };
