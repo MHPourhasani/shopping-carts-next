@@ -5,7 +5,7 @@ import notProductSearchFound from "@/assets/icons/svgs/search-illustration.svg";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import EmptyState from "@/shared/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { IPost } from "@/interfaces/general";
 import CloseIcon from "@/assets/icons/components/Close";
 import API from "@/shared/libs/api/endpoints";

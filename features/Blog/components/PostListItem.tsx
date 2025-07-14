@@ -4,8 +4,8 @@ import EditIcon from "@/assets/icons/components/Edit";
 import TrashIcon from "@/assets/icons/components/Trash";
 import UserIcon from "@/assets/icons/components/User";
 import { IPost } from "@/interfaces/general";
-import { handleRefreshAfterBack } from "@/shared/helper";
-import toastMessage from "@/shared/toastMessage";
+import { handleRefreshAfterBack } from "@/shared/utils/utils";
+import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
 

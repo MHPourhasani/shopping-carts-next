@@ -1,5 +1,5 @@
-import SignUp from "@/features/auth/signup/components/signup";
-import PATH from "@/shared/path";
+import SignUp from "@/features/auth/components/signup";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 
 export const revalidate = 30;

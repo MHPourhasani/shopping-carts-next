@@ -1,7 +1,7 @@
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import API from "@/shared/libs/api/endpoints";
 import Products from "@/features/ProductsPage/components/products";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import { get } from "@/shared/libs/api/client";
 import { PaginatedResponse } from "@/shared/interfaces";

@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const ArrowLeft = ({ onClick, className }: IconProps) => {
+const ArrowLeft = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="16"

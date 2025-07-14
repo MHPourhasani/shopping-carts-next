@@ -1,7 +1,7 @@
 "use client";
 import notImage from "@/assets/images/not-images.svg";
 import Image from "next/image";
-import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/helper";
+import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/utils/utils";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import LoveIcon from "@/assets/icons/components/Love";
 import { useSession } from "next-auth/react";
@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import Toman from "@/assets/icons/components/Toman";
 
 interface PropsInterface {

@@ -2,7 +2,7 @@ const toastMessage = {
     auth: {
         login: { successfulLogin: "خوش آمدید." },
     },
-    profile: {
+    dashboard: {
         successfulChangedRole: (name: string) => `نقش ${name} تغییر کرد.`,
         failedChangedRole: (name: string) => `تغییر نقش ${name} با خطا مواجه شد.`,
         successfulDeleteUser: (name: string) => `${name} با موفقیت حذف شد.`,

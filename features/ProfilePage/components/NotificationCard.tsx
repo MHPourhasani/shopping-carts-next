@@ -4,8 +4,8 @@ import TrashIcon from "@/assets/icons/components/Trash";
 import API from "@/shared/libs/api/endpoints";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import toastMessage from "@/shared/toastMessage";
-import { showFullDate } from "@/shared/helper";
+import toastMessage from "@/shared/utils/toastMessage";
+import { showFullDate } from "@/shared/utils/utils";
 import { Button } from "@/components/ui/button";
 
 interface Props {

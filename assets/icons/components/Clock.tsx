@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const ClockIcon = ({ onClick, className }: IconProps) => {
+const ClockIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="24"

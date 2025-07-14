@@ -5,7 +5,7 @@ import signupImage from "@/assets/images/signup-page.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import API from "@/shared/libs/api/endpoints";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";

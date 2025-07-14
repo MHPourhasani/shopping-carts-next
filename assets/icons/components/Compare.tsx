@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const CompareIcon = ({ onClick, className }: IconProps) => {
+const CompareIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="24"

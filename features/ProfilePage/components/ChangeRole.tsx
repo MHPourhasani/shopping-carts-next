@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import SingleSelect from "@/shared/components/common/SingleSelect";
-import { TOption, IUser } from "@/interfaces/general";
+import { TOption } from "@/interfaces/general";
 import { toast } from "react-toastify";
-import toastMessage from "@/shared/toastMessage";
-import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/shared/helper";
-import { UserRoleEnum } from "@/interfaces/enums";
+import toastMessage from "@/shared/utils/toastMessage";
+import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/shared/utils/utils";
+import { IUser } from "@/features/auth/interfaces";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 interface Props {
     user: IUser;

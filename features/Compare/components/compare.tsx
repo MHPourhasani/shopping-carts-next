@@ -1,5 +1,5 @@
 "use client";
-import CompareItem from "@/components/CompareItem";
+import CompareItem from "@/features/Compare/components/CompareItem";
 import Modal from "@/shared/components/Modal";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,9 +9,9 @@ import { toast } from "react-toastify";
 import addIcon from "@/assets/icons/svgs/add.svg";
 import minusIcon from "@/assets/icons/svgs/minus.svg";
 import Toman from "@/assets/icons/components/Toman";
-import PATH from "@/shared/path";
-import toastMessage from "@/shared/toastMessage";
-import { tomanFormat } from "@/shared/helper";
+import PATH from "@/shared/utils/path";
+import toastMessage from "@/shared/utils/toastMessage";
+import { tomanFormat } from "@/shared/utils/utils";
 import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/interface";
 import { Button } from "@/components/ui/button";
 

@@ -3,18 +3,18 @@ import EyeIcon from "@/assets/icons/components/Eye";
 import TrashIcon from "@/assets/icons/components/Trash";
 import EmptyState from "@/shared/components/EmptyState";
 import ChangeRole from "@/features/ProfilePage/components/ChangeRole";
-import { IUser } from "@/interfaces/general";
-import toastMessage from "@/shared/toastMessage";
+import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import PATH from "../../../../shared/path";
+import PATH from "../../../../shared/utils/path";
 import { useAppSelector } from "@/redux/hooks";
 import AddIcon from "@/assets/icons/components/Add";
-import { UserRoleEnum } from "@/interfaces/enums";
 import { useSearchParams } from "next/navigation";
 import PageHeader from "@/shared/components/PageHeader";
 import { Button } from "@/components/ui/button";
+import { IUser } from "@/features/auth/interfaces";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 interface Props {
     users: IUser[];

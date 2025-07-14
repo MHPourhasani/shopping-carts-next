@@ -7,13 +7,12 @@ import AddIcon from "@/assets/icons/components/Add";
 import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/shared/components/EmptyState";
 import { setUser } from "@/redux/slices/authSlice";
-import { IAddress } from "@/interfaces/general";
-import { ObjectId } from "mongoose";
 import AddressItem from "@/features/ProfilePage/components/AddressItem";
 import PageHeader from "@/shared/components/PageHeader";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { IAddress } from "@/features/auth/interfaces";
 
 interface Props {
     addresses: IAddress[];
@@ -61,7 +60,7 @@ const Address = ({ addresses }: Props) => {
         }
     };
 
-    const selectAddressHandler = async (addressId: ObjectId | string) => {
+    const selectAddressHandler = async (addressId: string) => {
         const res = await fetch(`/api/profile/address/select-address/${addressId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -82,7 +81,7 @@ const Address = ({ addresses }: Props) => {
         }
     };
 
-    const editAddressHandler = async (addressId: ObjectId | string) => {
+    const editAddressHandler = async (addressId: string) => {
         const res = await fetch(`/api/profile/address/update-address/${addressId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

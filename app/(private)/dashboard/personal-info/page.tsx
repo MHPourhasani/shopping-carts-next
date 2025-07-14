@@ -1,6 +1,6 @@
 import Profile from "@/features/ProfilePage/components/profile";
 
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { authToken } from "@/shared/utils/token";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";

@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import API from "./endpoints";
 import { authToken } from "@/shared/utils/token";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 
 let isRefreshing = false;
 let failedQueue: {

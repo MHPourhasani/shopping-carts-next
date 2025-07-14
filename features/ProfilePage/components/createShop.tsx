@@ -2,7 +2,7 @@
 import PageHeader from "@/shared/components/PageHeader";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";

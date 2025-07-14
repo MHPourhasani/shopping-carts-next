@@ -3,11 +3,11 @@ import Image from "next/image";
 import bagIcon from "@/assets/icons/svgs/bag.svg";
 import Link from "next/link";
 import ProfileIcon from "@/assets/icons/components/Profile";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import ThemeSwitch from "@/shared/components/ThemeSwitch";
 import { useAppSelector } from "@/redux/hooks";
 import DesktopMenu from "./DesktopMenu";
-import Search from "@/components/Search";
+import Search from "@/features/Layout/components/Search";
 import { Suspense } from "react";
 import { authToken } from "@/shared/utils/token";
 

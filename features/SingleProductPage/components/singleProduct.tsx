@@ -8,8 +8,8 @@ import { useSession } from "next-auth/react";
 import MobileSingleProduct from "@/features/SingleProductPage/components/MobileSingleProduct";
 import DesktopSingleProduct from "@/features/SingleProductPage/components/Desctop/DesktopSingleProduct";
 import { usePathname, useRouter } from "next/navigation";
-import toastMessage from "@/shared/toastMessage";
-import PATH from "@/shared/path";
+import toastMessage from "@/shared/utils/toastMessage";
+import PATH from "@/shared/utils/path";
 import { useSingleProductData } from "../context/ProductData";
 import { ISingleProductData } from "../interface/interface";
 

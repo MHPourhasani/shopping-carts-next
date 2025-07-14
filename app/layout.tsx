@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProviders } from "@/shared/providers/Theme";
 import Wrapper from "./_wrapper";
 import Toast from "@/shared/components/Toast";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/features/Layout/components/Navbar";
 import Loading from "./loading";
 import { iranSans } from "./fonts";
 

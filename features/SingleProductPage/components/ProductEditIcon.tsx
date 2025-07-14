@@ -1,9 +1,9 @@
 "use client";
 import EditIcon from "@/assets/icons/components/Edit";
-import { UserRoleEnum } from "@/interfaces/enums";
+import { UserRoleEnum } from "@/features/auth/enums";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { useAppSelector } from "@/redux/hooks";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import Link from "next/link";
 
 const ProductEditIcon = ({ product }: { product: IProduct }) => {

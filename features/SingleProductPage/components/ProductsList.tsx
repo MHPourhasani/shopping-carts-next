@@ -1,4 +1,4 @@
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import ProductCardItem from "./ProductCardItem";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 

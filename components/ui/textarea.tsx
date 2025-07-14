@@ -1,4 +1,4 @@
-import { cn } from "@/shared/helper";
+import { cn } from "@/shared/utils/utils";
 import { forwardRef } from "react";
 import { Label } from "./label";
 

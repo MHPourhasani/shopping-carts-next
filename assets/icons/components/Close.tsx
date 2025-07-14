@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const CloseIcon = ({ onClick, style, className }: IconProps) => {
+const CloseIcon = ({ onClick, style, className }: IIconProps) => {
     return (
         <svg
             width="24"

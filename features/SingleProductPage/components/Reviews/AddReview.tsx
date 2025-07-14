@@ -1,6 +1,6 @@
 "use client";
 import EditIcon from "@/assets/icons/components/Edit";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -30,7 +30,7 @@ const AddReview = () => {
                     }}
                     className="flex cursor-pointer items-center gap-2"
                 >
-                    <EditIcon className="size-5 fill-primary-100" />
+                    <EditIcon className="fill-primary-100 size-5" />
                     <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
                 </span>
 

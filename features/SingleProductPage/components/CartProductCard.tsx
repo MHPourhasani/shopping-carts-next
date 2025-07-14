@@ -3,9 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import notImage from "@/assets/images/not-images.svg";
 import { toast } from "react-toastify";
-import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/helper";
-import PATH from "@/shared/path";
-import { ObjectId } from "mongoose";
+import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/utils/utils";
+import PATH from "@/shared/utils/path";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setCarts } from "@/redux/slices/cartsSlice";
 import { ICart } from "@/interfaces/general";
@@ -14,15 +13,14 @@ import { useSession } from "next-auth/react";
 import Minus from "@/assets/icons/components/Minus";
 import AddIcon from "@/assets/icons/components/Add";
 import Toman from "@/assets/icons/components/Toman";
-import { IColor } from "../interface/interface";
 
 interface IProps {
-    _id: ObjectId;
+    _id: string;
     product: any;
     size: number;
     quantity: number;
     getData?: any;
-    color: IColor;
+    color: any;
 }
 
 const CartProductCard = (props: IProps) => {

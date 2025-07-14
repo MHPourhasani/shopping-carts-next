@@ -1,17 +1,17 @@
-import BestSellers from "@/components/BestSellers/BestSellers";
+import BestSellers from "@/features/ProductsPage/components/BestSellers";
 import Categories from "@/features/HomePage/components/Categories";
 import Header from "@/features/Layout/components/Header/Header";
 import MainBanners from "@/features/HomePage/components/MainBanners";
 import ProductsList from "@/features/SingleProductPage/components/ProductsList";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import Link from "next/link";
-import { IPost } from "@/interfaces/general";
 import { Metadata } from "next";
 import PostCard from "@/features/Blog/components/PostCard";
 import API from "@/shared/libs/api/endpoints";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { get } from "@/shared/libs/api/client";
 import { IPaginatedResponse } from "@/shared/interfaces";
+import { IPost } from "@/features/Blog/interfaces";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

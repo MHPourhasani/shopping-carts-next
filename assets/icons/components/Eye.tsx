@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const EyeIcon = ({ onClick, className }: IconProps) => {
+const EyeIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="24"

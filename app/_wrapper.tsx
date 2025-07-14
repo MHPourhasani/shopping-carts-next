@@ -1,5 +1,5 @@
 "use client";
-import { UserRoleEnum } from "@/interfaces/enums";
+import { UserRoleEnum } from "@/features/auth/enums";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { get } from "@/shared/libs/api/client";

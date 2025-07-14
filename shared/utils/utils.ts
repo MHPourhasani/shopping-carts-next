@@ -1,4 +1,5 @@
-import { PaymentMethodEnum, UserRoleEnum } from "@/interfaces/enums";
+import { UserRoleEnum } from "@/features/auth/enums";
+import { PaymentMethodEnum } from "@/interfaces/enums";
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 

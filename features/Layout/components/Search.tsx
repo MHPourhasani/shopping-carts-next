@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import SearchIcon from "@/assets/icons/components/Search";
-import { Input } from "./ui/input";
+import { Input } from "../../../components/ui/input";
 
 interface Props {
     onChange?: any;

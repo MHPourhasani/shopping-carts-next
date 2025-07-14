@@ -1,5 +1,5 @@
 "use client";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

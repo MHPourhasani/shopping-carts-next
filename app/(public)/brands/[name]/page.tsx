@@ -1,7 +1,7 @@
 import PageHeader from "@/shared/components/PageHeader";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
-import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
-import PATH from "@/shared/path";
+import { capitalizeTheFirstLettersOfWords } from "@/shared/utils/utils";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 

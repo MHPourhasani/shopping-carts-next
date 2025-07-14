@@ -2,9 +2,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Pagination from "@/shared/components/Pagination";
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import PageHeader from "@/shared/components/PageHeader";
-import { capitalizeTheFirstLettersOfWords } from "@/shared/helper";
+import { capitalizeTheFirstLettersOfWords } from "@/shared/utils/utils";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import CloseIcon from "@/assets/icons/components/Close";

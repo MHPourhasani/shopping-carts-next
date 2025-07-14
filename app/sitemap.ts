@@ -1,6 +1,6 @@
 import { IBanner, IPost, ICategory } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import fs from "fs";
 import path from "path";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";

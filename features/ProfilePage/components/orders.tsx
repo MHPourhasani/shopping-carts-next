@@ -1,29 +1,26 @@
 "use client";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/shared/components/EmptyState";
-import { IOrder, IUser } from "@/interfaces/general";
-import PATH from "@/shared/path";
-import OrderCardItem from "@/components/Order/OrderCardItem";
+import PATH from "@/shared/utils/path";
+import OrderCardItem from "@/features/Orders/components/OrderCardItem";
 import PageHeader from "@/shared/components/PageHeader";
 import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
-import { UserRoleEnum } from "@/interfaces/enums";
 import { Input } from "@/components/ui/input";
 import SearchIcon from "@/assets/icons/components/Search";
-import { useRouter } from "next/navigation";
+import { IUser } from "@/features/auth/interfaces";
+import { IOrder } from "@/features/Orders/interfaces";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 interface Props {
     orders: { user: IUser; orders: IOrder[] };
 }
-
-const orderStatus = [""];
 
 const Orders = (props: Props) => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState({});
     const [orders, setOrders] = useState(props.orders.orders);
     const userState = useAppSelector((state) => state.auth.user);
-    const router = useRouter();
 
     useEffect(() => {
         if (search.trim()) {

@@ -8,13 +8,13 @@ import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { useRef, useState } from "react";
 import EditIcon from "@/assets/icons/components/Edit";
 import Modal from "@/shared/components/Modal";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
-import { covertUserRoleToPersian, showFullDate } from "@/shared/helper";
-import { UserRoleEnum } from "@/interfaces/enums";
+import { covertUserRoleToPersian, showFullDate } from "@/shared/utils/utils";
 import { Button } from "@/components/ui/button";
 import { authToken } from "@/shared/utils/token";
 import { useRouter } from "next/navigation";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 interface PropsInterface {
     isLoading: boolean;

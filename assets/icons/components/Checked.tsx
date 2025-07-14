@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const CheckedIcon = ({ className, onClick, color }: IconProps) => {
+const CheckedIcon = ({ className, onClick, color }: IIconProps) => {
     return (
         <svg
             width="24"

@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const FillFavoriteIcon = ({ onClick, className }: IconProps) => {
+const FillFavoriteIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="16"

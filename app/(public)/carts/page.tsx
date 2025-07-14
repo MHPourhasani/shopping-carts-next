@@ -2,7 +2,7 @@ import Carts from "@/features/CartPage/components/carts";
 import { Metadata } from "next";
 import API from "@/shared/libs/api/endpoints";
 import { redirect } from "next/navigation";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { authToken } from "@/shared/utils/token";
 
 export const metadata: Metadata = {

@@ -1,7 +1,7 @@
 "use client";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import { showFullDate, tomanFormat } from "@/shared/helper";
-import PATH from "@/shared/path";
+import { showFullDate, tomanFormat } from "@/shared/utils/utils";
+import PATH from "@/shared/utils/path";
 import Image from "next/image";
 import Link from "next/link";
 import ProductEditIcon from "./ProductEditIcon";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Label } from "./label";
 import { Input } from "./input";
-import { cn } from "@/shared/helper";
+import { cn } from "@/shared/utils/utils";
 
 interface Props extends React.ComponentProps<"input"> {
     label: string;

@@ -3,8 +3,8 @@ import TrashIcon from "@/assets/icons/components/Trash";
 import { IPost } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
-import { showFullDate } from "@/shared/helper";
-import PATH from "@/shared/path";
+import { showFullDate } from "@/shared/utils/utils";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Link from "next/link";
 

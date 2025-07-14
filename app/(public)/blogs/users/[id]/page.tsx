@@ -1,7 +1,7 @@
 import PostCard from "@/features/Blog/components/PostCard";
 import { IPost, IUser } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import userIcon from "@/assets/icons/svgs/user.svg";

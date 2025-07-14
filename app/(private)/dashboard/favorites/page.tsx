@@ -3,7 +3,7 @@ import Favorites from "@/features/ProfilePage/components/favorites";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 
 import { Metadata } from "next";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import PageHeader from "@/shared/components/PageHeader";
 
 export const metadata: Metadata = {

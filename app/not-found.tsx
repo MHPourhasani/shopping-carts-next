@@ -1,5 +1,5 @@
 import notFoundImage from "@/assets/icons/svgs/404-page.svg";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +15,7 @@ const NotFound = () => {
 
             <Link
                 href={PATH.home()}
-                className="flex w-full items-center justify-center rounded-full bg-primary-100 py-3 text-lg text-white lg:w-6/12 xl:w-1/2"
+                className="bg-primary-100 flex w-full items-center justify-center rounded-full py-3 text-lg text-white lg:w-6/12 xl:w-1/2"
             >
                 رفتن به خانه
             </Link>

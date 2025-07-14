@@ -1,7 +1,7 @@
 import EmptyState from "@/shared/components/EmptyState";
 import { Metadata } from "next";
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import Link from "next/link";
 import Image from "next/image";
 import successfullyOrder from "@/public/images/png/successfully-order.png";

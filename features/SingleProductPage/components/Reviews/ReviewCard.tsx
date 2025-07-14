@@ -1,6 +1,6 @@
 import ClockIcon from "@/assets/icons/components/Clock";
 import UserIcon from "@/assets/icons/components/User";
-import { showFullDate } from "@/shared/helper";
+import { showFullDate } from "@/shared/utils/utils";
 import { IReview } from "../../interface/interface";
 
 const ReviewCard = ({ author, title, rating, description, createdAt }: IReview) => {

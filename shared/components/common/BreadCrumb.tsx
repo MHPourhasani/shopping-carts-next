@@ -1,9 +1,9 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { cn } from "@/shared/helper";
+import { cn } from "@/shared/utils/utils";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import Link from "next/link";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import HomeIcon from "@/assets/icons/components/Home";
 
 type TBreadCrumb = { title: string; path: string };
@@ -21,7 +21,7 @@ const BreadCrumb = (props: IBreadCrumbProps) => {
             <HomeIcon className="fill-secondary-300 dark:fill-secondary-100" />
             <Link
                 href={PATH.home()}
-                className={`hover-transition cursor-pointer text-secondary-300 hover:text-primary-100 dark:text-secondary-100`}
+                className={`hover-transition text-secondary-300 hover:text-primary-100 dark:text-secondary-100 cursor-pointer`}
             >
                 خانه
             </Link>
@@ -31,7 +31,7 @@ const BreadCrumb = (props: IBreadCrumbProps) => {
                 ? props.items.map((item, index) => (
                       <Link key={item.title} href={item.path} className="flex items-center gap-4">
                           <h3
-                              className={`hover-transition cursor-pointer hover:text-primary-100 ${pathname === item.path ? "font-medium text-customBlack-200 dark:text-white" : "text-secondary-300 dark:text-secondary-100"}`}
+                              className={`hover-transition hover:text-primary-100 cursor-pointer ${pathname === item.path ? "text-customBlack-200 font-medium dark:text-white" : "text-secondary-300 dark:text-secondary-100"}`}
                           >
                               {item.title}
                           </h3>

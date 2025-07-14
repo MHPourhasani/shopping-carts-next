@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const LogoutIcon = ({ onClick, className }: IconProps) => {
+const LogoutIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="24"

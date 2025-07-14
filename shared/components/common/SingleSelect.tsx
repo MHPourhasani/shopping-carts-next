@@ -3,7 +3,7 @@ import arrow from "@/assets/icons/svgs/arrow.svg";
 import close from "@/assets/icons/svgs/close.svg";
 import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import { TOption } from "@/interfaces/general";
-import { cn } from "@/shared/helper";
+import { cn } from "@/shared/utils/utils";
 import Image from "next/image";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -88,7 +88,7 @@ const SingleSelect = (props: SingleSelectProps) => {
         <div
             ref={singleSelectRef}
             className={cn(
-                `relative w-full hover:border-secondary-600 ${props.defaultValue || selectedOption.title ? "border-secondary-600 bg-transparent" : "border-transparent"} ${props.disabled ? "cursor-not-allowed bg-secondary-100" : "cursor-pointer"}`,
+                `hover:border-secondary-600 relative w-full ${props.defaultValue || selectedOption.title ? "border-secondary-600 bg-transparent" : "border-transparent"} ${props.disabled ? "bg-secondary-100 cursor-not-allowed" : "cursor-pointer"}`,
                 props.className,
             )}
         >
@@ -96,7 +96,7 @@ const SingleSelect = (props: SingleSelectProps) => {
                 onClick={() => {
                     if (!props.disabled) setShowOptions(!showOptions);
                 }}
-                className={`flex h-auto max-h-full min-h-12 w-full items-center gap-2 rounded-[10px] border-1.5 px-3 ${showOptions ? "!border-primary-500 rounded-b-none border-b-0" : "dark:bg-secondary-400"}`}
+                className={`border-1.5 flex h-auto max-h-full min-h-12 w-full items-center gap-2 rounded-[10px] px-3 ${showOptions ? "!border-primary-500 rounded-b-none border-b-0" : "dark:bg-secondary-400"}`}
             >
                 <div className="flex flex-1 items-center gap-4">
                     {selectedOption.title && (
@@ -130,7 +130,7 @@ const SingleSelect = (props: SingleSelectProps) => {
                             setShowOptions(!showOptions);
                         }
                     }}
-                    className={`hover-transition flex size-6 items-center justify-center rounded-full hover:bg-bg-2 dark:hover:bg-secondary-600 ${props.disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+                    className={`hover-transition hover:bg-bg-2 dark:hover:bg-secondary-600 flex size-6 items-center justify-center rounded-full ${props.disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
                 >
                     <Image
                         src={selectedOption.title ? close : arrow}
@@ -142,7 +142,7 @@ const SingleSelect = (props: SingleSelectProps) => {
 
             {showOptions && (
                 <div
-                    className={`no-scrollbar border-primary-500 text-secondary-900 absolute z-10 flex h-fit max-h-96 w-full flex-col overflow-y-auto rounded-b-[10px] border-1.5 border-t-0 bg-white shadow-md dark:bg-secondary-600`}
+                    className={`no-scrollbar border-primary-500 text-secondary-900 border-1.5 dark:bg-secondary-600 absolute z-10 flex h-fit max-h-96 w-full flex-col overflow-y-auto rounded-b-[10px] border-t-0 bg-white shadow-md`}
                 >
                     {filteredOptions.length ? (
                         filteredOptions.map((option) => (

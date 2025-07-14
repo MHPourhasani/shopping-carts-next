@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const SearchIcon = ({ onClick, style, className }: IconProps) => {
+const SearchIcon = ({ onClick, style, className }: IIconProps) => {
     return (
         <svg
             width="16"

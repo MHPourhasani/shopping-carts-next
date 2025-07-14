@@ -1,4 +1,4 @@
-import PATH from "../../../shared/path";
+import PATH from "../../../shared/utils/path";
 import CategoryIcon from "@/assets/icons/components/Category";
 import UsersIcon from "@/assets/icons/components/Users";
 import InfoIcon from "@/assets/icons/components/Info";
@@ -8,7 +8,7 @@ import ReceiptIcon from "@/assets/icons/components/Receipt";
 import LoveIcon from "@/assets/icons/components/Love";
 import ShopIcon from "@/assets/icons/components/Shop";
 import ProductsIcon from "@/assets/icons/components/Products";
-import { UserRoleEnum } from "@/interfaces/enums";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 const strokeColor = `stroke-customBlack-100 dark:stroke-secondary-100`;
 const activeStrokeColor = `stroke-primary-100 dark:stroke-violet-300`;

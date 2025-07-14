@@ -1,6 +1,6 @@
 "use client";
 import CloseIcon from "@/assets/icons/components/Close";
-import { cn } from "@/shared/helper";
+import { cn } from "@/shared/utils/utils";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
@@ -38,7 +38,7 @@ const Modal = (props: ModalProps) => {
 
                   <div
                       className={cn(
-                          `hover-transition absolute bottom-0 flex w-full flex-col gap-8 rounded-t-3xl bg-white p-4 dark:bg-secondary-700 lg:bottom-auto lg:max-w-[1000px] lg:rounded-3xl`,
+                          `hover-transition dark:bg-secondary-700 absolute bottom-0 flex w-full flex-col gap-8 rounded-t-3xl bg-white p-4 lg:bottom-auto lg:max-w-[1000px] lg:rounded-3xl`,
                           className,
                       )}
                   >
@@ -49,7 +49,7 @@ const Modal = (props: ModalProps) => {
                                   onClick={() => {
                                       if (onClose) onClose();
                                   }}
-                                  className="cursor-pointer fill-secondary-700 dark:fill-secondary-100"
+                                  className="fill-secondary-700 dark:fill-secondary-100 cursor-pointer"
                               />
                           )}
                       </span>

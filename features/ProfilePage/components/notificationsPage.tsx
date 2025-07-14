@@ -2,7 +2,7 @@
 import EmptyState from "@/shared/components/EmptyState";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import API from "@/shared/libs/api/endpoints";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { INotification } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
 import { useSession } from "next-auth/react";

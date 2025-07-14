@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const Minus = ({ className, onClick }: IconProps) => {
+const Minus = ({ className, onClick }: IIconProps) => {
     return (
         <svg
             width="16"

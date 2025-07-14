@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { setUser } from "@/redux/slices/authSlice";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { IShop } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
 import { Button } from "@/components/ui/button";

@@ -1,6 +1,6 @@
 "use server";
 import Link from "next/link";
-import ProductsList from "../../features/SingleProductPage/components/ProductsList";
+import ProductsList from "../../SingleProductPage/components/ProductsList";
 
 interface Props {
     products: any[];

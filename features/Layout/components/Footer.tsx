@@ -1,12 +1,12 @@
 "use client";
-import { scrollToTop } from "@/shared/helper";
+import { scrollToTop } from "@/shared/utils/utils";
 import Image from "next/image";
 import appStoreIcon from "@/assets/images/app-store.svg";
 import googlePlayIcon from "@/assets/images/google-play.svg";
 import Link from "next/link";
 import { useState } from "react";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 

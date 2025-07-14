@@ -2,14 +2,14 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { handleRefreshAfterBack } from "../../../shared/helper";
+import { handleRefreshAfterBack } from "../../../shared/utils/utils";
 import { useAppSelector } from "@/redux/hooks";
 import { IPost } from "@/interfaces/general";
 import Link from "next/link";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import TextEditor from "@/shared/components/common/TextEditor";
 import TrashIcon from "@/assets/icons/components/Trash";
-import toastMessage from "@/shared/toastMessage";
+import toastMessage from "@/shared/utils/toastMessage";
 import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "@/shared/components/common/MultiSelect";
 import API from "@/shared/libs/api/endpoints";

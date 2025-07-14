@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const FilterIcon = ({ onClick, className }: IconProps) => {
+const FilterIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="20"

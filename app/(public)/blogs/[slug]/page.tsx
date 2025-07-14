@@ -1,13 +1,13 @@
 import { IPost } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import ClockIcon from "@/assets/icons/components/Clock";
 import PostCard from "@/features/Blog/components/PostCard";
-import { showFullDate } from "@/shared/helper";
+import { showFullDate } from "@/shared/utils/utils";
 import PageHeader from "@/shared/components/PageHeader";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 import { get } from "@/shared/libs/api/client";

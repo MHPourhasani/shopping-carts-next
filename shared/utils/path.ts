@@ -1,4 +1,4 @@
-import { stringToSlug } from "./helper";
+import { stringToSlug } from "./utils";
 
 const PATH = {
     home: () => `/`,

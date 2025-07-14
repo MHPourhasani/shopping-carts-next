@@ -1,10 +1,3 @@
-export enum UserRoleEnum {
-    ADMIN = "admin",
-    CUSTOMER = "customer",
-    AUTHOR = "author",
-    SELLER = "seller",
-}
-
 export enum PaymentMethodEnum {
     cash = "cash",
     online = "online",
@@ -16,10 +9,4 @@ export enum OrderStatusEnum {
     PENDING,
     PROCESS,
     REJECT,
-}
-
-export enum PostStatusEnum {
-    DRAFT = "draft",
-    PUBLISHED = "published",
-    ARCHIVED = "archived",
 }

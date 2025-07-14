@@ -6,7 +6,7 @@ import PageHeader from "@/shared/components/PageHeader";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { get } from "@/shared/libs/api/client";
 import API from "@/shared/libs/api/endpoints";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Link from "next/link";
 

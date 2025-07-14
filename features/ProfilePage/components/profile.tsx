@@ -1,7 +1,7 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import toastMessage from "@/shared/toastMessage";
+import toastMessage from "@/shared/utils/toastMessage";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-toastify";

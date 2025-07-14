@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IAddress, ICart } from "@/interfaces/general";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
 import API from "../../../shared/libs/api/endpoints";
 import Toman from "@/assets/icons/components/Toman";

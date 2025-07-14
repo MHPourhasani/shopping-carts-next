@@ -1,4 +1,3 @@
-import { ObjectId } from "mongoose";
 import { ProductStatusEnum } from "./enums";
 
 export interface IAttribute {
@@ -50,8 +49,8 @@ export interface CreateProductDto {
 }
 
 export interface IProduct {
-    _id: ObjectId | string;
-    creator: ObjectId;
+    _id: string;
+    creator: string;
     name: string;
     slug: string;
     description?: string;

@@ -1,7 +1,7 @@
 import { IOrder } from "@/interfaces/general";
 import { forwardRef } from "react";
 import ProductOrderCard from "./ProductOrderCard";
-import { covertPaymentToPersian, showFullDate, tomanFormat } from "@/shared/helper";
+import { covertPaymentToPersian, showFullDate, tomanFormat } from "@/shared/utils/utils";
 import Toman from "@/assets/icons/components/Toman";
 
 const OrderPrint = forwardRef(function OrderPrint({ order }: { order: Partial<IOrder> }, ref: any) {

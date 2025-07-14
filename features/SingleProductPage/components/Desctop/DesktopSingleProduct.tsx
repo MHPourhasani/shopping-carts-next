@@ -4,12 +4,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Navigation } from "swiper/modules";
-import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/helper";
+import { capitalizeTheFirstLettersOfWords, tomanFormat } from "@/shared/utils/utils";
 import ProductTags from "../ProductTags";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import notImage from "@/assets/images/not-images.svg";
 import LoveIcon from "@/assets/icons/components/Love";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
@@ -132,55 +132,8 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                         ))}
                     </div>
 
-                    {/* <section className="flex flex-col gap-8">
-                        <div className="flex flex-col gap-4">
-                            <span className="font-semibold">سایز</span>
-
-                            <div className="flex flex-wrap gap-2">
-                                {sizes?.split(",").map((size: string) => {
-                                    return (
-                                        <span
-                                            key={size}
-                                            onClick={() => setProductData({ ...productData, size: size })}
-                                            className={`bg-bg-2 flex aspect-square h-12 cursor-pointer items-center justify-center rounded-full ${
-                                                size === productData.size ? "bg-primary-100 font-semibold text-white" : "text-secondary-600"
-                                            }`}
-                                        >
-                                            {size}
-                                        </span>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-4">
-                            <span className="font-semibold">رنگ</span>
-
-                            <div className="flex flex-wrap gap-2">
-                                {colors?.map((color: IColor, index: number) => {
-                                    return (
-                                        <span
-                                            key={index}
-                                            title={color.name}
-                                            onClick={() => setProductData({ ...productData, color: color })}
-                                            style={{ backgroundColor: color.hex }}
-                                            className={`group dark:bg-customBlack-50 relative flex size-10 cursor-pointer flex-col items-center justify-center rounded-full ${color === productData.color ? "border-2 border-gray-300 dark:border-white" : ""}`}
-                                        >
-                                            {color === productData.color && (
-                                                <TickIcon
-                                                    className={`absolute top-1/5 w-5 fill-white ${color !== productData.color && "opacity-30"}`}
-                                                />
-                                            )}
-                                            <p className="absolute -top-9 hidden items-center justify-center rounded-md bg-gray-500 p-1 text-white group-hover:flex">
-                                                {color.name}
-                                            </p>
-                                        </span>
-                                    );
-                                })}
-                            </div>
-                        </div>
-
-                        <div className="flex h-12 w-full items-center gap-8 rounded-full">
+                    <section className="flex flex-col gap-8">
+                        {/* <div className="flex h-12 w-full items-center gap-8 rounded-full">
                             <span className="font-semibold">تعداد</span>
                             <div className="bg-bg-2 dark:bg-secondary-600 flex items-center gap-4 rounded-full p-2">
                                 <span
@@ -204,8 +157,8 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                                     <Image src={minusIcon} alt="minus" />
                                 </span>
                             </div>
-                        </div>
-                    </section> */}
+                        </div> */}
+                    </section>
 
                     <div className="flex gap-4">
                         <Button
@@ -250,7 +203,12 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
 
                     <div className="no-scrollbar overflow-x-aut flex w-full flex-1 gap-4">
                         {relatedProducts.map((p) => (
-                            <ProductCardItem product={p} href={PATH.singleProduct(String(p._id), p.name)} className="w-1/4 xl:w-1/6" />
+                            <ProductCardItem
+                                key={p._id}
+                                product={p}
+                                href={PATH.singleProduct(String(p._id), p.name)}
+                                className="w-1/4 xl:w-1/6"
+                            />
                         ))}
                     </div>
                 </section>

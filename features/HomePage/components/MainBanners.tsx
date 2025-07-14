@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Navigation, Pagination } from "swiper/modules";
 import Link from "next/link";
 import { IBanner } from "@/interfaces/general";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 
 interface IProps {
     banners: IBanner[];

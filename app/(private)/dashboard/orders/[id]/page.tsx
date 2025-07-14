@@ -1,7 +1,7 @@
 import EmptyState from "@/shared/components/EmptyState";
 
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import API from "@/shared/libs/api/endpoints";
 import SingleOrder from "@/features/ProfilePage/components/singleOrder";
 import { IOrder } from "@/interfaces/general";

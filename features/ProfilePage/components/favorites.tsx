@@ -1,7 +1,7 @@
 import ProductCardItem from "@/features/SingleProductPage/components/ProductCardItem";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import PageHeader from "@/shared/components/PageHeader";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 
 interface Props {
     products: IProduct[];

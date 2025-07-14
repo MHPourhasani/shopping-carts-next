@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const NotificationIcon = ({ onClick, className }: IconProps) => {
+const NotificationIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="25"

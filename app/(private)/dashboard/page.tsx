@@ -1,5 +1,5 @@
 import { IOrder } from "@/interfaces/general";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import Link from "next/link";
 
 const getOrders = async (user_id: string) => {

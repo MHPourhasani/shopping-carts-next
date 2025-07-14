@@ -1,6 +1,6 @@
-import { IconProps } from "@/interfaces/general";
+import { IIconProps } from "@/interfaces/general";
 
-const ClearIcon = ({ onClick, className }: IconProps) => {
+const ClearIcon = ({ onClick, className }: IIconProps) => {
     return (
         <svg
             width="16"

@@ -1,14 +1,14 @@
 "use client";
-import { UserRoleEnum } from "@/interfaces/enums";
-import { IUser } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
-import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/shared/helper";
+import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/shared/utils/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import SingleSelect from "@/shared/components/common/SingleSelect";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
+import { IUser } from "@/features/auth/interfaces";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 interface Props {
     data?: IUser;
@@ -24,7 +24,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
     };
 
     const submitHandler = async () => {
-        const { first_name, last_name, email, phone_number } = user;
+        const { first_name, last_name, email, phone } = user;
 
         if (!first_name?.trim()) {
             toast.error("نام نباید خالی باشد.");
@@ -32,9 +32,9 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
             toast.error("نام خانوادگی نباید خالی باشد.");
         } else if (!email?.trim()) {
             toast.error("ایمیل نباید خالی باشد.");
-        } else if (!phone_number?.trim()) {
+        } else if (!phone?.trim()) {
             toast.error("شماره موبایل نباید خالی باشد.");
-        } else if (+phone_number.trim() < 11) {
+        } else if (+phone.trim() < 11) {
             toast.error("شماره موبایل نباید کمتر از 11 رقم باشد.");
         } else {
             let res: any;
@@ -47,7 +47,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                         first_name: first_name,
                         last_name: last_name,
                         email,
-                        phone_number: phone_number,
+                        phone: phone,
                     }),
                 });
             } else {
@@ -113,8 +113,8 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                     dir="ltr"
                     type="tel"
                     label="شماره تماس"
-                    name="phone_number"
-                    value={user.phone_number}
+                    name="phone"
+                    value={user.phone}
                     onChange={changeHandler}
                     maxLength={11}
                     className="focus:border-primary-100"

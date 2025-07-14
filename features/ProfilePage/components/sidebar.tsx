@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import PATH from "@/shared/path";
+import PATH from "@/shared/utils/path";
 import { sidebarItems } from "@/features/ProfilePage/components/sidebarItems";
 import LogoutIcon from "@/assets/icons/components/Logout";
 import { authToken } from "@/shared/utils/token";
