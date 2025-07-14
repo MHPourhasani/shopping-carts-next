@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { Button } from "@/components/ui/button";
-import { get } from "@/shared/libs/api/client";
+import { get } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
 import { IPaginatedResponse } from "@/shared/interfaces";
 

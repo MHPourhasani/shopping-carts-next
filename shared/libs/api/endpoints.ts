@@ -24,9 +24,10 @@ const API = {
         products: () => `${process.env.API_BASE_URL}/products`,
         single_product: (id: string) => `${process.env.API_BASE_URL}/products/${id}`,
         reviews: (id: string) => `${process.env.API_BASE_URL}/reviews/${id}`,
+        attributes: () => `${process.env.API_BASE_URL}/attributes`,
     },
     orders: {
-        orders_list: () => `${process.env.API_BASE_URL}/orders`,
+        list: () => `${process.env.API_BASE_URL}/orders`,
         single_order: (id: string, user_id: string) => `${process.env.API_BASE_URL}/orders/${id}?user_id=${user_id}`,
     },
     shop: {

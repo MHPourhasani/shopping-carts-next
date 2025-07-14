@@ -27,7 +27,7 @@ const PATH = {
         },
         address: () => `/dashboard/address`,
         order: {
-            orders: () => `/dashboard/orders`,
+            main: () => `/dashboard/orders`,
             single_order: (orderNo: string) => `/dashboard/orders/${orderNo}`,
         },
         notifications: () => `/dashboard/notifications`,

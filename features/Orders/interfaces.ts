@@ -18,6 +18,7 @@ export interface IOrderItem {
 }
 
 export interface IOrder {
+    _id: string;
     userId: string;
     items: IOrderItem[]; // لیست آیتم‌های سفارش با جزئیات snapshot محصول
     discountCode?: string; // کد تخفیف اعمال شده (در صورت وجود)
@@ -42,7 +43,7 @@ export interface IOrder {
         changedAt: Date;
         changedBy?: string; // آیدی کاربر یا سیستم که تغییر وضعیت را ایجاد کرده
     }>;
-    createdAt?: Date;
+    createdAt: Date;
     updatedAt?: Date;
     deletedAt?: Date; // حذف نرم‌افزاری
 }

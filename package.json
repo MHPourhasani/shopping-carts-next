@@ -61,6 +61,7 @@
         "yup": "^1.6.1"
     },
     "devDependencies": {
+        "@types/cookie": "^0.6.0",
         "@types/file-saver": "^2.0.7",
         "@types/js-cookie": "^3.0.6",
         "@types/react-color": "^3.0.12",

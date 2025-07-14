@@ -1,11 +1,11 @@
-import { IBanner, IPost, ICategory } from "@/interfaces/general";
+import { IBanner, ICategory } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/utils/path";
 import fs from "fs";
 import path from "path";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import { get } from "@/shared/libs/api/client";
 import { IPaginatedResponse } from "@/shared/interfaces";
+import { get } from "@/shared/libs/api/axios";
 
 const baseUrl = "https://mhp-shop.vercel.app";
 const baseDir = "app";

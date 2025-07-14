@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { IAddress, IUser } from "@/interfaces/general";
 import PATH from "@/shared/utils/path";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
@@ -16,17 +15,18 @@ import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { put } from "@/shared/libs/api/client";
+import { put } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
+import { IAddress, IUser } from "@/features/auth/interfaces";
 
-interface PropsInterface {
+interface IProps {
     isLoading: boolean;
     imageFileHandler: (e: any) => void;
     deleteProfileImage: () => void;
     deleteAccountHandler: () => void;
 }
 
-const DesktopProfile = (props: PropsInterface) => {
+const DesktopProfile = (props: IProps) => {
     const { isLoading, imageFileHandler, deleteAccountHandler } = props;
     const userState = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState<IUser>();
@@ -210,7 +210,7 @@ const DesktopProfile = (props: PropsInterface) => {
 
                     {userState?.addresses ? (
                         <p className="break-all text-gray-500 dark:text-gray-300">
-                            {userState.addresses.filter((adr: IAddress) => adr.isSelected)[0]?.address_value}
+                            {userState.addresses.filter((adr: IAddress) => adr.isDefault)[0]?.address_value}
                         </p>
                     ) : null}
                 </div>

@@ -6,20 +6,20 @@ import PageHeader from "@/shared/components/PageHeader";
 import { handleRefreshAfterBack } from "@/shared/utils/utils";
 import API from "@/shared/libs/api/endpoints";
 import toastMessage from "@/shared/utils/toastMessage";
-import { CreateProductDto } from "../interface/interface";
+import { CreateProductDto, IProduct } from "../interface/interface";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { get, post, put } from "@/shared/libs/api/client";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useFieldArray, useForm } from "react-hook-form";
 import { ProductStatusEnum } from "../interface/enums";
 import { Input } from "@/components/ui/input";
+import { get, put, post } from "@/shared/libs/api/axios";
 
 interface ProductFormProps {
     isEdit?: boolean;
-    initialData?: CreateProductDto;
+    initialData?: IProduct;
     productId?: string;
 }
 
@@ -77,7 +77,7 @@ export const productSchema = yup.object({
         .required("ترکیب‌ها الزامی هستند"),
 });
 
-const AddAndEditProduct = ({ isEdit = false, initialData, productId }: ProductFormProps) => {
+const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProps) => {
     const [, setMessage] = useState("");
     const router = useRouter();
     const {
@@ -114,12 +114,11 @@ const AddAndEditProduct = ({ isEdit = false, initialData, productId }: ProductFo
                 setMessage("✅ محصول با موفقیت ویرایش شد");
             } else {
                 await post(API.product.products(), data);
-                setMessage("✅ محصول با موفقیت ثبت شد");
+                toast.success("✅ محصول با موفقیت ثبت شد");
                 reset();
             }
         } catch (e) {
-            console.error("❌ خطا در ذخیره محصول", e);
-            setMessage("❌ خطا در ذخیره محصول");
+            toast.error("❌ خطا در ذخیره محصول");
         }
     };
 
@@ -130,7 +129,13 @@ const AddAndEditProduct = ({ isEdit = false, initialData, productId }: ProductFo
         };
 
         getProducts();
+        getAttributes();
     }, []);
+
+    const getAttributes = async () => {
+        const data = await get(API.product.attributes());
+        return data;
+    };
 
     const deleteProductHandler = async () => {
         if (isEdit && productId) {
@@ -242,4 +247,4 @@ const AddAndEditProduct = ({ isEdit = false, initialData, productId }: ProductFo
     );
 };
 
-export default AddAndEditProduct;
+export default ProductForm;

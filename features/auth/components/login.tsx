@@ -9,13 +9,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import AppleLogo from "@/assets/icons/components/AppleLogo";
 import PATH from "@/shared/utils/path";
-import API from "@/shared/libs/api/endpoints";
 import toastMessage from "@/shared/utils/toastMessage";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
 import { authToken } from "@/shared/utils/token";
-import { post } from "@/shared/libs/api/client";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -34,22 +32,19 @@ const Login = () => {
     };
 
     const handleLogin = async () => {
-        const { email, password } = formData;
         setIsLoading(true);
-
         try {
-            const data = await post<{
-                access: string;
-                refresh: string;
-            }>(API.auth.login(), {
-                email,
-                password,
+            await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: formData.email, password: formData.password }),
+                credentials: "include",
             });
 
-            authToken.set({ access: data.access, refresh: data.refresh });
             toast.success(toastMessage.auth.login.successfulLogin);
-        } catch (error) {
-            console.error(error);
+            router.push(PATH.home());
+        } catch (e) {
+            console.error(e);
         } finally {
             setIsLoading(false);
         }

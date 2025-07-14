@@ -17,7 +17,8 @@ const nextConfig = {
     ],
     swcMinify: true,
     env: {
-        API_BASE_URL: "https://mhp-shop-backend-nest.onrender.com/api",
+        BASE_URL: "http://localhost:3000/",
+        API_BASE_URL: "http://localhost:5000/api",
         GITHUB_ID: "16d86c5991c8a9f397ae",
         GITHUB_SECRET: "b12e58ae4fe0fa8a7e1883556c79764c8bbf8285",
         TAX_PERCENT: 9,

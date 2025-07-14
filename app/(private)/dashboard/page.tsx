@@ -1,27 +1,17 @@
-import { IOrder } from "@/interfaces/general";
+import { IOrder } from "@/features/Orders/interfaces";
+import { IPaginatedResponse } from "@/shared/interfaces";
+import { get } from "@/shared/libs/api/axios";
+import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/utils/path";
 import Link from "next/link";
 
-const getOrders = async (user_id: string) => {
-    try {
-        const response = await fetch(`${process.env.API_BASE_URL}/orders?user_id=${user_id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const data = await response.json();
-            return data.orders;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+const getOrders = async () => {
+    const data = await get<IPaginatedResponse<IOrder>>(API.orders.list());
+    return data.results;
 };
 
 const DashboardPage = async () => {
-    const orders: IOrder[] = await getOrders(session?.user.userId!);
+    const orders = await getOrders();
 
     const summary = [
         { title: "سفارشات", length: orders?.length || 0 },
@@ -50,14 +40,14 @@ const DashboardPage = async () => {
                     <div className="grid grid-cols-2 gap-4">
                         {orders.map((item) => (
                             <Link
-                                key={item.orderNo}
-                                href={`${PATH.dashboard.order.orders()}/${item.orderNo}`}
+                                key={item._id}
+                                href={PATH.dashboard.order.single_order(item._id)}
                                 className="hover-transition hover:bg-bg-2 dark:hover:bg-secondary-600 flex flex-col gap-2 rounded-xl border p-4"
                             >
-                                <p className="truncate">سفارش #{item.orderNo}</p>
+                                <p className="truncate">سفارش #{item._id}</p>
                                 <span className="flex items-center justify-between">
                                     {new Date(item.createdAt).toLocaleDateString("fa-IR")}
-                                    {item.products.length}
+                                    {item.items.length}
                                 </span>
                             </Link>
                         ))}

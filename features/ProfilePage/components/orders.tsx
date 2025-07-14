@@ -8,25 +8,24 @@ import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import SearchIcon from "@/assets/icons/components/Search";
-import { IUser } from "@/features/auth/interfaces";
 import { IOrder } from "@/features/Orders/interfaces";
 import { UserRoleEnum } from "@/features/auth/enums";
 
 interface Props {
-    orders: { user: IUser; orders: IOrder[] };
+    orders: IOrder[];
 }
 
 const Orders = (props: Props) => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState({});
-    const [orders, setOrders] = useState(props.orders.orders);
+    const [orders, setOrders] = useState(props.orders);
     const userState = useAppSelector((state) => state.auth.user);
 
     useEffect(() => {
         if (search.trim()) {
-            setOrders((prev) => prev.filter((orders) => orders.orderNo.toLowerCase().includes(search.trim().toLowerCase())));
+            setOrders((prev) => prev.filter((orders) => orders._id.toLowerCase().includes(search.trim().toLowerCase())));
         } else {
-            setOrders(props.orders.orders);
+            setOrders(props.orders);
         }
     }, [search, orders]);
 
@@ -63,9 +62,9 @@ const Orders = (props: Props) => {
                         {orders.map((item: IOrder) => {
                             return (
                                 <OrderCardItem
-                                    key={item.orderNo}
-                                    href={PATH.dashboard.order.single_order(item.orderNo)}
-                                    user={props.orders.user}
+                                    key={item._id}
+                                    href={PATH.dashboard.order.single_order(item._id)}
+                                    user={props.orders}
                                     order={item}
                                 />
                             );

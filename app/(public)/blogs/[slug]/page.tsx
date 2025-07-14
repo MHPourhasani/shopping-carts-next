@@ -10,7 +10,8 @@ import PostCard from "@/features/Blog/components/PostCard";
 import { showFullDate } from "@/shared/utils/utils";
 import PageHeader from "@/shared/components/PageHeader";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
-import { get } from "@/shared/libs/api/client";
+import { get } from "@/shared/libs/api/axios";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 interface Props {
     params: { slug: string };
@@ -40,26 +41,13 @@ const getBlog = async (slug: string) => {
 };
 
 const getBlogs = async () => {
-    try {
-        const response = await fetch(API.blogs.posts(), {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const { results } = await response.json();
-            return results;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+    const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
+    return data;
 };
 
 const SingleBlogPage = async ({ params }: Props) => {
     const data = await getBlog(params.slug);
-    const blogs: IPost[] = await getBlogs();
+    const blogs = await getBlogs();
     const filteredBlogs = blogs.filter((blog) => blog.slug !== params.slug);
 
     const { title, slug, author, updatedAt, createdAt, tags, content } = data;

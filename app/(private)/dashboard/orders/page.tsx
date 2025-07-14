@@ -1,5 +1,4 @@
 import EmptyState from "@/shared/components/EmptyState";
-
 import orderImage from "@/assets/icons/svgs/receipt-page.svg";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
@@ -7,32 +6,21 @@ import Orders from "@/features/ProfilePage/components/orders";
 import Error500 from "@/shared/components/Error500";
 import API from "@/shared/libs/api/endpoints";
 import PageHeader from "@/shared/components/PageHeader";
+import { IPaginatedResponse } from "@/shared/interfaces";
+import { IOrder } from "@/features/Orders/interfaces";
+import { get } from "@/shared/libs/api/axios";
 
 export const metadata: Metadata = {
     title: "سفارشات",
 };
 
-const getOrders = async (user_id: string) => {
-    try {
-        const res = await fetch(API.orders.orders_list() + `?user_id=${user_id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-
-        if (res.ok) {
-            const { results } = await res.json();
-            return results;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+const getOrders = async () => {
+    const data = await get<IPaginatedResponse<IOrder>>(API.orders.list());
+    return data.results;
 };
 
 const OrderPage = async () => {
-    const orders = await getOrders(session?.user.userId!);
+    const orders = await getOrders();
 
     return session ? (
         orders !== undefined ? (

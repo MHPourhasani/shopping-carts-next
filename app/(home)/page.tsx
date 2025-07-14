@@ -9,7 +9,7 @@ import { Metadata } from "next";
 import PostCard from "@/features/Blog/components/PostCard";
 import API from "@/shared/libs/api/endpoints";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import { get } from "@/shared/libs/api/client";
+import { get } from "@/shared/libs/api/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { IPost } from "@/features/Blog/interfaces";
 

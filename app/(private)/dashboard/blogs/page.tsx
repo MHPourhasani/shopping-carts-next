@@ -1,10 +1,10 @@
 import AddIcon from "@/assets/icons/components/Add";
 import PostListItem from "@/features/Blog/components/PostListItem";
-import { IPost } from "@/interfaces/general";
+import { IPost } from "@/features/Blog/interfaces";
 import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/shared/components/PageHeader";
 import { IPaginatedResponse } from "@/shared/interfaces";
-import { get } from "@/shared/libs/api/client";
+import { get } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";

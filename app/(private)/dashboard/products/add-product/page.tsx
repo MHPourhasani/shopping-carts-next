@@ -1,4 +1,4 @@
-import AddAndEditProduct from "@/features/SingleProductPage/components/AddAndEditProduct";
+import ProductForm from "@/features/SingleProductPage/components/ProductForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 const AddProductPage = () => {
-    return <AddAndEditProduct />;
+    return <ProductForm />;
 };
 
 export default AddProductPage;

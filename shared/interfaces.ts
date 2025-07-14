@@ -1,6 +1,6 @@
 export interface IPaginatedResponse<T> {
     total: number;
-    previos: string | null;
+    previous: string | null;
     next: string | null;
     results: T[];
 }

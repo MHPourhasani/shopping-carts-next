@@ -3,8 +3,8 @@ import API from "@/shared/libs/api/endpoints";
 import Products from "@/features/ProductsPage/components/products";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
-import { get } from "@/shared/libs/api/client";
-import { PaginatedResponse } from "@/shared/interfaces";
+import { get } from "@/shared/libs/api/axios";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 export const revalidate = 30;
 export const dynamic = "force-static";
@@ -29,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const getProducts = async () => {
-    const data = await get<PaginatedResponse<IProduct>>(API.product.products());
+    const data = await get<IPaginatedResponse<IProduct>>(API.product.products());
     return data.results;
 };
 
