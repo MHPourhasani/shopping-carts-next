@@ -6,7 +6,7 @@ const API = {
     },
     users: {
         getProfile: () => `${process.env.API_BASE_URL}/users/get-profile`,
-        updateProfile: (id: string) => `${process.env.API_BASE_URL}/users/profile/${id}`,
+        updateProfile: () => `${process.env.API_BASE_URL}/users/update-profile`,
     },
     banners: {
         banners_list: () => `${process.env.API_BASE_URL}/banners`,
@@ -16,7 +16,7 @@ const API = {
     },
     notification: {
         create_notification: `${process.env.API_BASE_URL}/notifications/create-notification`,
-        notifications_list: (user_id: string) => `${process.env.API_BASE_URL}/notifications?user_id=${user_id}`,
+        notifications_list: () => `${process.env.API_BASE_URL}/notifications`,
         single_notification: (id: string) => `${process.env.API_BASE_URL}/notifications/${id}`,
         allNotifications: () => `${process.env.API_BASE_URL}/notifications`,
     },
@@ -28,7 +28,7 @@ const API = {
     },
     orders: {
         list: () => `${process.env.API_BASE_URL}/orders`,
-        single_order: (id: string, user_id: string) => `${process.env.API_BASE_URL}/orders/${id}?user_id=${user_id}`,
+        single_order: (id: string) => `${process.env.API_BASE_URL}/orders/${id}`,
     },
     shop: {
         single_shop: (name: string) => `${process.env.API_BASE_URL}/shop/${name}`,

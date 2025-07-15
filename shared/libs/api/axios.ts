@@ -1,4 +1,5 @@
 import { AUTH_TOKEN_KEY } from "@/shared/constant";
+import PATH from "@/shared/utils/path";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 interface Tokens {
@@ -13,25 +14,26 @@ export interface RequestOptions extends Omit<RequestInit, "body"> {
     server?: boolean;
 }
 
-function getTokenClient(): Tokens | null {
-    const m = document.cookie.match(/(?:^|; )MHP_SHOP_AUTH_TOKEN=([^;]+)/);
+export function getTokenClient(): Tokens | null {
+    if (typeof window === "undefined") return null;
+    const m = document.cookie.match(new RegExp(`(?:^|; )${AUTH_TOKEN_KEY.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&")}=([^;]+)`));
     return m ? JSON.parse(decodeURIComponent(m[1])) : null;
 }
 
-async function getTokenServer(): Promise<Tokens | null> {
+export async function getTokenServer(): Promise<Tokens | null> {
     const { cookies } = await import("next/headers");
     const val = cookies().get(AUTH_TOKEN_KEY)?.value;
     return val ? JSON.parse(val) : null;
 }
 
 const browserAxios = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+    baseURL: process.env.BASE_URL,
     withCredentials: true,
     headers: { "Content-Type": "application/json" },
 });
 
 browserAxios.interceptors.request.use((cfg) => {
-    const tokens = getTokenClient(); // ⬅️ همگام
+    const tokens = getTokenClient();
     if (tokens?.access) cfg.headers!.Authorization = `Bearer ${tokens.access}`;
     return cfg;
 });
@@ -60,12 +62,13 @@ browserAxios.interceptors.response.use(
 async function refreshClientToken() {
     refreshing = true;
     try {
-        await browserAxios.post("/auth/refresh");
-        const newAccess = getTokenClient()?.access; // ⬅️ همگام
+        const { data } = await browserAxios.post("/api/auth/refresh");
+        console.log(data);
+        const newAccess = data?.access;
         waiters.forEach((cb) => cb(newAccess));
     } catch {
         waiters.forEach((cb) => cb());
-        window.location.href = "/login";
+        window.location.href = PATH.login();
     } finally {
         waiters = [];
         refreshing = false;
@@ -74,6 +77,8 @@ async function refreshClientToken() {
 
 async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
     const tokens = await getTokenServer();
+    const { cookies } = await import("next/headers");
+    const cookieHeader = decodeURIComponent(cookies().toString());
 
     const res = await fetch(url, {
         ...opt,
@@ -82,19 +87,20 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
             "Content-Type": "application/json",
             ...opt.headers,
             ...(tokens?.access ? { Authorization: `Bearer ${tokens.access}` } : {}),
+            Cookie: cookieHeader,
         },
         body: opt.body ? JSON.stringify(opt.body) : undefined,
         cache: "no-store",
     });
 
     if (res.status === 401 && tokens?.refresh) {
+        console.log("serverFetch refresh cookieHeader:", cookieHeader);
         const ref = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
             method: "POST",
-            headers: { Cookie: `MHP_SHOP_AUTH_TOKEN=${encodeURIComponent(JSON.stringify(tokens))}` },
+            headers: { Cookie: cookieHeader },
         });
         if (!ref.ok) throw new Error("UNAUTHORIZED");
-
-        return serverFetch<T>(url, opt); // retry
+        return serverFetch<T>(url, opt);
     }
 
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -103,7 +109,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
 
 export async function apiRequest<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const isServer = typeof window === "undefined" || options.server;
-    const url = new URL(endpoint, process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL);
+    const url = new URL(endpoint, process.env.API_BASE_URL ?? process.env.BASE_URL);
     if (options.params) Object.entries(options.params).forEach(([k, v]) => url.searchParams.append(k, String(v)));
 
     if (isServer) {
@@ -112,7 +118,7 @@ export async function apiRequest<T>(endpoint: string, options: RequestOptions = 
 
     const { data } = await browserAxios.request<T>({
         url: endpoint,
-        method: options.body ? "POST" : "GET",
+        method: options.method ?? (options.body ? "POST" : "GET"),
         params: options.params,
         data: options.body,
         headers: options.headers,

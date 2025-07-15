@@ -11,16 +11,17 @@ export interface IAddress {
 
 export interface IUser {
     _id: string;
-    first_name: string;
-    last_name: string;
+    first_name: string | null;
+    last_name: string | null;
     email: string;
     password: string;
-    is_email_verified?: boolean;
-    is_phone_verified?: boolean;
-    profile_image?: string;
-    phone?: string;
+    is_email_verified: boolean;
+    is_phone_verified: boolean;
+    is_active: boolean;
+    profile_image: string | null;
+    phone: string | null;
     addresses: IAddress[];
     role: UserRoleEnum;
     createdAt: Date;
-    updatedAt?: Date;
+    updatedAt: Date;
 }

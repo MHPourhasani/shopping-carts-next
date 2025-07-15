@@ -13,7 +13,7 @@ import toastMessage from "@/shared/utils/toastMessage";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
-import { authToken } from "@/shared/utils/token";
+import { authTokenClient } from "@/shared/constant";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -22,8 +22,8 @@ const Login = () => {
     const redirectParams = useSearchParams().get("redirect");
 
     useEffect(() => {
-        if (authToken.get()?.access) router.push(redirectParams ?? PATH.home());
-    }, [authToken.get()?.access]);
+        if (authTokenClient?.access) router.push(redirectParams ?? PATH.home());
+    }, [authTokenClient?.access]);
 
     const { handleSubmit } = useForm();
 

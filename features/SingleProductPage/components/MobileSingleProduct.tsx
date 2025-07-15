@@ -13,37 +13,41 @@ import { capitalizeTheFirstLettersOfWords, isNumber, tomanFormat } from "@/share
 import AddReviewForm from "@/features/SingleProductPage/components/Reviews/AddReviewForm";
 import EditIcon from "@/assets/icons/components/Edit";
 import { useParams, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import ProductTags from "./ProductTags";
 import { useEffect, useRef, useState } from "react";
 import PATH from "@/shared/utils/path";
-import TickIcon from "@/assets/icons/components/Tick";
+import { ISingleProductProps } from "../interface/interface";
+import { useAppSelector } from "@/redux/hooks";
 import BackButton from "@/shared/components/BackButton";
 import LoveIcon from "@/assets/icons/components/Love";
-import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
 import notImage from "@/assets/images/not-images.svg";
 import Link from "next/link";
 import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "./ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
-import { ISingleProductProps } from "../interface/interface";
 import { Button } from "@/components/ui/button";
 
 const MobileSingleProduct = (props: ISingleProductProps) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
-    const { _id, images, name, price, discountedPrice, tags, description, sizes, colors, relatedProducts } = productData.product;
-    const { data: session } = useSession();
+    const { _id, images, name, basePrice, discountedPrice, tags, description, relatedProducts } = productData.product;
     const [imageActive, setImageActive] = useState(0);
-    const [isChooseSize, setIsChooseSize] = useState(false);
-    const [isChooseColor, setIsChooseColor] = useState(false);
     const router = useRouter();
     const params = useParams();
     const swiperRef = useRef<any>();
+    const user = useAppSelector((state) => state.auth.user);
 
     useEffect(() => {
         swiperRef.current?.swiper.slideTo(imageActive);
     }, [imageActive]);
+
+    const handleAddNewReview = () => {
+        if (user._id) {
+            setIsAddReview(!isAddReview);
+        } else {
+            router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
+        }
+    };
 
     return (
         <section className="flex w-full flex-col gap-4 pt-4 pb-14">
@@ -113,78 +117,8 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                     </h1>
 
                     <section className="flex flex-col gap-2">
-                        <div
-                            onClick={() => setIsChooseSize(true)}
-                            className="bg-bg-2 dark:bg-secondary-600 flex h-12 w-full items-center justify-between rounded-full px-4"
-                        >
-                            <span>سایز</span>
-                            <span className="flex items-center gap-7">
-                                <span className="font-semibold">{productData.size}</span>
-                                <ArrowDownIcon className="stroke-secondary-600 size-6 dark:stroke-white" />
-                            </span>
-                        </div>
-
-                        <Modal status={isChooseSize} title="انتخاب سایز" onClose={() => setIsChooseSize(false)}>
-                            <div className="flex w-full flex-col gap-2 overflow-y-auto">
-                                {sizes?.split(",").map((size: string) => {
-                                    return (
-                                        <span
-                                            key={size}
-                                            onClick={() => setProductData({ ...productData, size: size })}
-                                            className={`flex h-12 w-full items-center justify-between gap-4 rounded-full px-4 ${
-                                                size === productData.size
-                                                    ? "bg-primary-100 font-semibold text-white"
-                                                    : "dark:bg-secondary-600 bg-gray-100"
-                                            }`}
-                                        >
-                                            {size}
-                                            {size === productData.size && <TickIcon className="w-6 fill-white" />}
-                                        </span>
-                                    );
-                                })}
-                            </div>
-                        </Modal>
-
-                        <div
-                            onClick={() => setIsChooseColor(true)}
-                            className="bg-bg-2 dark:bg-secondary-600 flex h-12 w-full items-center justify-between rounded-full px-4"
-                        >
-                            <span>رنگ ها</span>
-                            {productData.color ? (
-                                <div className="flex items-center gap-7">
-                                    <div style={{ backgroundColor: productData.color.hex }} className={`size-6 rounded-full`} />
-                                    <ArrowDownIcon className="stroke-secondary-600 size-6 dark:stroke-white" />
-                                </div>
-                            ) : (
-                                <p>هیچ رنگی نیست</p>
-                            )}
-                        </div>
-
-                        <Modal status={isChooseColor} title="انتخاب رنگ" onClose={() => setIsChooseColor(false)}>
-                            <div className="flex w-full flex-col gap-2 overflow-y-auto">
-                                {colors?.map((color: { name: string; hex: string }, index) => {
-                                    return (
-                                        <p
-                                            key={index}
-                                            onClick={() => setProductData({ ...productData, color: color })}
-                                            className={`flex h-12 w-full items-center justify-between gap-4 rounded-full px-4 ${
-                                                color === productData.color
-                                                    ? "bg-primary-100 font-semibold text-white"
-                                                    : "dark:bg-secondary-600 bg-gray-100"
-                                            }`}
-                                        >
-                                            {color.name}
-                                            <span className="flex items-center gap-4">
-                                                <div
-                                                    style={{ backgroundColor: color.hex }}
-                                                    className={`size-5 rounded-full border-[3px] border-white`}
-                                                />
-                                                {color === productData.color && <TickIcon className="w-6 fill-white" />}
-                                            </span>
-                                        </p>
-                                    );
-                                })}
-                            </div>
+                        <Modal status={false} title="انتخاب سایز" onClose={() => console.log(false)}>
+                            kjl
                         </Modal>
 
                         <div className="bg-bg-2 dark:bg-secondary-600 flex h-12 w-full items-center justify-between rounded-full px-4">
@@ -230,19 +164,11 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                 </div>
 
                 <ReviewsList reviews={reviews} limit={5} isLoading={false} />
-                <span
-                    onClick={() => {
-                        if (session?.user.userId) {
-                            setIsAddReview(!isAddReview);
-                        } else {
-                            router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
-                        }
-                    }}
-                    className="flex cursor-pointer items-center gap-2"
-                >
+                <span onClick={handleAddNewReview} className="flex cursor-pointer items-center gap-2">
                     <EditIcon className="fill-primary-100 size-5" />
                     <p className="text-primary-100">نظر خود را برای این محصول بنویسید.</p>
                 </span>
+
                 {isAddReview ? (
                     <AddReviewForm
                         productId={String(params.slug)}
@@ -263,9 +189,9 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                     <span
                         className={`flex items-center gap-2 ${isNumber(discountedPrice) ? "text-base font-normal text-gray-600 line-through dark:text-gray-500" : "text-primary-100 dark:text-secondary-100 font-medium"}`}
                     >
-                        {price > 0 ? (
+                        {basePrice > 0 ? (
                             <>
-                                {tomanFormat(price)}
+                                {tomanFormat(basePrice)}
                                 {!(isNumber(discountedPrice) && discountedPrice > 0) && <Toman className="size-4 lg:size-5" />}
                             </>
                         ) : (

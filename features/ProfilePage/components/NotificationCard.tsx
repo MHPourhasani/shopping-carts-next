@@ -2,11 +2,11 @@
 import { INotification } from "@/interfaces/general";
 import TrashIcon from "@/assets/icons/components/Trash";
 import API from "@/shared/libs/api/endpoints";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/utils/toastMessage";
 import { showFullDate } from "@/shared/utils/utils";
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/redux/hooks";
 
 interface Props {
     notification: INotification;
@@ -18,36 +18,31 @@ interface Props {
 
 const NotificationCard = ({ notification, onDelete, onRead, selectNotification, onSelect }: Props) => {
     const { _id: id, title, message, isViewed, createdAt } = notification;
-    const { data: session } = useSession();
 
-    const deleteHandler = async (notificationId: string) => {
-        const res = await fetch(API.notification.single_notification(notificationId), {
+    const deleteHandler = async (id: string) => {
+        const res = await fetch(API.notification.single_notification(id), {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                userId: session!.user.userId,
-            }),
         });
 
         if (res.ok) {
-            onDelete(notificationId);
+            onDelete(id);
             toast.success(toastMessage.notification.successfullyDeleted);
         } else {
             toast.error(toastMessage.notification.failedDeleted);
         }
     };
 
-    const convertToReadHandler = async (notificationId: string, status: boolean) => {
-        const res = await fetch(API.notification.single_notification(notificationId), {
+    const convertToReadHandler = async (id: string, status: boolean) => {
+        const res = await fetch(API.notification.single_notification(id), {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                userId: session!.user.userId,
                 status,
             }),
         });
         if (res.ok) {
-            onRead(notificationId, status);
+            onRead(id, status);
         }
     };
 

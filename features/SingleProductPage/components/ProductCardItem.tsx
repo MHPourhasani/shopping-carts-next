@@ -4,7 +4,6 @@ import Image from "next/image";
 import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/utils/utils";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import LoveIcon from "@/assets/icons/components/Love";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import Link from "next/link";
@@ -12,6 +11,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import PATH from "@/shared/utils/path";
 import Toman from "@/assets/icons/components/Toman";
+import { getTokenClient } from "@/shared/libs/api/axios";
+import { authTokenClient } from "@/shared/constant";
 
 interface PropsInterface {
     product: IProduct;
@@ -21,26 +22,25 @@ interface PropsInterface {
 
 const ProductCardItem = ({ product, href, className }: PropsInterface) => {
     const { _id, name, basePrice, discountedPrice, images } = product;
-    const userState = useAppSelector((state) => state.auth.user);
-    const { data: session } = useSession();
+    const user = useAppSelector((state) => state.auth.user);
     const router = useRouter();
     const dispatch = useAppDispatch();
 
     const addToFavoriteHandler = async () => {
-        if (!session) {
+        if (!getTokenClient()?.access) {
             router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
         }
 
         const res = await fetch(`/api/favorites`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: session?.user.userId, productId: _id }),
+            body: JSON.stringify({ userId: user._id, productId: _id }),
         });
 
         const { data, message } = await res.json();
 
         if (res.ok) {
-            dispatch(setUser({ ...userState, favorites: data }));
+            dispatch(setUser({ ...user, favorites: data }));
             toast.success(message);
             handleRefreshAfterBack();
         } else {

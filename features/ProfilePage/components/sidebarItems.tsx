@@ -25,8 +25,8 @@ export const sidebarItems = (pathname: string) => {
         },
         {
             title: "سفارشات",
-            icon: <ReceiptIcon className={pathname === PATH.dashboard.order.orders() ? activeStrokeColor : strokeColor} />,
-            href: PATH.dashboard.order.orders(),
+            icon: <ReceiptIcon className={pathname === PATH.dashboard.order.main() ? activeStrokeColor : strokeColor} />,
+            href: PATH.dashboard.order.main(),
             roles: [UserRoleEnum.CUSTOMER, UserRoleEnum.AUTHOR, UserRoleEnum.SELLER, UserRoleEnum.ADMIN],
         },
         {

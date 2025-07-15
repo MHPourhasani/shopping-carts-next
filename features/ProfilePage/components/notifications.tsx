@@ -4,25 +4,25 @@ import NotificationIcon from "@/assets/icons/components/Notificationbing";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { useEffect, useState } from "react";
 import API from "@/shared/libs/api/endpoints";
-import { useSession } from "next-auth/react";
 import { INotification } from "@/interfaces/general";
 import NotificationsList from "./NotificationsList";
+import { useAppSelector } from "@/redux/hooks";
 
 const DashboardNotifications = () => {
-    const { data: session } = useSession();
+    const user = useAppSelector((state) => state.auth.user);
     const [isShow, setIsShow] = useState(false);
     const [notifications, setNotifications] = useState<INotification[] | undefined>(undefined);
     const [unReads, setUnReads] = useState<number | undefined>(undefined);
 
     useEffect(() => {
-        if (session?.user.userId) {
+        if (user?._id) {
             getNotifications();
         }
-    }, [session?.user.userId]);
+    }, [user]);
 
     const getNotifications = async () => {
         try {
-            const response = await fetch(API.notification.notifications_list(session?.user.userId!), {
+            const response = await fetch(API.notification.notifications_list(), {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",

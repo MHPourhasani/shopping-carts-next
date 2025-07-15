@@ -3,7 +3,6 @@ import CartProductCard from "@/features/SingleProductPage/components/CartProduct
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { setCarts } from "@/redux/slices/cartsSlice";
-import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import EmptyState from "@/shared/components/EmptyState";
@@ -23,7 +22,6 @@ interface IProps {
 const Carts = ({ carts }: IProps) => {
     const cartsState: any = useAppSelector((state) => state.carts.carts);
     const dispatch = useAppDispatch();
-    const { data: session } = useSession();
 
     useEffect(() => {
         dispatch(setCarts(carts));
@@ -31,7 +29,7 @@ const Carts = ({ carts }: IProps) => {
 
     const deleteAllCarts = async () => {
         try {
-            const res = await fetch(`/api/carts/${session!.user.userId}`, {
+            const res = await fetch(`/api/carts`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             });

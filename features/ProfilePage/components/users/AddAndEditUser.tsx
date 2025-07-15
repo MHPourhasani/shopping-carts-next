@@ -43,12 +43,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                 res = await fetch(`/api/profile/update-profile/${user._id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        first_name: first_name,
-                        last_name: last_name,
-                        email,
-                        phone: phone,
-                    }),
+                    body: JSON.stringify({ first_name, last_name, email, phone }),
                 });
             } else {
                 res = await fetch(API.auth.register(), {

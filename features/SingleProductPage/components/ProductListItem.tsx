@@ -10,6 +10,8 @@ import { useState } from "react";
 import Toman from "@/assets/icons/components/Toman";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
 import notImage from "@/assets/images/not-images.svg";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery";
+import { DeviceSize } from "@/shared/enums";
 
 interface PropsInterface {
     product: IProduct;
@@ -18,11 +20,13 @@ interface PropsInterface {
 
 const ProductListItem = ({ product, href }: PropsInterface) => {
     const { name, basePrice, categories, images, createdAt, updatedAt } = product;
-    const [open, setIsOpen] = useState(window.innerWidth > 1024 ? true : false);
+    const isDesktop = useMediaQuery(DeviceSize.DESKTOP);
+
+    const [open, setIsOpen] = useState(isDesktop ? true : false);
 
     return (
         <div
-            onClick={() => setIsOpen(window.innerWidth > 1024 ? true : !open)}
+            onClick={() => setIsOpen(isDesktop ? true : !open)}
             className="odd:bg-secondary-50 dark:bg-secondary-700 dark:shadow-secondary-700 dark:odd:bg-secondary-600 flex w-full flex-col gap-4 rounded-xl bg-white p-2 lg:grid lg:grid-cols-11 lg:items-center lg:gap-2 lg:rounded-2xl"
         >
             <div className="flex items-center justify-between lg:col-span-3">

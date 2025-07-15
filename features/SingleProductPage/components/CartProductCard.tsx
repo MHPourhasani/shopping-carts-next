@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setCarts } from "@/redux/slices/cartsSlice";
 import { ICart } from "@/interfaces/general";
 import TrashIcon from "@/assets/icons/components/Trash";
-import { useSession } from "next-auth/react";
 import Minus from "@/assets/icons/components/Minus";
 import AddIcon from "@/assets/icons/components/Add";
 import Toman from "@/assets/icons/components/Toman";
@@ -25,12 +24,11 @@ interface IProps {
 
 const CartProductCard = (props: IProps) => {
     const { _id, product, size, quantity, color } = props;
-    const { data: session } = useSession();
     const cartsState: any = useAppSelector((state) => state.carts.carts);
     const dispatch = useAppDispatch();
 
     const updateQuantity = async (operator: "+" | "-") => {
-        const res = await fetch(`/api/carts/${session?.user.userId}`, {
+        const res = await fetch(`/api/carts`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ operator, productId: _id }),

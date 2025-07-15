@@ -4,7 +4,7 @@ import Checkout from "@/features/CheckoutPage/components/checkout";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { authToken } from "@/shared/utils/token";
+import { authTokenClient } from "@/shared/constant";
 
 export const metadata: Metadata = {
     title: "تسویه حساب",
@@ -28,10 +28,10 @@ const getCarts = async (user_id: string) => {
 };
 
 const CheckoutPage = async () => {
-    if (!authToken.get()?.access) {
+    if (!authTokenClient?.access) {
         redirect(`${PATH.login()}?redirect=${PATH.checkout()}`);
     }
-    const carts = await getCarts(authToken.get()!.access);
+    const carts = await getCarts(authTokenClient!.access);
 
     return (
         <section className="container flex w-full flex-1 flex-col gap-4 lg:gap-8">

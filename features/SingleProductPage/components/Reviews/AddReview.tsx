@@ -1,15 +1,15 @@
 "use client";
 import EditIcon from "@/assets/icons/components/Edit";
 import PATH from "@/shared/utils/path";
-import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import AddReviewForm from "./AddReviewForm";
 import { useSingleProductData } from "../../context/ProductData";
+import { useAppSelector } from "@/redux/hooks";
 
 const AddReview = () => {
-    const { data: session } = useSession();
+    const user = useAppSelector((state) => state.auth.user);
     const router = useRouter();
     const params = useParams();
     const [isAddReview, setIsAddReview] = useState(false);
@@ -21,7 +21,7 @@ const AddReview = () => {
             <div className="flex flex-col gap-4">
                 <span
                     onClick={() => {
-                        if (session?.user.userId) {
+                        if (user._id) {
                             setIsAddReview(!isAddReview);
                         } else {
                             router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);

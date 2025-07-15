@@ -2,7 +2,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useSession } from "next-auth/react";
 import AddIcon from "@/assets/icons/components/Add";
 import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/shared/components/EmptyState";
@@ -19,15 +18,14 @@ interface Props {
 }
 
 const Address = ({ addresses }: Props) => {
-    const { data: session } = useSession();
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const [isAddAddress, setIsAddAddress] = useState(false);
     const [editAddress, setEditAddress] = useState({ id: "", status: false });
     const [addressData, setAddressData] = useState({ address_title: "", address_value: "" });
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(setUser({ ...userState, addresses }));
+        dispatch(setUser({ ...user, addresses }));
     }, []);
 
     const addressChangeHandler = (e: any) => {
@@ -37,12 +35,11 @@ const Address = ({ addresses }: Props) => {
     const addAddressHandler = async (e: any) => {
         e.preventDefault();
 
-        if (session?.user.userId) {
+        if (user._id) {
             const res = await fetch(`/api/profile/address`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    userId: session?.user.userId,
                     addressData,
                 }),
             });
@@ -51,7 +48,7 @@ const Address = ({ addresses }: Props) => {
 
             if (res.ok) {
                 setIsAddAddress(false);
-                dispatch(setUser({ ...userState, addresses: [...userState.addresses, data] }));
+                dispatch(setUser({ ...user, addresses: [...user.addresses, data] }));
                 setAddressData({ address_title: "", address_value: "" });
                 toast.success(message);
             } else {
@@ -64,18 +61,13 @@ const Address = ({ addresses }: Props) => {
         const res = await fetch(`/api/profile/address/select-address/${addressId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                userId: session?.user.userId,
-            }),
         });
 
         const { data } = await res.json();
 
         if (res.ok) {
-            dispatch(setUser({ ...userState, addresses: data }));
-            toast.success(
-                `${userState.addresses.find((address: IAddress) => address._id === addressId).title} has been edited successfully`,
-            );
+            dispatch(setUser({ ...user, addresses: data }));
+            toast.success(`${user.addresses.find((address: IAddress) => address._id === addressId).title} has been edited successfully`);
         } else {
             toast.error(`خطا در انتخاب آدرس`);
         }
@@ -86,7 +78,6 @@ const Address = ({ addresses }: Props) => {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                userId: session?.user.userId,
                 addressData: addressData && addressData,
             }),
         });
@@ -95,11 +86,9 @@ const Address = ({ addresses }: Props) => {
 
         if (res.ok) {
             setEditAddress({ id: "", status: false });
-            dispatch(setUser({ ...userState, addresses: data }));
+            dispatch(setUser({ ...user, addresses: data }));
             setAddressData({ address_title: "", address_value: "" });
-            toast.success(
-                `${userState.addresses.find((address: IAddress) => address._id === addressId).title} has been selected successfully`,
-            );
+            toast.success(`${user.addresses.find((address: IAddress) => address._id === addressId).title} has been selected successfully`);
         } else {
             toast.error(`خطا در انتخاب آدرس`);
         }
@@ -110,7 +99,7 @@ const Address = ({ addresses }: Props) => {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                userId: session?.user.userId,
+                userId: user._id,
             }),
         });
 
@@ -118,13 +107,11 @@ const Address = ({ addresses }: Props) => {
             setIsAddAddress(false);
             dispatch(
                 setUser({
-                    ...userState,
-                    addresses: userState.addresses.filter((address: IAddress) => address._id !== addressId),
+                    ...user,
+                    addresses: user.addresses.filter((address: IAddress) => address._id !== addressId),
                 }),
             );
-            toast.success(
-                `${userState.addresses.find((address: IAddress) => address._id === addressId).title} has been deleted successfully`,
-            );
+            toast.success(`${user.addresses.find((address: IAddress) => address._id === addressId).title} has been deleted successfully`);
         } else {
             toast.error(`خطا در حذف آدرس`);
         }
@@ -142,7 +129,7 @@ const Address = ({ addresses }: Props) => {
                 />
             </PageHeader>
 
-            <section className={`flex w-full flex-1 flex-col ${!userState?.addresses?.length ? "items-center justify-center" : ""}`}>
+            <section className={`flex w-full flex-1 flex-col ${!user?.addresses?.length ? "items-center justify-center" : ""}`}>
                 {isAddAddress ? (
                     <div className="mb-4 flex w-full flex-col items-start gap-4">
                         <span className="bg-bg-2 flex w-full flex-col items-end justify-between gap-2 rounded-2xl p-4 text-gray-500">
@@ -175,10 +162,10 @@ const Address = ({ addresses }: Props) => {
                 ) : null}
 
                 <>
-                    {userState?.addresses?.length ? (
+                    {user?.addresses?.length ? (
                         <div className="flex w-full flex-1 flex-col items-start gap-4">
                             <div className="flex w-full flex-col gap-4">
-                                {userState.addresses.map((addressItem: IAddress) => {
+                                {user.addresses.map((addressItem: IAddress) => {
                                     return (
                                         <AddressItem
                                             key={String(addressItem._id)}

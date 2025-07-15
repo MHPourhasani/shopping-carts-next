@@ -2,11 +2,10 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import toastMessage from "@/shared/utils/toastMessage";
-import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import MobileProfile from "./mobileProfile";
-import DesktopProfile from "./desktopProfile";
+import DesktopProfile from "./DesktopProfile";
 
 const Profile = () => {
     const userState = useAppSelector((state) => state.auth.user);
@@ -19,7 +18,7 @@ const Profile = () => {
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = async function () {
                 setIsLoading(true);
-                const res = await fetch(`/api/profile/change-profile-image/${userState._id}`, {
+                const res = await fetch(`/api/profile/change-profile-image`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -40,7 +39,7 @@ const Profile = () => {
 
     const deleteProfileImage = async () => {
         setIsLoading(true);
-        const res = await fetch(`/api/profile/change-profile-image/${userState._id}`, {
+        const res = await fetch(`/api/profile/change-profile-image`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -58,15 +57,14 @@ const Profile = () => {
     };
 
     const deleteAccountHandler = async () => {
-        const res = await fetch(`/api/auth/users/${userState._id}`, {
+        const res = await fetch(`/api/auth/users`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
         });
         if (res.ok) {
-            await signOut();
             dispatch(setUser(null));
         } else {
-            toast.error(toastMessage.profile.failedDeleteAccount);
+            toast.error(toastMessage.dashboard.failedDeleteAccount);
         }
     };
 

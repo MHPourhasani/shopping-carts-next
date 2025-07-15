@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Providers } from "@/redux/provider";
-import NextAuthSessionProvider from "@/shared/providers/Session";
 import React, { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProviders } from "@/shared/providers/Theme";
@@ -150,19 +149,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     className={`dark:bg-secondary-800 flex min-h-screen w-full max-w-full flex-col items-center justify-start overflow-x-hidden bg-white ${iranSans.variable}`}
                 >
                     <Providers>
-                        <NextAuthSessionProvider>
-                            <ThemeProviders>
-                                <Toast />
+                        <ThemeProviders>
+                            <Toast />
 
-                                <Wrapper>
-                                    {children}
-                                    <Navbar />
-                                    <SpeedInsights />
-                                </Wrapper>
+                            <Wrapper>
+                                {children}
+                                <Navbar />
+                                <SpeedInsights />
+                            </Wrapper>
 
-                                <div id="shop-modal" />
-                            </ThemeProviders>
-                        </NextAuthSessionProvider>
+                            <div id="shop-modal" />
+                        </ThemeProviders>
                     </Providers>
                 </body>
             </Suspense>

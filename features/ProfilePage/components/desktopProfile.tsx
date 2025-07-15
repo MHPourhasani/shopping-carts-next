@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import PATH from "@/shared/utils/path";
 import userIcon from "@/assets/icons/svgs/user.svg";
@@ -15,9 +14,12 @@ import loadingIcon from "@/assets/icons/svgs/refresh.svg";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { put } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
 import { IAddress, IUser } from "@/features/auth/interfaces";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ProfileFormValues, profileSchema } from "../schemas/profile.schema";
+import { put } from "@/shared/libs/api/axios";
 
 interface IProps {
     isLoading: boolean;
@@ -28,60 +30,49 @@ interface IProps {
 
 const DesktopProfile = (props: IProps) => {
     const { isLoading, imageFileHandler, deleteAccountHandler } = props;
-    const userState = useAppSelector((state) => state.auth.user);
-    const [formData, setFormData] = useState<IUser>();
-    const [formDataError, setFormDataError] = useState({ first_name: "", last_name: "", email: "", phone: "" });
+    const user = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
-    const router = useRouter();
     const fileInputRef = useRef<any>();
 
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        formState: { errors, isSubmitting },
+    } = useForm<ProfileFormValues>({
+        resolver: yupResolver(profileSchema),
+    });
+
     useEffect(() => {
-        if (userState) setFormData(userState);
-    }, [userState]);
+        if (user) {
+            setValue("first_name", user.first_name ?? "");
+            setValue("last_name", user.last_name ?? "");
+            setValue("email", user.email ?? "");
+            setValue("phone", user.phone ?? null);
+        }
+    }, [user, setValue]);
 
-    const changeHandler = (e: any) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const onSubmit = async (data: Partial<IUser>) => {
+        try {
+            const updatedUser = await put(API.users.updateProfile(), {
+                first_name: data.first_name,
+                last_name: data.last_name,
+                phone: data.phone,
+            });
 
-    const saveChangesHandler = async () => {
-        if (!!formData) {
-            const { first_name, last_name, phone } = formData;
+            await fetch("/api/notifications", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    user: user!._id,
+                    notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
+                }),
+            });
 
-            if (!first_name.trim()) {
-                setFormDataError({ ...formDataError, first_name: "نام نباید خالی باشد." });
-            } else if (!last_name?.trim()) {
-                setFormDataError({ ...formDataError, last_name: "نام خانوادگی نباید خالی باشد." });
-            } else if (!phone?.trim()) {
-                setFormDataError({ ...formDataError, phone: "شماره تماس نباید خالی باشد." });
-            } else if (+phone.trim() < 11) {
-                setFormDataError({ ...formDataError, phone: "شماره تماس نباید کمتر از 11 رقم باشد." });
-            } else {
-                const res = await put(API.users.updateProfile(String(userState!._id)), {
-                    first_name,
-                    last_name,
-                    phone,
-                });
-
-                const { message, data } = await res.json();
-
-                if (res.ok) {
-                    await fetch("/api/notifications", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            user: userState._id,
-                            notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
-                        }),
-                    });
-                    dispatch(setUser(data));
-                    toast.success(message);
-                    router.back();
-                } else {
-                    toast.error(`خطا در آپدیت پروفایل`);
-                }
-            }
+            dispatch(setUser(updatedUser));
+            toast.success("پروفایل با موفقیت آپدیت شد");
+        } catch (err) {
+            toast.error("خطای شبکه");
         }
     };
 
@@ -129,41 +120,37 @@ const DesktopProfile = (props: IProps) => {
                     />
 
                     <span
-                        className={`flex aspect-square w-full items-center justify-center rounded-full ${userState?.profile_image ? "from-primary-100 bg-gradient-to-tr to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
+                        className={`flex aspect-square w-full items-center justify-center rounded-full ${user?.profile_image ? "from-primary-100 bg-gradient-to-tr to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
                     >
                         <Image
-                            src={userState?.profile_image ? userState.profile_image : userIcon}
+                            src={user?.profile_image ? user.profile_image : userIcon}
                             alt="user"
                             width={500}
                             height={500}
-                            className={`${userState?.profile_image ? "h-full rounded-full object-cover" : "w-1/2"}`}
+                            className={`${user?.profile_image ? "h-full rounded-full object-cover" : "w-1/2"}`}
                         />
                     </span>
                 </div>
 
                 <span className="bg-secondary-100 dark:bg-secondary-700 rounded-lg px-2 py-1">
-                    <p>{covertUserRoleToPersian(userState?.role)}</p>
+                    <p>{covertUserRoleToPersian(user?.role)}</p>
                 </span>
 
-                <div className="flex w-full flex-col items-start gap-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-start gap-4">
                     <div className="grid w-full grid-cols-2 gap-3 text-gray-500">
                         <InputWithLabel
                             dir="auto"
                             label="نام"
-                            name="first_name"
-                            value={formData.first_name}
-                            onChange={changeHandler}
-                            error={formDataError.first_name}
+                            {...register("first_name", { required: "نام نباید خالی باشد." })}
+                            error={errors.first_name?.message}
                             className="focus:border-primary-100"
                         />
 
                         <InputWithLabel
                             dir="auto"
                             label="نام خانوادگی"
-                            name="last_name"
-                            value={formData.last_name}
-                            onChange={changeHandler}
-                            error={formDataError.last_name}
+                            {...register("last_name", { required: "نام خانوادگی نباید خالی باشد." })}
+                            error={errors.last_name?.message}
                             className="focus:border-primary-100"
                         />
 
@@ -171,46 +158,34 @@ const DesktopProfile = (props: IProps) => {
                             dir="ltr"
                             type="tel"
                             label="شماره تماس"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={changeHandler}
-                            error={formDataError.phone}
                             maxLength={11}
+                            {...register("phone", {
+                                required: "شماره تماس نباید خالی باشد.",
+                                minLength: { value: 11, message: "شماره تماس نباید کمتر از 11 رقم باشد." },
+                            })}
+                            error={errors.phone?.message}
                             className="focus:border-primary-100"
                         />
 
-                        <InputWithLabel
-                            dir="ltr"
-                            label="ایمیل"
-                            name="email"
-                            disabled
-                            value={formData.email}
-                            onChange={changeHandler}
-                            error={formDataError.email}
-                            className="focus:border-primary-100"
-                        />
+                        <InputWithLabel dir="ltr" label="ایمیل" disabled {...register("email")} className="focus:border-primary-100" />
                     </div>
 
-                    <Button onClick={saveChangesHandler} className="cursor-pointer">
-                        ذخیره تغییرات
+                    <Button type="submit" disabled={isSubmitting} className="cursor-pointer">
+                        {isSubmitting ? "در حال ذخیره..." : "ذخیره تغییرات"}
                     </Button>
-                </div>
+                </form>
 
                 <div className="bg-bg-2 dark:bg-secondary-600 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <Link href={PATH.dashboard.address()} className="flex w-full items-center justify-between">
                         <span className="text-secondary-600 dark:text-white">آدرس</span>
                         <span className="text-primary-100">
-                            {userState?.addresses?.length ? (
-                                <p>مشاهده همه</p>
-                            ) : (
-                                <ArrowLeft className="stroke-secondary-600 dark:stroke-white" />
-                            )}
+                            {user?.addresses?.length ? <p>مشاهده همه</p> : <ArrowLeft className="stroke-secondary-600 dark:stroke-white" />}
                         </span>
                     </Link>
 
-                    {userState?.addresses ? (
+                    {user?.addresses ? (
                         <p className="break-all text-gray-500 dark:text-gray-300">
-                            {userState.addresses.filter((adr: IAddress) => adr.isDefault)[0]?.address_value}
+                            {user.addresses.filter((adr: IAddress) => adr.isDefault)[0]?.address_value}
                         </p>
                     ) : null}
                 </div>

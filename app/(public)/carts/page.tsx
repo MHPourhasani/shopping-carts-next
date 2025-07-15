@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import API from "@/shared/libs/api/endpoints";
 import { redirect } from "next/navigation";
 import PATH from "@/shared/utils/path";
-import { authToken } from "@/shared/utils/token";
+import { authTokenClient } from "@/shared/constant";
 
 export const metadata: Metadata = {
     title: "سبد خرید",
@@ -27,10 +27,10 @@ const getCarts = async (user_id: string) => {
 };
 
 const CartsPage = async () => {
-    if (!authToken.get()?.access) {
+    if (!authTokenClient?.access) {
         redirect(`${PATH.login()}?redirect=${PATH.carts()}`);
     }
-    const carts = await getCarts(authToken.get()!.access);
+    const carts = await getCarts(authTokenClient!.access);
 
     return <Carts carts={carts ? carts : []} />;
 };

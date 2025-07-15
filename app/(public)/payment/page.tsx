@@ -25,7 +25,7 @@ const PaymentPage = async () => {
             <div className="bg-bg-2 dark:bg-secondary-800 flex w-full flex-1 flex-col items-center justify-center gap-4 rounded-t-3xl p-4">
                 <h1 className="mb-5 text-3xl font-bold">سفارش با موفقیت ثبت شد.</h1>
                 <p>شما یک ایمیل تایید دریافت خواهید کرد.</p>
-                <Link href={PATH.dashboard.order.orders()} className="w-full">
+                <Link href={PATH.dashboard.order.main()} className="w-full">
                     <Button>جزئیات سفارش را ببینید</Button>
                 </Link>
             </div>
@@ -34,7 +34,7 @@ const PaymentPage = async () => {
         <EmptyState
             imgSrc={orderImage}
             title="لطفاً وارد شوید"
-            linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.orders()}`}
+            linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.main()}`}
             linkTitle="ورود به حساب کاربری"
         />
     );

@@ -1,14 +1,12 @@
 "use client";
-import { UserRoleEnum } from "@/features/auth/enums";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
+import { authTokenClient } from "@/shared/constant";
 import { get } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
-import { authToken } from "@/shared/utils/token";
 import { useEffect } from "react";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
-    const userState = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
 
     const getProfile = async () => {
@@ -37,16 +35,10 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
     };
 
     useEffect(() => {
-        if (authToken.get()?.access) {
+        if (authTokenClient?.access) {
             getProfile();
         }
-    }, [authToken.get()?.access]);
-
-    useEffect(() => {
-        if (userState && userState.role !== UserRoleEnum.CUSTOMER) {
-            getShop();
-        }
-    }, [userState]);
+    }, [authTokenClient?.access]);
 
     return <>{children}</>;
 };

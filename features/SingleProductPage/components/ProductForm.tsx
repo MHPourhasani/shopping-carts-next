@@ -27,23 +27,14 @@ export const productSchema = yup.object({
     name: yup.string().required("نام محصول الزامی است"),
     slug: yup.string().required("لینک الزامی است"),
     description: yup.string().optional(),
-
     basePrice: yup.number().typeError("قیمت باید یک عدد باشد").min(0, "قیمت نمی‌تواند منفی باشد").optional(),
-
     baseQuantity: yup.number().typeError("تعداد باید یک عدد باشد").min(0, "تعداد نمی‌تواند کمتر از صفر باشد").optional(),
-
     images: yup.array().of(yup.string().required("آدرس عکس نمی‌تواند خالی باشد")).optional(),
-
     categories: yup.array().of(yup.string().required("دسته‌بندی نمی‌تواند خالی باشد")).optional(),
-
     brand: yup.string().optional(),
-
     tags: yup.array().of(yup.string().required("تگ نمی‌تواند خالی باشد")).optional(),
-
     services: yup.array().of(yup.string().required("خدمت نمی‌تواند خالی باشد")).optional(),
-
     status: yup.mixed<ProductStatusEnum>().oneOf(Object.values(ProductStatusEnum), "وضعیت نامعتبر است").optional(),
-
     relatedProducts: yup.array().of(yup.string().required("شناسه محصول مرتبط الزامی است")).optional(),
 
     attributes: yup

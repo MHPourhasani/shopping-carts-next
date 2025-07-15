@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/redux/hooks";
 
 interface Props {
     productId: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const AddReviewForm = ({ productId, onSubmit }: Props) => {
-    const { data: session } = useSession();
+    const user = useAppSelector((state) => state.auth.user);
     const [reviewValue, setReviewValue] = useState({ title: "", description: "", rating: 5 });
 
     const changeHandler = (e: any) => {
@@ -23,7 +23,7 @@ const AddReviewForm = ({ productId, onSubmit }: Props) => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                author: session?.user.userId,
+                author: user._id,
                 product: productId,
                 ...reviewValue,
             }),

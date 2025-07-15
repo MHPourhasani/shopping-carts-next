@@ -12,7 +12,7 @@ import PATH from "@/shared/utils/path";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import { covertUserRoleToPersian, showFullDate } from "@/shared/utils/utils";
 import { Button } from "@/components/ui/button";
-import { authToken } from "@/shared/utils/token";
+
 import { useRouter } from "next/navigation";
 import { UserRoleEnum } from "@/features/auth/enums";
 
@@ -24,7 +24,7 @@ interface PropsInterface {
 }
 
 const pageItems = [
-    { title: "سفارشات", href: PATH.dashboard.order.orders() },
+    { title: "سفارشات", href: PATH.dashboard.order.main() },
     { title: "علاقه مندی ها", href: PATH.dashboard.favorites() },
     { title: "پیام ها", href: PATH.dashboard.notifications() },
     { title: "تنظیمات", href: PATH.dashboard.settings() },
@@ -39,21 +39,21 @@ const adminPages = [
 
 const MobileProfile = (props: PropsInterface) => {
     const { isLoading, imageFileHandler, deleteProfileImage, deleteAccountHandler } = props;
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
     const [isChangeProfileImage, setIsChangeProfileImage] = useState(false);
     const fileInputRef = useRef<any>();
     const router = useRouter();
 
     const userData = [
-        { title: "نام", value: userState?.first_name },
-        { title: "نام خانوادگی", value: userState?.last_name },
-        { title: "شماره تماس", value: userState?.phone },
-        { title: "ایمیل", value: userState?.email },
+        { title: "نام", value: user?.first_name },
+        { title: "نام خانوادگی", value: user?.last_name },
+        { title: "شماره تماس", value: user?.phone },
+        { title: "ایمیل", value: user?.email },
     ];
 
     const logoutHandler = async () => {
-        authToken.remove();
+        // authTokenClient.remove();
         dispatch(setUser(null));
         router.push(PATH.home());
     };
@@ -96,20 +96,20 @@ const MobileProfile = (props: PropsInterface) => {
                     />
 
                     <span
-                        className={`flex aspect-square w-full items-center justify-center rounded-full ${userState?.profile_image ? "from-primary-100 bg-gradient-to-tr to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
+                        className={`flex aspect-square w-full items-center justify-center rounded-full ${user?.profile_image ? "from-primary-100 bg-gradient-to-tr to-violet-50 p-1" : "bg-bg-2 dark:bg-secondary-700"}`}
                     >
                         <Image
-                            src={userState?.profile_image ? userState.profile_image : userIcon}
+                            src={user?.profile_image ? user.profile_image : userIcon}
                             alt="user"
                             width={500}
                             height={500}
-                            className={`${userState?.profile_image ? "h-full rounded-full object-cover" : "w-1/2"}`}
+                            className={`${user?.profile_image ? "h-full rounded-full object-cover" : "w-1/2"}`}
                         />
                     </span>
                 </div>
 
                 <span className="bg-secondary-100 dark:bg-secondary-700 rounded-lg px-2 py-1">
-                    <p>{covertUserRoleToPersian(userState?.role)}</p>
+                    <p>{covertUserRoleToPersian(user?.role!)}</p>
                 </span>
 
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
@@ -134,7 +134,7 @@ const MobileProfile = (props: PropsInterface) => {
                             <span className="min-w-fit">ایجاد شده در</span>
 
                             <p dir="ltr" className="text-secondary-700 w-full truncate dark:text-white">
-                                {userState?.createdAt ? showFullDate(userState.createdAt) : "-"}
+                                {user?.createdAt ? showFullDate(user.createdAt) : "-"}
                             </p>
                         </span>
 
@@ -142,7 +142,7 @@ const MobileProfile = (props: PropsInterface) => {
                             <span className="min-w-fit">آپدیت شده در</span>
 
                             <p dir="ltr" className="text-secondary-700 w-full truncate dark:text-white">
-                                {userState?.updatedAt ? showFullDate(userState.updatedAt) : "-"}
+                                {user?.updatedAt ? showFullDate(user.updatedAt) : "-"}
                             </p>
                         </span>
                     </div>
@@ -170,7 +170,7 @@ const MobileProfile = (props: PropsInterface) => {
                     })}
                 </div>
 
-                {userState?.role === UserRoleEnum.ADMIN &&
+                {user?.role === UserRoleEnum.ADMIN &&
                     adminPages.map((page) => (
                         <Link
                             href={page.href}

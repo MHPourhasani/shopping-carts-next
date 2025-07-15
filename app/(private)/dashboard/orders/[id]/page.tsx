@@ -48,7 +48,7 @@ const SingleOrderPage = async ({ params }: Props) => {
             <EmptyState
                 imgSrc={orderImage}
                 title="لطفاً وارد شوید"
-                linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.orders()}`}
+                linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.main()}`}
                 linkTitle="ورود به حساب کاربری"
             />
         </div>

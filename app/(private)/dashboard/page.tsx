@@ -1,6 +1,7 @@
 import { IOrder } from "@/features/Orders/interfaces";
+import { authTokenServer } from "@/shared/constant";
 import { IPaginatedResponse } from "@/shared/interfaces";
-import { get } from "@/shared/libs/api/axios";
+import { get, getTokenServer } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/utils/path";
 import Link from "next/link";

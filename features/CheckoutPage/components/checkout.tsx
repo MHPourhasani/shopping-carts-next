@@ -3,14 +3,15 @@ import { redirect, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { IAddress, ICart } from "@/interfaces/general";
+import { ICart } from "@/interfaces/general";
 import PATH from "@/shared/utils/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
 import API from "../../../shared/libs/api/endpoints";
 import Toman from "@/assets/icons/components/Toman";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { authToken } from "@/shared/utils/token";
+import { authTokenClient } from "@/shared/constant";
+import { IAddress } from "@/features/auth/interfaces";
 
 const Checkout = ({ carts }: { carts: ICart[] }) => {
     const userState = useAppSelector((state) => state.auth.user);
@@ -20,13 +21,13 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
     const router = useRouter();
     const taxPercent = Number(process.env.TAX_PERCENT) || 9;
 
-    if (!authToken.get()?.access) {
+    if (!authTokenClient?.access) {
         redirect(`${PATH.login()}?redirect=${PATH.checkout()}`);
     }
 
     const deleteAllCarts = async () => {
         try {
-            await fetch(`/api/carts/${session!.user.userId}`, {
+            await fetch(`/api/carts`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             });
@@ -39,18 +40,17 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
     const goToPayment = async () => {
         if (!userState?.first_name || !userState?.last_name || !userState?.phone) {
             setError({ ...error, information: "Please enter empty field" });
-        } else if (!userState?.addresses.find((adr: IAddress) => adr.isSelected)) {
+        } else if (!userState?.addresses.find((adr: IAddress) => adr.isDefault)) {
             setError({ ...error, address: "Please add an address" });
         } else {
-            const res = await fetch(API.orders.orders_list(), {
+            const res = await fetch(API.orders.list(), {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    userId: session?.user.userId,
                     products: carts,
-                    address: userState?.addresses.find((adr: IAddress) => adr.isSelected),
+                    address: userState?.addresses.find((adr: IAddress) => adr.isDefault),
                     description: description ? description : undefined,
                     payment: { method: "online", transportCost: 10 },
                     pricePaid: calculateTotalPrice(),
@@ -141,7 +141,7 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
 
                     {userState?.addresses.length ? (
                         <p className="break-all text-gray-500">
-                            {userState?.addresses.filter((adr: IAddress) => adr.isSelected)[0].address_value}
+                            {userState?.addresses.filter((adr: IAddress) => adr.isDefault)[0].address}
                         </p>
                     ) : null}
 

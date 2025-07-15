@@ -5,7 +5,7 @@ import Link from "next/link";
 import PATH from "@/shared/utils/path";
 import { sidebarItems } from "@/features/ProfilePage/components/sidebarItems";
 import LogoutIcon from "@/assets/icons/components/Logout";
-import { authToken } from "@/shared/utils/token";
+
 import { Button } from "@/components/ui/button";
 import { setUser } from "@/redux/slices/authSlice";
 
@@ -16,7 +16,7 @@ const Sidebar = () => {
     const dispatch = useAppDispatch();
 
     const handleLogout = () => {
-        authToken.remove();
+        // authTokenClient.remove();
         dispatch(setUser(null));
         router.push(PATH.home());
     };

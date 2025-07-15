@@ -4,7 +4,6 @@ import Modal from "@/shared/components/Modal";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import addIcon from "@/assets/icons/svgs/add.svg";
 import minusIcon from "@/assets/icons/svgs/minus.svg";
@@ -14,6 +13,7 @@ import toastMessage from "@/shared/utils/toastMessage";
 import { tomanFormat } from "@/shared/utils/utils";
 import { IProduct, ISingleProductData } from "@/features/SingleProductPage/interface/interface";
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/redux/hooks";
 
 interface Props {
     product1: IProduct;
@@ -22,6 +22,7 @@ interface Props {
 }
 
 const Compare = ({ product1, product2, products }: Props) => {
+    const user = useAppSelector((state) => state.auth.user);
     const [compareProducts, setCompareProducts] = useState<{ product1: null | IProduct; product2: null | IProduct }>({
         product1: null,
         product2: null,
@@ -30,7 +31,6 @@ const Compare = ({ product1, product2, products }: Props) => {
     const [addToCartModal, setAddToCartModal] = useState<Partial<ISingleProductData> | undefined>(undefined);
     const router = useRouter();
     const pathname = usePathname();
-    const { data: session } = useSession();
 
     useEffect(() => {
         if (!product2) {
@@ -52,13 +52,13 @@ const Compare = ({ product1, product2, products }: Props) => {
     };
 
     const addToCartsHandler = async () => {
-        if (!session) {
+        if (!user._id) {
             router.push(`${PATH.login()}?redirect=${pathname}`);
         } else {
             const res = await fetch(`/api/carts`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user: session.user.userId, product: addToCartModal }),
+                body: JSON.stringify({ user: user._id, product: addToCartModal }),
             });
 
             const { message } = await res.json();
