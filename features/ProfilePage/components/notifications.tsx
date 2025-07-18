@@ -6,35 +6,30 @@ import { useEffect, useState } from "react";
 import API from "@/shared/libs/api/endpoints";
 import { INotification } from "@/interfaces/general";
 import NotificationsList from "./NotificationsList";
+import { get } from "@/shared/libs/api/axios";
+import { IPaginatedResponse } from "@/shared/interfaces";
 import { useAppSelector } from "@/redux/hooks";
 
 const DashboardNotifications = () => {
     const user = useAppSelector((state) => state.auth.user);
+
     const [isShow, setIsShow] = useState(false);
     const [notifications, setNotifications] = useState<INotification[] | undefined>(undefined);
-    const [unReads, setUnReads] = useState<number | undefined>(undefined);
+    const [unReads] = useState<number | undefined>(undefined);
 
     useEffect(() => {
-        if (user?._id) {
-            getNotifications();
-        }
-    }, [user]);
+        getNotifications();
+    }, []);
 
     const getNotifications = async () => {
         try {
-            const response = await fetch(API.notification.notifications_list(), {
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-                cache: "no-store",
-            });
-            if (response.ok) {
-                const { results } = await response.json();
-                setNotifications(results);
-                setUnReads(results.filter((item: INotification) => !item.isViewed).length);
+            if (user) {
+                console.log(user);
+                const data = await get<IPaginatedResponse<INotification>>(API.notification.list(user.id));
+                console.log(data.results);
+                setNotifications(data.results);
             }
-        } catch (error: any) {
+        } catch (error) {
             console.error(error);
         }
     };
@@ -42,7 +37,7 @@ const DashboardNotifications = () => {
     return (
         <section className="relative flex flex-col gap-4">
             <span onClick={() => setIsShow(!isShow)} className="relative">
-                {notifications && notifications.find((item) => !item.isViewed) && (
+                {notifications && notifications.find((item) => !item.isRead) && (
                     <div className="absolute top-0 right-1 size-2 animate-pulse rounded-full bg-red-500" />
                 )}
                 <NotificationIcon

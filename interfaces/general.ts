@@ -18,10 +18,12 @@ export interface IFavorite {
 
 export interface INotification {
     _id: string;
+    user: string;
     title: string;
     message: string;
-    isViewed: boolean;
+    isRead: boolean;
     createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface ICart {

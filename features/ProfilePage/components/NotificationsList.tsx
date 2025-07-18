@@ -25,7 +25,7 @@ const NotificationsList = (props: Props) => {
                             setNotifications(
                                 notifications.map((item) => {
                                     if (item._id === id) {
-                                        notification.isViewed = status;
+                                        notification.isRead = status;
                                         return item;
                                     } else {
                                         return item;

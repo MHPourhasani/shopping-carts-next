@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import toastMessage from "@/shared/utils/toastMessage";
 import { showFullDate } from "@/shared/utils/utils";
 import { Button } from "@/components/ui/button";
-import { useAppSelector } from "@/redux/hooks";
 
 interface Props {
     notification: INotification;
@@ -17,7 +16,7 @@ interface Props {
 }
 
 const NotificationCard = ({ notification, onDelete, onRead, selectNotification, onSelect }: Props) => {
-    const { _id: id, title, message, isViewed, createdAt } = notification;
+    const { _id: id, title, message, isRead, createdAt } = notification;
 
     const deleteHandler = async (id: string) => {
         const res = await fetch(API.notification.single_notification(id), {
@@ -49,7 +48,7 @@ const NotificationCard = ({ notification, onDelete, onRead, selectNotification, 
     return (
         <div
             onClick={() => {
-                if (!isViewed && selectNotification.id !== id) {
+                if (!isRead && selectNotification.id !== id) {
                     convertToReadHandler(id, true);
                 }
                 onSelect(id, !selectNotification.status);
@@ -59,7 +58,7 @@ const NotificationCard = ({ notification, onDelete, onRead, selectNotification, 
             <div className="flex w-full items-center justify-between">
                 <h3 className="font-medium">{title}</h3>
                 <div className="flex items-center gap-4">
-                    {!isViewed && selectNotification.id !== id && <div className="size-2 rounded-full bg-red-500" />}
+                    {!isRead && selectNotification.id !== id && <div className="size-2 rounded-full bg-red-500" />}
 
                     {selectNotification.id === id && (
                         <TrashIcon onClick={() => deleteHandler(id)} className="cursor-pointer fill-red-600" />

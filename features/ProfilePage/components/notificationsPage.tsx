@@ -34,7 +34,7 @@ const Notifications = () => {
     }, []);
 
     useEffect(() => {
-        setUnReads(notifications.filter((item) => !item.isViewed).length);
+        setUnReads(notifications.filter((item) => !item.isRead).length);
     }, [notifications]);
 
     return authTokenClient?.access ? (
