@@ -85,7 +85,7 @@ const SingleBlogAuthorPage = async ({ params }: Props) => {
                     <h1 className="text-lg font-bold lg:text-xl">مقالات منتشر شده</h1>
                     <div className="grid w-full gap-4 lg:grid-cols-3">
                         {blogs.map((item) => (
-                            <PostCard key={String(item._id)} link={PATH.singleBlog(item.link)} blog={item} />
+                            <PostCard key={String(item._id)} post={item} />
                         ))}
                     </div>
                 </div>

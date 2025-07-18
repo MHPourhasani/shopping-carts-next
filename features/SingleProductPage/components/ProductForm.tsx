@@ -101,7 +101,7 @@ const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProp
     const onSubmit = async (data: CreateProductDto) => {
         try {
             if (isEdit && productId) {
-                await put(API.product.single_product(productId), data);
+                await put(API.product.singleProduct(productId), data);
                 setMessage("✅ محصول با موفقیت ویرایش شد");
             } else {
                 await post(API.product.products(), data);
@@ -130,7 +130,7 @@ const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProp
 
     const deleteProductHandler = async () => {
         if (isEdit && productId) {
-            const res = await fetch(API.product.single_product(productId), {
+            const res = await fetch(API.product.singleProduct(productId), {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
             });

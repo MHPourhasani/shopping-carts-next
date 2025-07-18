@@ -1,6 +1,6 @@
 import CloseIcon from "@/assets/icons/components/Close";
 import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/libs/utils";
 import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import ArrowDownIcon from "@/assets/icons/components/ArrowDown";
 import Image from "next/image";

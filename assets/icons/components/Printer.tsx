@@ -1,5 +1,5 @@
 "use client";
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 import { useTheme } from "next-themes";
 
 const PrinterIcon = ({ onClick, className }: IIconProps) => {

@@ -6,8 +6,9 @@ import path from "path";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { get } from "@/shared/libs/api/axios";
+import { IPost } from "@/features/Blog/interfaces";
 
-const baseUrl = "https://mhp-shop.vercel.app";
+const baseUrl = process.env.BASE_URL!;
 const baseDir = "app";
 
 function getAllFolders(dirPath: string) {
@@ -37,21 +38,18 @@ const getCategories = async () => {
 };
 
 const getProducts = async () => {
-    const data = await get<IPaginatedResponse<IProduct[]>>(API.product.products());
-    return data.results;
+    try {
+        const data = await get<IPaginatedResponse<IProduct>>(API.product.products());
+        return data.results;
+    } catch (error: any) {
+        console.error(error);
+    }
 };
 
 const getBlogs = async () => {
     try {
-        const response = await fetch(API.blogs.posts(), {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        const { results } = await response.json();
-        return results;
+        const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
+        return data.results;
     } catch (error: any) {
         console.error(error);
     }
@@ -72,8 +70,8 @@ async function getRoutes() {
 
     const routesOfBanners = banners.map((b) => PATH.singleBanner(b.name));
     const routesOfCategories = categories.map((c) => PATH.singleBrand(c.name.toLowerCase()));
-    const routesOfProducts = products.map((p) => PATH.singleProduct(p._id.toString(), p.name));
-    const routesOfBlogs = blogs.map((b) => PATH.singleBlog(b.link));
+    const routesOfProducts = products?.map((p) => PATH.singleProduct(p._id.toString(), p.name)) || [];
+    const routesOfBlogs = blogs?.map((b) => PATH.singleBlog(b.slug)) || [];
 
     const routes = [...routesOfFolders, ...routesOfBanners, ...routesOfCategories, ...routesOfProducts, ...routesOfBlogs];
 

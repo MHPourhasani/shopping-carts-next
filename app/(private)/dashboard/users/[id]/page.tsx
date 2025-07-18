@@ -1,26 +1,16 @@
+import { IUser } from "@/features/auth/interfaces";
 import AddAndEditUser from "@/features/ProfilePage/components/users/AddAndEditUser";
 import PageHeader from "@/shared/components/PageHeader";
+import { get } from "@/shared/libs/api/axios";
+import API from "@/shared/libs/api/endpoints";
 
 interface Params {
     id: string;
 }
 
-const getUser = async (user_id: string) => {
-    try {
-        const response = await fetch(`${process.env.API_BASE_URL}/auth/users/${user_id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const { user } = await response.json();
-            return user;
-        }
-    } catch (error) {
-        console.error(error);
-    }
+const getUser = async (id: string) => {
+    const user = await get<IUser>(API.users.singleUser(id));
+    return user;
 };
 
 const EditUserPage = async ({ params }: { params: Params }) => {

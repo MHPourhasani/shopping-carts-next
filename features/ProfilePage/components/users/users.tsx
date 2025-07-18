@@ -15,14 +15,15 @@ import PageHeader from "@/shared/components/PageHeader";
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/features/auth/interfaces";
 import { UserRoleEnum } from "@/features/auth/enums";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 interface Props {
-    users: IUser[];
+    data: IPaginatedResponse<IUser>;
 }
 
 const AllUsers = (props: Props) => {
-    const userState = useAppSelector((state) => state.auth.user);
-    const [users, setUsers] = useState(props.users);
+    const user = useAppSelector((state) => state.auth.user);
+    const [users, setUsers] = useState(props.data.results);
     const [filters] = useState<{ role: null | string }>({ role: null });
     const sp = useSearchParams();
     const urlSp = new URLSearchParams();
@@ -100,7 +101,7 @@ const AllUsers = (props: Props) => {
 
                                 <ChangeRole user={user} />
 
-                                {userState?.role === UserRoleEnum.ADMIN && (
+                                {user?.role === UserRoleEnum.ADMIN && (
                                     <span className="flex items-center gap-2">
                                         <TrashIcon onClick={() => deleteUserHandler(user)} className="size-5 cursor-pointer fill-red-500" />
 

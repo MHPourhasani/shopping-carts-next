@@ -12,7 +12,7 @@ import { Suspense } from "react";
 import { authTokenClient } from "@/shared/constant";
 
 const Header = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
 
     return (
         <header className="w-full border-gray-200 lg:gap-6 lg:border-b-2 lg:py-5 dark:border-gray-400">
@@ -46,10 +46,10 @@ const Header = () => {
                                 <Image src={bagIcon} alt="bag" className="h-full w-full" />
                             </Link>
 
-                            {/* {userState?.carts && (
+                            {/* {user?.carts && (
                     <section className="absolute top-0 z-50 hidden w-80 flex-col rounded-xl shadow-xl group-hover:flex">
                         <div className="flex flex-col gap-2">
-                            {userState.carts.products.map((product: any) => (
+                            {user.carts.products.map((product: any) => (
                                 <div key={product._id} className="flex w-full items-center justify-between gap-3 bg-bg-2 p-2 lg:p-4">
                                     <Link
                                         href={`${PATH.products}/${product?.brand?.toLocaleLowerCase()}/${product?._id}`}
@@ -103,7 +103,7 @@ const Header = () => {
                         >
                             <ProfileIcon className="stroke-black dark:stroke-white" />
                             <span className="truncate">
-                                {!!userState ? `${(userState.first_name || userState.last_name) ?? "کاربر"}` : "ورود | ثبت نام"}
+                                {!!user ? `${(user.first_name || user.last_name) ?? "کاربر"}` : "ورود | ثبت نام"}
                             </span>
                         </Link>
                     </div>

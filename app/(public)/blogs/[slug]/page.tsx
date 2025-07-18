@@ -1,4 +1,3 @@
-import { IPost } from "@/interfaces/general";
 import API from "@/shared/libs/api/endpoints";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
@@ -12,13 +11,14 @@ import PageHeader from "@/shared/components/PageHeader";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 import { get } from "@/shared/libs/api/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
+import { IPost } from "@/features/Blog/interfaces";
 
 interface Props {
     params: { slug: string };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const data: IPost = await getBlog(params.slug);
+    const data = await getBlog(params.slug);
 
     const title = "بلاگ " + data.title;
     const description = data.content;
@@ -41,8 +41,8 @@ const getBlog = async (slug: string) => {
 };
 
 const getBlogs = async () => {
-    const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
-    return data;
+    const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts(), { limit: 6 });
+    return data.results;
 };
 
 const SingleBlogPage = async ({ params }: Props) => {

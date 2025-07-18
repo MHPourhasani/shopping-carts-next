@@ -1,5 +1,5 @@
 import PageHeader from "@/shared/components/PageHeader";
-import AddAndEditBlog from "@/features/Blog/components/AddAndEditBlog";
+import PostForm from "@/features/Blog/components/PostForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ const ProfileAddBlogPage = () => {
     return (
         <section className="flex flex-1 flex-col gap-4">
             <PageHeader title="افزودن نوشته" />
-            <AddAndEditBlog />
+            <PostForm />
         </section>
     );
 };

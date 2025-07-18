@@ -14,7 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
 
-const SignUp = () => {
+const Register = () => {
     const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "", checkbox: false });
     const [formDataError, setFormDataError] = useState({ email: "", password: "", confirmPassword: "" });
     const router = useRouter();
@@ -138,4 +138,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Register;

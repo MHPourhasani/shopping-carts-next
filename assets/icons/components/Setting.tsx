@@ -1,4 +1,4 @@
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 
 const SettingIcon = ({ onClick, className }: IIconProps) => {
     return (

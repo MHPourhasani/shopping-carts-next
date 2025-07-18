@@ -8,7 +8,7 @@ import MobileProfile from "./mobileProfile";
 import DesktopProfile from "./DesktopProfile";
 
 const Profile = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -28,7 +28,7 @@ const Profile = () => {
                 setIsLoading(false);
 
                 if (res.ok) {
-                    dispatch(setUser({ ...userState, profile_image: reader.result }));
+                    dispatch(setUser({ ...user, profile_image: reader.result }));
                     toast.success("عکس پروفایل با موفقیت تغییر کرد");
                 } else {
                     toast.error(`تغییر عکس پروفایل با خطا مواجه شد`);
@@ -49,7 +49,7 @@ const Profile = () => {
         setIsLoading(false);
 
         if (res.ok) {
-            dispatch(setUser({ ...userState, profile_image: null }));
+            dispatch(setUser({ ...user, profile_image: null }));
             toast.success("عکس پروفایل با موفقیت خذف شد.");
         } else {
             toast.error(`حذف عکس پروفایل با خطا مواجه شد`);

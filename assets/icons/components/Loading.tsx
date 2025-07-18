@@ -1,4 +1,4 @@
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 
 const LoadingIcon = ({ onClick, className }: IIconProps) => {
     return (

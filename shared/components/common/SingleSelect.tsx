@@ -3,8 +3,8 @@ import arrow from "@/assets/icons/svgs/arrow.svg";
 import close from "@/assets/icons/svgs/close.svg";
 import useOnClickOutside from "@/shared/hooks/useOnClickOutside";
 import { TOption } from "@/interfaces/general";
-import { cn } from "@/shared/utils/utils";
 import Image from "next/image";
+import { cn } from "@/shared/libs/utils";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     className?: string;

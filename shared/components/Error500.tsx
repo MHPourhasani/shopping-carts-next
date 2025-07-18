@@ -1,7 +1,11 @@
 import EmptyState from "./EmptyState";
 
-const Error500 = () => {
-    return <EmptyState title="مشکل سمت سرور" description="لطفاً چند دقیقه دیگر امتحان کنید." />;
+interface IProps {
+    onClick?: () => void;
+}
+
+const Error500 = ({ onClick }: IProps) => {
+    return <EmptyState title="مشکل سمت سرور" description="لطفاً چند دقیقه دیگر امتحان کنید." btnTitle="تلاش مجدد" btnFunction={onClick} />;
 };
 
 export default Error500;

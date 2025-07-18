@@ -1,11 +1,7 @@
 import { AUTH_TOKEN_KEY } from "@/shared/constant";
+import { IToken } from "@/shared/interfaces";
 import PATH from "@/shared/utils/path";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-
-interface Tokens {
-    access: string;
-    refresh: string;
-}
 
 export interface RequestOptions extends Omit<RequestInit, "body"> {
     params?: Record<string, any>;
@@ -14,13 +10,13 @@ export interface RequestOptions extends Omit<RequestInit, "body"> {
     server?: boolean;
 }
 
-export function getTokenClient(): Tokens | null {
+export function getTokenClient(): IToken | null {
     if (typeof window === "undefined") return null;
-    const m = document.cookie.match(new RegExp(`(?:^|; )${AUTH_TOKEN_KEY.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&")}=([^;]+)`));
+    const m = document.cookie.match(new RegExp(`(?:^|; )${AUTH_TOKEN_KEY}=([^;]+)`));
     return m ? JSON.parse(decodeURIComponent(m[1])) : null;
 }
 
-export async function getTokenServer(): Promise<Tokens | null> {
+export async function getTokenServer(): Promise<IToken | null> {
     const { cookies } = await import("next/headers");
     const val = cookies().get(AUTH_TOKEN_KEY)?.value;
     return val ? JSON.parse(val) : null;
@@ -63,7 +59,6 @@ async function refreshClientToken() {
     refreshing = true;
     try {
         const { data } = await browserAxios.post("/api/auth/refresh");
-        console.log(data);
         const newAccess = data?.access;
         waiters.forEach((cb) => cb(newAccess));
     } catch {
@@ -94,7 +89,6 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
     });
 
     if (res.status === 401 && tokens?.refresh) {
-        console.log("serverFetch refresh cookieHeader:", cookieHeader);
         const ref = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
             method: "POST",
             headers: { Cookie: cookieHeader },

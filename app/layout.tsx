@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import { Providers } from "@/redux/provider";
 import React, { Suspense } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ThemeProviders } from "@/shared/providers/Theme";
 import Wrapper from "./_wrapper";
 import Toast from "@/shared/components/Toast";
 import Navbar from "@/features/Layout/components/Navbar";
@@ -12,7 +11,7 @@ import { iranSans } from "./fonts";
 
 const title = process.env.shop_name!;
 const description = "این یک پروژه فروشگاهی حرفه ای است.";
-const url = "https://mhp-shop.vercel.app";
+const url = process.env.BASE_URL!;
 
 export const metadata: Metadata = {
     title: {
@@ -149,17 +148,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                     className={`dark:bg-secondary-800 flex min-h-screen w-full max-w-full flex-col items-center justify-start overflow-x-hidden bg-white ${iranSans.variable}`}
                 >
                     <Providers>
-                        <ThemeProviders>
-                            <Toast />
+                        <Toast />
 
-                            <Wrapper>
-                                {children}
-                                <Navbar />
-                                <SpeedInsights />
-                            </Wrapper>
-
-                            <div id="shop-modal" />
-                        </ThemeProviders>
+                        <Wrapper>
+                            {children}
+                            <Navbar />
+                            <SpeedInsights />
+                        </Wrapper>
                     </Providers>
                 </body>
             </Suspense>

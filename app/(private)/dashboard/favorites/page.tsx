@@ -1,7 +1,6 @@
 import EmptyState from "@/shared/components/EmptyState";
 import Favorites from "@/features/ProfilePage/components/favorites";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
-
 import { Metadata } from "next";
 import PATH from "@/shared/utils/path";
 import PageHeader from "@/shared/components/PageHeader";
@@ -10,9 +9,9 @@ export const metadata: Metadata = {
     title: "علاقه مندی ها",
 };
 
-const getFavoritesProducts = async (user_id: string) => {
+const getFavoritesProducts = async () => {
     try {
-        const response = await fetch(`${process.env.API_BASE_URL}/favorites/${user_id}`, {
+        const response = await fetch(`${process.env.API_BASE_URL}/favorites/`, {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
@@ -29,7 +28,7 @@ const getFavoritesProducts = async (user_id: string) => {
 };
 
 const FavoritesPage = async () => {
-    const favoriteProducts = await getFavoritesProducts(session?.user.userId!);
+    const favoriteProducts = await getFavoritesProducts();
 
     return favoriteProducts ? (
         <Favorites products={favoriteProducts ? favoriteProducts : []} />

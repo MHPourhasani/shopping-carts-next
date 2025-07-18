@@ -9,7 +9,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
     return (
         <div className="flex w-full flex-1 flex-col items-start gap-6 pt-4 pb-20 2xl:items-center 2xl:justify-center">
-            <Error500 />
+            <Error500 onClick={reset} />
         </div>
     );
 }

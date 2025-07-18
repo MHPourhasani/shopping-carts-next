@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { handleRefreshAfterBack } from "../../../shared/utils/utils";
 import { useAppSelector } from "@/redux/hooks";
-import { IPost } from "@/interfaces/general";
 import Link from "next/link";
 import PATH from "@/shared/utils/path";
 import TextEditor from "@/shared/components/common/TextEditor";
@@ -15,16 +14,16 @@ import MultiSelect from "@/shared/components/common/MultiSelect";
 import API from "@/shared/libs/api/endpoints";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
+import { IPost } from "../interfaces";
 
 interface Props {
-    blog?: IPost;
-    isEdit?: boolean;
+    initialData?: IPost;
 }
 
-const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
-    const userState = useAppSelector((state) => state.auth.user);
+const PostForm = ({ initialData }: Props) => {
+    const user = useAppSelector((state) => state.auth.user);
     const [data, setData] = useState<any>(
-        isEdit ? blog! : { link: "", subject: "", content: "", tags: "", keywords: "", relatedBlogs: [] },
+        initialData ? initialData! : { link: "", title: "", content: "", tags: "", keywords: "", relatedBlogs: [] },
     );
     const [isEditLink, setIsEditLink] = useState(true);
     const [allBlogs, setAllBlogs] = useState<Partial<IPost[]>>([]);
@@ -37,7 +36,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
     useEffect(() => {
         const getBlogs = async () => {
             try {
-                const response = await fetch(API.blogs.blogs_list(), {
+                const response = await fetch(API.blogs.posts(), {
                     headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json",
@@ -60,12 +59,12 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
         try {
             if (!data.link!.trim()) {
                 toast.error("لینک نباید خالی باشد.");
-            } else if (!data.subject!.trim()) {
+            } else if (!data.title!.trim()) {
                 toast.error("موضوع نباید خالی باشد.");
             } else {
                 let res: any;
 
-                if (isEdit) {
+                if (initialData) {
                     res = await fetch(`/api/blogs/${data.link}`, {
                         method: "PUt",
                         headers: {
@@ -81,14 +80,14 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                             "Content-Type": "application/json",
                             Accept: "application/json",
                         },
-                        body: JSON.stringify({ author: userState._id, data }),
+                        body: JSON.stringify({ author: user._id, data }),
                     });
                 }
 
                 const { message } = await res.json();
 
                 if (res.ok) {
-                    toast.success(isEdit ? "بلاگ با موفقیت ویرایش شد." : "بلاگ با موفقیت اضافه شد.");
+                    toast.success(initialData ? "بلاگ با موفقیت ویرایش شد." : "بلاگ با موفقیت اضافه شد.");
                     router.back();
                     handleRefreshAfterBack();
                 } else {
@@ -107,11 +106,11 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
         });
 
         if (res.ok) {
-            toast.success(toastMessage.blog.successfullyDelete);
+            toast.success(toastMessage.post.successfullyDelete);
             router.back();
             handleRefreshAfterBack();
         } else {
-            toast.error(toastMessage.blog.failedDeleted);
+            toast.error(toastMessage.post.failedDeleted);
         }
     };
 
@@ -140,8 +139,8 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                 value={data.readingTime}
                 onChange={changeHandler}
             />
-            <InputWithLabel name="subject" label="موضوع" value={data.subject} onChange={changeHandler} />
-            <TextEditor value={data.content!} onChange={(content) => setData({ ...data, content })} />
+            <InputWithLabel name="title" label="موضوع" value={data.title} onChange={changeHandler} />
+            <TextEditor value={data.content} onChange={(content) => setData({ ...data, content })} />
             <InputWithLabel name="tags" label="تگ ها" value={data.tags} onChange={changeHandler} />
             <InputWithLabel name="keywords" label="کلمات کلیدی" value={data.keywords} onChange={changeHandler} />
 
@@ -151,12 +150,12 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                     defaultValues={
                         data.relatedBlogs
                             ? data.relatedBlogs.map((b: IPost) => {
-                                  return { id: String(b?._id), title: String(b?.subject) };
+                                  return { id: String(b?._id), title: String(b?.title) };
                               })
                             : undefined
                     }
                     options={allBlogs.map((b) => {
-                        return { id: String(b?._id), title: String(b?.subject) };
+                        return { id: String(b?._id), title: String(b?.title) };
                     })}
                     onChange={(selected) =>
                         setData({
@@ -171,7 +170,7 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
 
             <div className="mt-8 flex gap-4">
                 <Button onClick={submitBlogHandler}>
-                    {isEdit ? (
+                    {initialData ? (
                         <>
                             به روزرسانی
                             <EditIcon className="fill-white" />
@@ -180,7 +179,8 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
                         "انتشار بلاگ"
                     )}
                 </Button>
-                {isEdit && (
+
+                {initialData && (
                     <Button
                         variant="secondary"
                         onClick={deleteHandler}
@@ -195,4 +195,4 @@ const AddAndEditBlog = ({ blog, isEdit = false }: Props) => {
     );
 };
 
-export default AddAndEditBlog;
+export default PostForm;

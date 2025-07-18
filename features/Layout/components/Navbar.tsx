@@ -10,7 +10,7 @@ import ShopIcon from "@/assets/icons/components/Shop";
 import PaperNote from "@/assets/icons/components/PaperNote";
 
 const Navbar = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const pathname = usePathname();
     let isActive = false;
 
@@ -21,14 +21,8 @@ const Navbar = () => {
         {
             title: "پروفایل",
             icon:
-                !!userState && userState?.profile_image ? (
-                    <Image
-                        src={userState.profile_image}
-                        alt="user"
-                        width={100}
-                        height={100}
-                        className="aspect-square size-6 rounded-full"
-                    />
+                !!user && user?.profile_image ? (
+                    <Image src={user.profile_image} alt="user" width={100} height={100} className="aspect-square size-6 rounded-full" />
                 ) : (
                     <ProfileIcon />
                 ),

@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 const CreateShop = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({ name: "", description: "", phone_number: "" });
     const [formDataError, setFormDataError] = useState({ name: "", description: "", phone_number: "" });
     const dispatch = useAppDispatch();
@@ -36,7 +36,7 @@ const CreateShop = () => {
             const res = await fetch(`/api/profile/create-shop`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user_id: userState._id, name, description, phone_number }),
+                body: JSON.stringify({ user_id: user._id, name, description, phone_number }),
             });
 
             await fetch("/api/notifications", {
@@ -45,7 +45,7 @@ const CreateShop = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    user: userState._id,
+                    user: user._id,
                     notification: { title: "ساخت فروشگاه", message: "فروشگاه شما با موفقیت ساخته شد." },
                 }),
             });

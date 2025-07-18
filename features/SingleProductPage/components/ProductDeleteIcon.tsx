@@ -9,10 +9,10 @@ import API from "@/shared/libs/api/endpoints";
 import { UserRoleEnum } from "@/features/auth/enums";
 
 const ProductDeleteIcon = ({ product }: { product: IProduct }) => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
 
     const deleteProductHandler = async () => {
-        const res = await fetch(API.product.single_product(product._id.toString()), {
+        const res = await fetch(API.product.singleProduct(product._id.toString()), {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
         });
@@ -26,8 +26,8 @@ const ProductDeleteIcon = ({ product }: { product: IProduct }) => {
     };
 
     return (
-        userState &&
-        userState.role !== UserRoleEnum.CUSTOMER &&
+        user &&
+        user.role !== UserRoleEnum.CUSTOMER &&
         product && <TrashIcon onClick={deleteProductHandler} className="cursor-pointer fill-red-600 dark:fill-red-500" />
     );
 };

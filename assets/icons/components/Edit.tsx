@@ -1,4 +1,4 @@
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 
 const EditIcon = ({ className, onClick }: IIconProps) => {
     return (

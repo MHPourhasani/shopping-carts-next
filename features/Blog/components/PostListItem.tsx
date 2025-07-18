@@ -3,11 +3,11 @@ import ClockIcon from "@/assets/icons/components/Clock";
 import EditIcon from "@/assets/icons/components/Edit";
 import TrashIcon from "@/assets/icons/components/Trash";
 import UserIcon from "@/assets/icons/components/User";
-import { IPost } from "@/interfaces/general";
 import { handleRefreshAfterBack } from "@/shared/utils/utils";
 import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import { IPost } from "../interfaces";
 
 const PostListItem = ({ post, link }: { post: IPost; link: string }) => {
     const { _id, title, author, createdAt } = post;

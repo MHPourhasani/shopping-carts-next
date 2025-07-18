@@ -1,10 +1,13 @@
 import { UserRoleEnum } from "./enums";
 
 export interface IAddress {
-    _id: string;
-    title: string;
-    address: string;
+    _id?: string;
+    title: string | null;
+    province: string;
     city: string;
+    address: string;
+    plaque: string;
+    unit?: string;
     postalCode: string;
     isDefault: boolean;
 }

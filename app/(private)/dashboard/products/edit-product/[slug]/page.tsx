@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 const getSingleProduct = async (product_id: string) => {
-    const data = await get<IProduct>(API.product.single_product(product_id));
+    const data = await get<IProduct>(API.product.singleProduct(product_id));
     return data;
 };
 

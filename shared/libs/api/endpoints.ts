@@ -5,8 +5,13 @@ const API = {
         refresh: () => `${process.env.API_BASE_URL}/auth/refresh-token`,
     },
     users: {
+        list: () => `${process.env.API_BASE_URL}/users`,
+        singleUser: (id: string) => `${process.env.API_BASE_URL}/users/${id}`,
         getProfile: () => `${process.env.API_BASE_URL}/users/get-profile`,
         updateProfile: () => `${process.env.API_BASE_URL}/users/update-profile`,
+        addAddress: () => `${process.env.API_BASE_URL}/users/addresses`,
+        addressess: () => `${process.env.API_BASE_URL}/users/addresses`,
+        singleAddress: (id: string) => `${process.env.API_BASE_URL}/users/addresses/${id}`,
     },
     banners: {
         banners_list: () => `${process.env.API_BASE_URL}/banners`,
@@ -22,7 +27,7 @@ const API = {
     },
     product: {
         products: () => `${process.env.API_BASE_URL}/products`,
-        single_product: (id: string) => `${process.env.API_BASE_URL}/products/${id}`,
+        singleProduct: (id: string) => `${process.env.API_BASE_URL}/products/${id}`,
         reviews: (id: string) => `${process.env.API_BASE_URL}/reviews/${id}`,
         attributes: () => `${process.env.API_BASE_URL}/attributes`,
     },

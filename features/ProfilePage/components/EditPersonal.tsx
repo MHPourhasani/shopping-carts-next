@@ -10,12 +10,12 @@ import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 
 const EditPersonalInformation = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({
-        firstName: userState?.first_name ? userState?.first_name : "",
-        lastName: userState?.last_name ? userState?.last_name : "",
-        email: userState?.email ? userState?.email : "",
-        phoneNumber: userState?.phone_number ? userState?.phone_number : "",
+        firstName: user?.first_name ? user?.first_name : "",
+        lastName: user?.last_name ? user?.last_name : "",
+        email: user?.email ? user?.email : "",
+        phoneNumber: user?.phone_number ? user?.phone_number : "",
     });
     const [formDataError, setFormDataError] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "" });
     const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ const EditPersonalInformation = () => {
         } else if (phoneNumber.trim() < 11) {
             setFormDataError({ ...formDataError, phoneNumber: "شماره تماس نباید کمتر از 11 رقم باشد." });
         } else {
-            const res = await fetch(`/api/profile/update-profile/${userState._id}`, {
+            const res = await fetch(`/api/profile/update-profile/${user._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -59,7 +59,7 @@ const EditPersonalInformation = () => {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        user: userState._id,
+                        user: user._id,
                         notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
                     }),
                 });

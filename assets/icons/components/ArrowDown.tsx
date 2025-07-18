@@ -1,4 +1,4 @@
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 
 const ArrowDownIcon = ({ onClick, className }: IIconProps) => {
     return (

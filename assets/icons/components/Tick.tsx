@@ -1,4 +1,4 @@
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 
 const TickIcon = ({ className, onClick }: IIconProps) => {
     return (

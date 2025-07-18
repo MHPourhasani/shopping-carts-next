@@ -1,4 +1,4 @@
-import SignUp from "@/features/auth/components/signup";
+import Register from "@/features/auth/components/Register";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const SignUpPage = () => {
-    return <SignUp />;
+    return <Register />;
 };
 
 export default SignUpPage;

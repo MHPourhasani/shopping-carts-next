@@ -8,7 +8,7 @@ import HomeIcon from "@/assets/icons/components/Home";
 import DashboardNotifications from "./notifications";
 
 const DashboardHeader = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
 
     return (
         <header className="hidden w-full items-center justify-end gap-4 lg:flex">
@@ -20,14 +20,14 @@ const DashboardHeader = () => {
 
             <Link
                 href={PATH.dashboard.profile()}
-                className={`flex aspect-square size-10 items-center justify-center rounded-full ${userState?.profile_image ? "" : "bg-bg-2 dark:bg-secondary-600"}`}
+                className={`flex aspect-square size-10 items-center justify-center rounded-full ${user?.profile_image ? "" : "bg-bg-2 dark:bg-secondary-600"}`}
             >
                 <Image
-                    src={userState?.profile_image ? userState.profile_image : userIcon}
+                    src={user?.profile_image ? user.profile_image : userIcon}
                     alt="user"
                     width={500}
                     height={500}
-                    className={`${userState?.profile_image ? "h-full rounded-full object-cover" : "w-5"}`}
+                    className={`${user?.profile_image ? "h-full rounded-full object-cover" : "w-5"}`}
                 />
             </Link>
         </header>

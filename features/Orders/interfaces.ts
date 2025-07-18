@@ -1,3 +1,4 @@
+import { PaymentMethodEnum } from "@/interfaces/enums";
 import { OrderStatusEnum, PaymentStatusEnum } from "./enums";
 
 export interface IOrderItem {
@@ -27,7 +28,7 @@ export interface IOrder {
     tax: number; // مالیات کل سفارش
     total: number; // مبلغ نهایی سفارش بعد از تخفیف و مالیات
     transactionId?: string; // شناسه تراکنش پرداخت
-    paymentMethod?: string; // روش پرداخت (مثلاً "online", "cod" و ...)
+    paymentMethod?: PaymentMethodEnum; // روش پرداخت (مثلاً "online", "cod" و ...)
     paymentStatus?: PaymentStatusEnum; // وضعیت پرداخت
     shippingMethod?: string; // روش ارسال (پیک، تیپاکس، پست و ...)
     shippingCost?: number; // هزینه ارسال

@@ -1,4 +1,4 @@
-import { IIconProps } from "@/interfaces/general";
+import { IIconProps } from "@/shared/interfaces";
 
 const CloseIcon = ({ onClick, style, className }: IIconProps) => {
     return (

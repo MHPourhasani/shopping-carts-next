@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Label } from "./label";
 import { Input } from "./input";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/libs/utils";
 
 interface Props extends React.ComponentProps<"input"> {
     label: string;
@@ -13,7 +13,7 @@ const InputWithLabel = React.forwardRef<HTMLInputElement, Props>(({ className, t
     const id = React.useId();
 
     return (
-        <div className="flex flex-col items-start gap-2.5">
+        <div className="flex w-full flex-col items-start gap-2.5">
             <Label htmlFor={id}>{label}</Label>
             <Input id={id} type={type} className={cn("", className)} ref={ref} {...props} />
 

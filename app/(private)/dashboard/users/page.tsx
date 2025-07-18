@@ -1,33 +1,24 @@
+import { IUser } from "@/features/auth/interfaces";
 import AllUsers from "@/features/ProfilePage/components/users/users";
-
+import { IPaginatedResponse } from "@/shared/interfaces";
+import { get } from "@/shared/libs/api/axios";
+import API from "@/shared/libs/api/endpoints";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "کاربران",
+    title: "لیست کاربران",
 };
 
-const getUsers = async (userId: string) => {
-    try {
-        const response = await fetch(`${process.env.API_BASE_URL}/auth/users?user_id=${userId}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            cache: "no-store",
-        });
-        if (response.ok) {
-            const { data } = await response.json();
-            return data;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+const getUsers = async () => {
+    const data = await get<IPaginatedResponse<IUser>>(API.users.list());
+    return data;
 };
 
 const ProfileUsersPage = async () => {
-    const users = await getUsers(session?.user.userId!);
+    const data = await getUsers();
+    console.log(data);
 
-    return <AllUsers users={users ? users : []} />;
+    return <AllUsers data={data} />;
 };
 
 export default ProfileUsersPage;

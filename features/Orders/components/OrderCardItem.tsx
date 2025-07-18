@@ -1,9 +1,9 @@
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import ReceiptIcon from "@/assets/icons/components/Receipt";
-import { IOrder, IUser } from "@/interfaces/general";
-
+import { IUser } from "@/features/auth/interfaces";
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
+import { IOrder } from "../interfaces";
 
 interface Props {
     user: IUser;
@@ -22,8 +22,8 @@ const OrderCardItem = ({ user, order, href }: Props) => {
                     <ReceiptIcon />
                 </span>
                 <div>
-                    <p className="mb-2 truncate font-bold whitespace-pre-line">سفارش #{order.orderNo}</p>
-                    <p className="text-sm text-gray-400 dark:text-gray-300">{order.products.length} محصول</p>
+                    <p className="mb-2 truncate font-bold whitespace-pre-line">سفارش #{order.invoiceNumber}</p>
+                    <p className="text-sm text-gray-400 dark:text-gray-300">{order.items.length} محصول</p>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@ const OrderCardItem = ({ user, order, href }: Props) => {
                 {user.first_name ?? ""}
                 {user.last_name ?? ""}
             </span>
-            <span className="col-span-2 text-sm text-gray-400 dark:text-gray-300">{order.products.length}</span>
+            <span className="col-span-2 text-sm text-gray-400 dark:text-gray-300">{order.items.length}</span>
 
             <ArrowLeft className="stroke-secondary-400 dark:stroke-secondary-100 h-auto w-6" />
         </Link>

@@ -1,6 +1,5 @@
 import { ICart } from "@/interfaces/general";
-import { Dispatch, createSlice } from "@reduxjs/toolkit";
-import { useAppDispatch } from "../hooks";
+import { createSlice } from "@reduxjs/toolkit";
 
 interface initialState {
     carts: ICart[];
@@ -10,12 +9,6 @@ const initialState: initialState = {
     carts: [],
 };
 
-/**
- * Create a slice as a reducer containing actions.
- *
- * In this example actions are included in the slice. It is fine and can be
- * changed based on your needs.
- */
 export const cartsSlice = createSlice({
     name: "carts",
     initialState,
@@ -32,7 +25,6 @@ export const cartsSlice = createSlice({
     },
 });
 
-// Exports all actions
 export const { addToCarts, setCarts, removeAllCarts } = cartsSlice.actions;
 
 export default cartsSlice.reducer;

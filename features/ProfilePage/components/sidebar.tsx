@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { setUser } from "@/redux/slices/authSlice";
 
 const Sidebar = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -29,10 +29,10 @@ const Sidebar = () => {
                 </Link>
 
                 <div className="text-customBlack-100 dark:text-secondary-100 flex w-full flex-1 flex-col overflow-auto">
-                    {userState &&
-                        userState.role &&
+                    {user &&
+                        user.role &&
                         sidebarItems(pathname)
-                            .filter((item) => item.roles.includes(userState.role))
+                            .filter((item) => item.roles.includes(user.role))
                             .map((item) => {
                                 const isActive = pathname === item.href;
 

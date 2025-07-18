@@ -1,7 +1,7 @@
 "use client";
 import notImage from "@/assets/images/not-images.svg";
 import Image from "next/image";
-import { capitalizeTheFirstLettersOfWords, cn, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/utils/utils";
+import { capitalizeTheFirstLettersOfWords, handleRefreshAfterBack, isNumber, tomanFormat } from "@/shared/utils/utils";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import LoveIcon from "@/assets/icons/components/Love";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { setUser } from "@/redux/slices/authSlice";
 import PATH from "@/shared/utils/path";
 import Toman from "@/assets/icons/components/Toman";
 import { getTokenClient } from "@/shared/libs/api/axios";
-import { authTokenClient } from "@/shared/constant";
+import { cn } from "@/shared/libs/utils";
 
 interface PropsInterface {
     product: IProduct;
@@ -34,7 +34,7 @@ const ProductCardItem = ({ product, href, className }: PropsInterface) => {
         const res = await fetch(`/api/favorites`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: user._id, productId: _id }),
+            body: JSON.stringify({ productId: _id }),
         });
 
         const { data, message } = await res.json();

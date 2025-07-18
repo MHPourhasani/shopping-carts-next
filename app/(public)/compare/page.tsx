@@ -9,7 +9,7 @@ interface Props {
 
 const getSingleProduct = async (product_id: string) => {
     try {
-        const res = await fetch(API.product.single_product(product_id), {
+        const res = await fetch(API.product.singleProduct(product_id), {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",

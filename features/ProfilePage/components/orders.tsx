@@ -19,7 +19,7 @@ const Orders = (props: Props) => {
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState({});
     const [orders, setOrders] = useState(props.orders);
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
 
     useEffect(() => {
         if (search.trim()) {
@@ -29,7 +29,7 @@ const Orders = (props: Props) => {
         }
     }, [search, orders]);
 
-    return userState?.role === UserRoleEnum.SELLER || userState?.role === UserRoleEnum.ADMIN ? (
+    return user?.role === UserRoleEnum.SELLER || user?.role === UserRoleEnum.ADMIN ? (
         <section className="no-scrollbar flex w-full flex-1 flex-col gap-4 overflow-y-auto lg:gap-8">
             <PageHeader title="سفارشات" mobileBackButton={true} desktopBackButton={false} />
 

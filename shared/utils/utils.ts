@@ -1,9 +1,5 @@
 import { UserRoleEnum } from "@/features/auth/enums";
 import { PaymentMethodEnum } from "@/interfaces/enums";
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export const sizes = [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49];
 
 export const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -25,10 +21,6 @@ export const capitalizeTheFirstLettersOfWords = (word: string) => {
 export function isNumber(value: any) {
     return typeof value === "number";
 }
-
-export const cn = (...inputs: ClassValue[]) => {
-    return twMerge(clsx(inputs));
-};
 
 export const range = (start: number, end: number, step: number) => {
     const seq = [];

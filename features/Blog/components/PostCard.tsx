@@ -1,9 +1,9 @@
 import ClockIcon from "@/assets/icons/components/Clock";
 import UserIcon from "@/assets/icons/components/User";
-import { IPost } from "@/interfaces/general";
-import { cn } from "@/shared/utils/utils";
 import PATH from "@/shared/utils/path";
 import Link from "next/link";
+import { IPost } from "../interfaces";
+import { cn } from "@/shared/libs/utils";
 
 interface Props {
     post: IPost;

@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: "*",
             allow: "/",
-            disallow: ["/dashboard", "/dashboard/*", "/profile", "/profile/*"],
+            disallow: ["/dashboard", "/dashboard/*"],
         },
-        sitemap: "https://mhp-shop.vercel.app/sitemap.xml",
+        sitemap: process.env.BASE_URL + "/sitemap.xml",
     };
 }

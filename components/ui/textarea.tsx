@@ -1,6 +1,6 @@
-import { cn } from "@/shared/utils/utils";
 import { forwardRef } from "react";
 import { Label } from "./label";
+import { cn } from "@/shared/libs/utils";
 
 interface Props extends React.ComponentProps<"textarea"> {
     label: string;
@@ -10,7 +10,7 @@ interface Props extends React.ComponentProps<"textarea"> {
 
 const Textarea = forwardRef<HTMLTextAreaElement, Props>(({ className, label, error, hint, ...props }, ref) => {
     return (
-        <div className="flex flex-col items-start gap-2.5">
+        <div className="flex w-full flex-col items-start gap-2.5">
             <Label>{label}</Label>
             <textarea
                 className={cn(

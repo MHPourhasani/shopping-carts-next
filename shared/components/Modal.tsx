@@ -1,8 +1,8 @@
 "use client";
 import CloseIcon from "@/assets/icons/components/Close";
-import { cn } from "@/shared/utils/utils";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { cn } from "../libs/utils";
 
 interface ModalProps {
     status: boolean;

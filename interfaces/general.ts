@@ -38,11 +38,4 @@ export interface IBrands {
     src: string;
 }
 
-export interface IIconProps {
-    className?: string;
-    color?: string;
-    style?: any;
-    onClick?: any;
-}
-
 export type TOption = { id?: string | number; title: string };

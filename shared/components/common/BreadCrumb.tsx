@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/libs/utils";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import Link from "next/link";
 import PATH from "@/shared/utils/path";

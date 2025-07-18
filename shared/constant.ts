@@ -1,4 +1,4 @@
-import { getTokenClient, getTokenServer } from "./libs/api/axios";
+import { getTokenClient } from "./libs/api/axios";
 
 export const AUTH_TOKEN_KEY = "MHP_SHOP_AUTH_TOKEN";
 

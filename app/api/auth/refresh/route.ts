@@ -7,7 +7,6 @@ export async function POST(req: NextRequest) {
     const cookieStore = req.cookies;
 
     const tokenString = cookieStore.get(AUTH_TOKEN_KEY)?.value;
-    console.log("Refresh API Cookie:", tokenString);
 
     if (!tokenString) {
         return NextResponse.json({ error: "No token cookie found" }, { status: 401 });
@@ -15,7 +14,6 @@ export async function POST(req: NextRequest) {
 
     try {
         const { refresh } = JSON.parse(tokenString);
-        console.log("Sending refresh token to API:", refresh);
 
         if (!refresh) {
             return NextResponse.json({ error: "No refresh token inside cookie" }, { status: 401 });

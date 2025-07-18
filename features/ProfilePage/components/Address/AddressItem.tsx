@@ -3,10 +3,10 @@ import EmptySquareIcon from "@/assets/icons/svgs/empty-square.svg";
 import EditIcon from "@/assets/icons/components/Edit";
 import Image from "next/image";
 import TrashIcon from "@/assets/icons/components/Trash";
-import { IAddress } from "@/interfaces/general";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { IAddress } from "@/features/auth/interfaces";
 
 interface Props {
     address: IAddress;
@@ -15,24 +15,45 @@ interface Props {
     setEditAddress: any;
     setAddressData: any;
     editAddress: { id: string; status: boolean };
-    deleteAddressHandler: (a: any) => void;
     addressData: { address_title: string; address_value: string };
     addressChangeHandler: (a: any) => void;
     editAddressHandler: (a: any) => void;
 }
 
-const address = ({
+const AddressItem = ({
     address,
     selectAddressHandler,
     setIsAddAddress,
     setEditAddress,
     setAddressData,
     editAddress,
-    deleteAddressHandler,
     addressData,
     addressChangeHandler,
     editAddressHandler,
 }: Props) => {
+    const deleteAddressHandler = async (addressId: string) => {
+        const res = await fetch(`/api/profile/address/delete-address/${addressId}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId: user._id,
+            }),
+        });
+
+        if (res.ok) {
+            setIsAddAddress(false);
+            dispatch(
+                setUser({
+                    ...user,
+                    addresses: user.addresses.filter((address: IAddress) => address._id !== addressId),
+                }),
+            );
+            toast.success(`${user.addresses.find((address: IAddress) => address._id === addressId).title} has been deleted successfully`);
+        } else {
+            toast.error(`خطا در حذف آدرس`);
+        }
+    };
+
     return (
         <div
             key={address._id}
@@ -46,7 +67,7 @@ const address = ({
                         }}
                         className="cursor-pointer"
                     >
-                        {address.isSelected ? (
+                        {address.isDefault ? (
                             <CheckedIcon className="w-auto" color="#16a34a" />
                         ) : (
                             <Image src={EmptySquareIcon} alt="checked" />
@@ -97,6 +118,7 @@ const address = ({
                         <Button variant="text" onClick={() => setEditAddress({ id: "", status: false })} className="flex-1">
                             انصراف
                         </Button>
+
                         <Button variant="text" onClick={() => editAddressHandler(address._id)} className="flex-1">
                             به روزرسانی
                         </Button>
@@ -107,4 +129,4 @@ const address = ({
     );
 };
 
-export default address;
+export default AddressItem;

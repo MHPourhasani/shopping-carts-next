@@ -1,50 +1,38 @@
-import AddAndEditBlog from "@/features/Blog/components/AddAndEditBlog";
+import PostForm from "@/features/Blog/components/PostForm";
+import { IPost } from "@/features/Blog/interfaces";
 import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/shared/components/PageHeader";
-import { IPost } from "@/interfaces/general";
+import { get } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
 import { Metadata } from "next";
 
 interface Props {
-    params: { url: string };
+    params: { slug: string };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const data: IPost = await getBlog(params.url);
+    const data = await getBlog(params.slug);
 
     return {
-        title: data && data.subject ? `ویرایش نوشته "${data?.subject}"` : "ویرایش نوشته",
+        title: data && data.title ? `ویرایش نوشته "${data?.title}"` : "ویرایش نوشته",
     };
 }
 
-const getBlog = async (url: string) => {
-    try {
-        const response = await fetch(API.blogs.single_blog(url), {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-        });
-
-        if (response.ok) {
-            const { result } = await response.json();
-            return result;
-        }
-    } catch (error: any) {
-        console.error(error);
-    }
+const getBlog = async (slug: string) => {
+    const data = await get<IPost>(API.blogs.singlePost(slug));
+    return data;
 };
 
 const ProfileEditBlogPage = async ({ params }: Props) => {
-    const data: IPost = await getBlog(params.url);
+    const data: IPost = await getBlog(params.slug);
 
     if (!data) {
         return <Error500 />;
     }
     return (
         <section className="flex flex-1 flex-col gap-4">
-            <PageHeader title={`ویرایش نوشته "${data.subject}"`} />
-            <AddAndEditBlog blog={data} isEdit />
+            <PageHeader title={`ویرایش نوشته "${data.title}"`} />
+            <PostForm initialData={data} />
         </section>
     );
 };

@@ -9,7 +9,7 @@ import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 
 const ChangePassword = () => {
-    const userState = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
     const [formDataError, setFormDataError] = useState({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
     const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ const ChangePassword = () => {
         } else if (newPassword !== confirmNewPassword) {
             setFormDataError({ ...formDataError, confirmNewPassword: "رمز عبور ها با هم برابر نیستند." });
         } else {
-            const res = await fetch(`/api/profile/change-password/${userState._id}`, {
+            const res = await fetch(`/api/profile/change-password/${user._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ newPassword }),
@@ -47,13 +47,13 @@ const ChangePassword = () => {
             //     method: "POST",
             //     headers: { "Content-Type": "application/json" },
             //     body: JSON.stringify({
-            //         user: userState.email,
+            //         user: user.email,
             //         notification: { title: "تغییر رمز عبور", message: "رمز عبور با موقفیت تغییر کرد." },
             //     }),
             // });
 
             if (res.ok) {
-                dispatch(setUser({ ...userState, formData }));
+                dispatch(setUser({ ...user, formData }));
                 toast.success("رمز عبور با موفقیت تغییر کرد.");
                 router.back();
             } else {
