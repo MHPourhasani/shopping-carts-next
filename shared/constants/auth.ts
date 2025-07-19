@@ -1,0 +1,1 @@
+export const AUTH_TOKEN_KEY = "MHP_SHOP_AUTH_TOKEN";

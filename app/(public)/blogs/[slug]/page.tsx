@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const getBlog = async (slug: string) => {
-    const data = await get<IPost>(API.blogs.singlePost(slug));
+    const data = await get<IPost>(API.blogs.singlePostBySlug(slug));
     return data;
 };
 
@@ -51,6 +51,7 @@ const SingleBlogPage = async ({ params }: Props) => {
     const filteredBlogs = blogs.filter((blog) => blog.slug !== params.slug);
 
     const { title, slug, author, updatedAt, createdAt, tags, content } = data;
+    console.log(author);
 
     return (
         <section className="container flex w-full flex-1 flex-col gap-8">

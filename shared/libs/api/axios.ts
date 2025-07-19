@@ -1,7 +1,8 @@
-import { AUTH_TOKEN_KEY } from "@/shared/constant";
+import { AUTH_TOKEN_KEY } from "@/shared/constants/auth";
 import { IToken } from "@/shared/interfaces";
 import PATH from "@/shared/utils/path";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { parse } from "cookie";
 
 export interface RequestOptions extends Omit<RequestInit, "body"> {
     params?: Record<string, any>;
@@ -70,7 +71,7 @@ async function refreshClientToken() {
     }
 }
 
-async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
+async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = false): Promise<T> {
     const tokens = await getTokenServer();
     const { cookies } = await import("next/headers");
     const cookieHeader = decodeURIComponent(cookies().toString());
@@ -88,13 +89,49 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
         cache: "no-store",
     });
 
-    if (res.status === 401 && tokens?.refresh) {
+    if (res.status === 401 && tokens?.refresh && !hasRetried) {
         const ref = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
             method: "POST",
-            headers: { Cookie: cookieHeader },
+            headers: {
+                Cookie: cookieHeader,
+            },
         });
-        if (!ref.ok) throw new Error("UNAUTHORIZED");
-        return serverFetch<T>(url, opt);
+
+        if (!ref.ok) {
+            await fetch(`${process.env.BASE_URL}/api/auth/logout`, {
+                method: "POST",
+                headers: { Cookie: cookieHeader },
+            });
+            throw new Error("UNAUTHORIZED");
+        }
+
+        // ⬇️ دستی توکن جدید رو از Set-Cookie بگیر
+        const setCookieHeader = ref.headers.get("set-cookie");
+        if (!setCookieHeader) throw new Error("No Set-Cookie in refresh response");
+
+        // ⬇️ کوکی رو پارس کن
+        const parsedCookies = parse(setCookieHeader);
+        const newTokenString = parsedCookies[AUTH_TOKEN_KEY];
+        if (!newTokenString) throw new Error("No auth token found in new cookie");
+
+        const newToken: IToken = JSON.parse(decodeURIComponent(newTokenString));
+
+        // 🔁 دوباره درخواست بفرست ولی با توکن جدید
+        return fetch(url, {
+            ...opt,
+            method: opt.method ?? (opt.body ? "POST" : "GET"),
+            headers: {
+                "Content-Type": "application/json",
+                ...opt.headers,
+                Authorization: `Bearer ${newToken.access}`,
+                Cookie: `MHP_SHOP_AUTH_TOKEN=${encodeURIComponent(newTokenString)}`, // کوکی جدید
+            },
+            body: opt.body ? JSON.stringify(opt.body) : undefined,
+            cache: "no-store",
+        }).then((r) => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            return r.json();
+        });
     }
 
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

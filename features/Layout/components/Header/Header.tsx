@@ -103,7 +103,7 @@ const Header = () => {
                         >
                             <ProfileIcon className="stroke-black dark:stroke-white" />
                             <span className="truncate">
-                                {!!user ? `${(user.first_name || user.last_name) ?? "کاربر"}` : "ورود | ثبت نام"}
+                                {!!user ? `${(user?.first_name ?? "" + user?.last_name ?? "") || "کاربر"}` : "ورود | ثبت نام"}
                             </span>
                         </Link>
                     </div>

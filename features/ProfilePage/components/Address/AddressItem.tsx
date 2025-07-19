@@ -36,7 +36,7 @@ const AddressItem = ({
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                userId: user._id,
+                userId: user.id,
             }),
         });
 

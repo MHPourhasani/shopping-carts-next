@@ -21,7 +21,7 @@ const EditUserPage = async ({ params }: { params: Params }) => {
             <PageHeader
                 title={`ویرایش کاربر "${user.first_name || user.last_name ? user.first_name + " " + user.last_name : user.email}"`}
             />
-            <AddAndEditUser data={user} isEdit />
+            <AddAndEditUser initialData={user} />
         </section>
     );
 };

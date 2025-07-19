@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import successfullyOrder from "@/public/images/png/successfully-order.png";
 import { Button } from "@/components/ui/button";
+import { getTokenServer } from "@/shared/libs/api/axios";
+import { redirect } from "next/navigation";
 
 const title = "پرداخت";
 
@@ -16,7 +18,18 @@ export const metadata: Metadata = {
 };
 
 const PaymentPage = async () => {
-    return session ? (
+    const authToken = await getTokenServer();
+    if (!authToken?.access)
+        return (
+            <EmptyState
+                imgSrc={orderImage}
+                title="لطفاً وارد شوید"
+                linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.main()}`}
+                linkTitle="ورود به حساب کاربری"
+            />
+        );
+
+    return (
         <div className="bg-primary-100 absolute inset-0 flex w-full flex-1 flex-col">
             <div className="flex w-full flex-1 flex-col items-center justify-center p-4">
                 <Image src={successfullyOrder} alt="successfully order" />
@@ -30,13 +43,6 @@ const PaymentPage = async () => {
                 </Link>
             </div>
         </div>
-    ) : (
-        <EmptyState
-            imgSrc={orderImage}
-            title="لطفاً وارد شوید"
-            linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.main()}`}
-            linkTitle="ورود به حساب کاربری"
-        />
     );
 };
 

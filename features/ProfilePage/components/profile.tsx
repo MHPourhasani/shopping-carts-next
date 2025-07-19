@@ -5,7 +5,7 @@ import toastMessage from "@/shared/utils/toastMessage";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import MobileProfile from "./mobileProfile";
-import DesktopProfile from "./DesktopProfile";
+import DesktopProfile from "./desktopProfile";
 
 const Profile = () => {
     const user = useAppSelector((state) => state.auth.user);

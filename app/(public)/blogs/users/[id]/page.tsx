@@ -7,6 +7,8 @@ import userIcon from "@/assets/icons/svgs/user.svg";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
 import { IUser } from "@/features/auth/interfaces";
 import { IPost } from "@/features/Blog/interfaces";
+import { get } from "@/shared/libs/api/axios";
+import { IPaginatedResponse } from "@/shared/interfaces";
 
 interface Props {
     params: { id: string };
@@ -18,8 +20,8 @@ interface DataInterface {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const data: DataInterface = await getUser(params.id);
-    const { blogs } = data;
+    const data = await getUser(params.id);
+    const blogs = data!.results;
 
     const title = `نویسنده در ${process.env.shop_name}`;
     const url = PATH.singleBlogAuthor(params.id);
@@ -38,24 +40,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const getUser = async (id: string) => {
     try {
-        const response = await fetch(API.blogs.blog_author(id), {
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-        });
-        if (response.ok) {
-            const data = await response.json();
-            return data;
-        }
+        const response = await get<IPaginatedResponse<any>>(API.blogs.blogAuthor(id));
+        return response;
     } catch (error: any) {
         console.error(error);
     }
 };
 
 const SingleBlogAuthorPage = async ({ params }: Props) => {
-    const data: DataInterface = await getUser(params.id);
-    const { user, blogs } = data;
+    const data = await getUser(params.id);
+    const blogs = data!.results;
+    const user = blogs[0].author;
 
     return (
         <section className="container flex w-full flex-1 flex-col gap-8">
@@ -63,7 +58,7 @@ const SingleBlogAuthorPage = async ({ params }: Props) => {
                 items={[
                     { title: "بلاگ", path: PATH.blogs() },
                     { title: "نویسندگان", path: "" },
-                    { title: user.first_name + " " + user.last_name || user.email, path: PATH.singleBlogAuthor(String(user._id)) },
+                    { title: user.first_name + " " + user.last_name || user.email },
                 ]}
             />
 

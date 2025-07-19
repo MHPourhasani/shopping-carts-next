@@ -37,7 +37,7 @@ const ChangePassword = () => {
         } else if (newPassword !== confirmNewPassword) {
             setFormDataError({ ...formDataError, confirmNewPassword: "رمز عبور ها با هم برابر نیستند." });
         } else {
-            const res = await fetch(`/api/profile/change-password/${user._id}`, {
+            const res = await fetch(`/api/profile/change-password/${user.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ newPassword }),

@@ -9,6 +9,7 @@ const API = {
         singleUser: (id: string) => `${process.env.API_BASE_URL}/users/${id}`,
         getProfile: () => `${process.env.API_BASE_URL}/users/get-profile`,
         updateProfile: () => `${process.env.API_BASE_URL}/users/update-profile`,
+        updateUserProfile: (id: string) => `${process.env.API_BASE_URL}/users/update-profile/${id}`,
         addAddress: () => `${process.env.API_BASE_URL}/users/addresses`,
         addressess: () => `${process.env.API_BASE_URL}/users/addresses`,
         singleAddress: (id: string) => `${process.env.API_BASE_URL}/users/addresses/${id}`,
@@ -47,8 +48,9 @@ const API = {
     blogs: {
         posts: () => `${process.env.API_BASE_URL}/posts`,
         singleShop: (name: string) => `${process.env.API_BASE_URL}/shop/${name}`,
-        singlePost: (slug: string) => `${process.env.API_BASE_URL}/posts/${slug}`,
-        blog_author: (id: string) => `${process.env.API_BASE_URL}/posts/users/${id}`,
+        singlePostBySlug: (slug: string) => `${process.env.API_BASE_URL}/posts/${slug}`,
+        singlePostById: (id: string) => `${process.env.API_BASE_URL}/posts/${id}`,
+        blogAuthor: (id: string) => `${process.env.API_BASE_URL}/posts/author/${id}`,
     },
 };
 

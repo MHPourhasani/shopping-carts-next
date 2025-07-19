@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/assets/icons/svgs/user.svg";
 import HomeIcon from "@/assets/icons/components/Home";
-import DashboardNotifications from "./notifications";
+import DashboardNotifications from "./Notifications";
 
 const DashboardHeader = () => {
     const user = useAppSelector((state) => state.auth.user);

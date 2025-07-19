@@ -6,7 +6,7 @@ import Link from "next/link";
 import PATH from "@/shared/utils/path";
 import HomeIcon from "@/assets/icons/components/Home";
 
-type TBreadCrumb = { title: string; path: string };
+type TBreadCrumb = { title: string; path?: string };
 
 interface IBreadCrumbProps {
     items: TBreadCrumb[];
@@ -29,7 +29,11 @@ const BreadCrumb = (props: IBreadCrumbProps) => {
 
             {props.items.length
                 ? props.items.map((item, index) => (
-                      <Link key={item.title} href={item.path} className="flex items-center gap-4">
+                      <Link
+                          key={item.title}
+                          href={item.path ? item.path : ""}
+                          className={`flex items-center gap-4 ${item.path ? "" : "pointer-events-none"}`}
+                      >
                           <h3
                               className={`hover-transition hover:text-primary-100 cursor-pointer ${pathname === item.path ? "text-customBlack-200 font-medium dark:text-white" : "text-secondary-300 dark:text-secondary-100"}`}
                           >

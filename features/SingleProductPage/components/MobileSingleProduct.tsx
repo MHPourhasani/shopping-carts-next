@@ -42,7 +42,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
     }, [imageActive]);
 
     const handleAddNewReview = () => {
-        if (user._id) {
+        if (user.id) {
             setIsAddReview(!isAddReview);
         } else {
             router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);

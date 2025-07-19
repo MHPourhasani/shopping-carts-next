@@ -21,7 +21,7 @@ const AddReview = () => {
             <div className="flex flex-col gap-4">
                 <span
                     onClick={() => {
-                        if (user._id) {
+                        if (user.id) {
                             setIsAddReview(!isAddReview);
                         } else {
                             router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);

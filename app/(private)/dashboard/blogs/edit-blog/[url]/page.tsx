@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const getBlog = async (slug: string) => {
-    const data = await get<IPost>(API.blogs.singlePost(slug));
+    const data = await get<IPost>(API.blogs.singlePostBySlug(slug));
     return data;
 };
 

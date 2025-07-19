@@ -52,7 +52,7 @@ const Compare = ({ product1, product2, products }: Props) => {
     };
 
     const addToCartsHandler = async () => {
-        if (!user._id) {
+        if (!user?._id) {
             router.push(`${PATH.login()}?redirect=${pathname}`);
         } else {
             const res = await fetch(`/api/carts`, {

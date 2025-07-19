@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import API from "@/shared/libs/api/endpoints";
-import { AUTH_TOKEN_KEY } from "@/shared/constant";
+import { AUTH_TOKEN_KEY } from "@/shared/constants/auth";
 
 export async function POST(req: NextRequest) {
     const cookieStore = req.cookies;
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
             refresh_token: refresh,
         });
 
-        const response = NextResponse.json({ access: data.access });
+        const response = NextResponse.json({ access: data.access, refresh: data.refresh });
 
         response.cookies.set(AUTH_TOKEN_KEY, JSON.stringify(data), {
             path: "/",

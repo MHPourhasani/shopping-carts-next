@@ -1,5 +1,5 @@
 import { IUser } from "@/features/auth/interfaces";
-import AllUsers from "@/features/ProfilePage/components/users/users";
+import AllUsers from "@/features/ProfilePage/components/users/Users";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { get } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";
@@ -16,7 +16,6 @@ const getUsers = async () => {
 
 const ProfileUsersPage = async () => {
     const data = await getUsers();
-    console.log(data);
 
     return <AllUsers data={data} />;
 };

@@ -1,156 +1,154 @@
 "use client";
-import API from "@/shared/libs/api/endpoints";
 import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum, handleRefreshAfterBack } from "@/shared/utils/utils";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import SingleSelect from "@/shared/components/common/SingleSelect";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import { IUser } from "@/features/auth/interfaces";
 import { UserRoleEnum } from "@/features/auth/enums";
+import { Controller, useForm } from "react-hook-form";
+import API from "@/shared/libs/api/endpoints";
+import { post, put } from "@/shared/libs/api/axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { userSchema } from "@/features/auth/schemas/user.schema";
+import { Switch } from "@/components/ui/switch";
 
 interface Props {
-    data?: IUser;
-    isEdit?: boolean;
+    initialData?: IUser;
 }
 
-const AddAndEditUser = ({ data, isEdit = false }: Props) => {
-    const [user, setUser] = useState<Partial<IUser>>(isEdit && data ? { ...data, password: "" } : {});
+const AddAndEditUser = ({ initialData }: Props) => {
     const router = useRouter();
 
-    const changeHandler = (e: any) => {
-        setUser({ ...user, [e.target.name]: e.target.value });
-    };
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { isSubmitting },
+    } = useForm({
+        resolver: yupResolver(userSchema, { context: { isEdit: !!initialData } }),
+        defaultValues: {
+            first_name: initialData?.first_name ?? "",
+            last_name: initialData?.last_name ?? "",
+            phone: initialData?.phone ?? "",
+            email: initialData?.email ?? "",
+            password: "",
+            role: initialData?.role ?? UserRoleEnum.CUSTOMER,
+            is_email_verified: initialData ? initialData.is_email_verified : false,
+            is_phone_verified: initialData ? initialData.is_phone_verified : false,
+            is_active: initialData ? initialData.is_active : true,
+        },
+    });
 
-    const submitHandler = async () => {
-        const { first_name, last_name, email, phone } = user;
-
-        if (!first_name?.trim()) {
-            toast.error("نام نباید خالی باشد.");
-        } else if (!last_name?.trim()) {
-            toast.error("نام خانوادگی نباید خالی باشد.");
-        } else if (!email?.trim()) {
-            toast.error("ایمیل نباید خالی باشد.");
-        } else if (!phone?.trim()) {
-            toast.error("شماره موبایل نباید خالی باشد.");
-        } else if (+phone.trim() < 11) {
-            toast.error("شماره موبایل نباید کمتر از 11 رقم باشد.");
-        } else {
-            let res: any;
-
-            if (isEdit) {
-                res = await fetch(`/api/profile/update-profile/${user._id}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ first_name, last_name, email, phone }),
-                });
+    const onSubmit = async (data: any) => {
+        try {
+            if (initialData) {
+                await put(API.users.updateUserProfile(initialData._id), { ...data });
+                toast.success("کاربر با موفقیت آپدیت شد.");
             } else {
-                res = await fetch(API.auth.register(), {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    body: JSON.stringify(user),
-                });
+                await post(API.auth.register(), { ...data });
+                toast.success("کاربر با موفقیت ایجاد شد.");
             }
 
-            const { message } = await res.json();
-
-            if (res.ok) {
-                toast.success(message);
-                router.back();
-                handleRefreshAfterBack();
-            } else {
-                toast.error(`خطا در آپدیت پروفایل`);
-            }
+            router.back();
+            handleRefreshAfterBack();
+        } catch (error) {
+            toast.error(`خطا در آپدیت پروفایل`);
         }
     };
 
     const deleteUserHandler = async () => {
-        const res = await fetch(`/api/auth/users/${user._id}`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-        });
-
-        if (res.ok) {
-            toast.success("کاربر با موفقیت حذف شد.");
-            router.back();
-            handleRefreshAfterBack();
-        } else {
-            toast.error("حذف کاربر با خطا مواجه شد.");
-        }
+        // const res = await del<{ status: boolean }>(API.users.singleUser(user.id!));
+        // if (res.status) {
+        //     toast.success("کاربر با موفقیت حذف شد.");
+        //     router.back();
+        //     handleRefreshAfterBack();
+        // } else {
+        //     toast.error("حذف کاربر با خطا مواجه شد.");
+        // }
     };
 
     return (
-        <div className="flex w-full flex-col items-start gap-4 lg:gap-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-start gap-4 lg:gap-8">
             <div className="grid w-full grid-cols-2 gap-4">
-                <InputWithLabel
-                    dir="auto"
-                    label="نام"
-                    name="first_name"
-                    value={user.first_name}
-                    onChange={changeHandler}
-                    className="focus:border-primary-100"
-                />
-
-                <InputWithLabel
-                    dir="auto"
-                    label="نام خانوادگی"
-                    name="last_name"
-                    value={user.last_name}
-                    onChange={changeHandler}
-                    className="focus:border-primary-100"
-                />
+                <InputWithLabel dir="auto" label="نام" {...register("first_name")} className="focus:border-primary-100" />
+                <InputWithLabel dir="auto" label="نام خانوادگی" {...register("last_name")} className="focus:border-primary-100" />
 
                 <InputWithLabel
                     dir="ltr"
                     type="tel"
                     label="شماره تماس"
-                    name="phone"
-                    value={user.phone}
-                    onChange={changeHandler}
+                    {...register("phone")}
                     maxLength={11}
                     className="focus:border-primary-100"
                 />
 
-                <InputWithLabel
-                    dir="ltr"
-                    type="email"
-                    label="ایمیل"
-                    name="email"
-                    value={user.email}
-                    onChange={changeHandler}
-                    className="focus:border-primary-100"
-                />
+                <InputWithLabel dir="ltr" type="email" label="ایمیل" {...register("email")} className="focus:border-primary-100" />
 
                 <InputWithLabel
                     dir="ltr"
-                    label={isEdit ? "رمز عبور جدید" : "رمز عبور"}
-                    name="password"
-                    value={user.password}
-                    onChange={changeHandler}
+                    label={initialData ? "رمز عبور جدید" : "رمز عبور"}
+                    {...register("password")}
                     className="focus:border-primary-100"
                 />
 
-                <div className="flex w-full flex-col gap-2">
+                <div className="flex w-full flex-col gap-2.5">
                     <label>نقش</label>
-                    <SingleSelect
-                        defaultValue={{ title: covertUserRoleToPersian(user.role ? user.role : UserRoleEnum.CUSTOMER) }}
-                        options={Object.values(UserRoleEnum).map((item) => {
-                            return { title: covertUserRoleToPersian(item) };
-                        })}
-                        onChange={(selected) => setUser({ ...user, role: covertUserRoleToUserRoleEnum(selected.title) })}
-                        className="size-full"
+                    <Controller
+                        control={control}
+                        name="role"
+                        render={({ field }) => (
+                            <SingleSelect
+                                defaultValue={{ title: covertUserRoleToPersian(field.value) }}
+                                options={Object.values(UserRoleEnum).map((item) => ({
+                                    title: covertUserRoleToPersian(item),
+                                }))}
+                                onChange={(selected) => {
+                                    const roleEnum = covertUserRoleToUserRoleEnum(selected.title);
+                                    field.onChange(roleEnum);
+                                }}
+                                className="size-full"
+                            />
+                        )}
+                    />
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <label htmlFor="is_email_verified">ایمیل تایید شده؟</label>
+
+                    <Controller
+                        control={control}
+                        name="is_email_verified"
+                        render={({ field }) => <Switch id="is_email_verified" checked={field.value} onCheckedChange={field.onChange} />}
+                    />
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <label htmlFor="is_phone_verified">شماره موبایل تایید شده؟</label>
+
+                    <Controller
+                        control={control}
+                        name="is_phone_verified"
+                        render={({ field }) => <Switch id="is_phone_verified" checked={field.value} onCheckedChange={field.onChange} />}
+                    />
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <label htmlFor="is_active">کاربر فعال است؟</label>
+
+                    <Controller
+                        control={control}
+                        name="is_active"
+                        render={({ field }) => <Switch id="is_active" checked={field.value} onCheckedChange={field.onChange} />}
                     />
                 </div>
             </div>
 
             <div className="flex w-full flex-col items-center gap-4 lg:flex-row">
-                <Button onClick={submitHandler}>{isEdit ? "ویرایش" : "ایجاد"}</Button>
+                <Button disabled={isSubmitting}>{initialData ? "ویرایش" : "ایجاد"}</Button>
 
-                {isEdit && (
+                {initialData && (
                     <Button
                         variant="secondary"
                         onClick={deleteUserHandler}
@@ -160,7 +158,7 @@ const AddAndEditUser = ({ data, isEdit = false }: Props) => {
                     </Button>
                 )}
             </div>
-        </div>
+        </form>
     );
 };
 

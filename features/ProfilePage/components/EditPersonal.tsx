@@ -15,7 +15,7 @@ const EditPersonalInformation = () => {
         firstName: user?.first_name ? user?.first_name : "",
         lastName: user?.last_name ? user?.last_name : "",
         email: user?.email ? user?.email : "",
-        phoneNumber: user?.phone_number ? user?.phone_number : "",
+        phoneNumber: user?.phone ? user?.phone : "",
     });
     const [formDataError, setFormDataError] = useState({ firstName: "", lastName: "", email: "", phoneNumber: "" });
     const dispatch = useAppDispatch();
@@ -36,10 +36,10 @@ const EditPersonalInformation = () => {
             setFormDataError({ ...formDataError, email: "ایمیل نباید خالی باشد." });
         } else if (!phoneNumber?.trim()) {
             setFormDataError({ ...formDataError, phoneNumber: "شماره تماس نباید خالی باشد." });
-        } else if (phoneNumber.trim() < 11) {
+        } else if (phoneNumber.trim().length < 11) {
             setFormDataError({ ...formDataError, phoneNumber: "شماره تماس نباید کمتر از 11 رقم باشد." });
         } else {
-            const res = await fetch(`/api/profile/update-profile/${user._id}`, {
+            const res = await fetch(`/api/profile/update-profile/${user?._id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -53,16 +53,6 @@ const EditPersonalInformation = () => {
             const { message, data } = await res.json();
 
             if (res.ok) {
-                await fetch("/api/notifications", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        user: user._id,
-                        notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
-                    }),
-                });
                 dispatch(setUser(data));
                 toast.success(message);
                 router.push(PATH.dashboard.main());

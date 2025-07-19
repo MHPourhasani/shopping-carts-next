@@ -21,6 +21,7 @@ const getBlogs = async () => {
 
 const ProfileBlogs = async () => {
     const blogs = await getBlogs();
+    console.log(blogs);
 
     if (!blogs) {
         return <Error500 />;

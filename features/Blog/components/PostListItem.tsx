@@ -8,22 +8,22 @@ import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { IPost } from "../interfaces";
+import { del } from "@/shared/libs/api/axios";
+import API from "@/shared/libs/api/endpoints";
 
 const PostListItem = ({ post, link }: { post: IPost; link: string }) => {
     const { _id, title, author, createdAt } = post;
 
     const deleteHandler = async () => {
-        const res = await fetch(`/api/blogs/${_id}`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-        });
+        const res = await del(API.blogs.singlePostById(_id));
+        console.log(res);
 
-        if (res.ok) {
-            toast.success(toastMessage.post.successfullyDelete);
-            handleRefreshAfterBack();
-        } else {
-            toast.error(toastMessage.post.failedDeleted);
-        }
+        toast.success(toastMessage.post.successfullyDelete);
+        // if (res.ok) {
+        //     handleRefreshAfterBack();
+        // } else {
+        //     toast.error(toastMessage.post.failedDeleted);
+        // }
     };
 
     return (

@@ -60,15 +60,6 @@ const DesktopProfile = (props: IProps) => {
                 phone: data.phone,
             });
 
-            await fetch("/api/notifications", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    user: user!._id,
-                    notification: { title: "ویرایش پروفایل", message: "پروفایل با موفقیت ویرایش شد." },
-                }),
-            });
-
             dispatch(setUser(updatedUser));
             toast.success("پروفایل با موفقیت آپدیت شد");
         } catch (err) {

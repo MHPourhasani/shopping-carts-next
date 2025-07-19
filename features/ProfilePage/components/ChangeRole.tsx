@@ -7,6 +7,8 @@ import toastMessage from "@/shared/utils/toastMessage";
 import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/shared/utils/utils";
 import { IUser } from "@/features/auth/interfaces";
 import { UserRoleEnum } from "@/features/auth/enums";
+import { put } from "@/shared/libs/api/axios";
+import API from "@/shared/libs/api/endpoints";
 
 interface Props {
     user: IUser;
@@ -16,23 +18,17 @@ const ChangeRole = ({ user }: Props) => {
     const [selected, setSelected] = useState<TOption>({ title: covertUserRoleToPersian(user.role) });
 
     const changeRoleHandler = async (selectedItem: TOption) => {
-        if (selectedItem.title) {
-            setSelected(selectedItem);
-            const res = await fetch(`/api/auth/users/${user._id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ role: covertUserRoleToUserRoleEnum(selectedItem.title) }),
-            });
+        try {
+            if (selectedItem.title) {
+                setSelected(selectedItem);
+                await put(API.users.updateUserProfile(user._id), { role: covertUserRoleToUserRoleEnum(selectedItem.title) });
 
-            if (res.ok) {
                 toast.success(
                     toastMessage.dashboard.successfulChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email),
                 );
-            } else {
-                toast.error(
-                    toastMessage.dashboard.failedChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email),
-                );
             }
+        } catch (error) {
+            toast.error(toastMessage.dashboard.failedChangedRole(user.first_name ? `${user?.first_name} ${user?.last_name}` : user.email));
         }
     };
 

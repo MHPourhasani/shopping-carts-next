@@ -80,7 +80,7 @@ const PostForm = ({ initialData }: Props) => {
                             "Content-Type": "application/json",
                             Accept: "application/json",
                         },
-                        body: JSON.stringify({ author: user._id, data }),
+                        body: JSON.stringify({ author: user?._id, data }),
                     });
                 }
 
