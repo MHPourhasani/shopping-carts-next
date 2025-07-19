@@ -20,9 +20,10 @@ const API = {
         categories_list: () => `${process.env.API_BASE_URL}/categories`,
     },
     notification: {
-        list: (userId: string) => `${process.env.API_BASE_URL}/notifications?userId=${userId}`,
+        list: () => `${process.env.API_BASE_URL}/notifications`,
         create_notification: `${process.env.API_BASE_URL}/notifications/create-notification`,
-        single_notification: (id: string) => `${process.env.API_BASE_URL}/notifications/${id}`,
+        singleNotification: (id: string) => `${process.env.API_BASE_URL}/notifications/${id}`,
+        readSingleNotification: (id: string) => `${process.env.API_BASE_URL}/notifications/${id}/read`,
         allNotifications: () => `${process.env.API_BASE_URL}/notifications`,
     },
     product: {

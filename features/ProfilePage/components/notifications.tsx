@@ -11,8 +11,6 @@ import { IPaginatedResponse } from "@/shared/interfaces";
 import { useAppSelector } from "@/redux/hooks";
 
 const DashboardNotifications = () => {
-    const user = useAppSelector((state) => state.auth.user);
-
     const [isShow, setIsShow] = useState(false);
     const [notifications, setNotifications] = useState<INotification[] | undefined>(undefined);
     const [unReads] = useState<number | undefined>(undefined);
@@ -23,12 +21,8 @@ const DashboardNotifications = () => {
 
     const getNotifications = async () => {
         try {
-            if (user) {
-                console.log(user);
-                const data = await get<IPaginatedResponse<INotification>>(API.notification.list(user.id));
-                console.log(data.results);
-                setNotifications(data.results);
-            }
+            const data = await get<IPaginatedResponse<INotification>>(API.notification.list());
+            setNotifications(data.results);
         } catch (error) {
             console.error(error);
         }

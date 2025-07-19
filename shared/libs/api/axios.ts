@@ -77,7 +77,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}): Promise<T> {
 
     const res = await fetch(url, {
         ...opt,
-        method: opt.body ? "POST" : "GET",
+        method: opt.method ?? (opt.body ? "POST" : "GET"),
         headers: {
             "Content-Type": "application/json",
             ...opt.headers,
@@ -123,4 +123,5 @@ export async function apiRequest<T>(endpoint: string, options: RequestOptions = 
 export const get = <T>(u: string, p?: any, o?: RequestOptions) => apiRequest<T>(u, { ...o, params: p });
 export const post = <T>(u: string, b?: any, o?: RequestOptions) => apiRequest<T>(u, { ...o, body: b, method: "POST" });
 export const put = <T>(u: string, b?: any, o?: RequestOptions) => apiRequest<T>(u, { ...o, body: b, method: "PUT" });
+export const patch = <T>(u: string, b?: any, o?: RequestOptions) => apiRequest<T>(u, { ...o, body: b, method: "PATCH" });
 export const del = <T>(u: string, p?: any, o?: RequestOptions) => apiRequest<T>(u, { ...o, params: p, method: "DELETE" });
