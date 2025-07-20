@@ -8,7 +8,9 @@ import PageHeader from "@/shared/components/PageHeader";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import NotificationsList from "./NotificationsList";
-import { authTokenClient } from "@/shared/constant";
+import { get } from "@/shared/libs/api/axios";
+import { IPaginatedResponse } from "@/shared/interfaces";
+import { authTokenClient } from "@/shared/constants/constant";
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState<INotification[]>([]);
@@ -18,15 +20,8 @@ const Notifications = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(API.notification.notifications_list(), {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    cache: "no-store",
-                });
-                const { results } = await response.json();
-                setNotifications(results);
+                const data = await get<IPaginatedResponse<INotification>>(API.notification.list());
+                setNotifications(data.results);
             } catch (error: any) {
                 console.error(error);
             }

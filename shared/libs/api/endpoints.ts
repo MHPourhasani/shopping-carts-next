@@ -11,7 +11,7 @@ const API = {
         updateProfile: () => `${process.env.API_BASE_URL}/users/update-profile`,
         updateUserProfile: (id: string) => `${process.env.API_BASE_URL}/users/update-profile/${id}`,
         addAddress: () => `${process.env.API_BASE_URL}/users/addresses`,
-        addressess: () => `${process.env.API_BASE_URL}/users/addresses`,
+        addresses: () => `${process.env.API_BASE_URL}/users/addresses`,
         singleAddress: (id: string) => `${process.env.API_BASE_URL}/users/addresses/${id}`,
     },
     banners: {

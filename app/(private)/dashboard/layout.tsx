@@ -3,9 +3,6 @@ import DashboardHeader from "@/features/ProfilePage/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
 import Sidebar from "@/features/ProfilePage/components/Sidebar";
-import { getTokenServer } from "@/shared/libs/api/axios";
-import { redirect } from "next/navigation";
-import PATH from "@/shared/utils/path";
 
 export const metadata: Metadata = {
     title: {
@@ -15,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
-    const authToken = await getTokenServer();
-    if (!authToken?.access) redirect(PATH.login());
+    // const authToken = await getTokenServer();
+    // if (!authToken?.access) redirect(PATH.login());
 
     return (
         <Suspense fallback={<Loading />}>

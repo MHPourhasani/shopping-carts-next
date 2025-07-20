@@ -1,7 +1,6 @@
 "use client";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
-import { authTokenClient } from "@/shared/constant";
 import { useAccessTokenWatcher } from "@/shared/hooks/useAccessTokenWatcher";
 import { get } from "@/shared/libs/api/axios";
 import API from "@/shared/libs/api/endpoints";

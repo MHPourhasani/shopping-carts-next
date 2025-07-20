@@ -1,4 +1,4 @@
-import Support from "@/features/ProfilePage/components/support";
+import Support from "@/features/ProfilePage/components/Support";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

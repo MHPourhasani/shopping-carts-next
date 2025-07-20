@@ -9,10 +9,11 @@ import { useAppSelector } from "@/redux/hooks";
 import DesktopMenu from "./DesktopMenu";
 import Search from "@/features/Layout/components/Search";
 import { Suspense } from "react";
-import { authTokenClient } from "@/shared/constant";
+import useToken from "@/shared/hooks/useToken";
 
 const Header = () => {
     const user = useAppSelector((state) => state.auth.user);
+    const authToken = useToken();
 
     return (
         <header className="w-full border-gray-200 lg:gap-6 lg:border-b-2 lg:py-5 dark:border-gray-400">
@@ -98,7 +99,7 @@ const Header = () => {
                         </div>
 
                         <Link
-                            href={authTokenClient?.access ? PATH.dashboard.main() : PATH.login()}
+                            href={authToken?.access ? PATH.dashboard.main() : PATH.login()}
                             className="dark:bg-secondary-700 hidden items-center justify-center gap-2 rounded-xl border border-gray-200 p-3 shadow-lg shadow-gray-200 lg:flex lg:max-w-48 dark:shadow-none"
                         >
                             <ProfileIcon className="stroke-black dark:stroke-white" />

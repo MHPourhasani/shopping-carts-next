@@ -1,5 +1,5 @@
 import API from "@/shared/libs/api/endpoints";
-import SingleOrder from "@/features/ProfilePage/components/singleOrder";
+import SingleOrder from "@/features/ProfilePage/components/SingleOrder";
 import { Metadata } from "next";
 
 interface Props {

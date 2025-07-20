@@ -40,6 +40,7 @@
         "fs": "^0.0.1-security",
         "html2canvas": "^1.4.1",
         "jodit-react": "^4.1.2",
+        "jose": "^6.0.12",
         "js-cookie": "^3.0.5",
         "jspdf": "^2.5.2",
         "lucide-react": "^0.511.0",

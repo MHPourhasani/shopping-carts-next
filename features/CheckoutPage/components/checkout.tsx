@@ -10,7 +10,6 @@ import API from "../../../shared/libs/api/endpoints";
 import Toman from "@/assets/icons/components/Toman";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { authTokenClient } from "@/shared/constant";
 import { IAddress } from "@/features/auth/interfaces";
 
 const Checkout = ({ carts }: { carts: ICart[] }) => {
@@ -21,9 +20,9 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
     const router = useRouter();
     const taxPercent = Number(process.env.TAX_PERCENT) || 9;
 
-    if (!authTokenClient?.access) {
-        redirect(`${PATH.login()}?redirect=${PATH.checkout()}`);
-    }
+    // if (!authTokenClient?.access) {
+    //     redirect(`${PATH.login()}?redirect=${PATH.checkout()}`);
+    // }
 
     const deleteAllCarts = async () => {
         try {
