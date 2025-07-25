@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import PATH from "@/shared/utils/path";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";

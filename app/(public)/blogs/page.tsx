@@ -1,11 +1,11 @@
 import PostCard from "@/features/Blog/components/PostCard";
 import Error500 from "@/shared/components/Error500";
 import PageHeader from "@/shared/components/PageHeader";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
-import { get } from "@/shared/libs/api/axios";
+import { get } from "@/shared/libs/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { IPost } from "@/features/Blog/interfaces";
 

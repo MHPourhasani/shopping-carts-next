@@ -20,8 +20,7 @@ export function ResponsiveDrawerDialog({ open, onOpenChange, title, description,
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={onOpenChange}>
-                \
-                <DialogContent className="sm:max-w-[425px]">
+                <DialogContent className="sm:max-w-[425px] lg:max-w-170">
                     <DialogHeader>
                         <DialogTitle>{title}</DialogTitle>
                         <DialogDescription>{description}</DialogDescription>
@@ -35,19 +34,16 @@ export function ResponsiveDrawerDialog({ open, onOpenChange, title, description,
 
     return (
         <Drawer open={open} onOpenChange={onOpenChange}>
-            \
             <DrawerContent>
-                <DrawerHeader className="text-left">
+                <DrawerHeader>
                     <DrawerTitle>{title}</DrawerTitle>
                     <DrawerDescription>{description}</DrawerDescription>
                 </DrawerHeader>
 
-                {children}
+                <div className="no-scrollbar overflow-y-auto py-4">{children}</div>
 
                 <DrawerFooter className="pt-2">
-                    <DrawerClose asChild>
-                        <Button variant="outline">Cancel</Button>
-                    </DrawerClose>
+                    <DrawerClose asChild>{/* <Button variant="outline">انصراف</Button> */}</DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>

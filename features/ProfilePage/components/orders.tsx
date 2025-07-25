@@ -63,7 +63,7 @@ const Orders = (props: Props) => {
                             return (
                                 <OrderCardItem
                                     key={item._id}
-                                    href={PATH.dashboard.order.single_order(item._id)}
+                                    href={PATH.profile.order.single_order(item._id)}
                                     user={props.orders}
                                     order={item}
                                 />

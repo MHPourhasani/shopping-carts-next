@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PostCard = ({ post, className }: Props) => {
-    const { title, slug, author, excerpt, content, createdAt } = post;
+    const { title, slug, author, excerpt, createdAt } = post;
 
     return (
         <Link
@@ -33,8 +33,8 @@ const PostCard = ({ post, className }: Props) => {
                 </span>
 
                 <span className="flex items-center gap-1 truncate">
+                    <span className="pt-[3px]">{new Date(createdAt).toLocaleDateString("fa-IR")}</span>
                     <ClockIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />
-                    {new Date(createdAt).toLocaleDateString("fa-IR")}
                 </span>
             </div>
         </Link>

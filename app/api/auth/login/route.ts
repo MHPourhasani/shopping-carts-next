@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { AUTH_TOKEN_KEY } from "@/shared/constants/auth";
 
 export async function POST(req: NextRequest) {

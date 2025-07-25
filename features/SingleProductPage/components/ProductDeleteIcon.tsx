@@ -5,7 +5,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/utils/toastMessage";
 import { handleRefreshAfterBack } from "@/shared/utils/utils";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { UserRoleEnum } from "@/features/auth/enums";
 
 const ProductDeleteIcon = ({ product }: { product: IProduct }) => {

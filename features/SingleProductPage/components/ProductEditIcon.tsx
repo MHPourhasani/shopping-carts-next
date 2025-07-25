@@ -13,7 +13,7 @@ const ProductEditIcon = ({ product }: { product: IProduct }) => {
         user &&
         user.role === UserRoleEnum.ADMIN &&
         product && (
-            <Link href={PATH.dashboard.products.edit_product(product._id.toString())}>
+            <Link href={PATH.profile.products.edit_product(product._id.toString())}>
                 <EditIcon className="fill-customBlack-200 dark:fill-white" />
             </Link>
         )

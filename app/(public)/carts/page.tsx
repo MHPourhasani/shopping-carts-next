@@ -1,6 +1,6 @@
 import Carts from "@/features/CartPage/components/carts";
 import { Metadata } from "next";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { redirect } from "next/navigation";
 import PATH from "@/shared/utils/path";
 

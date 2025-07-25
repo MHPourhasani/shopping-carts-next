@@ -26,7 +26,7 @@ const Navbar = () => {
                 ) : (
                     <ProfileIcon />
                 ),
-            href: PATH.dashboard.main(),
+            href: PATH.profile.main(),
         },
     ];
 

@@ -1,4 +1,4 @@
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import PostCard from "@/features/Blog/components/PostCard";
 import { showFullDate } from "@/shared/utils/utils";
 import PageHeader from "@/shared/components/PageHeader";
 import BreadCrumb from "@/shared/components/common/BreadCrumb";
-import { get } from "@/shared/libs/api/axios";
+import { get } from "@/shared/libs/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { IPost } from "@/features/Blog/interfaces";
 
@@ -51,7 +51,6 @@ const SingleBlogPage = async ({ params }: Props) => {
     const filteredBlogs = blogs.filter((blog) => blog.slug !== params.slug);
 
     const { title, slug, author, updatedAt, createdAt, tags, content } = data;
-    console.log(author);
 
     return (
         <section className="container flex w-full flex-1 flex-col gap-8">

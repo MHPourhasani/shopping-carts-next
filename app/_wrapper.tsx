@@ -2,9 +2,8 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import { useAccessTokenWatcher } from "@/shared/hooks/useAccessTokenWatcher";
-import { get } from "@/shared/libs/api/axios";
-import API from "@/shared/libs/api/endpoints";
-import { useEffect } from "react";
+import { get } from "@/shared/libs/axios";
+import API from "@/shared/libs/endpoints";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
@@ -20,10 +19,6 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
             console.error(error);
         }
     };
-
-    // useEffect(() => {
-    //     if (authTokenClient?.access) ;
-    // }, [authTokenClient?.access]);
 
     return <>{children}</>;
 };

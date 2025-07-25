@@ -2,7 +2,7 @@
 import EyeIcon from "@/assets/icons/components/Eye";
 import TrashIcon from "@/assets/icons/components/Trash";
 import EmptyState from "@/shared/components/EmptyState";
-import ChangeRole from "@/features/ProfilePage/components/ChangeRole";
+import ChangeRole from "@/features/ProfilePage/components/users/ChangeRole";
 import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,8 +15,8 @@ import { Button } from "@/components/ui/button";
 import { IUser } from "@/features/auth/interfaces";
 import { UserRoleEnum } from "@/features/auth/enums";
 import { IPaginatedResponse } from "@/shared/interfaces";
-import { del } from "@/shared/libs/api/axios";
-import API from "@/shared/libs/api/endpoints";
+import { del } from "@/shared/libs/axios";
+import API from "@/shared/libs/endpoints";
 
 interface Props {
     data: IPaginatedResponse<IUser>;
@@ -65,7 +65,7 @@ const AllUsers = (props: Props) => {
     return (
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="کاربران" desktopBackButton={false}>
-                <Link href={PATH.dashboard.users.create_user()}>
+                <Link href={PATH.profile.users.create_user()}>
                     <Button variant="text" className="text-primary-100 px-0">
                         <AddIcon className="stroke-primary-100 h-auto w-6 cursor-pointer dark:stroke-violet-400" />
                         ایجاد کاربر جدید
@@ -108,7 +108,7 @@ const AllUsers = (props: Props) => {
                                 <span className="flex items-center gap-2">
                                     <TrashIcon onClick={() => deleteUserHandler(user)} className="size-5 cursor-pointer fill-red-500" />
 
-                                    <Link href={PATH.dashboard.users.edit_user(String(user._id))}>
+                                    <Link href={PATH.profile.users.edit_user(String(user._id))}>
                                         <EyeIcon className="stroke-customBlack-200 h-5 w-auto cursor-pointer" />
                                     </Link>
                                 </span>

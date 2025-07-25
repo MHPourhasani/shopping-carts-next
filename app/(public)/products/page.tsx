@@ -1,9 +1,9 @@
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import Products from "@/features/ProductsPage/components/products";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
-import { get } from "@/shared/libs/api/axios";
+import { get } from "@/shared/libs/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
 
 export const revalidate = 30;

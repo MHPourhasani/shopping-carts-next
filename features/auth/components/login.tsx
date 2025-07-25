@@ -13,18 +13,18 @@ import toastMessage from "@/shared/utils/toastMessage";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
-import useToken from "@/shared/hooks/useToken";
+import { useAuthToken } from "@/shared/hooks/useAuthToken";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const redirectParams = useSearchParams().get("redirect");
-    const authToken = useToken();
+    const accessToken = useAuthToken();
 
     useEffect(() => {
-        if (authToken?.access) router.push(redirectParams ?? PATH.home());
-    }, [authToken?.access]);
+        if (accessToken) router.push(redirectParams ?? PATH.home());
+    }, [accessToken]);
 
     const { handleSubmit } = useForm();
 

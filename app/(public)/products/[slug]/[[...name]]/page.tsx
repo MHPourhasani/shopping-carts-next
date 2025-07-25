@@ -1,10 +1,10 @@
 import Error500 from "@/shared/components/Error500";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { Metadata } from "next";
 import { SingleProductProvider } from "@/features/SingleProductPage/context/ProductData";
 import SingleProduct from "@/features/SingleProductPage/components/singleProduct";
-import { get } from "@/shared/libs/api/axios";
+import { get } from "@/shared/libs/axios";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

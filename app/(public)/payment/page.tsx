@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import successfullyOrder from "@/public/images/png/successfully-order.png";
 import { Button } from "@/components/ui/button";
-import { getTokenServer } from "@/shared/libs/api/axios";
+import { getTokenServer } from "@/shared/libs/axios";
 import { redirect } from "next/navigation";
 
 const title = "پرداخت";
@@ -24,7 +24,7 @@ const PaymentPage = async () => {
             <EmptyState
                 imgSrc={orderImage}
                 title="لطفاً وارد شوید"
-                linkHref={`${PATH.login()}?redirect=${PATH.dashboard.order.main()}`}
+                linkHref={`${PATH.login()}?redirect=${PATH.profile.order.main()}`}
                 linkTitle="ورود به حساب کاربری"
             />
         );
@@ -38,7 +38,7 @@ const PaymentPage = async () => {
             <div className="bg-bg-2 dark:bg-secondary-800 flex w-full flex-1 flex-col items-center justify-center gap-4 rounded-t-3xl p-4">
                 <h1 className="mb-5 text-3xl font-bold">سفارش با موفقیت ثبت شد.</h1>
                 <p>شما یک ایمیل تایید دریافت خواهید کرد.</p>
-                <Link href={PATH.dashboard.order.main()} className="w-full">
+                <Link href={PATH.profile.order.main()} className="w-full">
                     <Button>جزئیات سفارش را ببینید</Button>
                 </Link>
             </div>

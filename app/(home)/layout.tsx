@@ -11,7 +11,7 @@ export default async function PublicLayout({ children }: { children: React.React
                     <div className="hidden w-full items-center justify-center lg:flex">
                         <Header />
                     </div>
-                    <main className="container flex flex-1 flex-col lg:p-4">{children}</main>
+                    <main className="flex w-full flex-1 flex-col lg:p-4">{children}</main>
                     <Footer />
                 </section>
             </div>

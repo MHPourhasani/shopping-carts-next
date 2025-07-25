@@ -4,8 +4,8 @@ import { setUser } from "@/redux/slices/authSlice";
 import toastMessage from "@/shared/utils/toastMessage";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import MobileProfile from "./mobileProfile";
-import DesktopProfile from "./desktopProfile";
+import MobilePersonalInfo from "./personalInfo/MobilePersonalInfo";
+import DesktopPersonalInfo from "./personalInfo/DesktopPersonalInfo";
 
 const Profile = () => {
     const user = useAppSelector((state) => state.auth.user);
@@ -72,8 +72,8 @@ const Profile = () => {
 
     return (
         <>
-            <MobileProfile {...props} />
-            <DesktopProfile {...props} />
+            <MobilePersonalInfo {...props} />
+            <DesktopPersonalInfo {...props} />
         </>
     );
 };

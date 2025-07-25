@@ -12,12 +12,14 @@ export const metadata: Metadata = {
 const NotFound = () => {
     return (
         <section className="flex min-h-dvh min-w-dvw flex-col items-center justify-center gap-4 p-4">
-            <Image src={notFoundImage} alt="not found" className={`lg:w-6/12 xl:w-1/2`} />
+            <Image src={notFoundImage} alt="not found" className={`lg:w-6/12 xl:w-5/12`} />
 
-            <p>صفحه مورد نظر یافت نشد.</p>
+            <p className="text-xl font-medium">صفحه مورد نظر یافت نشد.</p>
 
             <Link href={PATH.home()}>
-                <Button variant="text">رفتن به خانه</Button>
+                <Button variant="text" size="xl" className="cursor-pointer">
+                    رفتن به خانه
+                </Button>
             </Link>
         </section>
     );

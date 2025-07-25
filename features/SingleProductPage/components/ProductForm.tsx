@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PageHeader from "@/shared/components/PageHeader";
 import { handleRefreshAfterBack } from "@/shared/utils/utils";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import toastMessage from "@/shared/utils/toastMessage";
 import { CreateProductDto, IProduct } from "../interface/interface";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
@@ -15,7 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useFieldArray, useForm } from "react-hook-form";
 import { ProductStatusEnum } from "../interface/enums";
 import { Input } from "@/components/ui/input";
-import { get, put, post } from "@/shared/libs/api/axios";
+import { get, put, post } from "@/shared/libs/axios";
 
 interface ProductFormProps {
     isEdit?: boolean;

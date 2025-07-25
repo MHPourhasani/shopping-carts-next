@@ -1,6 +1,6 @@
 import PageHeader from "@/shared/components/PageHeader";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import Compare from "@/features/Compare/components/compare";
 
 interface Props {

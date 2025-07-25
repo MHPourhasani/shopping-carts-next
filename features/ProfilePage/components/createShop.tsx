@@ -55,7 +55,7 @@ const CreateShop = () => {
             if (res.ok) {
                 dispatch(setUser(data));
                 toast.success(message);
-                router.push(PATH.dashboard.main());
+                router.push(PATH.profile.main());
             } else {
                 toast.error(`خطا در فروشگاه شما`);
             }

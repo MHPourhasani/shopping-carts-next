@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/authSlice";
 import PATH from "@/shared/utils/path";
 import Toman from "@/assets/icons/components/Toman";
-import { getTokenClient } from "@/shared/libs/api/axios";
+import { getTokenClient } from "@/shared/libs/axios";
 import { cn } from "@/shared/libs/utils";
 
 interface PropsInterface {

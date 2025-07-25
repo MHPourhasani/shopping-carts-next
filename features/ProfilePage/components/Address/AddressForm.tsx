@@ -1,4 +1,3 @@
-import { IAddress } from "@/features/auth/interfaces";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { addressSchema } from "../../validation/address.schema";
@@ -24,11 +23,8 @@ const AddressForm = ({ defaultValues, onSubmit }: IProps) => {
     });
 
     return (
-        <div className="mb-4 flex w-full flex-col items-start gap-4">
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="bg-bg-2 flex w-full flex-col items-end justify-between gap-2 rounded-2xl p-4 text-gray-500 lg:gap-4 dark:bg-gray-900"
-            >
+        <div className="flex w-full flex-col items-start gap-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-end justify-between gap-2 text-gray-500 lg:gap-4">
                 <div className="grid w-full gap-4 lg:grid-cols-2">
                     <InputWithLabel
                         label="عنوان آدرس"
@@ -65,7 +61,7 @@ const AddressForm = ({ defaultValues, onSubmit }: IProps) => {
                 </div>
 
                 <div className="flex w-full gap-4">
-                    <Button type="submit" variant="text" className="flex-1">
+                    <Button type="submit" variant="text" className="flex-1 cursor-pointer">
                         افزودن
                     </Button>
                 </div>

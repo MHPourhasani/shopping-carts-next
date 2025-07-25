@@ -7,7 +7,7 @@ import EmptyState from "@/shared/components/EmptyState";
 import SearchIcon from "@/assets/icons/components/Search";
 import PATH from "@/shared/utils/path";
 import CloseIcon from "@/assets/icons/components/Close";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import PostCard from "@/features/Blog/components/PostCard";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { Input } from "@/components/ui/input";

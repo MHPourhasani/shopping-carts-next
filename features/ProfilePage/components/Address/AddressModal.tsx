@@ -3,14 +3,14 @@ import { IAddress } from "@/features/auth/interfaces";
 import { useState } from "react";
 import AddressForm from "./AddressForm";
 
-type Props = {
+interface IProps {
     open: boolean;
     onOpenChange: (v: boolean) => void;
     defaultValues?: Partial<IAddress>;
     onSubmit: (data: IAddress) => Promise<void> | void;
-};
+}
 
-export default function AddressModal({ open, onOpenChange, defaultValues, onSubmit }: Props) {
+export default function AddressDialog({ open, onOpenChange, defaultValues, onSubmit }: IProps) {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (data: IAddress) => {

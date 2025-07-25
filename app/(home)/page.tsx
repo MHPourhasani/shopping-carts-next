@@ -7,9 +7,9 @@ import PATH from "@/shared/utils/path";
 import Link from "next/link";
 import { Metadata } from "next";
 import PostCard from "@/features/Blog/components/PostCard";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
-import { get } from "@/shared/libs/api/axios";
+import { get } from "@/shared/libs/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { IPost } from "@/features/Blog/interfaces";
 

@@ -1,11 +1,11 @@
 import { IBanner, ICategory } from "@/interfaces/general";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import PATH from "@/shared/utils/path";
 import fs from "fs";
 import path from "path";
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import { IPaginatedResponse } from "@/shared/interfaces";
-import { get } from "@/shared/libs/api/axios";
+import { get } from "@/shared/libs/axios";
 import { IPost } from "@/features/Blog/interfaces";
 
 const baseUrl = process.env.BASE_URL!;
@@ -63,7 +63,7 @@ async function getRoutes() {
 
     const routesOfFolders = getAllFolders(baseDir)
         .map((folder) => folder.split("\\").join("/").replace(baseDir, "").replace("/(public)", ""))
-        .filter((folder) => !folder.startsWith(PATH.dashboard.main()))
+        .filter((folder) => !folder.startsWith(PATH.profile.main()))
         .filter((folder) => !folder.startsWith("/api"))
         .filter((folder) => !folder.startsWith("/dashboard"))
         .filter((folder) => ![""].includes(folder));

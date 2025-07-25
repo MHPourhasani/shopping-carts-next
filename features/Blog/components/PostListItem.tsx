@@ -8,8 +8,8 @@ import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import { IPost } from "../interfaces";
-import { del } from "@/shared/libs/api/axios";
-import API from "@/shared/libs/api/endpoints";
+import { del } from "@/shared/libs/axios";
+import API from "@/shared/libs/endpoints";
 
 const PostListItem = ({ post, link }: { post: IPost; link: string }) => {
     const { _id, title, author, createdAt } = post;

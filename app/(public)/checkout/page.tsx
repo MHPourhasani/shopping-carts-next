@@ -1,5 +1,5 @@
 import PageHeader from "@/shared/components/PageHeader";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import Checkout from "@/features/CheckoutPage/components/checkout";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";

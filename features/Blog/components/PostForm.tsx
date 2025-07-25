@@ -11,7 +11,7 @@ import TrashIcon from "@/assets/icons/components/Trash";
 import toastMessage from "@/shared/utils/toastMessage";
 import EditIcon from "@/assets/icons/components/Edit";
 import MultiSelect from "@/shared/components/common/MultiSelect";
-import API from "@/shared/libs/api/endpoints";
+import API from "@/shared/libs/endpoints";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import { IPost } from "../interfaces";

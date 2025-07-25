@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ICart } from "@/interfaces/general";
 import PATH from "@/shared/utils/path";
 import { removeAllCarts } from "@/redux/slices/cartsSlice";
-import API from "../../../shared/libs/api/endpoints";
+import API from "../../../shared/libs/endpoints";
 import Toman from "@/assets/icons/components/Toman";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -91,10 +91,10 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">اطلاعات مشتری</span>
-                        <Link href={PATH.dashboard.edit_personal()} className="text-primary-100 lg:hidden">
+                        <Link href={PATH.profile.edit_personal()} className="text-primary-100 lg:hidden">
                             ویرایش
                         </Link>
-                        <Link href={PATH.dashboard.main()} className="text-primary-100 hidden lg:flex">
+                        <Link href={PATH.profile.main()} className="text-primary-100 hidden lg:flex">
                             ویرایش
                         </Link>
                     </div>
@@ -127,11 +127,11 @@ const Checkout = ({ carts }: { carts: ICart[] }) => {
                 <div className="bg-bg-2 dark:bg-secondary-700 flex w-full flex-col items-start gap-4 rounded-xl p-4">
                     <div className="flex w-full items-center justify-between">
                         <span className="text-lg font-bold">آدرس</span>
-                        <span onClick={() => router.push(PATH.dashboard.address())} className="text-primary-100 lg:hidden">
+                        <span onClick={() => router.push(PATH.profile.address())} className="text-primary-100 lg:hidden">
                             {user?.addresses.length ? "ویرایش" : "افزودن"}
                         </span>
                         <span
-                            onClick={() => router.push(PATH.dashboard.address())}
+                            onClick={() => router.push(PATH.profile.address())}
                             className="text-primary-100 hidden cursor-pointer lg:flex"
                         >
                             {user?.addresses.length ? "ویرایش" : "افزودن"}

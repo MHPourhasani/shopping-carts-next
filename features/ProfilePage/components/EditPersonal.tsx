@@ -55,7 +55,7 @@ const EditPersonalInformation = () => {
             if (res.ok) {
                 dispatch(setUser(data));
                 toast.success(message);
-                router.push(PATH.dashboard.main());
+                router.push(PATH.profile.main());
             } else {
                 toast.error(`خطا در ویرایش پروفایل`);
             }
@@ -103,7 +103,7 @@ const EditPersonalInformation = () => {
                     className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
                 />
 
-                <Button onClick={saveChangesHandler} className="cursor-pointer md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]">
+                <Button size="xl" onClick={saveChangesHandler} className="mt-5 cursor-pointer md:w-11/12">
                     ذخیره تغییرات
                 </Button>
             </div>
