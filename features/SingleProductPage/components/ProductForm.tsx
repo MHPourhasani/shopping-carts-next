@@ -6,67 +6,22 @@ import PageHeader from "@/shared/components/PageHeader";
 import { handleRefreshAfterBack } from "@/shared/utils/utils";
 import API from "@/shared/libs/endpoints";
 import toastMessage from "@/shared/utils/toastMessage";
-import { CreateProductDto, IProduct } from "../interface/interface";
+import { IProduct } from "../interface/interface";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useFieldArray, useForm } from "react-hook-form";
-import { ProductStatusEnum } from "../interface/enums";
 import { Input } from "@/components/ui/input";
 import { get, put, post } from "@/shared/libs/axios";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CreateProductDto, ProductFormValues, productSchema } from "../validation/product.schema";
+import MultiSelect from "@/shared/components/common/MultiSelect";
 
 interface ProductFormProps {
     isEdit?: boolean;
     initialData?: IProduct;
     productId?: string;
 }
-
-export const productSchema = yup.object({
-    name: yup.string().required("نام محصول الزامی است"),
-    slug: yup.string().required("لینک الزامی است"),
-    description: yup.string().optional(),
-    basePrice: yup.number().typeError("قیمت باید یک عدد باشد").min(0, "قیمت نمی‌تواند منفی باشد").optional(),
-    baseQuantity: yup.number().typeError("تعداد باید یک عدد باشد").min(0, "تعداد نمی‌تواند کمتر از صفر باشد").optional(),
-    images: yup.array().of(yup.string().required("آدرس عکس نمی‌تواند خالی باشد")).optional(),
-    categories: yup.array().of(yup.string().required("دسته‌بندی نمی‌تواند خالی باشد")).optional(),
-    brand: yup.string().optional(),
-    tags: yup.array().of(yup.string().required("تگ نمی‌تواند خالی باشد")).optional(),
-    services: yup.array().of(yup.string().required("خدمت نمی‌تواند خالی باشد")).optional(),
-    status: yup.mixed<ProductStatusEnum>().oneOf(Object.values(ProductStatusEnum), "وضعیت نامعتبر است").optional(),
-    relatedProducts: yup.array().of(yup.string().required("شناسه محصول مرتبط الزامی است")).optional(),
-
-    attributes: yup
-        .array()
-        .of(
-            yup.object({
-                name: yup.string().required("نام ویژگی الزامی است"),
-                slug: yup.string().required("اسلاگ ویژگی الزامی است"),
-                values: yup
-                    .array()
-                    .of(yup.string().required("مقدار ویژگی الزامی است"))
-                    .min(1, "حداقل یک مقدار باید وارد شود")
-                    .required("مقادیر ویژگی الزامی است"),
-            }),
-        )
-        .min(1, "حداقل یک ویژگی باید تعریف شود")
-        .required("ویژگی‌ها الزامی هستند"),
-
-    variations: yup
-        .array()
-        .of(
-            yup.object({
-                sku: yup.string().required("کد SKU الزامی است"),
-                price: yup.number().required("قیمت ترکیب الزامی است"),
-                quantity: yup.number().required("موجودی ترکیب الزامی است"),
-                image: yup.string().optional(),
-                attributes: yup.object().required("ویژگی‌های ترکیب الزامی است"),
-            }),
-        )
-        .min(1, "حداقل یک ترکیب باید وارد شود")
-        .required("ترکیب‌ها الزامی هستند"),
-});
 
 const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProps) => {
     const [, setMessage] = useState("");
@@ -77,9 +32,10 @@ const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProp
         control,
         reset,
         watch,
+        setValue,
         formState: { errors, isSubmitting },
-    } = useForm({
-        resolver: yupResolver(productSchema),
+    } = useForm<ProductFormValues>({
+        resolver: zodResolver(productSchema),
         defaultValues: {
             name: "",
             slug: "",
@@ -94,7 +50,11 @@ const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProp
 
     useEffect(() => {
         if (isEdit && initialData) {
-            reset(initialData);
+            const transformedData: ProductFormValues = {
+                ...initialData,
+                relatedProducts: initialData.relatedProducts?.map((p) => p._id) ?? [],
+            };
+            reset(transformedData);
         }
     }, [isEdit, initialData, reset]);
 
@@ -196,29 +156,17 @@ const ProductForm = ({ isEdit = false, initialData, productId }: ProductFormProp
                 <InputWithLabel label="تگ ها" {...register("tags")} />
                 <InputWithLabel label="خدمات" {...register("services")} />
 
-                {/* <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
                     <label className="dark:text-secondary-100">محصولات مرتبط</label>
                     <MultiSelect
-                        defaultValues={
-                            formData.relatedProducts
-                                ? formData.relatedProducts.map((p: IProduct) => {
-                                      return { id: String(p?._id), title: String(p?.name), image: p?.images ? p?.images[0] : "" };
-                                  })
-                                : undefined
-                        }
-                        options={allProducts.map((p) => {
-                            return { id: String(p?._id), title: String(p?.name), image: p?.images ? p?.images[0] : "" };
-                        })}
-                        onChange={(selected) =>
-                            setFormData({
-                                ...formData,
-                                relatedProducts: selected.map((item) => {
-                                    return { ...item, _id: item.id };
-                                }),
-                            })
-                        }
+                        defaultValues={initialData?.relatedProducts.map((p) => ({ id: p._id, title: p.name }))}
+                        options={[]}
+                        onChange={(selected) => {
+                            const ids = selected.map((s) => String(s.id));
+                            setValue("relatedProducts", ids);
+                        }}
                     />
-                </div> */}
+                </div>
 
                 <Textarea label="توضیحات" {...register("description")} hint="حداقل باید 15 کاراکتر وارد کنید." className="min-h-80" />
 

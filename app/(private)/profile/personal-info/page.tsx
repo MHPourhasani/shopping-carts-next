@@ -1,12 +1,12 @@
-import Profile from "@/features/ProfilePage/components/profile";
+import Profile from "@/features/ProfilePage/components/Profile";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "اطلاعات شخصی",
 };
 
-const PesonalInfoPage = () => {
+const PersonalInfoPage = async () => {
     return <Profile />;
 };
 
-export default PesonalInfoPage;
+export default PersonalInfoPage;

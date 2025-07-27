@@ -60,14 +60,7 @@ const Orders = (props: Props) => {
                 {orders && orders.length ? (
                     <div className="flex w-full flex-1 flex-col gap-4">
                         {orders.map((item: IOrder) => {
-                            return (
-                                <OrderCardItem
-                                    key={item._id}
-                                    href={PATH.profile.order.single_order(item._id)}
-                                    user={props.orders}
-                                    order={item}
-                                />
-                            );
+                            return <OrderCardItem key={item._id} href={PATH.profile.order.single_order(item._id)} order={item} />;
                         })}
                     </div>
                 ) : (

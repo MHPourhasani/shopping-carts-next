@@ -16,7 +16,6 @@ const tabs = [
 const SingleProductTab = () => {
     const [selectedTabs, setSelectedTabs] = useState(TabsEnum.properties);
     const { data } = useSingleProductData();
-    const { sizes, colors } = data!.product;
     const reviews = data!.reviews;
 
     return (
@@ -41,24 +40,7 @@ const SingleProductTab = () => {
                             {reviews && !!reviews.length && <span className="text-sm lg:text-base">{reviews.length} نظر</span>}
                         </div>
 
-                        <div className="flex flex-col w-full gap-10">
-                            <div className="flex gap-4">
-                                <span className="w-1/12">سایز ها</span>
-                                <div className="flex gap-2 border-b w-10/12">
-                                    {sizes.split(",").map((size) => (
-                                        <span key={size}>{size}</span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="flex gap-4">
-                                <span className="w-1/12">رنگ ها</span>
-                                <div className="flex gap-2 border-b w-10/12">
-                                    {colors.map((color) => (
-                                        <span key={color.name}>{color.name}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                        <div className="flex w-full flex-col gap-10"></div>
                     </section>
                 )}
 

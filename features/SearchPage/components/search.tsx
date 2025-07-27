@@ -128,8 +128,8 @@ const Search = () => {
                 {!isLoading ? (
                     <div className="grid w-full gap-4 sm:grid-cols-3 lg:grid-cols-2">
                         {data.results.blogs?.length ? (
-                            data.results.blogs.map((blog) => {
-                                return <PostCard key={blog._id.toString()} blog={blog} link={PATH.singleBlog(blog.link)} />;
+                            data.results.blogs.map((post) => {
+                                return <PostCard key={post._id.toString()} post={post} />;
                             })
                         ) : (
                             <p>هیچ بلاگی یافت نشد.</p>

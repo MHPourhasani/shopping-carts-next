@@ -6,12 +6,11 @@ import Link from "next/link";
 import { IOrder } from "../interfaces";
 
 interface Props {
-    user: IUser;
     order: IOrder;
     href: Url;
 }
 
-const OrderCardItem = ({ user, order, href }: Props) => {
+const OrderCardItem = ({ order, href }: Props) => {
     return (
         <Link
             href={href}
@@ -29,8 +28,8 @@ const OrderCardItem = ({ user, order, href }: Props) => {
 
             <span className="col-span-2 truncate">{new Date(order.createdAt).toLocaleDateString("fa-IR")}</span>
             <span className="col-span-2 flex gap-1 truncate text-sm text-gray-400 dark:text-gray-300">
-                {user.first_name ?? ""}
-                {user.last_name ?? ""}
+                {/* {user.first_name ?? ""}
+                {user.last_name ?? ""} */}
             </span>
             <span className="col-span-2 text-sm text-gray-400 dark:text-gray-300">{order.items.length}</span>
 

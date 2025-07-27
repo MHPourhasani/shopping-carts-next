@@ -46,9 +46,9 @@ const SingleOrder = ({ order }: { order: IOrder }) => {
                 </div>
 
                 <div className="grid gap-4 lg:grid-cols-2">
-                    {order.items?.map((item) => (
+                    {/* {order.items?.map((item) => (
                         <ProductOrderCard key={String(item._id)} product={item} />
-                    ))}
+                    ))} */}
                 </div>
             </div>
 

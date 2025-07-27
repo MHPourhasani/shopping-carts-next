@@ -16,9 +16,9 @@ const OrderPrint = forwardRef(function OrderPrint({ order }: { order: IOrder }, 
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                    {order.items.map((item) => (
+                    {/* {order.items.map((item) => (
                         <ProductOrderCard key={String(item.productId)} product={item} />
-                    ))}
+                    ))} */}
                 </div>
             </div>
 

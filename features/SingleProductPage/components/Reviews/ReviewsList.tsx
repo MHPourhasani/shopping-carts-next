@@ -1,4 +1,4 @@
-import { IReview } from "../../interface/interface";
+import { IReview } from "../../interface/review.interface";
 import ReviewCard from "./ReviewCard";
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 

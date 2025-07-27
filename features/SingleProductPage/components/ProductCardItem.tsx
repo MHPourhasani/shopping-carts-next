@@ -21,7 +21,7 @@ interface PropsInterface {
 }
 
 const ProductCardItem = ({ product, href, className }: PropsInterface) => {
-    const { _id, name, basePrice, discountedPrice, images } = product;
+    const { _id, name, basePrice, images } = product;
     const user = useAppSelector((state) => state.auth.user);
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -74,7 +74,7 @@ const ProductCardItem = ({ product, href, className }: PropsInterface) => {
                 <h2 className="font-semibold">{capitalizeTheFirstLettersOfWords(name)}</h2>
                 <div className="flex flex-col gap-2">
                     <span
-                        className={`flex items-center gap-2 font-medium ${isNumber(discountedPrice) ? "text-sm text-gray-600 line-through dark:text-gray-500" : "text-gray-900 dark:text-white"}`}
+                        className={`flex items-center gap-2 font-medium ${isNumber("discountedPrice") ? "text-sm text-gray-600 line-through dark:text-gray-500" : "text-gray-900 dark:text-white"}`}
                     >
                         {basePrice && basePrice > 0 ? (
                             <>
@@ -86,16 +86,16 @@ const ProductCardItem = ({ product, href, className }: PropsInterface) => {
                         )}
                     </span>
 
-                    {isNumber(discountedPrice) && (
+                    {isNumber("discountedPrice") && (
                         <span className="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
-                            {discountedPrice && discountedPrice > 0 ? (
+                            {/* {discountedPrice && discountedPrice > 0 ? (
                                 <>
                                     {tomanFormat(discountedPrice)}
                                     <Toman className="size-4 lg:size-5" />
                                 </>
-                            ) : (
-                                "رایگان"
-                            )}
+                            ) : ( */}
+                            "رایگان"
+                            {/* )} */}
                         </span>
                     )}
                 </div>

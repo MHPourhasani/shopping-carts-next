@@ -14,40 +14,6 @@ export interface IVariation {
     attributes: Record<string, string>; // { color: "red", size: "M" }
 }
 
-export interface ProductFormValues {
-    name: string;
-    slug: string;
-    description?: string;
-    basePrice?: number;
-    baseQuantity?: number;
-    images?: string[];
-    categories?: string[];
-    brand?: string;
-    tags?: string[];
-    services?: string[];
-    status?: ProductStatusEnum;
-    attributes: IAttribute[];
-    variations: IVariation[];
-    relatedProducts?: string[]; // فقط ID‌ها
-}
-
-export interface CreateProductDto {
-    name: string;
-    slug: string;
-    description?: string;
-    basePrice?: number;
-    baseQuantity?: number;
-    images?: string[];
-    categories?: string[];
-    brand?: string;
-    tags?: string[];
-    services?: string[];
-    status?: ProductStatusEnum;
-    attributes: IAttribute[];
-    variations: IVariation[];
-    relatedProducts?: string[];
-}
-
 export interface IProduct {
     _id: string;
     creator: string;

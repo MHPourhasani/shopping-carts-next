@@ -1,15 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { addressSchema } from "../../validation/address.schema";
+import { AddressFormSchema, addressSchema } from "../../validation/address.schema";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
-import { InferType } from "yup";
-
-type AddressFormValues = InferType<typeof addressSchema>;
+import { IAddress } from "@/features/auth/interfaces";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface IProps {
-    defaultValues?: AddressFormValues;
-    onSubmit: (data: AddressFormValues) => void;
+    defaultValues?: IAddress;
+    onSubmit: (data: IAddress) => void;
 }
 
 const AddressForm = ({ defaultValues, onSubmit }: IProps) => {
@@ -17,9 +16,9 @@ const AddressForm = ({ defaultValues, onSubmit }: IProps) => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<AddressFormValues>({
-        resolver: yupResolver(addressSchema),
-        defaultValues,
+    } = useForm<AddressFormSchema>({
+        resolver: zodResolver(addressSchema),
+        defaultValues: defaultValues || {},
     });
 
     return (

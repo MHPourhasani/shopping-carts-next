@@ -30,7 +30,7 @@ import { Button } from "@/components/ui/button";
 const MobileSingleProduct = (props: ISingleProductProps) => {
     const { isAddReview, setIsAddReview, reviews, setReviews, addToCartsHandler, productData, setProductData, addToFavoriteHandler } =
         props;
-    const { _id, images, name, basePrice, discountedPrice, tags, description, relatedProducts } = productData.product;
+    const { _id, images, name, basePrice, tags, description, relatedProducts } = productData.product;
     const [imageActive, setImageActive] = useState(0);
     const router = useRouter();
     const params = useParams();
@@ -42,7 +42,7 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
     }, [imageActive]);
 
     const handleAddNewReview = () => {
-        if (user.id) {
+        if (user?._id) {
             setIsAddReview(!isAddReview);
         } else {
             router.push(`${PATH.login()}?redirect=${PATH.singleProduct(_id.toString(), name)}`);
@@ -125,21 +125,21 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
                             <span>تعداد</span>
                             <div className="flex items-center gap-6">
                                 <span
-                                    onClick={() => setProductData({ ...productData, quantity: productData.quantity + 1 })}
+                                    // onClick={() => setProductData({ ...productData, quantity: productData.quantity + 1 })}
                                     className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={addIcon} alt="add" />
                                 </span>
 
-                                <span>{productData.quantity}</span>
+                                {/* <span>{productData.quantity}</span> */}
 
                                 <span
-                                    onClick={() =>
-                                        setProductData({
-                                            ...productData,
-                                            quantity: productData.quantity === 1 ? 1 : productData.quantity - 1,
-                                        })
-                                    }
+                                    // onClick={() =>
+                                    //     setProductData({
+                                    //         ...productData,
+                                    //         quantity: productData.quantity === 1 ? 1 : productData.quantity - 1,
+                                    //     })
+                                    // }
                                     className="bg-primary-100 flex size-9 cursor-pointer items-center justify-center rounded-full"
                                 >
                                     <Image src={minusIcon} alt="minus" />
@@ -187,27 +187,27 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
 
                 <div className="text-primary-100 flex items-center gap-2 text-xl font-semibold">
                     <span
-                        className={`flex items-center gap-2 ${isNumber(discountedPrice) ? "text-base font-normal text-gray-600 line-through dark:text-gray-500" : "text-primary-100 dark:text-secondary-100 font-medium"}`}
+                        className={`flex items-center gap-2 ${isNumber("discountedPrice") ? "text-base font-normal text-gray-600 line-through dark:text-gray-500" : "text-primary-100 dark:text-secondary-100 font-medium"}`}
                     >
-                        {basePrice > 0 ? (
+                        {basePrice && basePrice > 0 ? (
                             <>
                                 {tomanFormat(basePrice)}
-                                {!(isNumber(discountedPrice) && discountedPrice > 0) && <Toman className="size-4 lg:size-5" />}
+                                {/* {!(isNumber(discountedPrice) && discountedPrice > 0) && <Toman className="size-4 lg:size-5" />} */}
                             </>
                         ) : (
                             "رایگان"
                         )}
                     </span>
-                    {isNumber(discountedPrice) && (
+                    {isNumber("discountedPrice") && (
                         <span className="flex items-center gap-2 font-medium text-gray-900 dark:text-white">
-                            {discountedPrice > 0 ? (
+                            {/* {discountedPrice > 0 ? (
                                 <>
                                     {tomanFormat(discountedPrice)}
                                     <Toman className="size-4 lg:size-5" />
                                 </>
-                            ) : (
-                                "رایگان"
-                            )}
+                            ) : ( */}
+                            "رایگان"
+                            {/* )} */}
                         </span>
                     )}
                 </div>

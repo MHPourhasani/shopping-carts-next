@@ -28,26 +28,27 @@ const Sidebar = () => {
                 </Link>
 
                 <div className="text-customBlack-100 dark:text-secondary-100 flex w-full flex-1 flex-col overflow-auto">
-                    {user &&
-                        user.role &&
-                        sidebarItems(pathname)
-                            .filter((item) => item.roles.includes(user.role))
-                            .map((item) => {
-                                const isActive = pathname === item.href;
+                    {user
+                        ? user.role &&
+                          sidebarItems(pathname)
+                              .filter((item) => item.roles.includes(user.role))
+                              .map((item) => {
+                                  const isActive = pathname === item.href;
 
-                                return (
-                                    <Link
-                                        key={item.href}
-                                        href={item.href}
-                                        className={`flex items-center gap-2 py-4 ${
-                                            isActive ? "text-primary-100 bg-gradient-to-l dark:text-violet-300" : ""
-                                        }`}
-                                    >
-                                        {item.icon}
-                                        <p>{item.title}</p>
-                                    </Link>
-                                );
-                            })}
+                                  return (
+                                      <Link
+                                          key={item.href}
+                                          href={item.href}
+                                          className={`flex items-center gap-2 py-4 ${
+                                              isActive ? "text-primary-100 bg-gradient-to-l dark:text-violet-300" : ""
+                                          }`}
+                                      >
+                                          {item.icon}
+                                          <p>{item.title}</p>
+                                      </Link>
+                                  );
+                              })
+                        : "loader"}
                 </div>
             </div>
 

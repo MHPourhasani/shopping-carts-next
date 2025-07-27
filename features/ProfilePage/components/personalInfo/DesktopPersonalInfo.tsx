@@ -17,9 +17,9 @@ import { Input } from "@/components/ui/input";
 import API from "@/shared/libs/endpoints";
 import { IAddress } from "@/features/auth/interfaces";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { ProfileFormValues, profileSchema } from "../../schemas/profile.schema";
 import { put } from "@/shared/libs/axios";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface IProps {
     isLoading: boolean;
@@ -40,7 +40,7 @@ const DesktopPersonalInfo = (props: IProps) => {
         setValue,
         formState: { errors, isSubmitting },
     } = useForm<ProfileFormValues>({
-        resolver: yupResolver(profileSchema),
+        resolver: zodResolver(profileSchema),
     });
 
     useEffect(() => {
@@ -54,11 +54,7 @@ const DesktopPersonalInfo = (props: IProps) => {
 
     const onSubmit = async (data: ProfileFormValues) => {
         try {
-            const updatedUser = await put(API.users.updateProfile(), {
-                first_name: data.first_name,
-                last_name: data.last_name,
-                phone: data.phone ?? null,
-            });
+            const updatedUser = await put(API.users.updateProfile(), { ...data, phone: data.phone === "" ? null : data.phone });
 
             dispatch(setUser(updatedUser));
             toast.success("پروفایل با موفقیت آپدیت شد");

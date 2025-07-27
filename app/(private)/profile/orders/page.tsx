@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Orders from "@/features/ProfilePage/components/orders";
+import Orders from "@/features/ProfilePage/components/Orders";
 import Error500 from "@/shared/components/Error500";
 import API from "@/shared/libs/endpoints";
 import { IPaginatedResponse } from "@/shared/interfaces";

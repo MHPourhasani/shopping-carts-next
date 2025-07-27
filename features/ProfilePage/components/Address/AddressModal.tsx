@@ -5,8 +5,8 @@ import AddressForm from "./AddressForm";
 
 interface IProps {
     open: boolean;
-    onOpenChange: (v: boolean) => void;
-    defaultValues?: Partial<IAddress>;
+    onOpenChange: () => void;
+    defaultValues?: IAddress;
     onSubmit: (data: IAddress) => Promise<void> | void;
 }
 
@@ -17,7 +17,7 @@ export default function AddressDialog({ open, onOpenChange, defaultValues, onSub
         try {
             setLoading(true);
             await onSubmit(data);
-            onOpenChange(false);
+            onOpenChange();
         } finally {
             setLoading(false);
         }

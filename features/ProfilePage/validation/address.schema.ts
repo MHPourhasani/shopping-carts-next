@@ -1,12 +1,13 @@
-import * as yup from "yup";
+import { z } from "zod";
 
-export const addressSchema = yup.object().shape({
-    title: yup.string().nullable().required("عنوان آدرس الزامی است"),
-    province: yup.string().required("استان الزامی است"),
-    city: yup.string().required("شهر الزامی است"),
-    address: yup.string().required("آدرس پستی الزامی است"),
-    plaque: yup.string().required("پلاک الزامی است"),
-    unit: yup.string().optional(),
-    postalCode: yup.string().required("کد پستی الزامی است"),
-    isDefault: yup.boolean(),
+export const addressSchema = z.object({
+    title: z.string().min(1, "عنوان آدرس الزامی است"),
+    province: z.string().min(2, "استان الزامی است"),
+    city: z.string().min(2, "شهر الزامی است"),
+    address: z.string().min(5, "آدرس پستی الزامی است"),
+    plaque: z.string().min(1, "پلاک الزامی است"),
+    unit: z.string().optional(),
+    postalCode: z.string().min(10, "کد پستی باید حداقل 10 رقم باشد").max(11, "کد پستی باید دقیقا 10 رقم باشد"),
 });
+
+export type AddressFormSchema = z.infer<typeof addressSchema>;

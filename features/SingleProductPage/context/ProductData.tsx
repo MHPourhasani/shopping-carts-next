@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useState } from "react";
-import { IProduct, IReview } from "../interface/interface";
+import { IProduct } from "../interface/interface";
+import { IReview } from "../interface/review.interface";
 
 interface IDataContext {
     data: IData;

@@ -1,4 +1,4 @@
-import Carts from "@/features/CartPage/components/carts";
+import Carts from "@/features/CartPage/components/Carts";
 import { Metadata } from "next";
 import API from "@/shared/libs/endpoints";
 import { redirect } from "next/navigation";

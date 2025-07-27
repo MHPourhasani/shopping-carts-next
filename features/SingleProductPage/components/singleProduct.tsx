@@ -7,15 +7,14 @@ import DesktopSingleProduct from "@/features/SingleProductPage/components/Descto
 import { usePathname, useRouter } from "next/navigation";
 import { useSingleProductData } from "../context/ProductData";
 import { ISingleProductData } from "../interface/interface";
+import { IReview } from "../interface/review.interface";
 
 export default function SingleProduct() {
     const { data } = useSingleProductData();
-    const router = useRouter();
-    const pathname = usePathname();
     const product = data!.product;
     const reviews = data!.reviews;
     const [isAddReview, setIsAddReview] = useState(false);
-    const [productData, setProductData] = useState<ISingleProductData>({
+    const [productData, setProductData] = useState<any>({
         product,
         quantity: 1,
         selectedAttributes: {},
@@ -41,7 +40,7 @@ export default function SingleProduct() {
     };
 
     const handleSelectAttributes = (slug: string, value: string) => {
-        setProductData((prev) => ({
+        setProductData((prev: any) => ({
             ...prev,
             selectedAttributes: {
                 ...prev.selectedAttributes,
@@ -50,7 +49,7 @@ export default function SingleProduct() {
         }));
     };
 
-    const addToCartsHandler = async (product: ISingleProductData) => {
+    const addToCartsHandler = async () => {
         // if (!session) {
         //     router.push(`${PATH.login()}?redirect=${pathname}`);
         // } else {

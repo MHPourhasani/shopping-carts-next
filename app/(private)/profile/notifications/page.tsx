@@ -1,4 +1,4 @@
-import Notifications from "@/features/ProfilePage/components/notifications/notificationsPage";
+import Notifications from "@/features/ProfilePage/components/notifications/NotificationsPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

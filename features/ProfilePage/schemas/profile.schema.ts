@@ -1,21 +1,17 @@
-import * as yup from "yup";
-import type { InferType } from "yup";
+import { z } from "zod";
 
-export const profileSchema = yup.object({
-    first_name: yup.string().required("نام نباید خالی باشد."),
-    last_name: yup.string().required("نام خانوادگی نباید خالی باشد."),
-    email: yup.string().email("ایمیل معتبر نیست.").required("ایمیل نباید خالی باشد."),
-    phone: yup
+export const profileSchema = z.object({
+    first_name: z.string().min(1, "نام نباید خالی باشد."),
+    last_name: z.string().min(1, "نام خانوادگی نباید خالی باشد."),
+    email: z.string().email("ایمیل معتبر نیست.").min(1, "ایمیل نباید خالی باشد."),
+    phone: z
         .string()
-        .optional()
         .nullable()
-        .transform((value, originalValue) => {
-            return originalValue === "" ? null : value;
-        })
-        .matches(/^09\d{9}$/, {
-            message: "شماره تماس باید ۱۱ رقم و با 09 شروع شود.",
-            excludeEmptyString: true,
-        }),
+        .optional()
+        .refine((val) => {
+            if (!val) return true;
+            return /^09\d{9}$/.test(val);
+        }, "شماره تماس باید ۱۱ رقم و با 09 شروع شود."),
 });
 
-export type ProfileFormValues = InferType<typeof profileSchema>;
+export type ProfileFormValues = z.infer<typeof profileSchema>;

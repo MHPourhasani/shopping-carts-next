@@ -1,6 +1,6 @@
 import { IProduct } from "@/features/SingleProductPage/interface/interface";
 import API from "@/shared/libs/endpoints";
-import Products from "@/features/ProductsPage/components/products";
+import Products from "@/features/ProductsPage/components/Products";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import { get } from "@/shared/libs/axios";
