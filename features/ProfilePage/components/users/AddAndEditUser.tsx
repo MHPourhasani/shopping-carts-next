@@ -52,7 +52,7 @@ const AddAndEditUser = ({ initialData }: Props) => {
             }
 
             router.back();
-            // handleRefreshAfterBack();
+            handleRefreshAfterBack();
         } catch (error) {
             toast.error(`خطا در آپدیت پروفایل`);
         }
