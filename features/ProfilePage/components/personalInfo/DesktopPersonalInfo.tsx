@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { ProfileFormValues, profileSchema } from "../../schemas/profile.schema";
 import { put } from "@/shared/libs/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserRoleEnum } from "@/features/auth/enums";
 
 interface IProps {
     isLoading: boolean;
@@ -120,7 +121,7 @@ const DesktopPersonalInfo = (props: IProps) => {
                 </div>
 
                 <span className="bg-secondary-100 dark:bg-secondary-700 rounded-lg px-2 py-1">
-                    <p>{covertUserRoleToPersian(user!.role)}</p>
+                    <p>{covertUserRoleToPersian(user ? user.role : UserRoleEnum.CUSTOMER)}</p>
                 </span>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-start gap-4">

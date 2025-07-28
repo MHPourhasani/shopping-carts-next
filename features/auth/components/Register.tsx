@@ -7,18 +7,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import PATH from "@/shared/utils/path";
 import API from "@/shared/libs/endpoints";
-import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/slices/authSlice";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
+import { post } from "@/shared/libs/axios";
 
 const Register = () => {
     const [formData, setFormData] = useState({ email: "", password: "", confirmPassword: "", checkbox: false });
     const [formDataError, setFormDataError] = useState({ email: "", password: "", confirmPassword: "" });
     const router = useRouter();
-    const dispatch = useAppDispatch();
 
     const changeHandler = (e: any) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,32 +37,14 @@ const Register = () => {
             const { email, password } = formData;
 
             try {
-                const res = await fetch(API.auth.register(), {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
+                try {
+                    await post(API.auth.register(), { email, password });
+                    await post("/api/auth/login", { email, password });
 
-                const { message } = await res.json();
-
-                if (res.ok) {
-                    const res = await fetch(API.auth.login(), {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Accept: "application/json",
-                        },
-                        body: JSON.stringify({ email, password }),
-                    });
-                    const { user } = await res.json();
-                    dispatch(setUser(user));
                     router.push(PATH.home());
-                    toast.success(message);
-                } else {
-                    toast.error(message);
+                    toast.success("خوش آمدید");
+                } catch (error) {
+                    toast.error("خطا در ورود");
                 }
             } catch (error: any) {
                 console.error(error);

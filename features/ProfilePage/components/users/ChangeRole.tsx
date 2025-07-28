@@ -12,9 +12,10 @@ import API from "@/shared/libs/endpoints";
 
 interface Props {
     user: IUser;
+    className?: string;
 }
 
-const ChangeRole = ({ user }: Props) => {
+const ChangeRole = ({ user, className }: Props) => {
     const [selected, setSelected] = useState<TOption>({ title: covertUserRoleToPersian(user.role) });
 
     const changeRoleHandler = async (selectedItem: TOption) => {
@@ -39,7 +40,7 @@ const ChangeRole = ({ user }: Props) => {
                 return { title: covertUserRoleToPersian(item) };
             })}
             onChange={(selected) => changeRoleHandler(selected)}
-            className="w-32 min-w-32"
+            className={`w-32 min-w-32 ${className}`}
         />
     );
 };

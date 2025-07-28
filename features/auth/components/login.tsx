@@ -14,6 +14,7 @@ import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import PageHeader from "@/shared/components/PageHeader";
 import { useAuthToken } from "@/shared/hooks/useAuthToken";
+import { post } from "@/shared/libs/axios";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -35,17 +36,25 @@ const Login = () => {
     const handleLogin = async () => {
         setIsLoading(true);
         try {
-            await fetch("/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: formData.email, password: formData.password }),
-                credentials: "include",
+            await post("/api/auth/login", {
+                email: formData.email,
+                password: formData.password,
             });
 
             toast.success(toastMessage.auth.login.successfulLogin);
             router.push(PATH.home());
-        } catch (e) {
-            console.error(e);
+        } catch (err: any) {
+            const code = err?.response?.data?.code;
+            switch (code) {
+                case "EMAIL_NOT_FOUND":
+                    toast.error("کاربری با این ایمیل یافت نشد.");
+                    break;
+                case "INVALID_PASSWORD":
+                    toast.error("رمز عبور اشتباه است.");
+                    break;
+                default:
+                    toast.error("ورود ناموفق بود.");
+            }
         } finally {
             setIsLoading(false);
         }
@@ -70,7 +79,7 @@ const Login = () => {
                     onSubmit={handleSubmit(handleLogin, errorHandler)}
                     className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
                 >
-                    <PageHeader title="ورود به حساب کاربری" />
+                    <PageHeader title="ورود به حساب کاربری" desktopBackButton={false} />
                     <InputWithLabel
                         dir="ltr"
                         type="email"

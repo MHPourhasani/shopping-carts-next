@@ -9,13 +9,13 @@ export const userSchema = yup.object({
     phone: yup
         .string()
         .nullable()
-        .matches(/^(\d{11})?$/, "شماره تماس باید ۱۱ رقم باشد"),
+        .matches(/^09\d{9}$/, "شماره تماس باید ۱۱ رقم باشد"),
 
     email: yup.string().required("ایمیل الزامی است").email("ایمیل معتبر نیست"),
 
     password: yup
         .string()
-        .transform((value) => (value === "" ? undefined : value)) // خالی رو به undefined تبدیل کن
+        .transform((value) => (value === "" ? undefined : value))
         .when([], {
             is: (_: any, schema: yup.StringSchema) => {
                 return schema?.describe()?.meta?.isEdit;

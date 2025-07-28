@@ -1,17 +1,17 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setUser } from "@/redux/slices/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import PageHeader from "@/shared/components/PageHeader";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
+import API from "../../../shared/libs/endpoints";
+import { put } from "@/shared/libs/axios";
 
 const ChangePassword = () => {
-    const user = useAppSelector((state) => state.auth.user);
-    const [formData, setFormData] = useState({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
-    const [formDataError, setFormDataError] = useState({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
+    const [formData, setFormData] = useState({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
+    const [formDataError, setFormDataError] = useState({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -20,43 +20,28 @@ const ChangePassword = () => {
     };
 
     const changesPasswordHandler = async () => {
-        const { oldPassword, newPassword, confirmNewPassword } = formData;
+        const { currentPassword, newPassword, confirmNewPassword } = formData;
 
-        if (!oldPassword.trim()) {
-            setFormDataError({ ...formDataError, oldPassword: "رمز عبور فعلی خود را وارد کنید." });
+        if (!currentPassword.trim()) {
+            setFormDataError({ ...formDataError, currentPassword: "رمز عبور فعلی خود را وارد کنید." });
         } else if (!newPassword.trim()) {
             setFormDataError({ ...formDataError, newPassword: "رمز عبور جدید را وارد کنید" });
         } else if (!confirmNewPassword.trim()) {
             setFormDataError({ ...formDataError, confirmNewPassword: "دوباره رمز عبور جدید را وارد کنید." });
         } else if (newPassword.length < 8) {
             setFormDataError({ ...formDataError, newPassword: "رمز عبور نباید کمتر از 8 کاراکتر باشد." });
-        } else if (newPassword === oldPassword) {
+        } else if (newPassword === currentPassword) {
             setFormDataError({ ...formDataError, newPassword: "رمز عبور فعلی نباید با رمز عبور جدید برابر باشد." });
         } else if (confirmNewPassword.length < 8) {
             setFormDataError({ ...formDataError, confirmNewPassword: "تکرار رمز عبور نباید کمتر از 8 کاراکتر باشد." });
         } else if (newPassword !== confirmNewPassword) {
             setFormDataError({ ...formDataError, confirmNewPassword: "رمز عبور ها با هم برابر نیستند." });
         } else {
-            const res = await fetch(`/api/profile/change-password/`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ newPassword }),
-            });
-
-            // await fetch("/api/notifications", {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify({
-            //         user: user.email,
-            //         notification: { title: "تغییر رمز عبور", message: "رمز عبور با موقفیت تغییر کرد." },
-            //     }),
-            // });
-
-            if (res.ok) {
-                dispatch(setUser({ ...user, formData }));
+            try {
+                await put(API.users.changePassword(), { currentPassword, newPassword });
                 toast.success("رمز عبور با موفقیت تغییر کرد.");
                 router.back();
-            } else {
+            } catch (error) {
                 toast.error(`خطا در تغییر رمز عبور`);
             }
         }
@@ -66,14 +51,14 @@ const ChangePassword = () => {
         <section className="flex w-full flex-1 flex-col gap-4">
             <PageHeader title="تغییر رمز عبور" />
 
-            <div className="flex flex-col gap-3">
+            <div className="flex w-full flex-col gap-4">
                 <InputWithLabel
                     label="رمز عبور فعلی"
-                    name="oldPassword"
-                    value={formData.oldPassword}
+                    name="currentPassword"
+                    value={formData.currentPassword}
                     onChange={changeHandler}
-                    error={formDataError.oldPassword}
-                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    error={formDataError.currentPassword}
+                    className="focus:border-primary-100"
                 />
                 <InputWithLabel
                     label="رمز عبور جدید"
@@ -81,7 +66,7 @@ const ChangePassword = () => {
                     value={formData.newPassword}
                     onChange={changeHandler}
                     error={formDataError.newPassword}
-                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100"
                 />
                 <InputWithLabel
                     label="تکرار رمز عبور جدید"
@@ -89,10 +74,12 @@ const ChangePassword = () => {
                     value={formData.confirmNewPassword}
                     onChange={changeHandler}
                     error={formDataError.confirmNewPassword}
-                    className="focus:border-primary-100 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:max-w-[600px]"
+                    className="focus:border-primary-100"
                 />
 
-                <Button onClick={changesPasswordHandler}>تغییر رمز</Button>
+                <Button onClick={changesPasswordHandler} className="mt-4 cursor-pointer self-end">
+                    تغییر رمز
+                </Button>
             </div>
         </section>
     );

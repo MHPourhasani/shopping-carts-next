@@ -7,7 +7,7 @@ const Settings = () => {
             <PageHeader title="تنظیمات" desktopBackButton={false} />
 
             <div className="flex w-full flex-col gap-4">
-                <div className="flex items-center justify-between gap-4 border-b">
+                <div className="flex items-center justify-between gap-4 border-b pb-2">
                     <p>تغییر تم</p>
                     <ThemeSwitch />
                 </div>

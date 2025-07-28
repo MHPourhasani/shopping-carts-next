@@ -3,7 +3,6 @@ import ClockIcon from "@/assets/icons/components/Clock";
 import EditIcon from "@/assets/icons/components/Edit";
 import TrashIcon from "@/assets/icons/components/Trash";
 import UserIcon from "@/assets/icons/components/User";
-import { handleRefreshAfterBack } from "@/shared/utils/utils";
 import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { toast } from "react-toastify";
@@ -15,15 +14,13 @@ const PostListItem = ({ post, link }: { post: IPost; link: string }) => {
     const { _id, title, author, createdAt } = post;
 
     const deleteHandler = async () => {
-        const res = await del(API.blogs.singlePostById(_id));
-        console.log(res);
+        try {
+            await del(API.blogs.singlePostById(_id));
 
-        toast.success(toastMessage.post.successfullyDelete);
-        // if (res.ok) {
-        //     handleRefreshAfterBack();
-        // } else {
-        //     toast.error(toastMessage.post.failedDeleted);
-        // }
+            toast.success(toastMessage.post.successfullyDelete);
+        } catch (error) {
+            toast.error("خطا در حذف نوشته");
+        }
     };
 
     return (
@@ -44,8 +41,9 @@ const PostListItem = ({ post, link }: { post: IPost; link: string }) => {
                 <div className="border-secondary-100 text-secondary-400 dark:text-secondary-100 flex items-center justify-between gap-4 border-t pt-4 text-sm">
                     <span className="flex items-center gap-1 truncate">
                         <UserIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />
-                        <p className="truncate">{author.first_name + " " + author.last_name || author.email}</p>
+                        <p className="truncate">{author.first_name + " " + author.last_name}</p>
                     </span>
+
                     <span className="flex items-center gap-1 truncate">
                         {new Date(createdAt).toLocaleDateString("fa-IR")}
                         <ClockIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />

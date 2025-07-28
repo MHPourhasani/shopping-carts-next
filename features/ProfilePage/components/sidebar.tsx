@@ -7,6 +7,10 @@ import { sidebarItems } from "@/features/ProfilePage/components/SidebarItems";
 import LogoutIcon from "@/assets/icons/components/Logout";
 import { Button } from "@/components/ui/button";
 import { setUser } from "@/redux/slices/authSlice";
+import { toast } from "react-toastify";
+import API from "@/shared/libs/endpoints";
+import { post } from "@/shared/libs/axios";
+import Loader from "@/shared/components/Loader";
 
 const Sidebar = () => {
     const user = useAppSelector((state) => state.auth.user);
@@ -14,10 +18,14 @@ const Sidebar = () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const handleLogout = () => {
-        // authTokenClient.remove();
-        dispatch(setUser(null));
-        router.push(PATH.home());
+    const handleLogout = async () => {
+        try {
+            await post(API.auth.logout());
+            dispatch(setUser(null));
+            router.push(PATH.home());
+        } catch (error) {
+            toast.error("خطا در خارج شدن");
+        }
     };
 
     return (
@@ -28,27 +36,29 @@ const Sidebar = () => {
                 </Link>
 
                 <div className="text-customBlack-100 dark:text-secondary-100 flex w-full flex-1 flex-col overflow-auto">
-                    {user
-                        ? user.role &&
-                          sidebarItems(pathname)
-                              .filter((item) => item.roles.includes(user.role))
-                              .map((item) => {
-                                  const isActive = pathname === item.href;
+                    {user ? (
+                        user.role &&
+                        sidebarItems(pathname)
+                            .filter((item) => item.roles.includes(user.role))
+                            .map((item) => {
+                                const isActive = pathname === item.href;
 
-                                  return (
-                                      <Link
-                                          key={item.href}
-                                          href={item.href}
-                                          className={`flex items-center gap-2 py-4 ${
-                                              isActive ? "text-primary-100 bg-gradient-to-l dark:text-violet-300" : ""
-                                          }`}
-                                      >
-                                          {item.icon}
-                                          <p>{item.title}</p>
-                                      </Link>
-                                  );
-                              })
-                        : "loader"}
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`flex items-center gap-2 py-4 ${
+                                            isActive ? "text-primary-100 bg-gradient-to-l dark:text-violet-300" : ""
+                                        }`}
+                                    >
+                                        {item.icon}
+                                        <p>{item.title}</p>
+                                    </Link>
+                                );
+                            })
+                    ) : (
+                        <Loader />
+                    )}
                 </div>
             </div>
 

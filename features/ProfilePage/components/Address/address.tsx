@@ -12,6 +12,7 @@ import { IAddress } from "@/features/auth/interfaces";
 import { post, put } from "@/shared/libs/axios";
 import AddressDialog from "./AddressModal";
 import API from "@/shared/libs/endpoints";
+import Loader from "@/shared/components/Loader";
 
 const Addresses = () => {
     const user = useAppSelector((state) => state.auth.user);
@@ -75,7 +76,7 @@ const Addresses = () => {
                             <EmptyState imgSrc={receiptIcon} description="هیچ آدرسی وجود دارد." className="flex-1" />
                         )
                     ) : (
-                        "<Loading"
+                        <Loader />
                     )}
                 </div>
             </section>

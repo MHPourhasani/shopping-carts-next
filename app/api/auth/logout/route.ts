@@ -6,7 +6,7 @@ export async function POST() {
 
     res.cookies.set(AUTH_TOKEN_KEY, "", {
         path: "/",
-        maxAge: 0,
+        expires: new Date(0),
     });
 
     return res;

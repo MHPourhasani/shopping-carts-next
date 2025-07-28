@@ -27,17 +27,17 @@ const ProfileProductsPage = async () => {
     const products = await getProducts();
 
     return (
-        <section className="flex w-full flex-1 flex-col gap-4">
+        <section className="flex w-full flex-1 flex-col gap-4 overflow-y-hidden">
             <PageHeader title="محصولات" desktopBackButton={false}>
                 <Link href={PATH.profile.products.add_product()}>
-                    <Button variant="text" className="text-primary-100">
+                    <Button variant="text" className="text-primary-100 group cursor-pointer px-0">
+                        <AddIcon className="stroke-primary-100 size-5 cursor-pointer transition-all ease-in-out group-hover:stroke-white lg:size-6" />
                         افزودن محصول جدید
-                        <AddIcon className="stroke-primary-100 size-5 cursor-pointer lg:size-6" />
                     </Button>
                 </Link>
             </PageHeader>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex h-full flex-col gap-4 overflow-y-hidden">
                 <div className="hidden w-full grid-cols-11 items-center gap-2 lg:grid">
                     <p className="col-span-3 pr-8">نام</p>
                     <p className="col-span-2">قیمت</p>
@@ -47,7 +47,7 @@ const ProfileProductsPage = async () => {
                 </div>
 
                 {products && products.length ? (
-                    <div className="flex w-full flex-col">
+                    <div className="custom-scrollbar flex w-full flex-1 flex-col overflow-y-auto">
                         {products.map((product) => (
                             <ProductListItem
                                 key={product._id.toString()}

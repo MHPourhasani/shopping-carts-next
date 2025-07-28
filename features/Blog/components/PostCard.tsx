@@ -27,10 +27,12 @@ const PostCard = ({ post, className }: Props) => {
             </div>
 
             <div className="text-secondary-400 dark:text-secondary-100 flex items-center justify-between gap-4 border-t pt-2 text-sm">
-                <span className="flex items-center gap-1 truncate">
-                    <UserIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />
-                    <p className="truncate">{author.first_name + " " + author.last_name || author.email}</p>
-                </span>
+                {author && (
+                    <span className="flex items-center gap-1 truncate">
+                        <UserIcon className="fill-secondary-400 dark:fill-secondary-100 size-5" />
+                        <p className="truncate">{author.first_name + " " + author.last_name || author.email}</p>
+                    </span>
+                )}
 
                 <span className="flex items-center gap-1 truncate">
                     <span className="pt-[3px]">{new Date(createdAt).toLocaleDateString("fa-IR")}</span>

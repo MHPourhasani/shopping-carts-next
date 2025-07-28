@@ -10,6 +10,7 @@ import DesktopMenu from "./DesktopMenu";
 import Search from "@/features/Layout/components/Search";
 import { Suspense } from "react";
 import { useAuthToken } from "@/shared/hooks/useAuthToken";
+import Loader from "@/shared/components/Loader";
 
 const Header = () => {
     const user = useAppSelector((state) => state.auth.user);
@@ -28,7 +29,7 @@ const Header = () => {
                             {process.env.shop_name}
                         </Link>
 
-                        <Suspense fallback={"loading..."}>
+                        <Suspense fallback={<Loader />}>
                             <div className="hidden max-w-[600px] flex-1 lg:flex">
                                 <Search />
                             </div>
@@ -110,7 +111,7 @@ const Header = () => {
                     </div>
                 </section>
 
-                <Suspense fallback={"loading..."}>
+                <Suspense fallback={<Loader />}>
                     <div className="flex w-full flex-1 lg:hidden">
                         <Search />
                     </div>

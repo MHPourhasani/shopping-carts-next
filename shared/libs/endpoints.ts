@@ -3,10 +3,12 @@ const API = {
         login: () => `${process.env.API_BASE_URL}/auth/login`,
         register: () => `${process.env.API_BASE_URL}/auth/register`,
         refresh: () => `${process.env.API_BASE_URL}/auth/refresh-token`,
+        logout: () => "/api/auth/logout",
     },
     users: {
         list: () => `${process.env.API_BASE_URL}/users`,
         singleUser: (id: string) => `${process.env.API_BASE_URL}/users/${id}`,
+        changePassword: () => `${process.env.API_BASE_URL}/users/change-password`,
         getProfile: () => `${process.env.API_BASE_URL}/users/get-profile`,
         updateProfile: () => `${process.env.API_BASE_URL}/users/update-profile`,
         updateUserProfile: (id: string) => `${process.env.API_BASE_URL}/users/update-profile/${id}`,

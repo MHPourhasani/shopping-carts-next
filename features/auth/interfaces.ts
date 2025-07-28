@@ -14,15 +14,15 @@ export interface IAddress {
 
 export interface IUser {
     _id: string;
-    first_name: string | null;
-    last_name: string | null;
+    first_name: string;
+    last_name: string;
     email: string;
     password: string;
     is_email_verified: boolean;
     is_phone_verified: boolean;
     is_active: boolean;
-    profile_image: string | null;
-    phone: string | null;
+    profile_image: string;
+    phone: string;
     addresses: IAddress[];
     role: UserRoleEnum;
     createdAt: Date;

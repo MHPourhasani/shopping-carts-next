@@ -41,7 +41,7 @@ export const handleRefreshAfterBack = () => {
 export const covertUserRoleToPersian = (role: UserRoleEnum) => {
     switch (true) {
         case role === UserRoleEnum.CUSTOMER:
-            return "کاربر";
+            return "مشتری";
         case role === UserRoleEnum.AUTHOR:
             return "نویسنده";
         case role === UserRoleEnum.SELLER:

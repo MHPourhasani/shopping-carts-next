@@ -43,7 +43,16 @@ browserAxios.interceptors.response.use(
     (r) => r,
     async (error: AxiosError) => {
         const original = error.config as AxiosRequestConfig & { _retry?: boolean };
-        if (error.response?.status !== 401 || original._retry) throw error;
+
+        if (
+            error.response?.status !== 401 ||
+            original._retry ||
+            original.url?.includes(PATH.login()) ||
+            original.url?.includes(PATH.register())
+        ) {
+            throw error;
+        }
+
         original._retry = true;
 
         return new Promise((resolve, reject) => {
