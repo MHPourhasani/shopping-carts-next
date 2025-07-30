@@ -1,4 +1,4 @@
-import Profile from "@/features/ProfilePage/components/Profile";
+import Profile from "@/features/Profile/components/Profile";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

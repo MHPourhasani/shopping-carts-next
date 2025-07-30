@@ -1,5 +1,5 @@
 import { IUser } from "@/features/auth/interfaces";
-import AllUsers from "@/features/ProfilePage/components/users/Users";
+import AllUsers from "@/features/Profile/components/users/Users";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { get } from "@/shared/libs/axios";
 import API from "@/shared/libs/endpoints";

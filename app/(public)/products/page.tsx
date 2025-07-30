@@ -7,7 +7,7 @@ import { get } from "@/shared/libs/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
 
 export const revalidate = 30;
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
     const products: IProduct[] = await getProducts();

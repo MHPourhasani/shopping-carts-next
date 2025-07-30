@@ -1,4 +1,4 @@
-import EditPersonalInformation from "@/features/ProfilePage/components/EditPersonal";
+import EditPersonalInformation from "@/features/Profile/components/EditPersonal";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -6,7 +6,7 @@ import AddIcon from "@/assets/icons/components/Add";
 import receiptIcon from "@/assets/icons/svgs/receipt-page.svg";
 import EmptyState from "@/shared/components/EmptyState";
 import { setUser } from "@/redux/slices/authSlice";
-import AddressItem from "@/features/ProfilePage/components/Address/AddressItem";
+import AddressItem from "@/features/Profile/components/Address/AddressItem";
 import PageHeader from "@/shared/components/PageHeader";
 import { IAddress } from "@/features/auth/interfaces";
 import { post, put } from "@/shared/libs/axios";

@@ -1,5 +1,5 @@
 import EmptyState from "@/shared/components/EmptyState";
-import Favorites from "@/features/ProfilePage/components/Favorites";
+import Favorites from "@/features/Profile/components/Favorites";
 import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import { Metadata } from "next";
 import PATH from "@/shared/utils/path";

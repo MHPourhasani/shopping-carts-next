@@ -2,7 +2,7 @@
 import EyeIcon from "@/assets/icons/components/Eye";
 import TrashIcon from "@/assets/icons/components/Trash";
 import EmptyState from "@/shared/components/EmptyState";
-import ChangeRole from "@/features/ProfilePage/components/users/ChangeRole";
+import ChangeRole from "@/features/Profile/components/users/ChangeRole";
 import toastMessage from "@/shared/utils/toastMessage";
 import Link from "next/link";
 import { useEffect, useState } from "react";

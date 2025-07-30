@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import DashboardHeader from "@/features/ProfilePage/components/Header";
+import DashboardHeader from "@/features/Profile/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";
-import Sidebar from "@/features/ProfilePage/components/Sidebar";
+import Sidebar from "@/features/Profile/components/Sidebar";
 import { getTokenServer } from "@/shared/libs/axios";
 import { redirect } from "next/navigation";
 import PATH from "@/shared/utils/path";

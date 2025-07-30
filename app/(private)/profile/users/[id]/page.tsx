@@ -1,5 +1,5 @@
 import { IUser } from "@/features/auth/interfaces";
-import AddAndEditUser from "@/features/ProfilePage/components/users/AddAndEditUser";
+import AddAndEditUser from "@/features/Profile/components/users/AddAndEditUser";
 import PageHeader from "@/shared/components/PageHeader";
 import { get } from "@/shared/libs/axios";
 import API from "@/shared/libs/endpoints";

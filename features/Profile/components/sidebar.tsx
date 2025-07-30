@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import PATH from "@/shared/utils/path";
-import { sidebarItems } from "@/features/ProfilePage/components/SidebarItems";
+import { sidebarItems } from "@/features/Profile/components/SidebarItems";
 import LogoutIcon from "@/assets/icons/components/Logout";
 import { Button } from "@/components/ui/button";
 import { setUser } from "@/redux/slices/authSlice";

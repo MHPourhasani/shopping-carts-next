@@ -14,7 +14,7 @@ import { IPaginatedResponse } from "@/shared/interfaces";
 import { IPost } from "@/features/Blog/interfaces";
 
 export const revalidate = 30;
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
