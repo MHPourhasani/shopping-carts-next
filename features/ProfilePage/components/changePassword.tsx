@@ -1,5 +1,4 @@
 "use client";
-import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -12,7 +11,6 @@ import { put } from "@/shared/libs/axios";
 const ChangePassword = () => {
     const [formData, setFormData] = useState({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
     const [formDataError, setFormDataError] = useState({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
-    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const changeHandler = (e: any) => {
