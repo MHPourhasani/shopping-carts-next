@@ -15,12 +15,12 @@ import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import API from "@/shared/libs/endpoints";
-import { IAddress } from "@/features/auth/interfaces";
+import { IAddress } from "@/features/Auth/interfaces";
 import { useForm } from "react-hook-form";
 import { ProfileFormValues, profileSchema } from "../../schemas/profile.schema";
 import { put } from "@/shared/libs/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserRoleEnum } from "@/features/auth/enums";
+import { UserRoleEnum } from "@/features/Auth/enums";
 
 interface IProps {
     isLoading: boolean;

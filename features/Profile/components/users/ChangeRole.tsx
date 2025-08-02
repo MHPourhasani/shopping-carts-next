@@ -5,8 +5,8 @@ import { TOption } from "@/interfaces/general";
 import { toast } from "react-toastify";
 import toastMessage from "@/shared/utils/toastMessage";
 import { covertUserRoleToPersian, covertUserRoleToUserRoleEnum } from "@/shared/utils/utils";
-import { IUser } from "@/features/auth/interfaces";
-import { UserRoleEnum } from "@/features/auth/enums";
+import { IUser } from "@/features/Auth/interfaces";
+import { UserRoleEnum } from "@/features/Auth/enums";
 import { put } from "@/shared/libs/axios";
 import API from "@/shared/libs/endpoints";
 

@@ -1,5 +1,5 @@
-import ChangePassword from "../../../../features/Profile/components/ChangePassword";
 import { Metadata } from "next";
+import ChangePassword from "@/features/Profile/components/ChangePassword";
 
 export const revalidate = 30;
 export const dynamic = "force-static";

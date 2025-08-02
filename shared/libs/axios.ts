@@ -68,7 +68,7 @@ browserAxios.interceptors.response.use(
 async function refreshClientToken() {
     refreshing = true;
     try {
-        const { data } = await browserAxios.post("/api/auth/refresh");
+        const { data } = await browserAxios.post("/api/Auth/refresh");
         const newAccess = data?.access;
         waiters.forEach((cb) => cb(newAccess));
     } catch {
@@ -99,7 +99,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = f
     });
 
     if (res.status === 401 && tokens?.refresh && !hasRetried) {
-        const ref = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
+        const ref = await fetch(`${process.env.BASE_URL}/api/Auth/refresh`, {
             method: "POST",
             headers: {
                 Cookie: cookieHeader,
@@ -107,7 +107,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = f
         });
 
         if (!ref.ok) {
-            await fetch(`${process.env.BASE_URL}/api/auth/logout`, {
+            await fetch(`${process.env.BASE_URL}/api/Auth/logout`, {
                 method: "POST",
                 headers: { Cookie: cookieHeader },
             });

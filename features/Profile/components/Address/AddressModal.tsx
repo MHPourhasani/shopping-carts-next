@@ -1,5 +1,5 @@
 import { ResponsiveDrawerDialog } from "@/components/ui/responsiveDrawerDialog";
-import { IAddress } from "@/features/auth/interfaces";
+import { IAddress } from "@/features/Auth/interfaces";
 import { useState } from "react";
 import AddressForm from "./AddressForm";
 

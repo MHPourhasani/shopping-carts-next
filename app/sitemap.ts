@@ -3,7 +3,7 @@ import API from "@/shared/libs/endpoints";
 import PATH from "@/shared/utils/path";
 import fs from "fs";
 import path from "path";
-import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import { IProduct } from "@/features/SingleProduct/interface/interface";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { get } from "@/shared/libs/axios";
 import { IPost } from "@/features/Blog/interfaces";

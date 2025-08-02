@@ -1,6 +1,6 @@
 import ArrowLeft from "@/assets/icons/components/ArrowLeft";
 import ReceiptIcon from "@/assets/icons/components/Receipt";
-import { IUser } from "@/features/auth/interfaces";
+import { IUser } from "@/features/Auth/interfaces";
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
 import { IOrder } from "../interfaces";

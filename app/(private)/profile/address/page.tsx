@@ -1,4 +1,4 @@
-import Addresses from "@/features/Profile/components/Address/Address";
+import Addresses from "@/features/Profile/components/address/Address";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

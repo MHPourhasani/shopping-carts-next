@@ -1,10 +1,10 @@
 import AddIcon from "@/assets/icons/components/Add";
 import PageHeader from "@/shared/components/PageHeader";
-import ProductListItem from "@/features/SingleProductPage/components/ProductListItem";
+import ProductListItem from "@/features/SingleProduct/components/ProductListItem";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import Link from "next/link";
-import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import { IProduct } from "@/features/SingleProduct/interface/interface";
 import { Button } from "@/components/ui/button";
 import { get } from "@/shared/libs/axios";
 import API from "@/shared/libs/endpoints";

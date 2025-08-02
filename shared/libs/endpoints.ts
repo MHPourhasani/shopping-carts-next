@@ -1,9 +1,9 @@
 const API = {
     auth: {
-        login: () => `${process.env.API_BASE_URL}/auth/login`,
-        register: () => `${process.env.API_BASE_URL}/auth/register`,
-        refresh: () => `${process.env.API_BASE_URL}/auth/refresh-token`,
-        logout: () => "/api/auth/logout",
+        login: () => `${process.env.API_BASE_URL}/Auth/login`,
+        register: () => `${process.env.API_BASE_URL}/Auth/register`,
+        refresh: () => `${process.env.API_BASE_URL}/Auth/refresh-token`,
+        logout: () => "/api/Auth/logout",
     },
     users: {
         list: () => `${process.env.API_BASE_URL}/users`,

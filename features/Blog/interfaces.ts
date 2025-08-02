@@ -1,4 +1,4 @@
-import { IUser } from "../auth/interfaces";
+import { IUser } from "../Auth/interfaces";
 import { PostStatusEnum } from "./enums";
 
 export interface IPost {

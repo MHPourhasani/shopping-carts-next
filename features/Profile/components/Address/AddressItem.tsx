@@ -3,7 +3,7 @@ import EmptySquareIcon from "@/assets/icons/svgs/empty-square.svg";
 import EditIcon from "@/assets/icons/components/Edit";
 import Image from "next/image";
 import TrashIcon from "@/assets/icons/components/Trash";
-import { IAddress } from "@/features/auth/interfaces";
+import { IAddress } from "@/features/Auth/interfaces";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "react-toastify";
 import { setUser } from "@/redux/slices/authSlice";

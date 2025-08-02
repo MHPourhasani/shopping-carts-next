@@ -1,4 +1,4 @@
-import Login from "@/features/auth/components/Login";
+import Login from "@/features/Auth/components/Login";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 

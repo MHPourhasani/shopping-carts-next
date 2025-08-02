@@ -1,4 +1,4 @@
-import { IUser } from "@/features/auth/interfaces";
+import { IUser } from "@/features/Auth/interfaces";
 import AllUsers from "@/features/Profile/components/users/Users";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import { get } from "@/shared/libs/axios";

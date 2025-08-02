@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AddressFormSchema, addressSchema } from "../../validation/address.schema";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
-import { IAddress } from "@/features/auth/interfaces";
+import { IAddress } from "@/features/Auth/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface IProps {

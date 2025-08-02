@@ -1,4 +1,4 @@
-import { UserRoleEnum } from "@/features/auth/enums";
+import { UserRoleEnum } from "@/features/Auth/enums";
 import { PaymentMethodEnum } from "@/interfaces/enums";
 
 export const scrollToTop = () => {

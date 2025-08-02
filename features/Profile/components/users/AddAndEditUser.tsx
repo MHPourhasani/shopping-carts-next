@@ -5,13 +5,13 @@ import { toast } from "react-toastify";
 import SingleSelect from "@/shared/components/common/SingleSelect";
 import { InputWithLabel } from "@/components/ui/inputWithLabel";
 import { Button } from "@/components/ui/button";
-import { IUser } from "@/features/auth/interfaces";
-import { UserRoleEnum } from "@/features/auth/enums";
+import { IUser } from "@/features/Auth/interfaces";
+import { UserRoleEnum } from "@/features/Auth/enums";
 import { Controller, useForm } from "react-hook-form";
 import API from "@/shared/libs/endpoints";
 import { post, put } from "@/shared/libs/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { userSchema } from "@/features/auth/schemas/user.schema";
+import { userSchema } from "@/features/Auth/schemas/user.schema";
 import { Switch } from "@/components/ui/switch";
 
 interface Props {

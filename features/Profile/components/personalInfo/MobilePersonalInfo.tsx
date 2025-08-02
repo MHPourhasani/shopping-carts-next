@@ -14,7 +14,7 @@ import { covertUserRoleToPersian, showFullDate } from "@/shared/utils/utils";
 import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
-import { UserRoleEnum } from "@/features/auth/enums";
+import { UserRoleEnum } from "@/features/Auth/enums";
 
 interface PropsInterface {
     isLoading: boolean;

@@ -39,7 +39,7 @@ const Register = () => {
             try {
                 try {
                     await post(API.auth.register(), { email, password });
-                    await post("/api/auth/login", { email, password });
+                    await post("/api/Auth/login", { email, password });
 
                     router.push(PATH.home());
                     toast.success("خوش آمدید");

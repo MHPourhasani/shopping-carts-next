@@ -1,6 +1,6 @@
 import Image from "next/image";
 import noImage from "@/assets/images/jpg/no-image.jpg";
-import { ISingleProductData } from "@/features/SingleProductPage/interface/interface";
+import { ISingleProductData } from "@/features/SingleProduct/interface/interface";
 
 const ProductOrderCard = ({ product }: { product: ISingleProductData }) => {
     return (

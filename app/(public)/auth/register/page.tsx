@@ -1,4 +1,4 @@
-import Register from "@/features/auth/components/Register";
+import Register from "@/features/Auth/components/Register";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 

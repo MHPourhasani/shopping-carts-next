@@ -1,5 +1,5 @@
-import ProductForm from "@/features/SingleProductPage/components/ProductForm";
-import { IProduct } from "@/features/SingleProductPage/interface/interface";
+import ProductForm from "@/features/SingleProduct/components/ProductForm";
+import { IProduct } from "@/features/SingleProduct/interface/interface";
 import { get } from "@/shared/libs/axios";
 import API from "@/shared/libs/endpoints";
 import { Metadata } from "next";

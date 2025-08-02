@@ -1,4 +1,4 @@
-import Carts from "@/features/CartPage/components/Carts";
+import Carts from "@/features/Cart/components/Carts";
 import { Metadata } from "next";
 import API from "@/shared/libs/endpoints";
 import { redirect } from "next/navigation";
@@ -26,9 +26,6 @@ const getCarts = async (user_id: string) => {
 };
 
 const CartsPage = async () => {
-    // if (!authTokenClient?.access) {
-    //     redirect(`${PATH.login()}?redirect=${PATH.carts()}`);
-    // }
     // const carts = await getCarts(authTokenClient!.access);
 
     // return <Carts carts={carts ? carts : []} />;

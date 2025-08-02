@@ -1,6 +1,6 @@
 import PageHeader from "@/shared/components/PageHeader";
 import API from "@/shared/libs/endpoints";
-import Checkout from "@/features/CheckoutPage/components/Checkout";
+import Checkout from "@/features/Checkout/components/Checkout";
 import PATH from "@/shared/utils/path";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
