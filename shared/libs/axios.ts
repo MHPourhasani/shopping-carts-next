@@ -107,7 +107,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = f
         });
 
         if (!ref.ok) {
-            await fetch(`${process.env.BASE_URL}/api/Auth/logout`, {
+            await fetch(`${process.env.BASE_URL}/api/auth/logout`, {
                 method: "POST",
                 headers: { Cookie: cookieHeader },
             });

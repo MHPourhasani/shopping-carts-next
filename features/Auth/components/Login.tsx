@@ -36,7 +36,7 @@ const Login = () => {
     const handleLogin = async () => {
         setIsLoading(true);
         try {
-            await post("/api/Auth/login", {
+            await post("/api/auth/login", {
                 email: formData.email,
                 password: formData.password,
             });
