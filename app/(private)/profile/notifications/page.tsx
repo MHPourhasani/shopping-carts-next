@@ -14,10 +14,16 @@ const getNotifications = async () => {
     return data;
 };
 
+const getunreadConutNotifications = async () => {
+    const count = await get<number>(API.notification.unreadCount());
+    return count;
+};
+
 const NotificationsPage = async () => {
     const data = await getNotifications();
+    const unreadConut = await getunreadConutNotifications();
 
-    return <Notifications initial={data} />;
+    return <Notifications initial={data} unreadConut={unreadConut} />;
 };
 
 export default NotificationsPage;

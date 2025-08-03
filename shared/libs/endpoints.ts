@@ -24,7 +24,7 @@ const API = {
     },
     notification: {
         list: () => `${process.env.API_BASE_URL}/notifications`,
-        create_notification: `${process.env.API_BASE_URL}/notifications/create-notification`,
+        unreadCount: () => `${process.env.API_BASE_URL}/notifications/unread/count`,
         singleNotification: (id: string) => `${process.env.API_BASE_URL}/notifications/${id}`,
         readSingleNotification: (id: string) => `${process.env.API_BASE_URL}/notifications/${id}/read`,
         allNotifications: () => `${process.env.API_BASE_URL}/notifications`,

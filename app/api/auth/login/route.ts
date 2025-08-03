@@ -6,6 +6,7 @@ import { AUTH_TOKEN_KEY } from "@/shared/constants/auth";
 export async function POST(req: NextRequest) {
     try {
         const { email, password } = await req.json();
+        console.log(API.auth.login());
         const { data } = await axios.post(API.auth.login(), { email, password });
 
         const res = NextResponse.json({ message: "Logged in" });
