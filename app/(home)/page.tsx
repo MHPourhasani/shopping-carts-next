@@ -50,7 +50,7 @@ export default async function Home() {
     const blogs = await getBlogs();
 
     return (
-        <section className="flex w-full flex-1 flex-col items-start gap-6 pt-4 pb-20 2xl:items-center 2xl:justify-center">
+        <section className="flex w-full flex-1 flex-col items-start gap-6 pt-4 pb-20 lg:gap-20 2xl:items-center 2xl:justify-center">
             <div className="w-full lg:hidden">
                 <Header />
             </div>
@@ -73,7 +73,7 @@ export default async function Home() {
             </div>
 
             {blogs && blogs.length ? (
-                <div className="mt-4 flex w-full flex-col gap-4">
+                <div className="container mt-4 flex w-full flex-col gap-4">
                     <div className="flex w-full items-center justify-between px-4">
                         <h2 className="text-xl font-semibold">آخرین بلاگ های منتشر شده</h2>
                         <Link

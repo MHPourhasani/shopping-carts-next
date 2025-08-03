@@ -69,17 +69,18 @@ const Login = () => {
     };
 
     return (
-        <section className="flex w-full justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
+        <section className="flex w-full flex-1 justify-center p-4 md:items-center md:gap-10 lg:p-0 xl:gap-0">
             <div className="hidden bg-gray-100 lg:flex lg:flex-1 lg:items-center lg:justify-center dark:bg-gray-950">
                 <Image src={loginImage} alt="login image" className="h-auto w-full 2xl:w-9/12" />
             </div>
 
-            <div className="flex w-full items-center justify-center lg:flex-1">
+            <div className="flex w-full flex-col items-center justify-center gap-8 lg:flex-1">
+                <PageHeader title="ورود به حساب کاربری" desktopBackButton={false} />
+
                 <form
                     onSubmit={handleSubmit(handleLogin, errorHandler)}
-                    className="flex w-full flex-col gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
+                    className="flex w-full flex-1 flex-col justify-center gap-4 md:w-11/12 lg:w-9/12 xl:w-8/12 2xl:w-6/12 2xl:max-w-[600px]"
                 >
-                    <PageHeader title="ورود به حساب کاربری" desktopBackButton={false} />
                     <InputWithLabel
                         dir="ltr"
                         type="email"

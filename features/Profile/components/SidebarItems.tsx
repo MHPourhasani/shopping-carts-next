@@ -1,3 +1,4 @@
+"use client";
 import PATH from "@/shared/utils/path";
 import CategoryIcon from "@/assets/icons/components/Category";
 import UsersIcon from "@/assets/icons/components/Users";
@@ -9,14 +10,21 @@ import LoveIcon from "@/assets/icons/components/Love";
 import ShopIcon from "@/assets/icons/components/Shop";
 import ProductsIcon from "@/assets/icons/components/Products";
 import { UserRoleEnum } from "@/features/Auth/enums";
+import { useAppSelector } from "@/redux/hooks";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import Loader from "@/shared/components/Loader";
 
 const strokeColor = `stroke-customBlack-100 dark:stroke-secondary-100`;
 const activeStrokeColor = `stroke-primary-100 dark:stroke-violet-300`;
 const fillColor = `fill-customBlack-100 dark:fill-secondary-100`;
 const activeFillColor = `fill-primary-100 dark:fill-violet-300`;
 
-export const sidebarItems = (pathname: string) => {
-    return [
+export const SidebarItems = () => {
+    const user = useAppSelector((state) => state.auth.user);
+    const pathname = usePathname();
+
+    const items = [
         {
             title: "خلاصه فعالیت ها",
             icon: <CategoryIcon className={pathname === PATH.profile.main() ? activeFillColor : fillColor} />,
@@ -72,4 +80,32 @@ export const sidebarItems = (pathname: string) => {
             roles: [UserRoleEnum.CUSTOMER, UserRoleEnum.AUTHOR, UserRoleEnum.SELLER, UserRoleEnum.ADMIN],
         },
     ];
+
+    return (
+        <div className="text-customBlack-100 dark:text-secondary-100 flex w-full flex-1 flex-col overflow-auto">
+            {user ? (
+                user.role &&
+                items
+                    .filter((item) => item.roles.includes(user.role))
+                    .map((item) => {
+                        const isActive = pathname === item.href;
+
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className={`flex items-center gap-2 border-b border-gray-200 py-4 lg:border-0 ${
+                                    isActive ? "text-primary-100 bg-gradient-to-l dark:text-violet-300" : ""
+                                }`}
+                            >
+                                {item.icon}
+                                <p>{item.title}</p>
+                            </Link>
+                        );
+                    })
+            ) : (
+                <Loader />
+            )}
+        </div>
+    );
 };

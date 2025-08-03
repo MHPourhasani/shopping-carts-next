@@ -8,10 +8,12 @@ import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import ShopIcon from "@/assets/icons/components/Shop";
 import PaperNote from "@/assets/icons/components/PaperNote";
+import { useAuthToken } from "@/shared/hooks/useAuthToken";
 
 const Navbar = () => {
     const user = useAppSelector((state) => state.auth.user);
     const pathname = usePathname();
+    const accessToken = useAuthToken();
     let isActive = false;
 
     const navbarItems = [
@@ -21,12 +23,18 @@ const Navbar = () => {
         {
             title: "پروفایل",
             icon:
-                !!user && user?.profile_image ? (
-                    <Image src={user.profile_image} alt="user" width={100} height={100} className="aspect-square size-6 rounded-full" />
+                accessToken && user?.profile_image ? (
+                    <Image
+                        src={user.profile_image}
+                        alt="user"
+                        width={100}
+                        height={100}
+                        className="aspect-square size-6 rounded-full border"
+                    />
                 ) : (
-                    <ProfileIcon />
+                    <ProfileIcon className="stroke-gray-500" />
                 ),
-            href: PATH.profile.main(),
+            href: accessToken ? PATH.profile.main() : PATH.login(),
         },
     ];
 

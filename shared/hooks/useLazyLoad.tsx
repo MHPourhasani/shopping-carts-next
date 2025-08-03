@@ -1,69 +1,90 @@
-import { useEffect, useState, useRef, useCallback } from "react";
-import { IPaginatedResponse } from "../interfaces";
+import { useEffect, useRef, useState } from "react";
+import type { AxiosError } from "axios";
 import { get } from "../libs/axios";
 
-type Props<T> = {
-    ref: React.RefObject<HTMLElement>;
-    initialList: T[];
-    nextUrl: string | null;
+interface LazyLoadResponse<T> {
+    total: number;
+    previous: string | null;
+    next: string | null;
+    results: T[];
+}
+
+interface UseLazyLoadProps<T> {
+    url: string;
     params?: Record<string, any>;
-    initialUrl: string;
-};
+    ref: React.RefObject<HTMLElement>;
+    enabled?: boolean;
+    initial?: LazyLoadResponse<T>;
+}
 
-export default function useLazyLoad<T>({ ref, initialList, nextUrl: initialNext, params, initialUrl }: Props<T>) {
-    const [list, setList] = useState<T[]>(initialList);
-    const [nextUrl, setNextUrl] = useState<string | null>(initialNext);
-    const [loading, setLoading] = useState(false);
-    const observerRef = useRef<IntersectionObserver | null>(null);
-
-    const fetchPage = useCallback(
-        async (fetchUrl: string) => {
-            setLoading(true);
-            try {
-                const res = await get<IPaginatedResponse<T>>(fetchUrl, params);
-                setList((prev) => [...prev, ...res.results]);
-                setNextUrl(res.next);
-            } catch (err) {
-                console.error("Pagination failed", err);
-            } finally {
-                setLoading(false);
-            }
-        },
-        [params],
-    );
-
-    const reset = useCallback(async () => {
-        setLoading(true);
-        try {
-            const res = await get<IPaginatedResponse<T>>(initialUrl, params);
-            setList(res.results);
-            setNextUrl(res.next);
-        } catch (err) {
-            console.error("Reset failed", err);
-        } finally {
-            setLoading(false);
-        }
-    }, [initialUrl, params]);
+export function useLazyLoad<T>({ url, params = {}, ref, enabled = true, initial }: UseLazyLoadProps<T>) {
+    const [lists, setLists] = useState<T[]>(initial?.results || []);
+    const [nextUrl, setNextUrl] = useState<string | null>(initial ? initial.next : url);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const observer = useRef<IntersectionObserver | null>(null);
+    const abortController = useRef<AbortController | null>(null);
 
     useEffect(() => {
-        if (!ref.current || !nextUrl) return;
+        if (!enabled || !ref.current) return;
 
-        observerRef.current?.disconnect();
+        const el = ref.current;
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !loading) {
-                    fetchPage(nextUrl);
+        if (observer.current) observer.current.disconnect();
+
+        observer.current = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && nextUrl && !isLoading) {
+                    fetchNext();
                 }
             },
-            { threshold: 1 },
+            { threshold: 0.5 },
         );
 
-        observer.observe(ref.current);
-        observerRef.current = observer;
+        observer.current.observe(el);
 
-        return () => observer.disconnect();
-    }, [ref, nextUrl, loading, fetchPage]);
+        return () => {
+            observer.current?.disconnect();
+        };
+    }, [ref, nextUrl, isLoading, enabled]);
 
-    return { list, loading, reset };
+    const fetchNext = async () => {
+        if (!nextUrl || isLoading || nextUrl === url) return;
+
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            abortController.current?.abort();
+            const controller = new AbortController();
+            abortController.current = controller;
+
+            const res = await get<LazyLoadResponse<T>>(nextUrl, params, {
+                signal: controller.signal,
+            });
+
+            setLists((prev) => [...prev, ...res.results]);
+            setNextUrl(res.next);
+        } catch (err: any) {
+            if ((err as AxiosError)?.name !== "CanceledError") {
+                setError((err as Error).message || "Unknown error");
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const reset = () => {
+        setLists([]);
+        setNextUrl(url);
+        setError(null);
+    };
+
+    return {
+        lists,
+        setLists,
+        isLoading,
+        error,
+        reset,
+    };
 }

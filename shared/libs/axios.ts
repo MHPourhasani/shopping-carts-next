@@ -149,7 +149,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = f
 
 export async function apiRequest<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
     const isServer = typeof window === "undefined" || options.server;
-    const url = new URL(endpoint, process.env.API_BASE_URL ?? process.env.BASE_URL);
+    const url = new URL(endpoint, process.env.API_BASE_URL);
     if (options.params) Object.entries(options.params).forEach(([k, v]) => url.searchParams.append(k, String(v)));
 
     if (isServer) {

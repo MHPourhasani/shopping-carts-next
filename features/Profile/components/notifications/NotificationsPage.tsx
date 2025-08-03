@@ -4,27 +4,27 @@ import notificationImage from "@/assets/icons/svgs/notificationPage.svg";
 import API from "@/shared/libs/endpoints";
 import { INotification } from "@/interfaces/general";
 import PageHeader from "@/shared/components/PageHeader";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import NotificationsList from "./NotificationsList";
-import { get } from "@/shared/libs/axios";
 import { IPaginatedResponse } from "@/shared/interfaces";
+import Loading from "@/app/loading";
+import { useLazyLoad } from "@/shared/hooks/useLazyLoad";
 
-const Notifications = () => {
-    const [notifications, setNotifications] = useState<INotification[]>([]);
+interface IProps {
+    initial?: IPaginatedResponse<INotification>;
+}
+
+const Notifications = ({ initial }: IProps) => {
     const [unReads, setUnReads] = useState<number | undefined>(undefined);
     const router = useRouter();
+    const loadMoreRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const data = await get<IPaginatedResponse<INotification>>(API.notification.list());
-                setNotifications(data.results);
-            } catch (error: any) {
-                console.error(error);
-            }
-        })();
-    }, []);
+    const { lists: notifications, isLoading } = useLazyLoad<INotification>({
+        url: API.notification.list(),
+        ref: loadMoreRef,
+        initial,
+    });
 
     useEffect(() => {
         setUnReads(notifications.filter((item) => !item.isRead).length);
@@ -35,15 +35,22 @@ const Notifications = () => {
             <PageHeader title="پیام ها">{!!unReads && <span>{unReads} خوانده نشده</span>}</PageHeader>
 
             <div className="flex w-full flex-1 flex-col gap-4">
-                {notifications.length ? (
-                    <NotificationsList notifications={notifications} />
+                {notifications ? (
+                    notifications.length ? (
+                        <>
+                            <NotificationsList notifications={notifications} />
+                            <div ref={loadMoreRef}>{isLoading && <Loading />}</div>
+                        </>
+                    ) : (
+                        <EmptyState
+                            imgSrc={notificationImage}
+                            title="فعلا هیچ پیامی نیست."
+                            btnFunction={() => router.refresh()}
+                            btnTitle="به روزرسانی "
+                        />
+                    )
                 ) : (
-                    <EmptyState
-                        imgSrc={notificationImage}
-                        title="فعلا هیچ پیامی نیست."
-                        btnFunction={() => router.refresh()}
-                        btnTitle="به روزرسانی "
-                    />
+                    <Loading />
                 )}
             </div>
         </section>
