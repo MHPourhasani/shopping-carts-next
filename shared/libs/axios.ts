@@ -68,7 +68,7 @@ browserAxios.interceptors.response.use(
 async function refreshClientToken() {
     refreshing = true;
     try {
-        const { data } = await browserAxios.post("/api/Auth/refresh");
+        const { data } = await browserAxios.post("/api/auth/refresh");
         const newAccess = data?.access;
         waiters.forEach((cb) => cb(newAccess));
     } catch {
@@ -99,7 +99,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = f
     });
 
     if (res.status === 401 && tokens?.refresh && !hasRetried) {
-        const ref = await fetch(`${process.env.BASE_URL}/api/Auth/refresh`, {
+        const ref = await fetch(`${process.env.BASE_URL}/api/auth/refresh`, {
             method: "POST",
             headers: {
                 Cookie: cookieHeader,
@@ -133,7 +133,7 @@ async function serverFetch<T>(url: URL, opt: RequestOptions = {}, hasRetried = f
                 "Content-Type": "application/json",
                 ...opt.headers,
                 Authorization: `Bearer ${newToken.access}`,
-                Cookie: `MHP_SHOP_AUTH_TOKEN=${encodeURIComponent(newTokenString)}`, // کوکی جدید
+                Cookie: `${AUTH_TOKEN_KEY}=${encodeURIComponent(newTokenString)}`,
             },
             body: opt.body ? JSON.stringify(opt.body) : undefined,
             cache: "no-store",

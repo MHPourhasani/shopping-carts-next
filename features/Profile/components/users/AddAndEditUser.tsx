@@ -9,7 +9,7 @@ import { IUser } from "@/features/Auth/interfaces";
 import { UserRoleEnum } from "@/features/Auth/enums";
 import { Controller, useForm } from "react-hook-form";
 import API from "@/shared/libs/endpoints";
-import { post, put } from "@/shared/libs/axios";
+import { del, post, put } from "@/shared/libs/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { userSchema } from "@/features/Auth/schemas/user.schema";
 import { Switch } from "@/components/ui/switch";
@@ -59,14 +59,21 @@ const AddAndEditUser = ({ initialData }: Props) => {
     };
 
     const deleteUserHandler = async () => {
-        // const res = await del<{ status: boolean }>(API.users.singleUser(user.id!));
-        // if (res.status) {
-        //     toast.success("کاربر با موفقیت حذف شد.");
-        //     router.back();
-        //     handleRefreshAfterBack();
-        // } else {
-        //     toast.error("حذف کاربر با خطا مواجه شد.");
-        // }
+        try {
+            if (initialData) {
+                const res = await del<{ success: boolean }>(API.users.singleUser(initialData._id));
+
+                if (res.success) {
+                    toast.success("کاربر با موفقیت حذف شد");
+                    router.back();
+                    handleRefreshAfterBack();
+                } else {
+                    toast.error("خطا در حذف کاربر");
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -146,13 +153,15 @@ const AddAndEditUser = ({ initialData }: Props) => {
             </div>
 
             <div className="flex w-full flex-col items-center gap-4 lg:flex-row">
-                <Button disabled={isSubmitting}>{initialData ? "ویرایش" : "ایجاد"}</Button>
+                <Button disabled={isSubmitting} className="cursor-pointer">
+                    {initialData ? "ویرایش" : "ایجاد"}
+                </Button>
 
                 {initialData && (
                     <Button
                         variant="secondary"
                         onClick={deleteUserHandler}
-                        className="border-red-600 text-red-600 hover:border-red-500 dark:border-red-500 dark:text-red-500"
+                        className="cursor-pointer border-red-600 text-red-600 hover:border-red-500 dark:border-red-500 dark:text-red-500"
                     >
                         حذف
                     </Button>
