@@ -22,7 +22,7 @@ const getSingleProduct = async (product_id: string) => {
 const EditProductPage = async ({ params }: { params: Params }) => {
     const product = await getSingleProduct(params.slug);
 
-    return <ProductForm isEdit initialData={product} productId={params.slug} />;
+    return <ProductForm initialData={product} />;
 };
 
 export default EditProductPage;
