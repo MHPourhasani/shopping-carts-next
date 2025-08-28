@@ -23,7 +23,7 @@ const PostCard = ({ post, className }: IProps) => {
         >
             <div className="flex flex-col gap-4">
                 <h2 className="font-semibold lg:text-lg">{title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: excerpt! }} className="truncate break-all whitespace-pre-line"></div>
+                <div dangerouslySetInnerHTML={{ __html: excerpt ?? "" }} className="truncate break-all whitespace-pre-line"></div>
             </div>
 
             <div className="text-secondary-400 dark:text-secondary-100 flex items-center justify-between gap-4 border-t pt-2 text-sm">
