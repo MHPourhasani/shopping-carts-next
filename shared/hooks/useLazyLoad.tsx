@@ -1,20 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import type { AxiosError } from "axios";
 import { get } from "../libs/axios";
-
-interface LazyLoadResponse<T> {
-    total: number;
-    previous: string | null;
-    next: string | null;
-    results: T[];
-}
+import { IPaginatedResponse } from "../interfaces";
 
 interface UseLazyLoadProps<T> {
     url: string;
     params?: Record<string, any>;
     ref: React.RefObject<HTMLElement>;
     enabled?: boolean;
-    initial?: LazyLoadResponse<T>;
+    initial?: IPaginatedResponse<T>;
 }
 
 export function useLazyLoad<T>({ url, params = {}, ref, enabled = true, initial }: UseLazyLoadProps<T>) {
@@ -59,7 +53,7 @@ export function useLazyLoad<T>({ url, params = {}, ref, enabled = true, initial 
             const controller = new AbortController();
             abortController.current = controller;
 
-            const res = await get<LazyLoadResponse<T>>(nextUrl, params, {
+            const res = await get<IPaginatedResponse<T>>(nextUrl, params, {
                 signal: controller.signal,
             });
 

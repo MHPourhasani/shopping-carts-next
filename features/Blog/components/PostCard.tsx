@@ -5,12 +5,12 @@ import Link from "next/link";
 import { IPost } from "../interfaces";
 import { cn } from "@/shared/libs/utils";
 
-interface Props {
+interface IProps {
     post: IPost;
     className?: string;
 }
 
-const PostCard = ({ post, className }: Props) => {
+const PostCard = ({ post, className }: IProps) => {
     const { title, slug, author, excerpt, createdAt } = post;
 
     return (

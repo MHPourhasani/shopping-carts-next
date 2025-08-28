@@ -10,6 +10,7 @@ import NotificationsList from "./NotificationsList";
 import { IPaginatedResponse } from "@/shared/interfaces";
 import Loading from "@/app/loading";
 import { useLazyLoad } from "@/shared/hooks/useLazyLoad";
+import Loader from "@/shared/components/Loader";
 
 interface IProps {
     initial?: IPaginatedResponse<INotification>;
@@ -37,7 +38,7 @@ const Notifications = ({ initial, unreadConut }: IProps) => {
                     notifications.length ? (
                         <>
                             <NotificationsList notifications={notifications} />
-                            <div ref={loadMoreRef}>{isLoading && <Loading />}</div>
+                            <div ref={loadMoreRef}>{isLoading && <Loader />}</div>
                         </>
                     ) : (
                         <EmptyState

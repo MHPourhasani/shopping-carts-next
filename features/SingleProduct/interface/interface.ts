@@ -1,17 +1,26 @@
 import { ProductStatusEnum } from "./enums";
 
-export interface IAttribute {
+export interface IAttributeValue {
     name: string;
     slug: string;
-    values: string[];
+    description?: string;
+}
+
+export interface IAttribute {
+    _id: string;
+    name: string;
+    slug: string;
+    values: IAttributeValue[];
 }
 
 export interface IVariation {
     sku: string;
     price: number;
     quantity: number;
-    image?: string; // یا File برای آپلود
-    attributes: Record<string, string>; // { color: "red", size: "M" }
+    attributes: {
+        attributeDef: string;
+        value: string;
+    }[];
 }
 
 export interface IProduct {

@@ -6,11 +6,11 @@ import { get } from "@/shared/libs/axios";
 import API from "@/shared/libs/endpoints";
 import { Metadata } from "next";
 
-interface Props {
+interface IProps {
     params: { slug: string };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: IProps): Promise<Metadata> {
     const data = await getBlog(params.slug);
 
     return {
@@ -19,16 +19,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const getBlog = async (slug: string) => {
-    const data = await get<IPost>(API.blogs.singlePostBySlug(slug));
-    return data;
+    try {
+        const data = await get<IPost>(API.blogs.singlePostBySlug(slug));
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
-const ProfileEditBlogPage = async ({ params }: Props) => {
-    const data: IPost = await getBlog(params.slug);
+const ProfileEditBlogPage = async ({ params }: IProps) => {
+    const data = await getBlog(params.slug);
 
-    if (!data) {
-        return <Error500 />;
-    }
+    if (!data?._id) return <Error500 />;
     return (
         <section className="flex flex-1 flex-col gap-4">
             <PageHeader title={`ویرایش نوشته "${data.title}"`} />

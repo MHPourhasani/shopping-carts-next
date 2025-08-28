@@ -23,23 +23,39 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const getBanners = async () => {
-    // const data = await get<IBanner[]>(API.banners.banners_list());
-    return [];
+    try {
+        // const data = await get<IBanner[]>(API.banners.banners_list());
+        return [];
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 const getCategories = async () => {
-    // const data = await get<ICategory[]>(API.category.categories_list());
-    return [];
+    try {
+        // const data = await get<ICategory[]>(API.category.categories_list());
+        return [];
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 const getProducts = async () => {
-    const data = await get<IPaginatedResponse<IProduct>>(API.product.products(), { limit: 3 });
-    return data.results;
+    try {
+        const data = await get<IPaginatedResponse<IProduct>>(API.product.products(), { limit: 3 });
+        return data.results;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 const getBlogs = async () => {
-    const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
-    return data.results;
+    try {
+        const data = await get<IPaginatedResponse<IPost>>(API.blogs.posts());
+        return data.results;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 export default async function Home() {

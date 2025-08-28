@@ -7,14 +7,21 @@ export interface IPost {
     slug: string;
     content: string;
     excerpt?: string;
+    readingTime?: number;
     status: PostStatusEnum;
+    pinned: boolean;
+    thumbnail: string;
+    scheduledAt: Date;
     tags: string[];
     categories: string[];
     author: IUser;
+    viewCount: number;
+    likeCount: number;
     seoTitle?: string;
     seoDescription?: string;
     keywords?: string[];
+    relatedPosts: IPost[];
+    publishedAt?: Date;
     createdAt: Date;
     updatedAt: Date;
-    publishedAt?: Date;
 }

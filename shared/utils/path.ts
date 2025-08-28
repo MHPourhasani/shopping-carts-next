@@ -36,8 +36,8 @@ const PATH = {
         blog: {
             blogs: () => `/profile/blogs`,
             single_blog: (url: string) => `/profile/blogs/${url}`,
-            add_blog: () => `/profile/blogs/add-blog`,
-            edit_blog: (url: string) => `/profile/blogs/edit-blog/${url}`,
+            add_blog: () => `/profile/blogs/add-post`,
+            edit_blog: (url: string) => `/profile/blogs/edit-post/${url}`,
         },
         users: {
             main: () => `/profile/users`,

@@ -28,8 +28,30 @@ export const productSchema = z.object({
     services: z.array(z.string().min(1, "خدمت نمی‌تواند خالی باشد")).optional(),
     status: z.nativeEnum(ProductStatusEnum).optional(),
     relatedProducts: z.array(z.string()).optional(),
-    attributes: z.array(attributeSchema).min(1, "حداقل یک ویژگی باید تعریف شود"),
-    variations: z.array(variationSchema).min(1, "حداقل یک ترکیب باید وارد شود"),
+
+    attributes: z.array(
+        z.object({
+            attributeDef: z.string().min(1, "ویژگی الزامی است"),
+            value: z.string().min(1, "مقدار ویژگی الزامی است"),
+            newValue: z.string().optional(),
+        }),
+    ),
+
+    variations: z.array(
+        z.object({
+            sku: z.string(),
+            price: z.number(),
+            quantity: z.number(),
+            image: z.string().optional(),
+            attributes: z.array(
+                z.object({
+                    attributeDef: z.string(),
+                    value: z.string(),
+                    newValue: z.string().optional(),
+                }),
+            ),
+        }),
+    ),
 });
 
 export type ProductFormValues = z.infer<typeof productSchema>;

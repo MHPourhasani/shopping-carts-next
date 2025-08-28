@@ -22,7 +22,6 @@ import BackButton from "@/shared/components/BackButton";
 import LoveIcon from "@/assets/icons/components/Love";
 import notImage from "@/assets/images/not-images.svg";
 import Link from "next/link";
-import Toman from "@/assets/icons/components/Toman";
 import ProductCardItem from "./ProductCardItem";
 import CompareIcon from "@/assets/icons/components/Compare";
 import { Button } from "@/components/ui/button";
@@ -150,7 +149,10 @@ const MobileSingleProduct = (props: ISingleProductProps) => {
 
                     <div className="">
                         <h3 className="mb-4 font-semibold">توضیحات</h3>
-                        <h2 className="text-gray-500 dark:text-gray-400">{description}</h2>
+                        <p
+                            dangerouslySetInnerHTML={{ __html: description ?? "توضیحی برای این محصول وجود ندارد." }}
+                            className="text-gray-500 dark:text-gray-400"
+                        />
                     </div>
 
                     {tags && <ProductTags tags={tags} />}

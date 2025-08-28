@@ -109,7 +109,10 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
 
                         <div className="flex flex-col gap-4">
                             <h3 className="font-semibold">توضیحات</h3>
-                            <p className="text-lg text-gray-500 dark:text-gray-400">{description ? description : ""}</p>
+                            <p
+                                dangerouslySetInnerHTML={{ __html: description ?? "توضیحی برای این محصول وجود ندارد." }}
+                                className="text-lg text-gray-500 dark:text-gray-400"
+                            />
                         </div>
                     </div>
 
@@ -120,11 +123,11 @@ const DesktopSingleProduct = (props: ISingleProductProps) => {
                                 <div className="flex flex-wrap gap-2">
                                     {attr.values.map((value) => (
                                         <button
-                                            key={value}
+                                            key={value.slug}
                                             className="rounded border px-3 py-1 text-sm hover:bg-gray-100"
                                             onClick={() => handleSelectAttributes(attr.slug, value)}
                                         >
-                                            {value}
+                                            {value.name}
                                         </button>
                                     ))}
                                 </div>

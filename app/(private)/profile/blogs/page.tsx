@@ -23,10 +23,7 @@ const getBlogs = async () => {
 const ProfileBlogs = async () => {
     const blogs = await getBlogs();
 
-    if (!blogs) {
-        return <Error500 />;
-    }
-
+    if (!blogs) return <Error500 />;
     return (
         <section className="flex flex-1 flex-col gap-4">
             <PageHeader title="نوشته ها" desktopBackButton={false}>

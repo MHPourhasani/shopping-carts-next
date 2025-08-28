@@ -78,7 +78,7 @@ const AddAndEditUser = ({ initialData }: Props) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col items-start gap-4 lg:gap-8">
-            <div className="grid w-full grid-cols-2 gap-4">
+            <div className="grid w-full gap-4 lg:grid-cols-2">
                 <InputWithLabel dir="auto" label="نام" {...register("first_name")} className="focus:border-primary-100" />
                 <InputWithLabel dir="auto" label="نام خانوادگی" {...register("last_name")} className="focus:border-primary-100" />
 
